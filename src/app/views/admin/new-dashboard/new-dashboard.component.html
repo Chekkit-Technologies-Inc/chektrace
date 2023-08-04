@@ -1,0 +1,128 @@
+
+<!-- Navbar -->
+<nav
+  class="absolute top-0 left-0 w-full z-10 bg-blueGray-100 md:flex-row md:flex-nowrap md:justify-start flex items-center p-4"
+>
+  <div
+    class="w-full mx-autp items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4"
+  >
+    <!-- Brand -->
+    <a [routerLink]="['/dashboard']"
+
+      class="md:block text-left md:pb-0 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-0 px-0"
+    >
+      <span class="block sm:hidden"> Chekkit C/I </span>
+      <span class="hidden sm:block">
+        <img
+        alt="..."
+        class=" align-middle border-none"
+        style="height: 50px;"
+        src="../../../../assets/img/chekkitlogoo 2.png"
+      /></span>
+    </a>
+
+  </div>
+</nav>
+
+<div class="w-100 h-screen bg-blueGray-100 flex" >
+  <div class="m-auto text-center bodyWidth">
+    <!-- <div class="flex">
+      <div class="bg-slate-200 rounded-full p-4 text-center m-auto" >
+        <img src="../../../../assets/img/welcome.png" class="" alt="" srcset="">
+      </div>
+    </div> -->
+    <p class="text-md font-semibold text-blueGray-700 my-3" >Hello, There</p>
+    <p class="text-xs" >Kindly select the module you are interested in</p>
+
+    <div class=" lg:flex mt-5 md:px-20 lg:px-20" *ngIf="loggedInUserType == 'admin' "  >
+      <a [routerLink]="['/mas']" class="flex-1 m-5" >
+        <div >
+          <div class="border-2 border-blueGray-300 rounded-md p-3 flex shadow" >
+            <img src="../../../../assets/img/label 1.png" alt="" class="mr-3 bject-contain h-20 w-30 " srcset="">
+            <div class="text-left" >
+              <p class="font-semibold md:text-md lg:text-md " >Mobile Authentication Scheme</p>
+              <p class="text-xs" >Assign surveys to the new serial numbers you just requested.</p>
+            </div>
+          </div>
+        </div>
+      </a>
+
+     <a [routerLink]="['/traceability']" class="flex-1 m-5">
+      <div >
+        <div class="border-2 border-blueGray-300 rounded-md p-3 flex shadow" >
+          <img src="../../../../assets/img/label2.png" alt="" class="mr-3 bject-contain h-20 w-30 " srcset="">
+          <div class="text-left" >
+            <p class="font-semibold text-md" >Traceability</p>
+            <p class="text-xs" >Track and trace your products across the supply chain, gain insights on consumers and track market diversions.</p>
+          </div>
+        </div>
+      </div>
+     </a>
+     <a [routerLink]="['/gaming']" class="flex-1 m-5">
+      <div >
+        <div class="border-2 border-blueGray-300 rounded-md p-3 flex shadow" >
+          <img src="../../../../assets/img/label2.png" alt="" class="mr-3 bject-contain h-20 w-30 " srcset="">
+          <div class="text-left" >
+            <p class="font-semibold text-md" >Gaming Insights</p>
+            <p class="text-xs" >Manage your trivia games insights and stay in control of end-to-end activities.</p>
+          </div>
+        </div>
+      </div>
+     </a>
+    </div>
+    <div class=" lg:flex mt-5 md:px-5 lg:px-20" *ngIf="loggedInUserType == 'distributor' " >
+      <a [routerLink]="['/mas']" class="flex-1 m-5 md:m-2" >
+        <div >
+          <div class="border-2 border-blueGray-300 rounded-md p-3 flex shadow  md:h-40" >
+            <img src="../../../../assets/img/label 1.png" alt="" class="mr-3 object-contain h-20 w-30 " srcset="">
+            <div class="text-left" >
+              <p class="font-semibold text-md" >Mobile Authentication Scheme</p>
+              <p class="text-xs" >Assign surveys to the new serial numbers you just requested.</p>
+            </div>
+          </div>
+        </div>
+      </a>
+
+     <a [routerLink]="['/traceability/inventory']" class="flex-1 m-5 md:m-2">
+      <div >
+        <div class="border-2 border-blueGray-300 rounded-md p-3 flex shadow  md:h-40" >
+          <img src="../../../../assets/img/label2.png" alt="" class="mr-3 object-contain h-20 w-30 " srcset="">
+          <div class="text-left" >
+            <p class="font-semibold text-md" >Traceability</p>
+            <p class="text-xs" >Track and trace your products across the supply chain, gain insights on consumers and track market diversions.</p>
+          </div>
+        </div>
+      </div>
+     </a>
+
+
+    </div>
+    <div class="md:flex lg:flex mt-5 md:px-20 lg:px-20" *ngIf="loggedInUserType == 'retailer' " >
+      <a [routerLink]="['/mas']" class="flex-1 m-5" >
+        <div >
+          <div class="border-2 border-blueGray-300 rounded-md p-3 flex shadow" >
+            <img src="../../../../assets/img/label 1.png" alt="" class="mr-3 bject-contain h-20 w-30 " srcset="">
+            <div class="text-left" >
+              <p class="font-semibold text-md" >Mobile Authentication Scheme</p>
+              <p class="text-xs" >Assign surveys to the new serial numbers you just requested.</p>
+            </div>
+          </div>
+        </div>
+      </a>
+
+     <a [routerLink]="['/traceability/inventory']" class="flex-1 m-5">
+      <div >
+        <div class="border-2 border-blueGray-300 rounded-md p-3 flex shadow" >
+          <img src="../../../../assets/img/label2.png" alt="" class="mr-3 bject-contain h-20 w-30 " srcset="">
+          <div class="text-left" >
+            <p class="font-semibold text-md" >Traceability</p>
+            <p class="text-xs" >Track and trace your products across the supply chain, gain insights on consumers and track market diversions.</p>
+          </div>
+        </div>
+      </div>
+     </a>
+
+
+    </div>
+  </div>
+</div>

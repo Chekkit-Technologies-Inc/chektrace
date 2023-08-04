@@ -1,0 +1,39 @@
+.fmn-secondary{
+  background-color: #F3F9EB;
+  color: #222;
+}
+
+.active{
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.fmn-primary{
+  background-color: #479C46;
+  color: #fff;
+}
+
+.fmn-border{
+  border: 1px solid #479C46;
+}
+
+.modal-body{
+  min-width: 500px !important;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+
+
+
+.rewards{
+  height: 200px;
+}
+
+.rewards img{
+  height: 150px;
+}
+
+input[type="checkbox"]{
+  filter: invert(80%) hue-rotate(18deg) brightness(1.7);
+}

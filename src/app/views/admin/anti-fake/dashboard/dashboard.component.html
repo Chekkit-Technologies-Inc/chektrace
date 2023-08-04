@@ -1,0 +1,571 @@
+<div class="px-8 ">
+
+  <div class="flex justify-between">
+    <div class="flex-1 p-3">
+      <p class="text-2xl font-semibold text-blueGray-700">Dashboard</p>
+    </div>
+    <div class="flex-1 flex flex-row-reverse py-2">
+      <div class="bg-blueGray-200 text-blueGray-500 flex rounded-md px-2 text-xs text-center">
+        <span class="m-auto" >Today, 10th Mar 2023</span>
+      </div>
+      <span class="bg-blueGray-200 py-1 px-2 rounded-md mx-3 ">
+        <i  class="fa">&#xf0f3;</i>
+      </span>
+      <input placeholder="search code order" class="bg-blueGray-200 rounded-md px-2 " />
+    </div>
+  </div>
+  <div class="flex justify-between my-5">
+    <div class="flex-auto p-3">
+      <div class="flex justify-between ">
+        <p class="text-blueGray-700 font-semibold text-md" >Product </p>
+        <select class="text-xs text-blueGray-500 py-1 px-2 border border-blueGray-300 rounded px-4 bg-blueGray-100 w-20">
+          <option>Filter</option>
+          <option>monthly</option>
+          <option>yearly</option>
+        </select>
+      </div>
+      <div class=" border border-blueGray-300 rounded p-2 my-3 ">
+        <div class="flex-1 flex py-3">
+          <img src="../../../../../assets/img/Frame 9.svg" width="50" alt="" srcset="">
+          <div class="m-auto" >
+            <p class="text-xs text-blueGray-500 " >Total Products</p>
+            <p class="text-sm text-blueGray-800 font-semibold" > {{productCount}} </p>
+          </div>
+        </div>
+        <hr>
+        <div class="flex-1 flex py-3">
+          <img src="../../../../../assets/img/Frame 9.svg" width="50" alt="" srcset="">
+          <div class="m-auto" >
+            <p class="text-xs text-blueGray-500 " >Total Batches</p>
+            <p class="text-sm text-blueGray-800 font-semibold" >421</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="flex-auto p-3">
+      <div class="flex justify-between ">
+        <p class="text-blueGray-700 font-semibold text-md" >Authentication </p>
+        <select class="text-xs text-blueGray-500 py-1 px-2 border border-blueGray-300 rounded px-4 bg-blueGray-100 w-20">
+          <option>USSD</option>
+          <option>monthly</option>
+          <option>yearly</option>
+        </select>
+      </div>
+      <div class=" border border-blueGray-300 rounded p-2 my-3 ">
+        <div class="flex-1 flex py-3">
+          <img src="../../../../../assets/img/Frame 9.svg" width="50" alt="" srcset="">
+          <div class="m-auto" >
+            <p class="text-xs text-blueGray-500 " >Total Authentication</p>
+            <p class="text-sm text-blueGray-800 font-semibold" > {{totalAuthentication}} </p>
+          </div>
+        </div>
+        <hr>
+        <div class="flex-1 flex py-3">
+          <img src="../../../../../assets/img/Frame 9.svg" width="50" alt="" srcset="">
+          <div class="m-auto" >
+            <p class="text-xs text-blueGray-500 " >Average Authentication</p>
+            <p class="text-sm text-blueGray-800 font-semibold" >421</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="flex-auto p-3">
+      <div class="flex justify-between ">
+        <p class="text-blueGray-700 font-semibold text-md" >Survey</p>
+        <select class="text-xs text-blueGray-500 py-1 px-2 border border-blueGray-300 rounded px-4 bg-blueGray-100 w-20">
+          <option>Filter</option>
+          <option>monthly</option>
+          <option>yearly</option>
+        </select>
+      </div>
+      <div class="p-2 my-3 border border-blueGray-300 rounded-md" >
+        <div class="flex py-2 ">
+          <div class="flex-1 flex">
+            <img src="../../../../../assets/img/dashboard-icon4.png" width="60" alt="" srcset="">
+            <div class="m-auto" >
+              <p class="text-xs text-blueGray-500 " >Total Surveys</p>
+              <p class="text-sm text-blueGray-800 font-semibold" > {{totalSurvey}} </p>
+            </div>
+          </div>
+
+          <div class="flex-1">
+            <div class="flex-1 flex">
+              <img src="../../../../../assets/img/dashboard-icon6.png" width="60" alt="" srcset="">
+              <div class="m-auto" >
+                <p class="text-xs text-blueGray-500 " >Completed Surveys</p>
+                <p class="text-sm text-blueGray-800 font-semibold" >201</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="flex py-2 ">
+          <div class="flex-1 flex">
+            <img src="../../../../../assets/img/dashboard-icon4.png" width="60" alt="" srcset="">
+            <div class="m-auto" >
+              <p class="text-xs text-blueGray-500 " >User Response</p>
+              <p class="text-sm text-blueGray-800 font-semibold" > {{userResponse}} </p>
+            </div>
+          </div>
+
+          <div class="flex-1">
+            <div class="flex-1 flex">
+              <img src="../../../../../assets/img/dashboard-icon6.png" width="60" alt="" srcset="">
+              <div class="m-auto" >
+                <p class="text-xs text-blueGray-500 " >Average Survey</p>
+                <p class="text-sm text-blueGray-800 font-semibold" >201</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex-auto p-3">
+      <div class="flex justify-between ">
+        <p class="text-blueGray-700 font-semibold text-md" >Survey</p>
+        <select class="text-xs text-blueGray-500 py-1 px-2 border border-blueGray-300 rounded px-4 bg-blueGray-100 w-20">
+          <option>Filter</option>
+          <option>monthly</option>
+          <option>yearly</option>
+        </select>
+      </div>
+      <div class="p-2 my-3 border border-blueGray-300 rounded-md" >
+        <div class="flex py-2 ">
+          <div class="flex-1 flex">
+            <img src="../../../../../assets/img/dashboard-icon4.png" width="60" alt="" srcset="">
+            <div class="m-auto" >
+              <p class="text-xs text-blueGray-500 " >Reward Balance</p>
+              <p class="text-sm text-blueGray-800 font-semibold" > {{rewardBalance}} </p>
+            </div>
+          </div>
+
+          <div class="flex-1">
+            <div class="flex-1 flex">
+              <img src="../../../../../assets/img/dashboard-icon6.png" width="60" alt="" srcset="">
+              <div class="m-auto" >
+                <p class="text-xs text-blueGray-500 " >Total Reward Type </p>
+                <p class="text-sm text-blueGray-800 font-semibold" >201</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="flex py-2 ">
+          <div class="flex-1 flex">
+            <img src="../../../../../assets/img/dashboard-icon4.png" width="60" alt="" srcset="">
+            <div class="m-auto" >
+              <p class="text-xs text-blueGray-500 " >Total Users</p>
+              <p class="text-sm text-blueGray-800 font-semibold" >720</p>
+            </div>
+          </div>
+
+          <div class="flex-1">
+            <div class="flex-1 flex">
+              <img src="../../../../../assets/img/dashboard-icon6.png" width="60" alt="" srcset="">
+              <div class="m-auto" >
+                <p class="text-xs text-blueGray-500 " >Average Reward Value </p>
+                <p class="text-sm text-blueGray-800 font-semibold" >201</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="text-blueGray-700 font-semibold text-md" >Product Batches </p>
+  <div class="overflow-x-auto  w-full h-full mt-5"  >
+    <div class=" w-full flex justify-between px-4 p-4 border border-blueGray-300 rounded-md ">
+      <div class="w-24 flex-shrink-0 text-left">
+
+        <p class="text-xs">
+           S/N
+        </p>
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs">
+        Batch Name
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs">
+        Number of Authentication
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs">
+        Status
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs">
+        Production Date
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs">
+        Expiry Date
+      </div>
+    </div>
+
+    <div class="w-auto flex table-bg mt-4 rounded-md justify-between px-4 py-4">
+      <div class="w-24 flex-shrink-0 text-left text-xs font-semibold">
+
+        &nbsp;&nbsp; 1
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        Batch Y02734
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        200,000
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs">
+        <span class="bg-green-600 text-white font-semibold rounded py-1 px-3" >sent</span>
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        21 January, 2023
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        21 August, 2023
+      </div>
+    </div>
+    <div class="w-auto flex table-bg mt-4 rounded-md justify-between px-4 py-4">
+      <div class="w-24 flex-shrink-0 text-left text-xs font-semibold">
+
+        &nbsp;&nbsp; 2
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        Batch Y02734
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        200,000
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs">
+        <span class="bg-green-600 text-white font-semibold rounded py-1 px-3" >sent</span>
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        21 January, 2023
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        21 August, 2023
+      </div>
+    </div>
+    <div class="w-auto flex table-bg mt-4 rounded-md justify-between px-4 py-4">
+      <div class="w-24 flex-shrink-0 text-left text-xs font-semibold">
+
+        &nbsp;&nbsp; 3
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        Batch Y02734
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        200,000
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs">
+        <span class="bg-red-600 text-white font-semibold rounded py-1 px-3" >failed</span>
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        21 January, 2023
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        21 August, 2023
+      </div>
+    </div>
+    <div class="w-auto flex table-bg mt-4 rounded-md justify-between px-4 py-4">
+      <div class="w-24 flex-shrink-0 text-left text-xs font-semibold">
+
+        &nbsp;&nbsp; 4
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        Batch Y02734
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        200,000
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs">
+        <span class="bg-green-600 text-white font-semibold rounded py-1 px-3" >sent</span>
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        21 January, 2023
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        21 August, 2023
+      </div>
+    </div>
+    <div class="w-auto flex table-bg mt-4 rounded-md justify-between px-4 py-4">
+      <div class="w-24 flex-shrink-0 text-left text-xs font-semibold">
+
+        &nbsp;&nbsp; 5
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        Batch Y02734
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        200,000
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs">
+        <span class="bg-red-600 text-white font-semibold rounded py-1 px-3" >failed</span>
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        21 January, 2023
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        21 August, 2023
+      </div>
+    </div>
+    <div class="w-auto flex table-bg mt-4 rounded-md justify-between px-4 py-4">
+      <div class="w-24 flex-shrink-0 text-left text-xs font-semibold">
+
+        &nbsp;&nbsp; 6
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        Batch Y02734
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        200,000
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs">
+        <span class="bg-green-600 text-white font-semibold rounded py-1 px-3" >sent</span>
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        21 January, 2023
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        21 August, 2023
+      </div>
+    </div>
+  </div>
+
+  <p class="text-blueGray-700 font-semibold text-md mt-10" >Surveys </p>
+  <div class="overflow-x-auto  w-full h-full mt-5"  >
+    <div class=" w-full flex justify-between px-4 p-4 border border-blueGray-300 rounded-md ">
+      <div class="w-40 flex-shrink-0 text-left">
+
+        <p class="text-xs">
+           Survey ID
+        </p>
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs">
+        Total User Responses
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs">
+        Product
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs">
+        Date Created
+      </div>
+
+    </div>
+    <div class="w-auto flex table-bg mt-4 rounded-md justify-between px-4 py-4">
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold text-blue-400 ">
+
+        Survey 001
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+       5000
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        Merck
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+         <p>January 21 2023</p>
+         <small  >20:30 PM</small>
+      </div>
+
+    </div>
+    <div class="w-auto flex table-bg mt-4 rounded-md justify-between px-4 py-4">
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold text-blue-400 ">
+
+        Survey 001
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+       5000
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        Merck
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+         <p>January 21 2023</p>
+         <small  >20:30 PM</small>
+      </div>
+
+    </div>
+    <div class="w-auto flex table-bg mt-4 rounded-md justify-between px-4 py-4">
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold text-blue-400 ">
+
+        Survey 001
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+       5000
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        Merck
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+         <p>January 21 2023</p>
+         <small  >20:30 PM</small>
+      </div>
+
+    </div>
+    <div class="w-auto flex table-bg mt-4 rounded-md justify-between px-4 py-4">
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold text-blue-400 ">
+
+        Survey 001
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+       5000
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        Merck
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+         <p>January 21 2023</p>
+         <small  >20:30 PM</small>
+      </div>
+
+    </div>
+    <div class="w-auto flex table-bg mt-4 rounded-md justify-between px-4 py-4">
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold text-blue-400 ">
+
+        Survey 001
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+       5000
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        Merck
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+         <p>January 21 2023</p>
+         <small  >20:30 PM</small>
+      </div>
+
+    </div>
+  </div>
+
+  <p class="text-blueGray-700 font-semibold text-md mt-10" >Rewards </p>
+  <div class="overflow-x-auto  w-full h-full mt-5"  >
+    <div class=" w-full flex justify-between px-4 p-4 border border-blueGray-300 rounded-md ">
+      <div class="w-40 flex-shrink-0 text-left">
+
+        <p class="text-xs">
+           Reward Name
+        </p>
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs">
+        Reward Type
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs">
+        Reward Value
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs">
+        Redemption Date
+      </div>
+
+    </div>
+    <div class="w-auto flex table-bg mt-4 rounded-md justify-between px-4 py-4">
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold text-blue-400 ">
+
+        Reward 001
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+       Loyalty Point
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        10
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+         <p>January 21 2023</p>
+      </div>
+
+    </div>
+    <div class="w-auto flex table-bg mt-4 rounded-md justify-between px-4 py-4">
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold text-blue-400 ">
+
+        Reward 001
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+       Loyalty Point
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        10
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+         <p>January 21 2023</p>
+      </div>
+
+    </div>
+    <div class="w-auto flex table-bg mt-4 rounded-md justify-between px-4 py-4">
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold text-blue-400 ">
+
+        Reward 001
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+       Loyalty Point
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        10
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+         <p>January 21 2023</p>
+      </div>
+
+    </div>
+    <div class="w-auto flex table-bg mt-4 rounded-md justify-between px-4 py-4">
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold text-blue-400 ">
+
+        Reward 001
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+       Loyalty Point
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+        10
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold ">
+         <p>January 21 2023</p>
+      </div>
+
+    </div>
+  </div>
+  <p class="text-blueGray-700 font-semibold text-md mt-10" >Total Authentication </p>
+  <div class="" >
+    <canvas id="myChart" ></canvas>
+  </div>
+</div>
+

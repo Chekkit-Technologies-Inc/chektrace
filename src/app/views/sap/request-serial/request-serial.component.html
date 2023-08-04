@@ -1,0 +1,78 @@
+<div class="flex flex-wrap mt-4 ">
+    <div class="w-full mb-12 px-4">
+        <div class="relative page-content px-8 flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"  ngClass="bg-sap">
+            <div class="block w-full overflow-x-auto px-4">
+                <div class="flex mt-12 justify-center">
+                    <h2 class="title"><span class="sap">Request Serial Number from Chekkit </span></h2>
+                </div>
+                   <div class="flex flex-wrap justify-center">
+
+                    <div class="flex  justify-center px-5">
+                        <p class="text-center text-sm-100 ">Now you are ready to acquire data from your consumers. To complete the process kindly follow the steps below. Your serial number geenrated on ATTP will now be matched with Chekkit Unique IDs</p>
+                    </div>
+                </div>
+
+
+                <div class="flex flex-wrap mt-12 mb-12">
+                    <div class="w-full flex-1 lg:w-3/12 px-4 pt-1 text-center ">
+                        <div class="relative w-full mb-3 ">
+                          <div class="card-selector card-selector-row flow" routerLink="/sap/request-serial"> 
+                              <div>
+                                <p class="flow-text">Create a Survey</p> 
+                                <p>Setup Surveys for subsequent scans</p>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="mt-12">
+                       
+                          <i class="fa fa-chevron-circle-right fa-3x" aria-hidden="true"></i>
+
+                    </div>
+                   
+
+                    <div class="w-full flex-1 lg:w-3/12 px-4 pt-1 text-center">
+                        <div class="relative w-full mb-3">
+                          <div class="card-selector card-selector-row flow" routerLink="/dashboard/rewards/loyalty-points">
+                              <div>
+                                <p class="flow-text">Attach Reward</p>
+                                <p class="text-center text-black-100 text-small">Attach reward to surveys you have created</p>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="mt-12">
+                        <i class="fa fa-chevron-circle-right fa-3x" aria-hidden="true"></i>
+                    </div>
+
+                        <div class="w-full flex-1 lg:w-3/12 px-4 pt-1 text-center">
+                            <div class="relative w-full mb-3">
+                              <div class="card-selector card-selector-row flow" routerLink="/dashboard/rewards/loyalty-points">
+                                  <div>
+                                    <p class="flow-text">Activate IDs</p>
+                                    <p>Activate your Unique IDs and send to printer</p>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                <div class="flex flex-wrap justify-center">
+                    <button [routerLink]="['/sap/batch']" type="submit" class="self-auto  ml-1 text-blueGray-600 font-bold px-12 py-4 rounded outline-blueGray-600  focus:outline-none mr-1 mb-1 bg-white text-sm shadow hover:shadow-lg ease-linear transition-all duration-150" >
+                        Start Process
+                    </button>
+                </div>
+            
+
+                 
+
+                </div> 
+          
+            
+        </div>
+        
+
+    </div>
+  </div>
+  

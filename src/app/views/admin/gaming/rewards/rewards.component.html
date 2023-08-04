@@ -1,0 +1,47 @@
+<div class="px-8 py-6 min-h-screen">
+  <div class="flex justify-between">
+    <p class="font-semibold text-xl">Rewards</p>
+    <div>
+      <button class="fmn-primary py-2 px-6 shadow font-semibold text-sm rounded-md" >Create Reward</button>
+    </div>
+  </div>
+  <hr>
+  <!-- <div class="md:flex lg:flex space-x-4 my-5">
+    <div class="basis-5/6">
+      <input class="border border-blueGray-300 rounded p-2 w-full" placeholder="Search Here" />
+    </div>
+    <div class="basis-1/6">
+      <select class="border border-blueGray-300 rounded p-2 w-full" >
+        <option>Filter By</option>
+      </select>
+    </div>
+  </div> -->
+  <div class="w-full grid grid-cols-4 gap-4" *ngIf="currentStep == 1" >
+    <div class="border border-blueGray-300 rounded shadow p-4 w-full" *ngFor="let reward of rewards" >
+      <div class="fmn-secondary rounded w-100 p-4 my-3">
+        <img src="../../../../../assets/img/image 42.png" alt="" srcset="">
+      </div>
+      <p class="text-primary text-xl my-3">
+        <span *ngIf="reward.reward_type == 'airtime' " >&#x20A6;</span> {{reward.reward_value}} {{reward.reward_type}}
+      </p>
+      <p class="text-xs my-3" >
+        <span class="text-gray-400 text-xs" >Total winners</span>  &nbsp;&nbsp;&nbsp;
+        <span class="text-black text-xs" >1,250 winners</span>
+      </p>
+      <p class="text-xs my-3" >
+        <span class="text-gray-400 text-xs" >Value</span>  &nbsp;&nbsp;&nbsp;
+        <span class="text-black text-xs" >20 days</span>
+      </p>
+      <p class="text-xs my-3" >
+        <span class="text-gray-400 text-xs" >Duration </span>  &nbsp;&nbsp;&nbsp;
+        <span class="text-black text-xs" >20 days</span>
+      </p>
+      <!-- <button class="border border-black py-2 px-8 rounded shadow my-3 text-sm" >View Reward</button> -->
+
+    </div>
+
+  </div>
+  <div *ngIf="currentStep == 2" >
+
+  </div>
+</div>

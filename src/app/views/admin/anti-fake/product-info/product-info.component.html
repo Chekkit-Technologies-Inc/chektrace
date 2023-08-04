@@ -1,0 +1,79 @@
+<div class="mt-12" (window:beforeunload)="confirmReload()">
+  <div *ngIf="selectedTab == 'product-info'" class="my-4 font-bold px-16 cursor-pointer" (click)="backToProducts()">
+    <span><i class="fa fa-arrow-left text-sm "></i></span> &nbsp; &nbsp; <span>Go Back</span>
+  </div>
+  <!-- <div *ngIf="selectedTab == 'attach-survey'" class="my-4 font-bold px-16 cursor-pointer" (click)="showModal = !showModal" >
+    <span><i class="fa fa-arrow-left text-sm "></i></span> &nbsp; &nbsp; <span>Go Back</span>
+  </div> -->
+  <!-- <div *ngIf="selectedTab == 'assign-rewards' " class="my-4 font-bold px-16 cursor-pointer" (click)=" selectedTab = 'attach-survey' ">
+    <span><i class="fa fa-arrow-left text-sm "></i></span> &nbsp; &nbsp; <span>Go Back</span>
+  </div> -->
+  <br>
+  <div class="w-100 mt-6 lg:px-32 px-3">
+
+
+    <div class="tabs">
+      <ul class="hidden sm:block md:block lg:block ">
+        <li [class.selected]="selectedTab == 'product-info'"
+          class="text-blueGray-800 p-4 rounded-lg inline mx-3 font-semibold" id="product-info">Product Information</li>
+        <li [class.selected]="selectedTab == 'attach-survey'"
+          class="text-blueGray-800 p-4 rounded-lg inline mx-3 font-semibold" id="attach-survey">Attach Survey</li>
+        <li [class.selected]="selectedTab == 'assign-rewards'"
+          class="text-blueGray-800 p-4 rounded-lg inline mx-3 font-semibold" id="assign-rewards">Assign Rewards</li>
+      </ul>
+      <br>
+      <div class="content my-6">
+        <div class="value1" *ngIf="selectedTab == 'product-info' ">
+
+          <app-add-product-info (attachSurvey)="goNext($event)" (productResponse)="getResponse($event)" ></app-add-product-info>
+        </div>
+        <div class="value2" *ngIf="selectedTab == 'attach-survey' ">
+
+
+          <app-attach-survey (assignRewards)="assignReward($event)" (emitSurveyAddedEvent)="getSurveyId($event)" ></app-attach-survey>
+        </div>
+        <div class="value3" *ngIf="selectedTab == 'assign-rewards' ">
+
+          <app-assign-rewards (selectedRewardId)="getRewardId($event)" (completedReward)="creteSubproduct($event)" ></app-assign-rewards>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal -->
+  <div *ngIf="showModal"
+  class="bg-blueGray-600 bg-opacity-25 min-h-screen w-screen absolute inset-0 flex justify-center item-center">
+  <div
+    class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+    <div class="relative w-auto my-6 mx-auto max-w-6xl modal-body">
+      <!--content-->
+      <div
+        class="border-0  relative flex flex-col w-full rounded-md bg-white outline-none focus:outline-none modal-body">
+        <!--header-->
+        <div class="flex items-start justify-between p-5  rounded-t">
+
+
+        </div>
+        <!--body-->
+        <div class="px-10 my-10" >
+          <p class="text-blueGray-700 font-semibold text-md " >Going back would overwrite previous changes, are you sure to continue ?</p>
+          <div class="text-center my-5" >
+            <button class="bg-blueGray-800 rounded shadow text-white font-semibold py-2 px-4 mx-3" (click)=" deleteProduct(productId)" >
+              <span *ngIf="!isLoading">
+                Yes
+              </span>
+              <span *ngIf="isLoading">
+                <img class="inline-flex "
+                    src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
+              </span>
+            </button>
+            <button class="bg-red-400 rounded shadow text-white font-semibold py-2 px-4 mx-3" (click)="showModal = !showModal" >No</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>

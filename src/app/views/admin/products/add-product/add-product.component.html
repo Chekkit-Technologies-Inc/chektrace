@@ -1,0 +1,484 @@
+<div class="flex flex-wrap mt-4">
+    <div class="w-full mb-12 px-4">
+        
+        <div class="relative flex flex-col min-w-0 break-words w-full mb-6 px-4 py-4 rounded"
+        ngClass="bg-white" >
+            <div class="flex flex-wrap">
+                <div class="w-full">
+                  <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
+                    <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                      <a class="text-xs font-bold uppercase px-5 py-3 rounded block leading-normal" (click)="toggleTabs(1)" [ngClass]="{'text-blueGray-800 bg-white': openTab !== 1, 'text-white bg-blueGray-800': openTab === 1}">
+                        1. PRODUCT INFO
+                      </a>
+                    </li>
+                    <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                      <a class="text-xs font-bold uppercase px-5 py-3 rounded block leading-normal" (click)="toggleTabs(2)" [ngClass]="{'text-blueGray-800 bg-white': openTab !== 2, 'text-white bg-blueGray-800': openTab === 2}">
+                        2. CREATE A NEW SURVEY
+                      </a>
+                    </li>
+                    <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                      <a class="text-xs font-bold uppercase px-5 py-3 rounded block leading-normal" (click)="toggleTabs(3)" [ngClass]="{'text-blueGray-800 bg-white': openTab !== 3, 'text-white bg-blueGray-800': openTab === 3}">
+                        3. ADD REWARDS
+                      </a>
+                    </li>
+                  </ul>
+                  <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 rounded">
+                    <div class="px-4 py-5 flex-auto">
+                      <div class="tab-content tab-space">
+                        <div [ngClass]="{'hidden': openTab !== 1, 'block': openTab === 1}">
+                            <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+                                <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+                                    <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                                    Product Identification
+                                    </h6>
+                                    <div class="flex flex-wrap">
+                                        <div class="w-full lg:w-6/12 px-4 mt-3">
+                                            <div class="relative w-full mb-3">
+                                                <label
+                                                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                    htmlFor="grid-password">
+                                                    Upload Product Image:
+                                                </label>
+                                                <input class="form-control border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" type="file" name="photo" (change)="onFileChange($event)" accept="image/*">
+                                            </div>
+                                        </div>
+                                        <div class="w-full lg:w-6/12 px-4 mt-3">   
+                                        </div>
+                                        <div class="w-full lg:w-6/12 px-4 mt-3">
+                                            <div class="relative w-full mb-3">
+                                                <label
+                                                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                    htmlFor="grid-password">
+                                                    Product Name
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    formControlName="product_name"
+                                                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                />
+                                                <div *ngIf="submitted && f.product_name.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                                                  <span class="inline-block align-middle mr-8">
+                                                    <b class="capitalize">warning!</b> This field is required
+                                                  </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="w-full lg:w-6/12 px-4 mt-3">
+                                            <div class="relative w-full mb-3">
+                                            <label
+                                                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                htmlFor="grid-password"
+                                            >
+                                                Producer Name
+                                            </label>
+                                            <input
+                                                type="text"
+                                                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                formControlName="producer_name"
+                                            />
+                                            <div *ngIf="submitted && f.producer_name.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                                              <span class="inline-block align-middle mr-8">
+                                                <b class="capitalize">warning!</b> This field is required
+                                              </span>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="w-full lg:w-6/12 px-4 mt-3">
+                                            <div class="relative w-full mb-3">
+                                            <label
+                                                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                htmlFor="grid-password"
+                                            >
+                                                Product Description
+                                            </label>
+                                            <textarea
+                                                type="text"
+                                                formControlName="product_description"
+                                                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                rows="3" > </textarea>
+                                                <div *ngIf="submitted && f.product_description.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                                                  <span class="inline-block align-middle mr-8">
+                                                    <b class="capitalize">warning!</b> This field is required
+                                                  </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="w-full lg:w-6/12 px-4 mt-3">
+                                            <label
+                                                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                htmlFor="grid-password">
+                                                What Age Group is the Product For?
+                                            </label>
+                                            <div class="flex flex-wrap">
+                                                <div class="w-full lg:w-4/12 px-4 ">
+                                                    <div class="relative w-full mb-3">
+                                                        <input id="checkbox0" type="radio" formControlName="age_range" value="0-2">
+                                                        <label
+                                                        class="inline uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                        htmlFor="grid-password">
+                                                        0-2 years
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="w-full lg:w-4/12 px-4">
+                                                    <div class="relative w-full mb-3">
+                                                        <input type="radio" class="form-check-input" formControlName="age_range" value="2-12">
+                                                        <label
+                                                        class="inline uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                        htmlFor="grid-password">
+                                                        2-12 years
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="w-full lg:w-4/12 px-4">
+                                                    <div class="relative w-full mb-3">
+                                                        <input type="radio" class="form-check-input" formControlName="age_range" value="13-19">
+                                                        <label
+                                                        class="inline uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                        htmlFor="grid-password">
+                                                        13-19 years
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="w-full lg:w-4/12 px-4">
+                                                    <div class="relative w-full mb-3">
+                                                        <input type="radio" class="form-check-input" formControlName="age_range" value="20-29">
+                                                        <label
+                                                        class="inline uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                        htmlFor="grid-password">
+                                                        20-29 years
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="w-full lg:w-4/12 px-4">
+                                                    <div class="relative w-full mb-3">
+                                                        <input type="radio" class="form-check-input" formControlName="age_range" value="30-40">
+                                                        <label
+                                                        class="inline uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                        htmlFor="grid-password">
+                                                        30-40 years
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="w-full lg:w-4/12 px-4">
+                                                    <div class="relative w-full mb-3">
+                                                        <input type="radio" class="form-check-input" formControlName="age_range" value="40 and above">
+                                                        <label
+                                                        class="inline uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                        htmlFor="grid-password">
+                                                        40 and above
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="submitted && f.age_range.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                                              <span class="inline-block align-middle mr-8">
+                                                <b class="capitalize">warning!</b> This field is required
+                                              </span>
+                                            </div>
+                                        
+                                        </div>
+                                    </div>
+                            
+                                    <hr class="mt-6 border-b-1 border-blueGray-300" />
+                            
+                                    <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                                    Batch Information
+                                    </h6>
+                                    <div class="flex flex-wrap">
+                                    <div class="w-full lg:w-4/12 px-4 pt-4">
+                                        <div class="relative w-full mb-3">
+                                            <label
+                                                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                htmlFor="grid-password"
+                                            >
+                                                Production Date
+                                            </label>
+                                            <input
+                                                type="date"
+                                                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                formControlName="production_date"
+                                            />
+                                            <div *ngIf="submitted && f.production_date.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                                            <span class="inline-block align-middle mr-8">
+                                                <b class="capitalize">warning!</b> This field is required
+                                            </span>
+                                            </div>
+                                            </div>
+                                    </div>
+                                    <div class="w-full lg:w-4/12 px-4 pt-4">
+                                        <div class="relative w-full mb-3">
+                                            <label
+                                                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                htmlFor="grid-password"
+                                            >
+                                                Expiry Date
+                                            </label>
+                                            <input
+                                                type="date"
+                                                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                formControlName="expiry_date"
+                                            />
+                                            <div *ngIf="submitted && f.expiry_date.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                                                <span class="inline-block align-middle mr-8">
+                                                    <b class="capitalize">warning!</b> This field is required
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="w-full lg:w-4/12 px-4 pt-4">
+                                        <div class="relative w-full mb-3">
+                                            <label
+                                                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                htmlFor="grid-password"
+                                            >
+                                                FDA Number
+                                            </label>
+                                            <input
+                                                type="text"
+                                                formControlName="fda_num" 
+                                                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            />
+                                            <div *ngIf="submitted && f.fda_num.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                                              <span class="inline-block align-middle mr-8">
+                                                <b class="capitalize">warning!</b> This field is required
+                                              </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="w-full lg:w-4/12 px-4 pt-8">
+                                        <div class="relative w-full mb-3">
+                                            <label
+                                                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                htmlFor="grid-password"
+                                            >
+                                            Batch Number
+                                            </label>
+                                            <input
+                                                type="text"
+                                                formControlName="batch_num"
+                                                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                value=""
+                                            />
+                                            <div *ngIf="submitted && f.batch_num.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                                              <span class="inline-block align-middle mr-8">
+                                                <b class="capitalize">warning!</b> This field is required
+                                              </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="w-full lg:w-4/12 px-4 pt-8">
+                                        <div class="relative w-full mb-3">
+                                            <label
+                                                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                htmlFor="grid-password"
+                                            >
+                                            Barcode Number
+                                            </label>
+                                            <input
+                                                type="text"
+                                                formControlName="barcode_num"
+                                                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                value="Postal Code"
+                                            />
+                                        </div>
+                                        <div *ngIf="submitted && f.barcode_num.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                                          <span class="inline-block align-middle mr-8">
+                                            <b class="capitalize">warning!</b> This field is required
+                                          </span>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <hr class="mt-6 border-b-1 border-blueGray-300" />
+            
+                                    <h6 class="text-blueGray-400 text-sm mt-3 mb-2 font-bold uppercase">
+                                        Product Category
+                                    </h6>
+                                    <div class="flex flex-wrap">
+                                        <div class="w-full lg:w-4/12 px-4 pt-1">
+                                            <div class="relative w-full mb-3">
+                                                <input id="checkbox0" type="radio" formControlName="product_category" value="Organic">
+                                                <label
+                                                class="inline uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                htmlFor="grid-password">
+                                                Organic
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="w-full lg:w-4/12 px-4 pt-2">
+                                            <div class="relative w-full mb-3">
+                                                <input type="radio" class="form-check-input" formControlName="product_category" value="Synthesized">
+                                                <label
+                                                class="inline uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                htmlFor="grid-password">
+                                                Synthesized
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="w-full lg:w-4/12 px-4 pt-2">
+                                            <div class="relative w-full mb-3">
+                                                <input type="radio" class="form-check-input" formControlName="product_category" value="Hybrid">
+                                                <label
+                                                class="inline uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                htmlFor="grid-password">
+                                                Hybrid
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="submitted && f.product_category.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                                      <span class="inline-block align-middle mr-8">
+                                        <b class="capitalize">warning!</b> This field is required
+                                      </span>
+                                    </div>
+                                
+                                    <h6 class="text-blueGray-400 text-sm mt-3 mb-2 font-bold uppercase">
+                                        ID Range
+                                    </h6>
+                                    <div class="flex flex-wrap">
+                                        <div class="w-full lg:w-4/12 px-4 pt-1">
+                                            <div class="relative w-full mb-3">
+                                                <input id="checkbox0" type="radio" formControlName="id_range" value="10000">
+                                                <label
+                                                class="inline uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                htmlFor="grid-password">
+                                                10,000 units
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="w-full lg:w-4/12 px-4 pt-2">
+                                            <div class="relative w-full mb-3">
+                                                <input type="radio" class="form-check-input" formControlName="id_range" value="50000">
+                                                <label
+                                                class="inline uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                htmlFor="grid-password">
+                                                50,000 units
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="w-full lg:w-4/12 px-4 pt-2">
+                                            <div class="relative w-full mb-3">
+                                                <input type="radio" class="form-check-input" formControlName="id_range" value="500000">
+                                                <label
+                                                class="inline uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                htmlFor="grid-password">
+                                                500,000 units
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="submitted && f.id_range.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                                      <span class="inline-block align-middle mr-8">
+                                        <b class="capitalize">warning!</b> This field is required
+                                      </span>
+                                    </div>
+                                
+                                    <div class="mt-12">
+
+                                        <button  class="rounded-full text-white font-bold px-3 py-3 rounded outline-none focus:outline-none mr-1 mb-1 bg-red-600 active:bg-red-700 text-sm shadow hover:shadow-lg ease-linear transition-all duration-150" disabled>prev {{productForm.invalid}}</button>
+                                        <button type="submit" class="rounded-full ml-1 text-white font-bold px-3 py-3 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 text-sm shadow hover:shadow-lg ease-linear transition-all duration-150" [disabled]="loading">
+                                            Save and Update
+                                        </button>
+                                        <!-- <a
+                                        href="#"
+                                        class="rounded-full ml-1 text-white font-bold px-3 py-3 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
+                                        target="_blank"
+                                        >
+                                        Save and Update
+                                        </a> -->
+                                    </div>
+                                
+                                </form>
+                            </div>
+                            
+                        </div>
+                        <div [ngClass]="{'hidden': openTab !== 2, 'block': openTab === 2}">
+                          
+                            <div class="flex flex-wrap"  *ngIf="!surveyType ">
+                                <div class="w-full px-4 flex-1 md:w-2/12 md:flex-none">
+                                </div>
+                                <div class="w-full flex-1 lg:w-4/12 px-4 pt-1">
+                                    <div class="relative w-full mb-3">
+                                      <div class="card-selector card-selector-row" (click)="surveyType = 'existing'">
+                                          <div>
+                                            <img
+                                                alt="..."
+                                                src="assets/img/contact-icon.png"
+                                                class=""
+                                            />
+                                          </div>
+                                          <div>
+                                            <p>Choose from existing survey</p>
+                                          </div>
+                                      </div>
+                                    </div>
+                                </div>
+                                <div class="w-full flex-1 lg:w-4/12 px-4 pt-1">
+                                    <div class="relative w-full mb-3">
+                                      <div class="card-selector card-selector-row" (click)="surveyType = 'new'">
+                                          <div>
+                                            <img
+                                                alt="..."
+                                                src="assets/img/contact-icon.png"
+                                                class=""
+                                            />
+                                          </div>
+                                          <div>
+                                            <p>Create a survey</p>
+                                          </div>
+                                      </div>
+                                    </div>
+                                </div>
+                                <div class="w-full px-4 flex-1 md:w-2/12 md:flex-none">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex flex-wrap" *ngIf="surveyType && surveyType == 'existing'">
+                                    <div class="w-full lg:w-8/12 px-4 mt-3">
+                                        <div class="relative w-full mb-3">
+
+                                            <form class="form-horizontal" [formGroup]="surveyForm" (ngSubmit)="updateSurveyProduct()">
+                                                <label
+                                                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                    htmlFor="grid-password">
+                                                    Please select the survey you want to attach to this Product.
+                                                </label>
+                                                <select class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" formControlName="surveyId" *ngIf="save_survey?.length>0">
+                                                    <option selected="">Select</option>
+                                                    <option *ngFor="let survey of save_survey"
+                                                        value="{{survey.id}}">{{survey.title}}</option>
+                                                </select>
+                                                <div *ngIf="submitted2 && g.surveyId.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                                                  <span class="inline-block align-middle mr-8">
+                                                    <b class="capitalize">warning!</b> This field is required
+                                                  </span>
+                                                </div>
+                                
+                                                <div class="mt-12">
+                                                    <button type="submit" class="rounded-full ml-1 text-white font-bold px-6 py-2 outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 text-sm shadow hover:shadow-lg ease-linear transition-all duration-150">
+                                                        Continue
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="surveyType && surveyType == 'new'">
+                                    <add-survey-form></add-survey-form>
+                                </div>
+                            </div>
+                        </div>
+                        <div [ngClass]="{'hidden': openTab !== 3, 'block': openTab === 3}">
+                            <!-- <add-reward *ngIf="data" [(pId)]="data?.id"></add-reward> -->
+                            <add-reward [pId]="'2'"></add-reward>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+    </div>
+  </div>
+  

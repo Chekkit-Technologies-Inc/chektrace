@@ -1,0 +1,225 @@
+<div class="px-8 py-6 min-h-screen">
+  <div *ngIf="step === 1">
+    <div class="flex justify-between my-3">
+      <p class="font-semibold text-xl">Leaderboard List</p>
+      <div>
+        <button class="btn fmn-primary px-6 py-2 rounded shadow text-sm " (click)="step = 2" >Select Winners</button>
+      </div>
+    </div>
+    <div class="flex justify-between space-x-4 fmn-secondary rounded-xl py-2 px-2" >
+      <div class="basis-1/3 text-center text-white  shadow rounded-xl font-semibold text-xs py-2" [ngClass]=" {'fmn-primary': active, 'fmn-secondary': !active} " (click)="toggleDaily()" >Daily</div>
+      <div class="basis-1/3 text-center text-white shadow rounded-xl font-semibold text-xs py-2" [ngClass]=" {'fmn-primary': active2, 'fmn-secondary': !active2} " (click)="toggleWeekly()" >Weekly</div>
+      <div class="basis-1/3 text-center text-white  shadow rounded-xl font-semibold text-xs py-2" [ngClass]=" {'fmn-primary': active3, 'fmn-secondary': !active3} " (click)="toggleAlltime()">All Time</div>
+    </div>
+
+    <div class="md:flex lg:flex space-x-4 my-5">
+      <div class="basis-5/6">
+        <input class="border border-blueGray-300 rounded-md shadow p-2 w-full searchTerm fmn-border" [(ngModel)]="term"  placeholder="Search Here" />
+      </div>
+      <div class="basis-1/6">
+        <!-- <select class="border border-blueGray-300 rounded p-2 w-full" >
+          <option>Filter By</option>
+        </select> -->
+      </div>
+    </div>
+
+    <div class="my-5">
+      <div class="mt-6 overflow-x-auto ">
+        <div class="overflow-x-auto  w-full h-full">
+          <div class="w-full flex bg-white justify-between px-4 py-3">
+            <div class="w-40 flex-shrink-0 text-center">
+              <p class="font-semibold text-xs">
+                Position
+              </p>
+            </div>
+            <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
+              Names
+            </div>
+            <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
+              Points
+            </div>
+            <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
+              Action
+            </div>
+          </div>
+          <hr>
+          <div *ngIf="active" >
+            <div class="w-full flex fmn-secondary justify-between px-4 py-3 my-3 rounded" *ngFor="let point of dailyBoard | filter: term ; let i = index " >
+              <div class="w-40 flex-shrink-0 text-center">
+                <p class="font-semibold text-xs">
+                  {{i + 1}}
+                </p>
+              </div>
+              <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
+                {{ point.user.first_name }} {{ point.user.last_name }}
+              </div>
+              <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
+                {{ point.dailyPoints }}
+              </div>
+              <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
+              <span class="border rounded py-2 px-4 text-xs cursor-pointer shadow fmn-primary" (click)="viewProfile(point.id)" >VIEW PROFILE</span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="active2" >
+            <div class="w-full flex fmn-secondary justify-between px-4 py-3 my-3 rounded" *ngFor="let point of weeklyBoard | filter: term ; let i = index" >
+              <div class="w-40 flex-shrink-0 text-center">
+                <p class="font-semibold text-xs">
+                  {{i + 1}}
+                </p>
+              </div>
+              <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
+                {{ point.user.first_name }} {{ point.user.last_name }}
+              </div>
+              <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
+                {{ point.WeeklyPoints }}
+              </div>
+              <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
+              <span class="border rounded py-2 px-4 text-xs cursor-pointer shadow fmn-primary" (click)="viewProfile(point.id)" >VIEW PROFILE</span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="active3" >
+            <div class="w-full flex fmn-secondary justify-between px-4 py-3 my-3 rounded" *ngFor="let point of allTimeboard | filter: term ; let i = index" >
+              <div class="w-40 flex-shrink-0 text-center">
+                <p class="font-semibold text-xs">
+                  {{i + 1}}
+                </p>
+              </div>
+              <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
+                {{ point.user.first_name }} {{ point.user.last_name }}
+              </div>
+              <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
+                {{ point.allPoints }}
+              </div>
+              <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
+              <span class="border rounded py-2 px-4 text-xs cursor-pointer shadow fmn-primary" (click)="viewProfile(point.id)" >VIEW PROFILE</span>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="showModal"
+    class="bg-blueGray-600 bg-opacity-25 min-h-screen w-screen absolute inset-0 flex justify-center item-center">
+    <div
+      class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+      <div class="relative w-auto my-6 mx-auto max-w-6xl modal-body">
+        <!--content-->
+        <div
+          class="border-0  relative flex flex-col w-full rounded-md bg-white outline-none focus:outline-none modal-body">
+          <!--header-->
+          <div class="flex items-start justify-between p-5  rounded-t">
+
+            <button
+              class="p-2 rounded-2xl ml-auto fmn-primary border-0 text-white float-right  leading-none font-semibold outline-none focus:outline-none"
+              (click)="showModal = !showModal">
+              <span class=" text-white  h-6 w-6 text-md block outline-none focus:outline-none">
+                <i style="font-size:24px; " class="fa">&#xf00d;</i>
+              </span>
+            </button>
+          </div>
+          <!--body-->
+
+          <div class="mx-4 text-start" >
+            <p class="text-blueGray-700 font-semibold text-md text-center" >User's Profile</p>
+            <div class="mt-5 text-start" >
+              <p class="text-md text-blueGray-700 my-3 font-semibold" >First Name: {{selectedFirstName}} </p>
+              <p  class="text-md text-blueGray-700 my-3 font-semibold"  >Last Name: {{selectedLastName}} </p>
+              <p  class="text-md text-blueGray-700 my-3 font-semibold"  >Date Of Birth: {{selectedDOB}} </p>
+              <p  class="text-md text-blueGray-700 my-3 font-semibold"  >Total Points: {{selectedPoint}} </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  </div>
+  <div *ngIf="step === 2" >
+    <span class="text-md px-3 py-2 rounded fmn-border mb-5 cursor-pointer shadow" (click)="step = 1" >Back</span>
+    <div class="flex justify-between my-3">
+      <p class="font-semibold text-xl">Select Winner(s)</p>
+      <div>
+        <button class="btn fmn-primary px-6 py-2 rounded shadow text-sm " (click)="selectWinners()" >
+          <span *ngIf="!loading" >Send Congratulation Message</span>
+          <span *ngIf="loading" > <i>Sending......</i> </span>
+        </button>
+      </div>
+    </div>
+    <div>
+      <p class="text-md mb-3" >Choose Reward Type</p>
+      <div class="flex" >
+        <div class="border border-black p-3 rounded-md rewards mr-3 cursor-pointer" [ngStyle]="{'box-shadow': rewardId === reward.id ? 'rgba(0, 0, 0, 0.24) 0px 3px 8px' : '' }" (click)="selectReward(reward.id)"  *ngFor="let reward of availableRewards" >
+          <span class="text-xs" > {{reward.reward_value}} </span>
+          <img [src]="reward.reward_image"  alt="" srcset="">
+        </div>
+        <!-- <div class="border border-black p-3 rounded-md ml-3">
+          <span class="text-xs" >iPad</span>
+          <br>
+          <img src="../../../../../assets/img/ipad.png" height="100"  alt="" srcset="">
+        </div>
+        <div class="border border-black p-3 rounded-md ml-3">
+          <span class="text-xs" >Scholarship</span>
+          <br>
+          <img src="../../../../../assets/img/scholarship.png" height="100"  alt="" srcset="">
+        </div>
+        <div class="border border-black p-3 rounded-md ml-3">
+          <span class="text-xs" >Bicycle</span>
+          <br>
+          <img src="../../../../../assets/img/bicycle.png" height="100"  alt="" srcset="">
+        </div> -->
+      </div>
+    </div>
+    <div class="my-5">
+      <div class="mt-6 overflow-x-auto ">
+        <div class="overflow-x-auto  w-full h-full">
+          <div class="w-full flex bg-white justify-between px-4 py-3">
+            <div class="w-40 flex-shrink-0 text-center">
+              <p class="font-semibold text-xs">
+                Position
+              </p>
+            </div>
+            <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
+              Full Name
+            </div>
+            <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
+              Date Of Birth
+            </div>
+            <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
+             Point
+            </div>
+            <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
+              Action
+            </div>
+          </div>
+          <hr>
+          <div class="w-full flex fmn-secondary justify-between px-4 py-3 my-3 rounded" *ngFor="let person of leaderboard; let i = index" >
+            <div class="w-40 flex-shrink-0 text-center">
+              <p class="font-semibold text-xs">
+                {{i + 1}}
+              </p>
+            </div>
+            <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
+              {{ person.user.first_name }} {{ person.user.last_name }}
+            </div>
+            <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
+              {{ person.user.age_range}}
+            </div>
+            <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
+              {{ person.allPoints }}
+            </div>
+            <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
+              <input type="checkbox" id="cb1" class="shadow" [value]="person.user.id" (change)="selectUser($event)" />
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

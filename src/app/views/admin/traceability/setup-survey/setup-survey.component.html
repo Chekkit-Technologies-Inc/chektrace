@@ -1,0 +1,143 @@
+<div class="flex flex-wrap mt-4 bg-blueGray-200 pt-16 px-8">
+    <div class="w-full mb-12 px-4 holder">
+        <div class="relative page-content min-w-0 break-words w-full mb-6 pb-6 px-4 rounded">
+
+            <img src="../../../../../assets/img/survey-up-right.png" class="h-20 float-right " alt="" srcset="">
+
+
+
+            <div class="flex-auto px-4 lg:px-10 pt-0">
+                <div class="text-left font-bold text-blueGray-800 my-4 cursor-pointer " (click)="goBack()">
+                    <span><i class="fa fa-arrow-left text-sm "></i></span> &nbsp; &nbsp; <span>Go Back</span>
+
+                </div>
+                <div class="font-bold text-blueGray-800 text-2xl pt-8 ">
+                    Step 2: Setup Surveys
+                </div>
+
+                <div class=" bg-white rounded mt-4 p-4 w-100">
+                   
+
+                    <form class="w-100 mt-4" cdkDropList (cdkDropListDropped)="drop($event)" >
+                        <div cdkDrag *ngFor="let question of questions; let i = index">
+
+                            
+                            <div class="md:flex lg:flex flex-wrap w-100 mb-6"  >
+                                <div class="flex-1 mb-6 md:mb-0">
+                                    <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                        for="grid-first-name">
+                                        Question {{i + 1}}
+                                    </label>
+                                    <input
+                                        class="block w-full  text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight bg-white focus:outline-none focus:bg-white"
+                                        id="grid-first-name" type="text" placeholder="Type question here........">
+                                </div>
+                                <div class="flex-1  px-3">
+                                    <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                        for="question-type">
+                                        Question Type
+                                    </label>
+                                    <div class="relative">
+                                        <select
+                                            class="block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                            id="grid-state">
+                                            <option> <span class="fa font-black text-blueGray-800 ">Checkboxes</span>
+                                            </option>
+                                            <option>Radio buttons</option>
+                                            <option>Enpty lines</option>
+                                        </select>
+    
+                                    </div>
+                                </div>
+                            </div>
+                            <div   >
+                                <div class="flex flex-wrap -mx-3 mb-6" >
+                                    <div class="w-full px-3">
+                                        <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                            for="grid-password">
+                                            Options
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0" *ngFor="let option of options; let i = index" >
+        
+                                    <div class="flex ">
+                                        <div class="flex-auto ">
+                                            <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                            [(ngModel)]="option.option" name="option{{i + 1 }}" type="text" placeholder="Type answer here ......">
+                                        </div>
+
+                                        <!-- <div class="flex-auto"> -->
+                                            <span (click)="removeOption(i)" > &nbsp;&nbsp;  <i class='fas pr-4'>&#xf1f8;</i></span>
+                                        <!-- </div> -->
+                                        
+                                        
+                                        
+                                    </div>
+                                </div>
+                                
+                                
+                            </div>
+                            <div class="w-full flex justify-end px-3" >
+                                <div class="bg-blueGray-100 rounded p-2 text-blueGray-800 text-sm font-bold" (click)="addOptions(i)" >
+                                    <i class='fas'>&#xf067;</i>&nbsp; Add Option
+                                </div>
+    
+                            </div>
+                        </div>
+
+                        
+                        
+                        <div class="w-full flex justify-start px-3">
+                            <div class=" rounded p-2 text-blueGray-800 text-sm font-bold" (click)="addQuestions()" >
+                                <i class='fas'>&#xf055;</i>&nbsp; Add Question
+                            </div>
+
+                        </div>
+                        <div class="px-6 mt-8">
+                            <hr>
+                            <div class="w-full flex justify-end px-5 py-4">
+
+                                <div class="cursor-pointer p-2 text-blueGray-800 font-bold ">
+                                    <i class='far pr-4'>&#xf24d;</i>
+                                </div>
+
+                                <div class="cursor-pointer rounded p-2 text-blueGray-800  font-bold ">
+                                    <i class='fas pr-4'>&#xf1f8;</i>
+                                </div>
+                                <button
+                                    class="bg-blueGray-800  text-white active:bg-blueGray-800 text-sm font-bold px-6 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+                                    Done
+                                </button>
+
+                            </div>
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+                
+
+
+                <div class="flex justify-between mt-8 mx-8">
+                    <!-- <div class="flex-1 h-12 bg-white text-blueGray-600 rounded-lg py-3 text-white mr-3 border-2 text-center hover:bg-blueGray-800 cursor-pointer border-blueGray-500 ">
+                        Skip
+                    </div> -->
+                    <div class="flex-1 h-12 text-white rounded-lg py-3 text-white mr-3 border-2 text-center bg-blueGray-800 cursor-pointer border-blueGray-500 " (click)="attachReward()" > 
+                        Continue
+                    </div>
+                </div>
+
+                
+
+
+            </div>
+
+            <img src="../../../../../assets/img/survey-bottom-left.png" class="h-20 float-left " alt="" srcset="">
+
+
+        </div>
+    </div>
+</div>

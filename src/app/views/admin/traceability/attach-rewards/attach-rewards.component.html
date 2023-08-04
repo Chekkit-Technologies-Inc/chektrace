@@ -1,0 +1,144 @@
+<div class="mt-12" >
+  <button class="p-2  hover:shadow-lg rounded-lg text-sm text-blueGray-700 shadow m-2 "
+    (click)="postPackingProcess = 'packing'" [class.selected]="postPackingProcess == 'packing'">Packing</button>
+  <button class="p-2  hover:shadow-lg rounded-lg text-sm text-blueGray-700 shadow m-2 " *ngIf="serialNumber.level != 'Primary'"
+    (click)="postPackingProcess = 'shipping'" [class.selected]="postPackingProcess == 'shipping'"> Load & Ship Container</button>
+</div>
+<hr>
+
+<br>
+<div *ngIf="postPackingProcess == 'packing'">
+  <div class="w-100 flex pt-4" *ngIf="!isPacking">
+    <div class="m-auto">
+      <img src="../../../../../assets/img/55.svg" alt="" srcset="">
+      <button class="bg-blueGray-800 text-white px-4 rounded-lg p-2 my-5" (click)="isPacking = true">Start
+        Packing</button>
+    </div>
+  </div>
+
+  <div *ngIf="isPacking">
+    <p class="font-2xl text-blueGray-800 font-bold ">Aggregation</p>
+    <br>
+    <div class="flex-1 m-3">
+      <div>
+        <label class="font-bold">Select Parent Package Level</label>
+
+        <select class="border border-blueGray-700 rounded-lg bg-white p-2 w-full "
+          (change)="selectParent($event.target.value)" name="parentLevel" [(ngModel)]="parentLevel">
+          <option class="text-blueGray-300" selected>Select packaging level</option>
+          <option [value]="level.id" *ngFor="let level of packageLevels"> {{level.level}} </option>
+
+        </select>
+      </div>
+
+
+
+    </div>
+    <div class="flex justify-between my-3">
+      <div class="flex-1 m-3">
+        <label class="font-bold">Select Child Package Level</label>
+
+        <select class="border border-blueGray-700 rounded-lg bg-white p-2 w-full "
+          (change)="selectChild($event.target.value)" name="childLevel" [(ngModel)]="childLevel">
+          <option class="text-blueGray-300" selected>Select packaging level</option>
+          <option [value]="level.id" *ngFor="let level of packageLevels"> {{level.level}} </option>
+
+        </select>
+      </div>
+
+
+    </div>
+
+
+    <div class="flex justify-between">
+      <div class="flex-1 m-3">
+        <div class="font-bold">Parent Maximum Capacity</div>
+
+        <input class="border border-blueGray-700 rounded-lg bg-white p-2 w-full" [(ngModel)]="capacity" name="capacity"
+          placeholder="Quantity" type="number" />
+      </div>
+      <div>
+
+      </div>
+    </div>
+    <div class="flex justify-between">
+      <div class="flex-1 m-3">
+        <div class="font-bold">Scan Parent Item</div>
+
+        <input class="border border-blueGray-700 rounded-lg bg-white p-2 w-full" [(ngModel)]="parentScan" name="parentScan"
+          placeholder="Parent Item"  />
+      </div>
+      <div class="flex-1 m-3" >
+        <div class="font-bold">Scan Child Item(s)</div>
+
+        <input class="border border-blueGray-700 rounded-lg bg-white p-2 w-full" [(ngModel)]="childScan" name="childScan"
+          placeholder="Child Item" (change)="addMore()" />
+      </div>
+    </div>
+
+
+    <div class="my-5 bg-blueGray-200 rounded-lg p-5  " *ngIf="childrenScans.length >= 1"  >
+      <div *ngFor="let code of childrenScans">
+        <div class="text-blueGray-800 text-md bg-white p-2 rounded-lg my-2 " >
+          {{code}} &nbsp;&nbsp;&nbsp; &nbsp;<span class="right-0 cursor-pointer" (click)="removeCode(code)" ><i style="font-size:24px" class="fa">&#xf1f8;</i></span>
+        </div>
+      </div>
+    </div>
+    <button class="bg-blueGray-800 p-2 px-5 rounded-lg text-white font-bold my-3"
+            >
+
+            <span *ngIf="loading">
+              <img
+                class="inline-flex"
+                src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+              />
+            </span>
+            <span *ngIf="!loading" (click)="pack()"> Aggregate</span>
+
+          </button>
+  </div>
+
+
+
+</div>
+
+<div *ngIf="postPackingProcess == 'loading' " >
+  <div class="success-body text-center">
+    <div class="success-image">
+      <img
+        src="../../../../assets/img/success-image.png"
+        class="m-auto ssimg"
+        alt=""
+        srcset=""
+        width="300"
+      />
+
+      <p class="text-lg font-bold text-blueGray-700 my-5">
+
+        Packing Was successfully Initiated
+      </p>
+      <div class="mt-10 flex justify-between w-70 ">
+        <div class="flex-1 text-right">
+          <button
+            class="bg-blueGray-600 rounded-lg text-white py-2 font-semibold  text-lg px-3 hover:bg-blueGray-500 m-3"
+            (click)="back()"
+          >
+            Back to Status Page
+          </button>
+        </div>
+        <div class="flex-1 text-left ">
+          <button
+            class="bg-blueGray-600 rounded-lg text-white py-2 font-semibold text-lg px-3 hover:bg-blueGray-500 m-3"
+            (click)="postPackingProcess = 'packing'"
+          >
+            Continue with Packing
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="postPackingProcess == 'shipping'"  >
+  <app-select-destination></app-select-destination>
+</div>

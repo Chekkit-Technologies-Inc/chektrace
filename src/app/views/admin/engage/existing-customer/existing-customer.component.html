@@ -1,0 +1,172 @@
+<div class="flex flex-wrap mt-4">
+    <div class="w-full mb-12 px-4">
+        <div class="relative page-content flex flex-col min-w-0 break-words w-full mb-6 pb-6 px-4 rounded"
+        ngClass="bg-white"
+        >
+                <div class="px-4 pb-4 pt-12" >
+                    <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+                        <div class="text-left font-bold text-indigo-600 mb-4 cursor-pointer" (click)="goBack()">
+                            <span><i class="fa fa-arrow-left text-sm "></i></span> &nbsp; &nbsp; <span>Go Back</span>
+    
+                        </div>
+                        <div class="text-blueGray-800 text-left mb-6 mt-4 font-semibold flex ">
+                            <img alt="..." src="assets/img/contact-icon-2.png" class=" hidden sm:hidden md:block lg:block" /> &nbsp;
+                            <div class=" text-2xl">
+                                Link existing contacts
+                            </div>
+                        </div>
+                        <br>
+                        <p class="text-blueGray-800 mb-6" >Please you need to give your contact group a name</p>
+                        <p class="text-blueGray-600" >Contact Group</p>
+                        <div class="relative flex w-full  mb-10">
+                            <div class="flex-auto lg:w-12/12  py-10 pt-0">
+                                
+                                <input type="text" placeholder="name contact group here" class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full pl-10"/>
+                             
+                                
+                            </div>
+                           
+                        </div>
+                        <br>
+                        <div class="relative flex w-full  mb-3">
+                            <div class="flex-auto  py-10 pt-0 pr-4">
+                                <span class="z-10 h-full leading-snug font-normal absolute text-center text-blueGray-300 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                                <input type="text" placeholder="search here" class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-blueGray-100 rounded text-sm border-none outline-none focus:outline-none focus:shadow-outline w-full pl-10"/>
+                             
+                                
+                            </div>
+                            <td
+                                    class=" text-blueGray-700  align-middle text-xs whitespace-nowrap"
+                                >
+                                <app-existing-customers-dropdown></app-existing-customers-dropdown>  
+                                <!-- <app-table-dropdown></app-table-dropdown> -->
+
+                                </td>
+                        </div>
+
+                        <div class="block w-full overflow-x-auto">
+                            <form [formGroup]="form" (ngSubmit)="submit()">
+                                <table class="items-center w-full bg-transparent border-collapse">
+                                    <thead class="border-2 border-black rounded-2xl" >
+                                        
+                                            <tr class=" mb-3">
+                                                <th
+                                                    class="px-6 align-middle py-3 text-xs capitalize whitespace-nowrap font-semibold text-left"
+                                                
+                                                >
+                                                    <input type="checkbox" class="form-check-input rounded-full" (change)="selectAll($event)"  value="selectAll">
+                                                </th>
+                                                <th
+                                                    class="px-6 align-middle py-3 text-xs capitalize whitespace-nowrap font-semibold text-left"
+                                                >
+                                                    phone number
+                                                </th>
+                                                <th
+                                                    class="px-6 align-middle py-3 text-xs capitalize whitespace-nowrap font-semibold text-left"
+                                                >
+                                                    age range
+                                                </th>
+                                                <th
+                                                    class="px-6 align-middle py-3 text-xs capitalize whitespace-nowrap font-semibold text-left"
+                                                >
+                                                    date added
+                                                </th>
+                                            </tr>
+                                        
+                                        
+                                    </thead>
+                                    <tbody>
+                                        <tr class=" border-none rounded bg-blueGray-100 mb-4" formArrayName="contacts" *ngFor="let order of ordersFormArray.controls; let i = index">
+                                            <td
+                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center"
+                                            >                                            
+                                                <input  type="checkbox" [formControlName]="i" class="form-check-input rounded-full "  value="13-19">
+                                            </td>
+                                            <td
+                                                class="border-t-0 text-blueGray-700 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                                            >
+                                                0941 567 3402
+                                            </td>
+                                            <td
+                                                class="border-t-0 text-blueGray-700 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                                            >
+                                                18 - 25
+                                            </td>
+                                            <td
+                                                class="border-t-0 text-blueGray-700 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                                            >
+                                            <app-table-dropdown></app-table-dropdown>
+
+                                                <!-- 11 mar 2020 -->
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+
+                        <div class="w-100 text-right">
+                            <div class="flex justify-right w-100 mt-6">
+                                <nav aria-label="Page navigation example">
+                                  <ul class="flex list-style-none">
+                                    <li class="page-item disabled"><a
+                                        class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"
+                                        href="#" tabindex="-1" aria-disabled="true">Page</a></li>
+                                    <li class="page-item"><a
+                                        class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                                        href="#">1</a></li>
+                                    <li class="page-item active"><a
+                                        class="page-link relative block py-1.5 px-3 rounded border-0 bg-indigo-500 outline-none transition-all duration-300 rounded text-white hover:text-white hover:bg-blue-600 shadow-md focus:shadow-md"
+                                        href="#">2 </a></li>
+                                    <li class="page-item"><a
+                                        class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                                        href="#">3</a></li>
+                                    <li class="page-item"><a
+                                        class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                                        href="#">Next</a></li>
+                                  </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                <div>
+                </div>
+            </div>
+            <div class="w-100 text-center">
+                <button [hidden]="stage == 3" (click)="nextStage()"
+                    class="bg-indigo-500  text-white active:bg-blueGray-600 text-sm font-bold px-12 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+                    Continue
+                </button>
+            </div>
+
+            <!-- <div class="footer-nav">
+                <button 
+                (click)="prevStage()"
+                [disabled]="stage == 1"
+                class="bg-transparent hover:bg-blueGray text-blueGray text-sm font-bold hover:shadow-lg mr-1 px-6 py-3 border-2 border-blue hover:border-transparent rounded">
+                    Go back
+                </button>
+                <button 
+                [hidden]="stage == 3"
+                (click)="nextStage()"
+                class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold px-6 py-3 rounded hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                >
+                Next
+                </button>
+                <button 
+                [hidden]="stage !== 3"
+                class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold px-6 py-3 rounded hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                type="submit"
+                >
+                Send
+                </button>
+            </div> -->
+        </div>
+        
+        
+
+    </div>
+  </div>
+  

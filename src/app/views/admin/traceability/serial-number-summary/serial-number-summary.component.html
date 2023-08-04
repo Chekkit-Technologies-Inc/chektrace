@@ -1,0 +1,215 @@
+<!-- <div class="flex flex-wrap mt-4 bg-blueGray-200 px-8">
+  <div class="w-full mb-12 px-4 mt-8 relative holder">
+    <br><br>
+    <div class="w-full my-4 bn pb-4">
+      <div class="float-left">
+        <div class="text-blueGray-800 font-medium mt-8 cursor-pointer " (click)="back()">
+            <i style="font-size:24px" class="fa">&#xf060;</i> &nbsp;Back
+        </div>
+      </div>
+      <div class=" bg-white shadow-lg rounded-lg w-auto p-4 font-bold float-right">
+        Batch Number &nbsp;<span class="text-lg">32013</span>
+      </div>
+    </div>
+
+    <div class="flex justify-between md:flex-row w-100 left-border border-indigo-500 mt-4 border-l-2 my-4 pb-4">
+      <div class="basis-2/3">
+        <p class="font-bold text-blueGray-600 text-2xl">Step 4</p>
+        <h2 class="font-bold text-blueGray-800 text-3xl ">Verify Serial Number Hierarchy</h2>
+      </div>
+      <div class="basis-1/3">
+        <div class="w-100 sm:ml-3 md:ml-2 lg:ml-2 text-center my-4 ">
+          <button
+            class="h-12   text-white transition-colors duration-150 bg-blueGray-800 rounded-lg focus:shadow-outline hover:bg-blueGray-600 font-semibold px-4 text-center " (click)="continue()" >
+            Save & Continue</button>
+
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-nowrap border-2 border-gray-300 bg-white border w-100 p-4 ">
+      <div class="flex-1 text-center">
+        Package Level
+      </div>
+      <div class="flex-1 text-center">
+        Serial Number
+      </div>
+      <div class="flex-1 text-center">
+        Action
+      </div>
+    </div>
+    <div class="border border-gray-300 pt-4 bg-blueGray-200 mt-2">
+      <div class="my-4 rounded-2xl  bg-blueGray-300 p-2">
+        <div class="flex flex-nowrap p-4 my-4">
+          <div class="flex-1 text-center text-blueGray-600 ">
+            Tertiary
+          </div>
+          <div class="flex-1 text-center text-blueGray-600">
+            000000001 - 111111111
+          </div>
+          <div class="flex-1 text-center text-blueGray-600 text-2xl cursor-pointer" (click)="toggle()">
+            <span *ngIf="!isOpened">
+              <i class="fa">&#xf055;</i>
+            </span>
+            <span *ngIf="isOpened">
+              <i style="font-size:24px" class="fa">&#xf056;</i>
+            </span>
+          </div>
+        </div>
+
+        <div *ngIf="isOpened" class="px-8 mx-8">
+          <div class="flex flex-nowrap bg-white border-2 border-blueGray-500 rounded-2xl p-4 my-4">
+            <div class="flex-1 text-center text-blueGray-600 ">
+              Secondary
+            </div>
+            <div class="flex-1 text-center text-blueGray-600">
+              000000001 - 111111111
+            </div>
+            <div class="flex-1 text-center text-blueGray-600 text-2xl cursor-pointer">
+              <i class="fa">&#xf055;</i>
+            </div>
+          </div>
+          <div class="flex flex-nowrap bg-white border-2 border-blueGray-500 rounded-2xl p-4 my-4">
+            <div class="flex-1 text-center text-blueGray-600 ">
+              Primary
+            </div>
+            <div class="flex-1 text-center text-blueGray-600">
+              000000001 - 111111111
+            </div>
+            <div class="flex-1 text-center text-blueGray-600 text-2xl cursor-pointer">
+              <i class="fa">&#xf055;</i>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="my-4 rounded-2xl  bg-blueGray-300 p-2">
+        <div class="flex flex-nowrap p-4 my-4">
+          <div class="flex-1 text-center text-blueGray-600 ">
+            Tertiary
+          </div>
+          <div class="flex-1 text-center text-blueGray-600">
+            000000001 - 111111111
+          </div>
+          <div class="flex-1 text-center text-blueGray-600 text-2xl cursor-pointer">
+            <span *ngIf="!isOpened">
+              <i class="fa">&#xf055;</i>
+            </span>
+            <span *ngIf="isOpened">
+              <i style="font-size:24px" class="fa">&#xf056;</i>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="my-4 rounded-2xl  bg-blueGray-300 p-2">
+        <div class="flex flex-nowrap p-4 my-4">
+          <div class="flex-1 text-center text-blueGray-600 ">
+            Tertiary
+          </div>
+          <div class="flex-1 text-center text-blueGray-600">
+            000000001 - 111111111
+          </div>
+          <div class="flex-1 text-center text-blueGray-600 text-2xl cursor-pointer">
+            <span *ngIf="!isOpened">
+              <i class="fa">&#xf055;</i>
+            </span>
+            <span *ngIf="isOpened">
+              <i style="font-size:24px" class="fa">&#xf056;</i>
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div> -->
+
+<div *ngIf="nextStep == 1" >
+  <div class=" p-8 mt-12  mt-12 ">
+    <p class="my-8 md:text-2xl text-md sm:text-2xl font-bold text-blueGray-800  ">Receive Shipped Item</p>
+
+    <div class="my-5 sm:grid grid-cols-2 gap-6 w-full">
+      <div class="">
+        <p class="mx-3">Scan Item(s)</p>
+        <input class="border-2 border-blueGray-300 rounded-2xl p-3 m-2 w-full" [(ngModel)]="recieved_container"
+          name="recieved_container" (change)="addReceive()" >
+      </div>
+      <div class="  ">
+        <label class="block tracking-wide text-gray-700 text-lg font-semibold mb-2" for="question-type">
+          Receiving Location
+        </label>
+        <div class="relative">
+          <select (change)="selectDestinationLocation($event.target.value)"
+            class="block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            id="grid-state">
+            <option>--Select Destination--</option>
+            <option value="{{location.gln}}" *ngFor="let location of locations"> {{location.address}} </option>
+          </select>
+
+        </div>
+      </div>
+
+    </div>
+
+
+
+  </div>
+
+  <div class="bg-white rounded-2xl p-8 mt-2 mb-5" *ngIf="receiveList.length >= 1"  >
+    <div class="flow-root mt-6" >
+        <p class="float-left font-semibold text-blueGray-800 text-lg  " > Item List</p>
+        <!-- <p class="float-right border-2 border-blueGray-300 rounded-lg py-2 px-5 " >Filter</p> -->
+    </div>
+
+    <div class="sm:mx-8 md:mx-8 md:mt-5 " >
+        <div class=" grid grid-cols-3 gap-3 " >
+            <!-- <div class="font-semibold text-blueGray-800 text-md text-center sm:text-lg " >Container</div> -->
+            <!-- <div class="font-semibold text-blueGray-800 text-md text-center sm:text-lg " >Serial Number</div> -->
+            <!-- <div class="font-semibold text-blueGray-800 text-md text-center sm:text-lg  " >Time Of Scan</div> -->
+        </div>
+        <div class=" grid grid-cols-3 gap-3 bg-blueGray-200 p-4 rounded-2xl mt-5" *ngFor="let code of receiveList" >
+            <div class=" text-blueGray-800 text-md text-center " >{{code}}</div>
+            <!-- <div class=" text-blueGray-800 text-md text-center " >000110011</div> -->
+            <!-- <div class="text-blueGray-800 text-md text-center  " >11:00AM August 12th 2022</div> -->
+        </div>
+
+    </div>
+    <button
+        class="w-full h-12 sm:mt-8 md:mt-8  text-white transition-colors duration-150 bg-blueGray-700 rounded-lg focus:shadow-outline hover:bg-blueGray-800 "
+        (click)="receiveContainer()">
+        <span *ngIf="loading" >
+          <img class="inline-flex " height="50" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
+        </span>
+        <span *ngIf="!loading" > Submit</span>
+      </button>
+  </div>
+</div>
+
+<div *ngIf="nextStep == 2" >
+  <div class="px-8 mt-10" >
+    <div class="success-body text-center ">
+
+      <div class="success-image">
+          <img src="../../../../assets/img/success-image.png" class="m-auto " alt="" srcset="">
+
+          <p class="text-3xl font-bold text-blueGray-700 my-5">Items Received Successfully </p>
+          <div class="my-5">
+              <button
+                  class="bg-blueGray-600 rounded-2xl text-white py-2 font-bold text-lg px-4 hover:bg-blueGray-500 m-2" [routerLink]="['/traceability/products']"
+                  >
+                  Back To Product
+              </button>
+              <button
+                  class="bg-blueGray-600 rounded-2xl text-white py-2 font-bold text-lg px-4 hover:bg-blueGray-500 m-2" [routerLink]="['/traceability/unpack', conatainerSSCC]"
+                  >
+                  Unpack Items
+              </button>
+          </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

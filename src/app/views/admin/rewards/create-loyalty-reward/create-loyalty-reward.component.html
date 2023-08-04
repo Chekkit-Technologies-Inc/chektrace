@@ -1,0 +1,103 @@
+<div class="flex flex-wrap mt-4">
+    <div class="w-full mb-12 px-4">
+        <div class="relative page-content flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
+        ngClass="bg-white"
+        >
+                <div class="block w-full overflow-x-auto px-4" *ngIf="stage == 1">
+                    <div class="flex flex-wrap mt-4">
+                        <div class="w-full mb-12 px-4">
+                            <div class=" flex justify-center mb-6 mt-8">
+                                <img class="h-12 w-36 bg-white" src="assets/img/chekkitlogoo.png" />
+                            </div>
+                            <h5 class="text-2xl  text-center font-normal leading-normal mt-0 mb-2 text-blueGray-800">
+                                Create Loyalty Point Rewards
+                            </h5>
+                            <p class="text-sm text-center font-light leading-relaxed mt-2 mb-4 text-blueGray-800">
+                                Reward your consumers with points for taking your survey
+                            </p>
+                            <div class=" flex justify-center">
+                                <img
+                                src="assets/img/survey-pic.png"
+                                style=" height:500px;"
+                                class="h-350 w-350 bg-white"
+                                alt="..."
+                              />
+                            </div>
+                              
+                        </div>
+                    </div>
+                    
+                    <div class="flex mb-12 justify-center">
+                        
+                        <div class="">
+                            <button (click)="stage = 2" type="submit" class="self-auto  ml-1 text-white font-bold px-12 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-800 active:bg-blueGray-600 text-sm shadow hover:shadow-lg ease-linear transition-all duration-150" >
+                                Get Started
+                            </button>
+                        </div>
+                    </div> 
+                </div>
+            <div class="px-4 pb-4 pt-12" *ngIf="stage == 2">
+                <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+                  <div class="text-blueGray-400 text-center mb-3 font-bold">
+                    Add New Loyalty Points Reward
+                  </div>
+                  <form [formGroup]="dataForm" (ngSubmit)="onSubmit()" >
+                    <div class="relative w-full mb-8">
+                      <label
+                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        Name of Loyalty Point
+                      </label>
+                      <input
+                        type="text" 
+                        formControlName="loyalty_name"
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Eg: promo"
+                      />
+                      <div *ngIf="submitted && f.loyalty_name.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                        <span class="inline-block align-middle mr-8">
+                          <b class="capitalize">warning!</b> Loyalty name is required
+                        </span>
+                      </div>
+                    </div>
+                    <div class="relative w-full mb-8">
+                      <label
+                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        How Many Points Should Be Allocated To Each Scan By The User?
+                      </label>
+                      <input
+                        type="number" 
+                        formControlName="loyalty_reward_value"
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="eg: 30, 50, 100"
+                      />
+                      <div *ngIf="submitted && f.loyalty_reward_value.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                        <span class="inline-block align-middle mr-8">
+                          <b class="capitalize">warning!</b> Loyalty point value is required
+                        </span>
+                      </div>
+                    </div>
+        
+                    <div class="text-center mt-6">
+                      <button
+                        [disabled]="loading"
+                        class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                        type="submit"
+                      >
+                        <loading-spinner *ngIf="loading" ></loading-spinner>                                    
+                        Submit
+                      </button>
+                      
+                    </div>
+                  </form>
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
+  </div>
+  

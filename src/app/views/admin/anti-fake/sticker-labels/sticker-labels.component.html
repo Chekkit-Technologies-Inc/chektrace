@@ -1,0 +1,96 @@
+<div class="my-16 w-100 px-16">
+    <div class="px-16  h-screen">
+        <p class="text-blueGray-700 font-bold my-16"><i class="fa">&#xf060;</i> &nbsp;Back</p>
+
+        <p class="text-3xl font-bold text-blueGray-700 my-8">Activate Sticker Labels for this Campaign</p>
+
+
+        <div class="grid grid-cols-4 gap-4 my-8 py-6">
+            <div class="col-span-2 ">
+                <div class="flex-1  px-3 py-6">
+                    <label class="block tracking-wide text-gray-700 text-lg font-bold mb-2" for="question-type">
+                        Do you have sticker labels for this campaign ?
+                    </label>
+                    <div class="relative">
+                        <select (change)="checkLabels($event)"
+                            class="block rounded-lg appearance-none w-full bg-white border border-gray-200 text-gray-700 py-6 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            id="grid-state">
+                            <option> <span class="fa font-black text-blueGray-800 ">Make a selection</span>
+                            </option>
+                            <option value="yes"> <span class="fa font-black text-blueGray-800 ">Yes</span>
+                            </option>
+                            <option value="no"> <span class="fa font-black text-blueGray-800 ">No</span>
+                            </option>
+
+                        </select>
+
+                    </div>
+                </div>
+                <div *ngIf="selectedLabelStatus === 'yes' " class="h-full" >
+
+                    <div class="flex-1  px-3 py-6">
+                        <label class="block tracking-wide text-gray-700 text-lg font-bold mb-2" for="question-type">
+                            Serial Number Range
+                        </label>
+                        <div class="relative">
+                            <select
+                                class="block rounded-lg appearance-none w-full bg-white border border-gray-200 text-gray-700 py-6 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                id="grid-state">
+                                <option value="yes"> <span class="fa font-black text-blueGray-800 ">Yes</span>
+                                </option>
+                                <option value="no"> <span class="fa font-black text-blueGray-800 ">No</span>
+                                </option>
+
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="flex-1  px-3 py-6">
+                        <label class="block tracking-wide text-gray-700 text-lg font-bold mb-2" for="question-type">
+                            Product Name
+                        </label>
+                        <div class="relative">
+                            <select
+                                class="block rounded-lg appearance-none w-full bg-white border border-gray-200 text-gray-700 py-6 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                id="grid-state">
+                                <option value="yes"> <span class="fa font-black text-blueGray-800 ">Select Product
+                                        Name</span>
+                                </option>
+                                <option value="no"> <span class="fa font-black text-blueGray-800 ">No</span>
+                                </option>
+
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="flex-1  px-3 py-6">
+                        <label class="block tracking-wide text-gray-700 text-lg font-bold mb-2" for="question-type">
+                            Product Batch
+                        </label>
+                        <div class="relative">
+                            <select
+                                class="block rounded-lg appearance-none w-full bg-white border border-gray-200 text-gray-700 py-6 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                id="grid-state">
+                                <option value="yes"> <span class="fa font-black text-blueGray-800 ">Product Batch</span>
+                                </option>
+                                <option value="no"> <span class="fa font-black text-blueGray-800 ">No</span>
+                                </option>
+
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <button class="w-full bg-blueGray-700 text-white font-bold py-4 rounded-2xl" >Continue</button>
+
+                </div>
+                <div *ngIf="selectedLabelStatus === 'no' ">
+                    <p class="text-blueGray-700 font-bold text-center" >Contact Us To Request Sticker Labels</p>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>

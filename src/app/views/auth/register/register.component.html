@@ -1,0 +1,180 @@
+<div class="container mx-auto px-4 h-full">
+  <div class="flex content-center items-center justify-center h-full">
+    <div class="w-full lg:w-6/12 px-4">
+      <div
+        class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0"
+      >
+        <div class="rounded-t mb-0 px-6 py-6">
+          <div class="text-center mb-3">
+            <h6 class="text-blueGray-500 text-sm font-bold">We are excited you are thinking about working us 😊 </h6>
+          </div>
+        </div>
+        <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+          <div class="text-blueGray-400 text-center mb-3 font-bold">
+            <small>Please fill the information below to get started:</small>
+          </div>
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" >
+            <div class="relative w-full mb-3">
+              <label
+                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                htmlFor="grid-password"
+              >
+                Create a Username
+              </label>
+              <input
+                type="text" 
+                formControlName="username"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                placeholder="Your Username"
+              />
+              <div *ngIf="submitted && f.username.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                <span class="inline-block align-middle mr-8">
+                  <b class="capitalize">warning!</b> Username is required
+                </span>
+              </div>
+            </div>
+            <div class="relative w-full mb-3">
+              <label
+                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                htmlFor="grid-password"
+              >
+                What's Your Company Representative Name?
+              </label>
+              <input
+                type="text" 
+                formControlName="company_rep"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                placeholder="Representative full name"
+              />
+              <div *ngIf="submitted && f.company_rep.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                <span class="inline-block align-middle mr-8">
+                  <b class="capitalize">warning!</b> Company Representative is required
+                </span>
+              </div>
+            </div>
+            <div class="relative w-full mb-3">
+              <label
+                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                htmlFor="grid-password"
+              >
+                What's Your Company Name?
+              </label>
+              <input
+                type="text" 
+                formControlName="company_name"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                placeholder="Your Company Name"
+              />
+              <div *ngIf="submitted && f.company_name.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                <span class="inline-block align-middle mr-8">
+                  <b class="capitalize">warning!</b> Company Represented name is required
+                </span>
+              </div>
+            </div>
+
+            <div class="relative w-full mb-3">
+              <label
+                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                htmlFor="grid-password"
+              >
+                Select Country
+              </label>
+              <select 
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+              formControlName="country"
+              > 
+                  <option selected="true" disabled="disabled">--please choose--</option>
+                  <option value="Nigeria">Nigeria</option>
+                  <option value="ZA">South Africa</option>
+              </select>
+              <div *ngIf="submitted && f.country.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                <span class="inline-block align-middle mr-8">
+                  <b class="capitalize">warning!</b> Country is required
+                </span>
+              </div>
+            </div>
+
+            <div class="relative w-full mb-3">
+              <label
+                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                htmlFor="grid-password"
+              >
+                Enter Your Email Address
+              </label>
+              <input
+                type="email"
+                formControlName="email"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                placeholder="Email"
+              />
+              <div *ngIf="submitted && f.email.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                <span class="inline-block align-middle mr-8">
+                  <b class="capitalize">warning!</b> Email Address is required
+                </span>
+              </div>
+            </div>
+
+            <div class="relative w-full mb-3">
+              <label
+                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                htmlFor="grid-password"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                formControlName="password"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                placeholder="Password"
+              />
+              <div *ngIf="submitted && f.password.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                <span class="inline-block align-middle mr-8" *ngIf="f.password.errors.required">
+                  <b class="capitalize">warning!</b> Password is required
+                </span>
+                <span class="inline-block align-middle mr-8 mt-1" *ngIf="f.password.errors.minlength">
+                  <b class="capitalize">warning!</b> Password must be at least 6 characters
+                </span>
+              </div>
+            </div>
+
+            <div>
+              <label class="inline-flex items-center cursor-pointer">
+                <input
+                  id="customCheckLogin"
+                  type="checkbox"
+                  [(ngModel)]="termsAccepted"
+                  [ngModelOptions]="{standalone: true}"
+                  class="form-checkbox border-0 text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150 rounded"
+                />
+                <span class="ml-2 text-sm font-semibold text-blueGray-600">
+                  I agree with the
+                  <a href="javascript:void(0)" class="text-red-600">
+                    Privacy Policy
+                  </a>
+                </span>
+              </label>
+            </div>
+
+            <div class="text-center mt-6">
+              <button
+                [disabled]="loading || !termsAccepted"
+                class="bg-green-500 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                type="submit"
+              >
+                <loading-spinner *ngIf="loading" ></loading-spinner>                                    
+                Create Account
+              </button>
+              
+            </div>
+
+            <div class="w-100 text-center">
+              <p  class="text-blueGray-600">
+                <small>Existing account ? <a [routerLink]="['/authentication/login']" class="text-blueGray-800" >Sign in Here</a> </small>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

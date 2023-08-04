@@ -1,0 +1,50 @@
+<!-- Navbar -->
+<nav
+  class=" top-0 left-0 right-0 w-full z-10 bg-transparent md:flex-row md:flex-nowrap md:justify-between flex items-center p-4 shadow-md">
+  <div class="w-full mx-auto items-center flex justify-between md:flex-nowrap flex-wrap  px-4">
+    <!-- Brand -->
+    <a
+      class="md:block text-left flex-1 md:pb-0 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-0 px-0">
+      <span class="block sm:hidden"> CHEKTRACE</span>
+      <span class="hidden sm:block">
+        <img alt="..." class=" align-middle border-none" style="height: 50px;"
+          src="../../../../assets/img/chekkitlogoo 2.png" /></span>
+    </a>
+
+    <!-- User -->
+    <ul class="flex-col flex-3 justify-between md:flex-row list-none items-center hidden md:flex" *ngIf="nav.visible ">
+      <li class="nav-item p-2">
+        <a class="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0 font-bold text-sm " href="/traceability/analytics">Analytics</a>
+      </li>
+      <li class="nav-item p-2">
+        <a class="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0 font-bold text-sm" href="/traceability/products">Products</a>
+      </li>
+      <li class="nav-item p-2">
+        <a class="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0 font-bold text-sm" href="/traceability/stocks">Stock Count</a>
+      </li>
+      <li class="nav-item p-2">
+        <a class="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0 font-bold text-sm " href="/traceability/management">User Management</a>
+      </li>
+      <li class="nav-item p-2">
+        <!-- <a class="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0 font-bold text-sm " href="#">Reward</a> -->
+      </li>
+      <li class="nav-item p-2">
+        <a class="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0 font-bold text-sm " href="/mas">MAS</a>
+      </li>
+      <!-- <li class="nav-item p-2">
+        <a class="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" href="#">Settings</a>
+      </li> -->
+      <!-- <app-user-dropdown class="block"></app-user-dropdown> -->
+    </ul>
+
+    <div class="flex-1 flex item-center w-100 hidden md:block lg:block " >
+      <div class="flex m-auto">
+        <img src="../../../../assets/img/team-3-800x800.jpg" width="50" class="rounded-2xl m-4" alt="" srcset="">
+        <div class="m-4" >
+          <p class="text-blueGray-300 font-bold " > {{Fusername}} {{Lusername}} </p>
+          <span> {{userCompany}} </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

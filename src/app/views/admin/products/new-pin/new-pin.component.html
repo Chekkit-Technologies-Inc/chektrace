@@ -1,0 +1,70 @@
+<div class=" mt-4">
+
+    <form class="form-horizontal" role="form" [formGroup]="newPinForm" (ngSubmit)="onSubmit()">
+        <div class="w-full mb-12 px-4">
+            <div class="relative page-content flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
+            ngClass="bg-white"
+            >
+        
+            <div class="px-4 pb-4 pt-12" *ngIf="stage == 1">
+                <div class="flex-auto px-4 lg:px-10 py-10 pt-0" *ngIf="!showingSummary">
+                    <div class="text-center mb-3  leading-normal mt-0 mb-2 text-blueGray-800 font-bold">
+                        Generate Labels For Your Product
+                    </div>
+                    <div class="relative w-full mb-8">
+                        <label
+                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        htmlFor="grid-password">
+                            Number of Pins You Want To Generate
+                        </label>
+                        <input
+                        type="text" 
+                        formControlName="pin_quantity"
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="e.g. 1,2,1000"
+                        />
+                        <div *ngIf="submitted && f.pin_quantity.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                        <span class="inline-block align-middle mr-8">
+                            <b class="capitalize">warning!</b> Quantity is required
+                        </span>
+                        </div>
+                    </div>
+                    <div class="text-center mt-6">
+                        <button
+                        [disabled]="loading || (newPinForm.invalid)"
+                            (click)="showingSummary = true"
+                            class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                            type="button" >
+                                Continue
+                        </button>
+                    </div>
+                </div>
+
+
+                <div class="px-4 pb-4"  *ngIf="showingSummary" >
+                    <div class="text-blueGray-600 text-center mb-3 text-xl font-bold">
+                        Sample Code
+                    </div>
+                    <div class="w-full" style=" display: flex; justify-content: center;">
+                        <pin-card [code_format]="batchObjct.code_format" [gtin]="'1002282233'" [exp]="batchObjct.expiry_date | date:'YYMMdd'" [lotNo]="batchObjct.batch_num" [sgtin]="'7450111122093785'"></pin-card>
+                    </div>
+                    
+                    <div class="text-center mt-12">
+                        <button
+                            [disabled]="loading || (newPinForm.invalid)"
+                            class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                            type="submit" >
+                                <loading-spinner *ngIf="loading" ></loading-spinner>                                    
+                                Save and Generate Code For This Batch
+                        </button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+
+        </div>
+    </form>
+</div>
+  

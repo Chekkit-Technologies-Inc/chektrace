@@ -1,0 +1,314 @@
+<div class="my-16 w-100 md:px-16 px-3 min-h-screen " >
+  <div class="md:grid grid-cols-3 gap-4 mb-8 ">
+    <div class="  ">
+      <p class=" flex-1 text-2xl text-blueGray-700 font-bold flex-1">User Management</p>
+
+    </div>
+    <div class="my-5" >
+      <form>
+        <label for="default-search"
+          class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Search</label>
+        <div class="relative">
+          <div class="flex absolute inset-y-0 right-3 items-center pl-3 pointer-events-none">
+            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+          <input type="search" id="default-search"
+            class="block py-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Type here to search for a user" [(ngModel)]="term" name="term" >
+          <!-- <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button> -->
+        </div>
+      </form>
+    </div>
+    <div class="flex ">
+      <!-- <button
+        class="bg-white text-blueGray-700 font-bold px-8 py-2 text-xs flex-1 mx-3 border-2 border-blueGray-700 rounded-md md:my-5">Role
+        Management</button> -->
+      <button class="bg-blueGray-700 rounded-md text-white font-bold px-3 text-xs py-2 mx-3  flex-1 md:my-5" (click)="addModal = !addModal" >Add User</button>
+
+    </div>
+  </div>
+
+  <!-- table header -->
+  <div class="md:flex w-full pb-2 mt-12">
+    <div class="flex justify-start flex-1">
+      <!-- <button class="text-sm  pr-4 text-blueGray-800 font-semibold" >All</button> -->
+      <button class="text-xs  px-4 text-blueGray-800">
+        <span class="font-semibold">All</span> &nbsp;
+        <span class="bg-blueGray-200 text-center text-xs py-1 rounded-md px-2"> {{users ? users.length: '0'}} </span>
+      </button>
+      <button class="text-xs  px-4 text-blueGray-800">
+        <span class="">Active</span>
+        &nbsp;
+        <span class="bg-blueGray-200 text-center text-xs py-1 rounded-md px-2"> 0</span>
+      </button>
+      <button class="text-xs  px-4 text-blueGray-800">
+        <span class="">De-activated</span> &nbsp; <span
+          class="bg-blueGray-200 text-center text-xs py-1 rounded-md px-2"> 0 </span> </button>
+    </div>
+    <div class="flex justify-end flex-1">
+      <!-- <button class="text-right text-sm  pl-4 text-blueGray-800  " >Filter</button> -->
+    </div>
+
+  </div>
+  <div class="overflow-x-auto  w-full h-full">
+    <div class="flex md:bg-white justify-between px-4 p-4 ">
+      <div class="w-40 flex-shrink-0 text-left text-xs">
+
+        <p class="font-bold text-blueGray-600 text-xs font-bold">
+          Name
+        </p>
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-blueGray-600 text-xs font-bold">
+        Email Address
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-blueGray-600 text-xs font-bold">
+        Phone Number
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-blueGray-600 text-xs font-bold">
+        Role
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-blueGray-600 text-xs font-bold">
+        Date Added
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-blueGray-600 text-xs font-bold">
+        Actions
+      </div>
+      <!-- <div class="w-40 flex-shrink-0 text-left text-blueGray-600 text-xs font-bold">
+        Status
+      </div> -->
+    </div>
+    <!-- table content starts-->
+    <div class="flex table-bg mt-4 rounded-3xl justify-between px-4 p-6" *ngFor="let user of users| filter: term ; let i = index;" >
+      <div class="w-40 flex-shrink-0 text-left text-xs">
+
+        <p> <small class="bg-blueGray-300 rounded-full p-2 m-2"> {{user.first_name | slice:0:1}}{{user.last_name | slice:0:1}} </small> {{user.first_name}} {{user.last_name}} </p>
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs ">
+        {{user.email}}
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs">
+        {{user.phone_number}}
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs ">
+
+        {{user.membership_type}}
+      </div>
+      <div class="w-40 flex-shrink-0 text-left text-xs">
+        {{user.updated_at | date: longDate}}
+      </div>
+
+      <div class="w-40 flex-shrink-0 text-left text-xs font-semibold">
+        <span class="text-green-400 cursor-pointer " (click)="editUser(user.id)" >EDIT</span> | <span class="text-red-400 cursor-pointer " (click)="confirmDelete(user.id)" >DELETE</span>
+      </div>
+    </div>
+
+
+  </div>
+
+
+</div>
+
+<div *ngIf="addModal"
+    class="bg-blueGray-600 bg-opacity-25 h-auto py-8 w-screen absolute inset-0 flex justify-center item-center">
+    <div
+      class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+      <div class="relative w-auto my-6 mx-auto max-w-6xl modal-body">
+        <!--content-->
+        <div
+          class="border-0  relative flex flex-col w-full bg-white rounded-lg outline-none focus:outline-none modal-body">
+          <!--header-->
+          <div class="flex items-start justify-between p-5  rounded-t">
+
+            <button
+              class="p-2 rounded-2xl ml-auto bg-blueGray-200 border-0 text-white float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+              (click)="addModal = false">
+              <span class=" text-blueGray-700  h-6 w-6 text-sm block outline-none focus:outline-none">
+                <i style="font-size:24px; " class="fa">&#xf00d;</i>
+              </span>
+            </button>
+          </div>
+          <!--body-->
+          <div class="relative px-6 py-8 w-100">
+            <p class="font-semibold text-blueGray-800" >New User</p>
+            <div class="mt-5" >
+              <p class="text-xs" >Enter First Name</p>
+              <input type="text" [(ngModel)]="newfirstname" class="bg-blueGray-200 rounded-t-md border-b-2 border-blueGray-500 w-full py-2 px-3" placeholder="First Name" />
+            </div>
+            <div class="mt-5" >
+              <p class="text-xs" >Enter Last Name</p>
+              <input type="text" [(ngModel)]="newlastname" class="bg-blueGray-200 rounded-t-md border-b-2 border-blueGray-500 w-full py-2 px-3 " placeholder="Last Name" />
+            </div>
+            <div class="mt-5" >
+              <p class="text-xs" >Enter Email Address</p>
+              <input type="text" [(ngModel)]="newemail" class="bg-blueGray-200 rounded-t-md border-b-2 border-blueGray-500 w-full py-2 px-3 " placeholder="Email Address" />
+            </div>
+            <div class="mt-5" >
+              <p class="text-xs" >Enter Phone Number</p>
+              <input [(ngModel)]="newphone" class="bg-blueGray-200 rounded-t-md border-b-2 border-blueGray-500 w-full py-2 px-3 " type="number" />
+            </div>
+            <div class="mt-5" >
+              <p class="text-xs" >Password</p>
+              <div class="flex" >
+                <input [(ngModel)]="newpassword" class="bg-blueGray-200 rounded-t-md border-b-2 border-blueGray-500 w-full py-2 px-3 " type="text" />
+                <button class="shadow-md bg-white border-2 border-blueGray-500 rounded-md mx-2 px-2 text-xs" (click)="generatePw(10)" >Auto Generate </button>
+              </div>
+            </div>
+            <div class="mt-5" >
+              <p class="text-xs" >Select Role</p>
+              <select class="bg-blueGray-200 rounded-t-md border-b-2 border-blueGray-500 w-full py-2 px-3 " (change)="selectNewMemberType($event)"   >
+                <option>--Select Role--</option>
+                <option value="retailer" >Retailer</option>
+                <option value="distributor" >Distributor</option>
+                <option value="manufacturer" >Manufacturer</option>
+
+              </select>
+
+            </div>
+
+            <button class="bg-blueGray-800 text-white py-2 px-8 rounded-md my-5 font-semibold text-sm " (click)="addStaff()" >
+
+              <span *ngIf="!isLoading" >
+                CREATE USER
+              </span>
+              <span *ngIf="isLoading">
+                <img class="inline-flex "
+                  src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
+              </span>
+            </button>
+
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+
+</div>
+
+<div *ngIf="editModal"
+    class="bg-blueGray-600 bg-opacity-25 h-auto py-8 w-screen absolute inset-0 flex justify-center item-center">
+    <div
+      class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+      <div class="relative w-auto my-6 mx-auto max-w-6xl modal-body">
+        <!--content-->
+        <div
+          class="border-0  relative flex flex-col w-full bg-white rounded-lg outline-none focus:outline-none modal-body">
+          <!--header-->
+          <div class="flex items-start justify-between p-5  rounded-t">
+
+            <button
+              class="p-2 rounded-2xl flex ml-auto bg-blueGray-200 border-0 text-white float-right text-3xl leading-none  outline-none focus:outline-none"
+              (click)="editModal = false">
+              <span class=" text-blueGray-700 m-auto h-6 w-6 text-sm block outline-none focus:outline-none">
+                <i  class="fa">&#xf00d;</i>
+              </span>
+            </button>
+          </div>
+          <!--body-->
+          <div class="relative px-6 py-8 w-100">
+            <p class="font-semibold text-blueGray-800" >New User</p>
+            <div class="mt-5" >
+              <p class="text-xs" >Enter First Name</p>
+              <input type="text" [(ngModel)]="firstname" class="bg-blueGray-200 rounded-t-md border-b-2 border-blueGray-500 w-full py-2 px-3" placeholder="First Name" />
+            </div>
+            <div class="mt-5" >
+              <p class="text-xs" >Enter Last Name</p>
+              <input type="text" [(ngModel)]="lastname" class="bg-blueGray-200 rounded-t-md border-b-2 border-blueGray-500 w-full py-2 px-3 " placeholder="Last Name" />
+            </div>
+            <div class="mt-5" >
+              <p class="text-xs" >Enter Email Address</p>
+              <input type="text" [(ngModel)]="email" class="bg-blueGray-200 rounded-t-md border-b-2 border-blueGray-500 w-full py-2 px-3 " placeholder="Email Address" />
+            </div>
+            <div class="mt-5" >
+              <p class="text-xs" >Enter Phone Number</p>
+              <input [(ngModel)]="phone" class="bg-blueGray-200 rounded-t-md border-b-2 border-blueGray-500 w-full py-2 px-3 " type="number" />
+            </div>
+            <!-- <div class="mt-5" >
+              <p class="text-xs" >Password</p>
+              <div class="flex" >
+                <input [(ngModel)]="password" class="bg-blueGray-200 rounded-t-md border-b-2 border-blueGray-500 w-full py-2 px-3 " type="text" />
+                <button class="shadow-md bg-white border-2 border-blueGray-500 rounded-md mx-2 px-2 text-xs" (click)="generatePw(10)" >Auto Generate </button>
+              </div>
+            </div> -->
+            <div class="mt-5" >
+              <p class="text-xs" >Select Role</p>
+              <select class="bg-blueGray-200 rounded-t-md border-b-2 border-blueGray-500 w-full py-2 px-3 " (change)="selectMemberType($event)" [(ngModel)]="role"  >
+                <option value="distributor" >Distributor</option>
+                <option value="manufacturer" >Manufacturer</option>
+              </select>
+
+            </div>
+
+            <button class="bg-blueGray-800 text-white py-2 px-8 rounded-md my-5 font-semibold text-sm " (click)="submitEdit()" >
+              <span *ngIf="!isLoading" >
+                SUBMIT
+              </span>
+              <span *ngIf="isLoading">
+                <img class="inline-flex "
+                  src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
+              </span>
+            </button>
+
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+
+</div>
+
+<div *ngIf="deleteModal"
+    class="bg-blueGray-600 bg-opacity-25 h-auto py-8 w-screen absolute inset-0 flex justify-center item-center">
+    <div
+      class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+      <div class="relative w-auto my-6 mx-auto max-w-6xl modal-body">
+        <!--content-->
+        <div
+          class="border-0  relative flex flex-col w-full bg-white rounded-lg outline-none focus:outline-none modal-body">
+          <!--header-->
+          <div class="flex items-start justify-between p-5  rounded-t">
+
+            <button
+              class="p-2 rounded-2xl flex ml-auto bg-blueGray-200 border-0 text-white float-right text-3xl leading-none  outline-none focus:outline-none"
+              (click)="deleteModal = false">
+              <span class=" text-blueGray-700 m-auto h-6 w-6 text-sm block outline-none focus:outline-none">
+                <i  class="fa">&#xf00d;</i>
+              </span>
+            </button>
+          </div>
+          <!--body-->
+          <div class="relative px-6 py-8 w-100">
+            <!-- <p class="font-semibold text-blueGray-800 text-left" >Delete User</p> -->
+
+            <p class="text-blueGray-700 font-semibold text-center " >Are you sure to delete <span class="text-red-400" >{{userToDelete.first_name}} {{userToDelete.last_name}}</span> from your user list ? </p>
+            <div class="flex w-100" >
+              <button class="bg-blueGray-800 text-white py-2 px-8 rounded-md my-5 font-semibold text-sm m-auto" (click)="deleteUser()" >
+                <span *ngIf="!isLoading" >
+                  DELETE
+                </span>
+                <span *ngIf="isLoading">
+                  <img class="inline-flex "
+                    src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
+                </span>
+              </button>
+            </div>
+
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+
+</div>

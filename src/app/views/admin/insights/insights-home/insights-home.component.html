@@ -1,0 +1,124 @@
+<div class="flex flex-wrap mt-4">
+    <div class="w-full mb-12 px-4 py-8">
+        <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
+        ngClass="bg-white"
+        >
+            <div class="block w-full overflow-x-auto px-4" *ngIf="stage == 1">
+                <div class="flex flex-wrap mt-4">
+                    <div class="w-full mb-12 px-4">
+                        <div class=" flex justify-center mb-6 mt-8">
+                            <img class="h-12 w-36 bg-white" src="assets/img/chekkitlogoo.png" />
+                        </div>
+                        <h5 class="text-2xl  text-center font-normal leading-normal mt-0 mb-2 text-blueGray-800">
+                            Welcome to Chekkit Insights
+                        </h5>
+                        <p class="text-sm text-center font-light leading-relaxed mt-2 mb-4 text-blueGray-800">
+                            We will get you started in 3 Steps:
+                        </p>
+                        <div class=" flex justify-center">
+                            <img
+                            src="assets/img/insights-steps.jpg"
+                            style="width: 80%;"
+                            class="h-350 w-350 bg-white"
+                            alt="..."
+                          />
+                        </div>
+                          
+                    </div>
+                </div>
+                
+                <div class="flex mb-12 justify-center">
+                    
+                    <div class="">
+                        <button (click)="stage = 2" type="submit" class="self-auto  ml-1 text-white font-bold px-12 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-800 active:bg-blueGray-600 text-sm shadow hover:shadow-lg ease-linear transition-all duration-150" >
+                            Get Started
+                        </button>
+                    </div>
+                </div> 
+            </div>
+            <div class="px-4 pb-4" *ngIf="stage == 2">
+
+                <div class="block w-full overflow-x-auto">
+                    <div class="flex flex-wrap mt-4">
+                        <div class="w-full mb-12 px-4">
+                            <h5 class="text-2xl  text-center font-bold leading-normal mt-0 mb-2 text-blueGray-800">
+                                Step 1: Setup Data Capturing Channel
+                            </h5>
+                            <p class="text-lg text-center font-light leading-relaxed mt-2 mb-4 text-blueGray-800">
+                                We currently support 3 Channels. Kindly select the one you want to work with
+                            </p>
+                              
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap  mb-12">
+                        <div class="w-full flex-1 lg:w-4/12 px-4 pt-1 text-center">
+                            <div class="relative w-full mb-3">
+                                <div class="card-selector card-selector-row card-selector-2" (click)="null">
+                                    <div class="top-s-section">
+                                        <div>
+                                            <img
+                                                alt="..."
+                                                src="assets/img/ussd-phone.png"
+                                                class=""
+                                            />
+                                        </div>
+                                        <div>
+                                            <p>*347*03# USSD Channel Shortcode</p>
+                                        </div>
+                                        <i class="far fa-circle sl-icon"></i>
+                                    </div>
+                                    <p class="sl-hint">We will generate a USSD code extension for you</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full flex-1 lg:w-4/12 px-4 pt-1">
+                            <div class="relative w-full mb-3">
+                                <div class="card-selector card-selector-row card-selector-2" (click)="null">
+                                    <div class="top-s-section">
+                                        <div>
+                                            <img
+                                                alt="..."
+                                                src="assets/img/call-icon.png"
+                                                class=""
+                                            />
+                                        </div>
+                                        <div>
+                                            <p>Use a special Phone Number </p>
+                                        </div>
+                                        <i class="far fa-circle sl-icon"></i>
+                                    </div>
+                                    <p class="sl-hint">We will create a special phone number campaign </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full flex-1 lg:w-4/12 px-4 pt-1">
+                            <div class="relative w-full mb-3">
+                                <div class="card-selector card-selector-row card-selector-2" (click)="null">
+                                    <div class="top-s-section">
+                                        <div>
+                                            <img
+                                                alt="..."
+                                                src="assets/img/qr-icon.png"
+                                                class=""
+                                            />
+                                        </div>
+                                        <div>
+                                            <p>QR Code with Web Link </p>
+                                        </div>
+                                        <i class="far fa-circle sl-icon"></i>
+                                    </div>
+                                    <p class="sl-hint">We will create a QR code with Web link for data capturing</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
+  </div>
+  

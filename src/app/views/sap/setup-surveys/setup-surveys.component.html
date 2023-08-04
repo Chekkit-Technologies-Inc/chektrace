@@ -1,0 +1,231 @@
+<<<<<<< HEAD
+<div class="flex mt-4" >
+    <div class="w-full mb-12 px-4">
+        <div class="relative page-content flex min-w-0 break-words mb-6 shadow-lg rounded-lg" ngClass="bg-sap">
+            <div class="block w-full overflow-x-auto px-4">
+                <div class="flex justify-start mt-10 ">
+                    <ul class="flex ">
+                        <li class="flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon back-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                              </svg>
+                              <p class="capitalize back">back</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="flex justify-end">
+                          <ul class="flex justify-end batch">
+                              <li class="cursor-pointer ">Batch Number <span class="text-2xl">320011</span></li>
+                          </ul>
+                </div>
+                <div class="flex">
+                    <h2 class="title"><span class="sap">Assign/Setup surveys</span></h2>
+                </div>
+                <div class="flex-auto px-4 lg:px-10 py-10 pt-0 justify-center rounded" ngClass="bg-white">
+                    <form >
+                        <div class="flex flex-wrap">
+
+                                <div class="w-full lg:w-8/12 px-4 mt-3">
+                                    <div class="relative w-full mb-3">
+                                        <label
+                                            class="block capitalize text-blueGray-600 text-xs  mb-2"
+                                            >
+                                            Question
+                                        </label>
+                                        <input
+                                            type="text"
+                                            class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            placeholder="Type question here..."
+                                        />
+                                    
+                                    </div>
+                                </div>
+                                <div class="w-full lg:w-4/12 px-4 mt-3">
+                                    <div class="relative w-full mb-3">
+                                    <label
+                                        class="block capitalize text-blueGray-600 text-xs mb-2"
+                                        
+                                    >
+                                       Option Type
+                                    </label>
+                                    <select class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" >
+                                        <option>  Checkboxes</option>
+                                        <option>Multiple Choices</option>
+                                        <option>Dropdown</option>
+                                      </select>
+                                      <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                      </div>
+                                  
+                                    </div>
+                                </div>
+                        </div>
+
+                        <div class="flex flex-wrap">
+
+                            <div class="w-full lg:w-12/12 px-4 mt-3">
+                                <div class="relative w-full mb-3">
+                                    <label
+                                        class="block capitalize text-blueGray-600 text-xs mb-2"
+                                        >
+                                        Options
+                                    </label>
+                                    <input
+                                        placeholder="Type answer here..."
+                                        type="text"
+                                        class="border-0 mb-5 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                    />
+                                    <br>
+                                    <input
+                                    placeholder="Type answer here..."
+                                    type="text"
+                                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                />
+                                </div>
+                            </div>
+                    </div>
+
+                    <ul class="flex justify-end">
+                        <li class="option bg-[#DAEFFF] text-center px-1">+ Add Option</li>
+                    </ul>
+
+                    <ul class="flex justify-start">
+                        <li class="text-center px-1"><span class="flex flex-row font-bold">
+                            <!-- <svg xmlns="http://www.w3.org/2000/svg" class="icon add" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>  -->
+                          <i class="fa fa-plus-circle add" aria-hidden="true"></i>
+
+                          Add Question</span></li>
+                    </ul>
+
+                    <hr class="flex justify-center">
+
+                    <ul class="flex dels justify-end">
+                        <svg xmlns="http://www.w3.org/2000/svg"  class="icon copy" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                          </svg>
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" class="icon del" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                          </svg> -->
+                          <i class="fa fa-trash " aria-hidden="true"></i>
+
+                        <button [routerLink]="['/sap/request-serial']" type="submit" class="done flex justify-end">
+                           <span class="done-txt">Done</span> 
+                         </button>
+                    </ul>
+                    </form>
+                </div>
+                        <ul class="flex justify-center">
+                            <button [routerLink]="['/sap/attach-rewards']" type="submit" class="flex justify-center text-white  ml-1 font-bold rounded outline-blueGray-600  focus:outline-none mr-1 mb-1 bg-red-100 text-sm shadow hover:shadow-lg ease-linear transition-all duration-150" >
+                                Continue
+                            </button>
+                        </ul>
+                    </div> 
+                </div>
+    </div>
+  </div>
+  
+
+  
+=======
+<div class="flex flex-wrap mt-4">
+    <div class="w-full mb-12 px-4">
+        <div class="relative page-content px-8 flex min-w-0 break-words w-full mb-6 shadow-lg rounded">
+            <div class="block w-full overflow-x-auto px-4">
+                <div class="flex mb-12 mt-10">
+                    <h2 class="title"><span class="sap">Assign/Setup surveys</span></h2>
+                </div>
+                <div class="flex-auto px-4 lg:px-10 py-10 pt-0 justify-center rounded" ngClass="bg-white">
+                    <form >
+
+                        <div class="flex flex-wrap">
+
+                                <div class="w-full lg:w-8/12 px-4 mt-3">
+                                    <div class="relative w-full mb-3">
+                                        <label
+                                            class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                            htmlFor="grid-password">
+                                            Question
+                                        </label>
+                                        <input
+                                            type="text"
+                                            class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                        />
+                                    
+                                    </div>
+                                </div>
+                                <div class="w-full lg:w-4/12 px-4 mt-3">
+                                    <div class="relative w-full mb-3">
+                                    <label
+                                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                        htmlFor="grid-password"
+                                    >
+                                       Option Type
+                                    </label>
+                                    <input
+                                        type="text"
+                                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                    />
+                                
+                                    </div>
+                                </div>
+                        </div>
+
+                        <div class="flex flex-wrap">
+
+                            <div class="w-full lg:w-12/12 px-4 mt-3">
+                                <div class="relative w-full mb-3">
+                                    <label
+                                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                        htmlFor="grid-password">
+                                        Options
+                                    </label>
+                                    <input
+                                        type="text"
+                                        class="border-0 mb-5 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                    />
+                                    <br>
+                                    <input
+                                    type="text"
+                                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                />
+                                
+                                </div>
+                            </div>
+
+                            <!-- <div class="flex flex-wrap justify-center">
+                                <button [routerLink]="['/sap/request-serial']" type="submit" >
+                                    Add Option
+                                </button>
+                            </div> -->
+                          
+                    </div>
+
+
+
+                    </form>
+                </div>
+                           
+                            <div class="flex flex-wrap justify-center">
+                                <button [routerLink]="['/sap/request-serial']" type="submit" class="self-auto  ml-1 text-blueGray-600 font-bold px-12 py-4 rounded outline-blueGray-600  focus:outline-none mr-1 mb-1 bg-white text-sm shadow hover:shadow-lg ease-linear transition-all duration-150" >
+                                    Continue
+                                </button>
+                            </div>
+                            
+            
+                    </div>
+
+                 
+ 
+          
+            
+        </div>
+        
+
+    </div>
+  </div>
+  
+
+  
+>>>>>>> origin/develop

@@ -1,0 +1,192 @@
+<div class=" bg-blueGray-200 py-2 min-h-screen  md:mt-14 sm:mt-14">
+  <div class="px-12" *ngIf="step == 1" >
+    <div class="flex w-full my-10">
+
+      <p class=" flex-1 text-sm sm:text-2xl font-semibold text-blueGray-700">Welcome to Stock Count Center</p>
+
+      <div class="w-full sm:ml-3 md:ml-2 lg:ml-2 flex-1 text-right">
+        <button
+        (click)="step = 2"
+          class=" h-10 px-4 text-white text-xs md:text-sm transition-colors duration-150 bg-blueGray-700 border-2 hover:shadow-md font-semibold border-blueGray-500 rounded-lg focus:shadow-outline mx-2"
+          >Start Count</button>
+        <!-- <button
+          class=" h-10 px-4 text-white text-md transition-colors duration-150 bg-blueGray-800 rounded-lg focus:shadow-outline  font-semibold"
+          (click)="createBatch()">Create Batch</button> -->
+
+      </div>
+
+    </div>
+    <div class="my-5">
+      <p class="text-md font-semibold text-blueGray-700" >Stock Count History</p>
+      <div class="overflow-x-auto  w-full h-full">
+        <div class="flex sm:bg-white md:bg-white justify-between px-4 p-4 rounded-md ">
+          <div class="w-40 flex-shrink-0 text-left text-xs">
+
+            <p class="font-bold text-blueGray-600 text-xs font-bold">
+              Product
+            </p>
+          </div>
+          <!-- <div class="w-40 flex-shrink-0 text-left text-blueGray-600 text-xs font-bold">
+            Last Count
+          </div> -->
+          <div class="w-40 flex-shrink-0 text-left text-blueGray-600 text-xs font-bold">
+             Count
+          </div>
+          <div class="w-40 flex-shrink-0 text-left text-blueGray-600 text-xs font-bold">
+            Date Recorded
+          </div>
+          <div class="w-40 flex-shrink-0 text-left text-blueGray-600 text-xs font-bold">
+            Action
+          </div>
+
+        </div>
+        <div *ngFor="let stock of stringifiedCount">
+          <div class="flex table-bg my-3 rounded-md justify-between px-4 p-4 "  >
+            <div class="w-40 flex-shrink-0 text-left text-xs">
+
+              <p class="font-bold text-blueGray-600 text-xs font-bold">
+                {{stock.product.product_name}}
+              </p>
+            </div>
+            <!-- <div class="w-40 flex-shrink-0 text-left text-blueGray-600 text-xs font-bold">
+              <p class="text-xs" > <span class="text-blueGray-500" > {{stock.count}} </span> </p>
+            </div> -->
+            <div class="w-40 flex-shrink-0 text-left text-blueGray-600 text-xs font-bold"  >
+              <div class="text-xs" >
+                <p class="text-blueGray-500" *ngIf="stock.count.Satchet" > Primary pack <span class="text-blueGray-800" >{{stock.count.Satchet}}</span> </p>
+                <p class="text-blueGray-500" *ngIf="stock.count.Vial" > Primary pack <span class="text-blueGray-800" >{{stock.count.Vial}}</span> </p>
+                <p class="text-blueGray-500" *ngIf="stock.count.Pack" > Secondary pack <span class="text-blueGray-800" >{{stock.count.Pack}}</span> </p>
+                <p class="text-blueGray-500" *ngIf="stock.count.Carton" > Tertiary pack <span class="text-blueGray-800" >{{stock.count.Carton}}</span> </p>
+                <p class="text-blueGray-500" *ngIf="stock.count.Pallet" > Pallet pack <span class="text-blueGray-800" >{{stock.count.Pallet}}</span> </p>
+
+              </div>
+              <!-- <p class="text-xs" > <span class="text-blueGray-500" >primary pack</span>&nbsp; <span> 24</span> </p> -->
+            </div>
+            <div class="w-40 flex-shrink-0 text-left text-blueGray-600 text-xs font-bold">
+              {{stock.created_at | date: 'longDate'}}
+            </div>
+            <div class="w-40 flex-shrink-0 text-left text-blueGray-600 text-xs font-bold cursor-pointer" (click)="viewDetails(stock.productId, stock.product.product_name)" >
+              VIEW DETAILS
+            </div>
+          </div>
+        </div>
+
+
+
+
+      </div>
+
+    </div>
+
+
+  </div>
+  <div class="px-12 " *ngIf="step == 2" >
+    <div class="my-8">
+      <i class="fa cursor-pointer">&#xf060;</i>&nbsp;&nbsp;<span (click)="step = 1" class="text-md text-blueGray-800 font-semibold cursor-pointer" >Back</span>
+    </div>
+    <div class="flex">
+      <div class="flex-auto w-32 mx-2">
+        <p class="text-2xl text-blueGray-800 font-semibold"  >Scan Input</p>
+        <div class="bg-white rounded-md my-5 p-5" >
+          <div class=" ">
+            <div class="mb-5" >
+              <div class="text-sm text-blueGray-700 font-semibold my-3" >Select Product</div>
+              <select class="border-2 border-blueGray-500 p-3 rounded-md w-full" (change)="selectProduct($event.target.value)" >
+                <option>--Select Product--</option>
+                <option *ngFor="let product of productList" [value]="product.id" > {{product.product_name?product.product_name:''}} </option>
+              </select>
+            </div>
+            <!-- <div *ngIf="productBatches" class="mb-5" >
+              <div class="text-sm text-blueGray-700 font-semibold my-3" >Select Product</div>
+              <select class="border-2 border-blueGray-500 p-3 rounded-md w-full" (change)="selectBatch($event.target.value)" >
+                <option *ngFor="let batch of productBatches" [value]="batch.productId" > {{batch.product_name}} ( {{batch.batch_num}} ) </option>
+              </select>
+            </div> -->
+            <div class="mb-5" >
+              <div class="text-sm text-blueGray-700 font-semibold my-3" >Scan Item</div>
+              <input class="border-2 rounded-md border-blueGray-500 p-3 shadow w-full " [(ngModel)]="code" (change)="addCode()" />
+              <small>place your cursor pointer in the field to start scanning</small>
+            </div>
+            <div class="mb-5" >
+              <div class="text-sm text-blueGray-700 font-semibold my-3" >Comment </div>
+              <textarea [(ngModel)]="description" name="description" class="border-2 rounded-md border-blueGray-500 p-3 shadow w-full  "></textarea>
+            </div>
+            <div class="flex">
+              <button class=" bg-blueGray-800 rounded-md py-2 px-8 text-white my-5 font-semibold m-auto   " (click)="scanProduct()" >
+                <span *ngIf="loading" >
+                  <img class="inline-flex " src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                </span>
+                <span *ngIf="!loading" >
+                  Scan
+                </span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="flex-auto w-64 mx-2">
+        <p class="text-2xl text-blueGray-800 font-semibold" >Scan Output</p>
+        <div class="bg-white rounded-md my-5 p-5" >
+            <div *ngFor="let code of codes" >
+              <p class="bg-blueGray-200 py-2 px-4 rounded-md my-3" >
+                {{code}} &nbsp; <span (click)="delete(code)"  class="text-red-500 cursor-pointer text-right "><i
+                  class="fa">&#xf1f8;</i></span>
+              </p>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="px-12 " *ngIf="step == 3" >
+    <div class="my-8">
+      <i class="fa cursor-pointer">&#xf060;</i>&nbsp;&nbsp;<span (click)="step = 1" class="text-md text-blueGray-800 font-semibold cursor-pointer" >Back</span>
+    </div>
+    <div class="my-5">
+      <p class="text-md font-semibold text-blueGray-700" > {{viewedStockProduct}} Stock Count Report</p>
+      <div class="overflow-x-auto  w-full h-full">
+        <div class="flex sm:bg-white md:bg-white justify-between px-4 p-4 rounded-md ">
+          <div class="w-40 flex-shrink-0 text-left text-xs">
+
+            <p class="font-bold text-blueGray-600 text-xs font-bold">
+              Count
+            </p>
+          </div>
+          <div class="w-40 flex-shrink-0 text-left text-blueGray-600 text-xs font-bold">
+            Comment
+          </div>
+          <div class="w-40 flex-shrink-0 text-left text-blueGray-600 text-xs font-bold">
+            Date Counted
+          </div>
+
+
+        </div>
+        <div *ngFor="let stock of stringifiedDetailsCount">
+          <div class="flex table-bg my-3 rounded-md justify-between px-4 p-4 "  >
+
+            <div class="w-40 flex-shrink-0 text-left text-blueGray-600 text-xs font-bold"  >
+              <div class="text-xs" >
+                <p class="text-blueGray-500" *ngIf="stock.count.Satchet" > Primary pack <span class="text-blueGray-800" >{{stock.count.Satchet}}</span> </p>
+                <p class="text-blueGray-500" *ngIf="stock.count.Pack" > Secondary pack <span class="text-blueGray-800" >{{stock.count.Pack}}</span> </p>
+                <p class="text-blueGray-500" *ngIf="stock.count.Carton" > Tertiary pack <span class="text-blueGray-800" >{{stock.count.Carton}}</span> </p>
+              </div>
+              <!-- <p class="text-xs" > <span class="text-blueGray-500" >primary pack</span>&nbsp; <span> 24</span> </p> -->
+            </div>
+            <div class="w-40 flex-shrink-0 text-left text-blueGray-600 text-xs">
+              {{stock.comment}}
+            </div>
+            <div class="w-40 flex-shrink-0 text-left text-blueGray-600 text-xs ">
+              {{stock.created_at | date: 'longDate'}}
+            </div>
+          </div>
+        </div>
+
+
+
+
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+.sky-btn{
+    background-color: red;
+}
+
+.q-txt-1{
+    color: #4F4F4F;
+    font-weight: 600;
+}
+
+.opt-container{
+    border: solid 1px #C4C4C4;
+    border-radius: 10px;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+}
+
+.opt-container p{
+    color: #4F596A;
+}

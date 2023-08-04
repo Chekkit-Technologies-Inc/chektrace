@@ -1,0 +1,10 @@
+.gift-section{
+    background-color: #153853;
+    padding: 40px;
+    border-radius: 20px;
+}
+
+.gift-section-wrapper{
+    width: 60%;
+    margin: 0px auto;
+}

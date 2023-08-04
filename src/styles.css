@@ -1,0 +1,249 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~animate.css/animate.min.css';
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap');
+
+/* @import '~ngx-print-element/styles.css'; */
+
+
+@font-face {
+    font-family: "Graphik";
+    src: local("Graphik"), url(./assets/bwipjs-fonts/GraphikLight.otf) format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Graphik";
+    src: local("Graphik"), url(./assets/bwipjs-fonts/GraphikSemibold.otf) format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* @font-face {
+    font-family: "Graphik";
+    src: local("Graphik"), url(./assets/bwipjs-fonts/GraphikBold.otf) format("truetype");
+    font-weight: bolder;
+    font-style: normal;
+} */
+
+/* @font-face {
+    font-family: "Graphik";
+    src: local("Graphik"), url(./assets/bwipjs-fonts/GraphikExtralight.otf) format("truetype");
+    font-weight: lighter;
+    font-style: normal;
+}
+
+
+
+@font-face {
+    font-family: "Graphik";
+    src: local("Graphik"), url(./assets/bwipjs-fonts/GraphikMedium.otf) format("truetype");
+    font-weight: medium;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Graphik";
+    src: local("Graphik"), url(./assets/bwipjs-fonts/GraphikThin.otf) format("truetype");
+    font-weight: thin;
+    font-style: normal;
+} */
+
+*{
+    font-family: 'Graphik';
+
+}
+
+body{
+    font-family: 'Graphik';
+}
+
+.ci-container{
+    padding: 0 40px;
+}
+
+.active-link{
+    /* border-bottom: 2px solid #334254; */
+    color: #15B881;
+}
+
+.quick-link{
+    cursor: pointer;
+}
+
+.quick-link:hover{
+    opacity: 0.8;
+    /* box-shadow: 0px 3px 6px 0px rgb(0 0 0 / 10%), 0px 1px 3px 0px rgb(0 0 0 / 8%); */
+}
+
+.product-card{
+    height: 600px;
+}
+
+.product-img{
+    height: 140px;
+    width: 140px;
+    border: solid 1px #ccc;
+}
+
+.border-left-primary{
+    border-left: 10px solid #46F7AD;
+
+}
+
+.tr-radius{
+    /* border: 2px red solid; */
+    border-radius: 10px;
+}
+
+.satchet{
+  background-color: #927AD6;
+  padding: 7px 12px;
+  border-radius: 7px;
+  color: #fff;
+}
+
+.satchet-text{
+  color: #927AD6;
+}
+
+
+
+.pack{
+  background-color: #E03EB8;
+  padding: 7px 12px;
+  border-radius: 7px;
+  color: #fff;
+}
+
+.pack-text{
+  color: #E03EB8;
+}
+
+.carton{
+  background-color: #AD8762;
+  padding: 7px 12px;
+  border-radius: 7px;
+  color: #fff;
+}
+
+.carton-text{
+  color: #AD8762;
+}
+
+.pallet{
+  background-color: #60B2FF;
+  padding: 7px 12px;
+  border-radius: 7px;
+  color: #fff;
+}
+
+.pallet-text{
+  color: #60B2FF;
+}
+
+
+/* shimmer loading effects styles */
+
+.shimmer-shine {
+  background: #f6f7f8;
+  background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #edeef1 100%);
+  background-repeat: no-repeat;
+  background-size: 800px 104px;
+  display: inline-block;
+  position: relative;
+
+  -webkit-animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-name: placeholderShimmer;
+  -webkit-animation-timing-function: linear;
+}
+
+.shimmer-box {
+  height: 104px;
+  width: 100px;
+}
+
+
+/* div.shimmer-div {
+  display: inline-flex;
+  flex-direction: column;
+  margin-left: 10px;
+  margin-top: 15px;
+  vertical-align: top;
+} */
+
+.shimmer-lines {
+  height: 10px;
+  margin-top: 10px;
+  width: 200px;
+}
+
+.shimmer-photo {
+  display: block!important;
+  width: 325px;
+  height: 100px;
+  margin-top: 15px;
+}
+
+.font-smbold{
+  font-weight: 600 !important;
+}
+.ngx-pagination .current {
+  padding: 0.1875rem 0.625rem;
+  background: #153853 !important;
+  border-radius: 2px;
+  color: #fefefe;
+  cursor: default;
+}
+
+@-webkit-keyframes placeholderShimmer {
+  0% {
+    background-position: -468px 0;
+  }
+
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+@media screen and (max-width: 799px){
+  .table-bg{
+    background-color: none;
+  }
+}
+
+@media screen and (min-width: 800px){
+  .table-bg{
+    background-color: #e4e4e7;
+  }
+}
+
+.swal2-styled.swal2-confirm{
+  background-color: #153853 !important;
+}
+
+.swal2-title{
+  font-size: larger !important;
+}
+
+/* @media print {
+  body {
+    visibility: hidden;
+  }
+  #section-to-print {
+    visibility: visible;
+    text-align: center;
+    min-width: 100%;
+    top: 0 !important;
+    margin: 5px 0px;
+  }
+
+  .myQR{
+    display: inline;
+  }
+} */
+

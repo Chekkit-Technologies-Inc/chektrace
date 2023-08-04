@@ -1,0 +1,47 @@
+<div class="flex flex-wrap mt-4">
+    <div class="w-full mb-12 px-4">
+        <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
+        ngClass="bg-white"
+        >
+                <div class="block w-full overflow-x-auto px-4" *ngIf="stage == 1">
+                    <div class="flex flex-wrap mt-4">
+                        <div class="w-full mb-12 px-4">
+                            <div class=" flex justify-center mb-6 mt-8">
+                                <img class="h-12 w-36 bg-white" src="assets/img/chekkitlogoo.png" />
+                            </div>
+                            <h5 class="text-2xl  text-center font-normal leading-normal mt-0 mb-2 text-blueGray-800">
+                                Create A Survey
+                            </h5>
+                            <p class="text-sm text-center font-light leading-relaxed mt-2 mb-4 text-blueGray-800">
+                                Collect the feedback and opinions of consumers using short intuitive surveys and go deeper into their minds.
+                            </p>
+                            <div class=" flex justify-center">
+                                <img
+                                src="assets/img/survey-pic.png"
+                                style=" height:500px;"
+                                class="h-350 w-350 bg-white"
+                                alt="..."
+                              />
+                            </div>
+                              
+                        </div>
+                    </div>
+                    
+                    <div class="flex mb-12 justify-center">
+                        
+                        <div class="">
+                            <button (click)="stage = 2" type="submit" class="self-auto  ml-1 text-white font-bold px-12 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-800 active:bg-blueGray-600 text-sm shadow hover:shadow-lg ease-linear transition-all duration-150" >
+                                Get Started
+                            </button>
+                        </div>
+                    </div> 
+                </div>
+            <div class="px-4 pb-4" *ngIf="stage == 2">
+                <add-survey-form></add-survey-form>
+            </div>
+        </div>
+        
+
+    </div>
+  </div>
+  

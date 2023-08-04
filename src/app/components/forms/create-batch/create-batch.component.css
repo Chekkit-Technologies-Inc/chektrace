@@ -1,0 +1,31 @@
+/* .form-body{
+    max-width: 1200px;
+    margin: auto;
+} */
+
+.success-image{
+    width: 700px;
+    margin: auto;
+}
+
+.success-body{
+    width: 100% !important;
+    display: flex;
+
+}
+
+button, select{
+  outline: none !important;
+ }
+
+.batchForm{
+    width: 60% !important;
+    text-align: center;
+}
+
+@media screen and (max-width: 700px) {
+    .batchForm{
+        width: 100% !important;
+        text-align: center;
+    }
+}

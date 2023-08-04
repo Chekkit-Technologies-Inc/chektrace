@@ -1,0 +1,178 @@
+<div class="w-full px-8 py-4 mt-14  bg-blueGray-200  border-2 border-t-2 min-h-screen">
+  <div *ngIf="step === 1">
+    <div class="rounded-md bg-white shadow mt-4 p-6 w-100">
+      <div class="flex justify-between ">
+        <input class="bg-white border-2 border-blueGray-500 rounded-md p-3 shadow text-md basis-3/4" [(ngModel)]="batchNum"
+          placeholder="Enter Batch Number" />
+        <button
+          class="text-white text-md font-semibold rounded-md shadow text-center bg-blueGray-700 px-3 basis-1/4 ml-2 disabled:bg-blueGray-300"
+          (click)="startProductRecall()" [disabled]="!batchNum" >Start
+          Product Recall &nbsp;
+          <span *ngIf="loading" >
+            <img class="inline-flex " src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+          </span>
+        </button>
+      </div>
+    </div>
+    <div class="mt-6">
+      <div class="flex justify-between">
+        <h4 class="text-blueGray-700 font-semibold">Product Recall History</h4>
+        <div class="text-xs border border-blueGray-500 rounded-lg p-1 px-2">Filter</div>
+      </div>
+      <div class="mt-6 overflow-x-auto ">
+
+        <div class="overflow-x-auto  w-full h-full">
+          <div class="w-full flex bg-white justify-between px-4 p-3 shadow rounded-md">
+            <div class="w-40 flex-shrink-0 text-start ">
+              Product Name
+            </div>
+            <div class="w-40 flex-shrink-0 text-start">
+              <p class="">
+                Batch Number
+              </p>
+            </div>
+
+            <div class="w-40 flex-shrink-0 text-start ">
+              Message
+            </div>
+            <div class="w-40 flex-shrink-0 text-start ">
+              Timestamp
+            </div>
+          </div>
+          <hr>
+          <div class="w-full flex bg-blueGray-300 justify-between px-4 p-3 shadow rounded-md my-3" *ngFor="let recalls of productRecalls" >
+            <div class="w-40 flex-shrink-0 text-start text-xs capitalize ">
+              {{recalls.product.product_name}}
+            </div>
+            <div class="w-40 flex-shrink-0 text-start ">
+              <p class="text-xs capitalize">
+                {{recalls.subProduct.batch_num}}
+              </p>
+            </div>
+            <div class="w-40 flex-shrink-0 text-start text-xs capitalize ">
+              {{recalls.message}}
+            </div>
+            <div class="w-40 flex-shrink-0 text-start text-xs capitalize">
+              {{ recalls.created_at | date: longDate }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="step === 2">
+    <div class="rounded-md bg-white shadow mt-4 p-6 w-100">
+      <div class="flex justify-between ">
+        <select class="bg-white border-2 border-blueGray-500 rounded-md p-3 shadow text-md basis-3/5"
+        (change)="selectProduct($event.target.value)"
+          placeholder="Enter Batch Number">
+          <option selected > --Select Product-- </option>
+          <option [value]="product.id" *ngFor="let product of saved_products" >
+            {{product.product_name}}
+          </option>
+        </select>
+        <button
+          class="text-white text-md font-semibold rounded-md shadow text-center bg-blueGray-700 px-3 basis-1/5 ml-2" (click)="showModal = true" >
+          Recall Product</button>
+        <button
+          class="text-blueGray-800 text-md font-semibold rounded-md shadow text-center bg-white border-2 border-blueGray-500 px-3 basis-1/5 ml-2" (click)="next = 1" >Cancel
+          Product Recall</button>
+      </div>
+    </div>
+
+    <div class="mt-6">
+      <div class="flex justify-between">
+        <h4 class="text-blueGray-700 font-semibold">Distributors List</h4>
+        <div class="text-xs border border-blueGray-500 rounded-lg p-1 px-2">Filter</div>
+      </div>
+      <div class="mt-6 overflow-x-auto ">
+
+        <div class="overflow-x-auto  w-full h-full">
+          <div class="w-full flex bg-white justify-between px-4 p-3 shadow rounded-md">
+            <div class="w-40 flex-shrink-0 text-start">
+              <p class="">
+                Distributor Name
+              </p>
+            </div>
+            <div class="w-40 flex-shrink-0 text-start ">
+              Email
+            </div>
+            <div class="w-40 flex-shrink-0 text-start ">
+              Country
+            </div>
+            <div class="w-40 flex-shrink-0 text-start ">
+              Phone
+            </div>
+            <div class="w-40 flex-shrink-0 text-start ">
+              Location
+            </div>
+
+          </div>
+          <hr>
+          <div class="w-full flex bg-blueGray-300 justify-between px-4 p-3 shadow rounded-md my-3" *ngFor="let distributor of productDistributors" >
+            <div class="w-40 flex-shrink-0 text-start">
+              <p class="text-xs">
+                {{distributor.first_name}} {{distributor.last_name}}
+              </p>
+            </div>
+            <div class="w-40 flex-shrink-0 text-start text-xs">
+              {{distributor.email}}
+            </div>
+            <div class="w-40 flex-shrink-0 text-start text-xs">
+              {{distributor.country}}
+            </div>
+            <div class="w-40 flex-shrink-0 text-start text-xs">
+              {{distributor.phone_number}}
+            </div>
+            <div class="w-40 flex-shrink-0 text-start text-xs">
+              23, Ashafa Tijani
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="showModal"
+      class="bg-blueGray-600 bg-opacity-25 h-auto w-screen absolute inset-0 flex justify-center item-center"
+      >
+      <div
+        class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex" >
+        <div class="relative my-6 m-auto max-w-6xl modal-body flex">
+          <!--content-->
+          <div class="border-0  relative m-auto  w-full bg-white outline-none rounded-lg focus:outline-none modal-body">
+            <!--header-->
+
+            <div class="relative p-6 w-100 ">
+              <p class="text-blueGray-700 font-semibold " >Recall Product</p>
+              <div class=" mt-3">
+                <p class="text-xs" >Message Title</p>
+                <input class="bg-white border-2 rounded-lg border-blueGray-500 p-1 w-full" [(ngModel)]="message" />
+              </div>
+              <div class=" mt-3">
+                <p class="text-xs"  >Message Content</p>
+                <textarea class="bg-white border-2 rounded-lg border-blueGray-500 p-1 w-full " row="6" [(ngModel)]="content" ></textarea>
+              </div>
+
+              <div class="flex justify-between">
+                <button
+          class="text-blueGray-800 text-xs font-semibold rounded-md shadow text-center bg-white border-2 border-blueGray-500 px-3 basis-1/2 m-2 py-2" (click)="showModal = !showModal" >Cancel
+          Product Recall</button>
+                <button
+          class="text-white text-xs font-semibold rounded-md shadow text-center bg-blueGray-700 px-3 basis-1/2 m-2 py-2" (click)="recallProduct()"  >
+          Send Message
+          <span *ngIf="loading" >
+            <img class="inline-flex " src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+          </span>
+        </button>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

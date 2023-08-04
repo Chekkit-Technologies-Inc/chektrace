@@ -1,0 +1,301 @@
+<div *ngIf="createNewBatch" class="min-h-screen" >
+
+
+  <p class="font-bold sm:text-2xl md:text-2xl text-md text-blueGray-700 ">Create A New Batch</p>
+  <div class="w-full flex ">
+    <div class="m-auto batchForm">
+      <div class="flex">
+
+      </div>
+      <div class="m-3 my-6 ">
+        <label class="sm:font-bold md:font-bold sm:text-md text-sm ">Select Product Name</label>
+
+        <select class="border border-blueGray-700 rounded-lg bg-white p-2 w-full "
+          (change)="selectProduct($event.target.value)">
+          <option selected>--Select Product--</option>
+          <option *ngFor="let product of save_products" value="{{product.id}}"> {{product.product_name}}
+          </option>
+        </select>
+      </div>
+      <div class="sm:flex md:flex my-5">
+        <div class="flex-1 m-3">
+          <p class="sm:font-bold  md:font-bold sm:text-md text-sm ">Production Date</p>
+          <input
+            class="form-control appearance-none block w-full bg-white text-gray-700 border border-blueGray-700 rounded-lg py-2 px-2 mb-3 leading-tight focus:outline-none focus:bg-white"
+            type="date" [(ngModel)]="productionDate" name="prod_date" placeholder="Product
+                        Production Date">
+        </div>
+        <div class="flex-1 m-3">
+          <p class="sm:font-bold  md:font-bold sm:text-md text-sm">Expiry Date</p>
+          <input
+            class="form-control appearance-none block w-full bg-white text-gray-700 border border-blueGray-700 rounded-lg py-2 px-2 mb-3 leading-tight focus:outline-none focus:bg-white"
+            type="date" [(ngModel)]="expiryDate" name="expiry_date" placeholder="Product
+                        Expiry Date">
+        </div>
+      </div>
+      <div class="sm:flex md:flex my-5">
+        <div class="flex-1 m-3">
+          <p class="sm:font-bold  md:font-bold sm:text-md text-sm">Batch Number</p>
+          <input
+            class="form-control appearance-none block w-full bg-white text-gray-700 border border-blueGray-700 rounded-lg py-2 px-2 mb-3 leading-tight focus:outline-none focus:bg-white"
+            type="text" [(ngModel)]="batch_Number" name="batch_number" placeholder="
+                        Batch number">
+        </div>
+
+        <div class="flex-1 mt-2">
+          <label class="sm:font-bold  md:font-bold sm:text-md text-sm">Select Code Format</label>
+
+          <select class="border border-blueGray-700 rounded-lg bg-white p-1 pb-2 w-full "
+            (change)="selectCode($event.target.value)">
+            <option value="qr_code">
+              QR code
+            </option>
+            <option value="matrix_code">
+              Matrix Code
+            </option>
+          </select>
+        </div>
+      </div>
+
+
+      <div class="my-5" *ngIf="isProductId">
+        <button class="bg-blueGray-700 rounded text-white py-2 font-bold text-lg px-8 hover:bg-blueGray-500"
+          (click)="createBatch()">
+
+          <span *ngIf="!loading">Create Batch</span>
+          <span *ngIf="loading">
+            <img class="inline-flex "
+              src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+          </span>
+        </button>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>
+
+<!-- <div *ngIf="showModal"
+  class="bg-blueGray-600 bg-opacity-25 h-screen w-screen absolute inset-0 flex justify-center item-center">
+  <div
+    class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+    <div class="relative w-auto my-6 mx-auto max-w-6xl modal-body">
+
+      <div
+        class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none modal-body">
+
+        <div class="relative p-6 w-100 flex-auto">
+          <div class="text-center m-5 ">
+
+            <p class="font-bold text-blueGray-700 text-lg my-5">Proceed to generate serialization for this batch ?</p>
+
+
+          </div>
+
+          <div class="w-100 text-center ">
+            <button (click)="ifNo()"
+              class="bg-white  text-blueGray-800 border-2 border-blueGray-800 active:bg-blueGray-700 text-lg font-bold px-12 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+
+              No, Skip This.
+            </button>
+            <button
+              class="bg-blueGray-700  text-white active:bg-blueGray-700 text-lg font-bold px-12 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              (click)="ifYes()">
+
+              Yes, Please.
+            </button>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div> -->
+
+
+
+<div *ngIf="isSuccessful">
+
+  <div class="success-body text-center ">
+
+    <div class="success-image">
+      <img src="../../../../assets/img/success-image.png" alt="" srcset="">
+
+      <p class="text-3xl font-bold text-blueGray-700 my-5">Product Batch Created successfully</p>
+      <div class="my-5">
+        <button class="bg-blueGray-600 rounded-2xl text-white py-2 font-bold text-2xl px-12 hover:bg-blueGray-500"
+          (click)="proceedToSerialization()">Submit</button>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+
+<div *ngIf="displayProductBatch">
+  <!-- <p>Product batch here</p> -->
+  <div class="w-full px-8 py-4 flex bg-white  ">
+    <div class=" my-8 px-4 pt-8 serialBody ">
+
+
+      <div class="my-10 grid grid-cols-3 gap-4 ">
+        <div class="col-span-2">
+          <p class="text-lg mr-5 ">You're viewing generated serial numbers for product name "Drug X 500mg"
+            with GTIN number "12533737" and batch number "1345"</p>
+        </div>
+        <div class="flex-1 flex justify-between">
+          <div
+            class="bg-white text-blueGray-800 border-2 border-blueGray-500 rounded-2xl p-3 font-bold px-3 cursor-pointer ">
+            View Serial Number</div>
+          <div
+            class="bg-white text-blueGray-800 border-2 border-blueGray-500 rounded-2xl p-3 font-bold px-3 cursor-pointer ">
+            Edit Batch</div>
+          <div
+            class="bg-white text-blueGray-800 border-2 border-blueGray-500 rounded-2xl p-3 font-bold px-3 cursor-pointer ">
+            Edit Level</div>
+        </div>
+      </div>
+
+
+      <div class="my-3 grid grid-cols-5 gap-4  bg-blueGray-100 border-blueGray-800  bg-white ">
+        <div class="text-sm text-blueGray text-center">
+          Batch Number
+        </div>
+        <div class="text-sm text-blueGray text-center ">
+          Code Format
+        </div>
+        <div class="text-sm text-blueGray text-center ">
+          Product Name
+        </div>
+        <div class="text-sm text-blueGray text-center ">
+          Production Date
+        </div>
+        <div class="text-sm text-blueGray text-center ">
+          Expiry Date
+        </div>
+      </div>
+      <div class="border-2 border-blueGray-300 py-2 ">
+        <div class="rounded-2xl bg-blueGray-300 p-3 mt-4 " *ngFor="let batch of productBatches ">
+          <div class="grid grid-cols-5 gap-4 mt-4 ">
+            <div class="text-sm text-blueGray text-center text-blueGray-800 font-bold">
+              {{ batch.batch_num }}
+            </div>
+            <div class="text-sm text-blueGray text-center text-blueGray-800 font-bold ">
+              {{ batch.code_format }}
+            </div>
+            <div class="text-sm text-blueGray text-center text-blueGray-800 font-bold ">
+              {{ batch.product_name }}
+            </div>
+            <div class="text-sm text-blueGray text-center text-blueGray-800 font-bold ">
+              {{ batch.production_date | date:'longDate' }}
+            </div>
+            <div class="text-sm text-blueGray text-center text-blueGray-800 font-bold ">
+              {{ batch.expiry_date | date:'longDate' }}
+            </div>
+          </div>
+
+          <!-- <div class="grid grid-cols-4 gap-4 my-5 bg-white border-2 border-blueGray-700 rounded-2xl p-3 mx-5 ">
+                        <div class="text-sm text-blueGray text-center text-blueGray-800 font-bold" >
+                            Tertiary
+                        </div>
+                        <div class="text-sm text-blueGray text-center text-blueGray-800 font-bold " >
+                            100
+                        </div>
+                        <div class="text-sm text-blueGray text-center text-blueGray-800 font-bold " >
+                            10,000 - 11,1111
+                        </div>
+                        <div class="text-sm text-blueGray text-center text-2xl text-blueGray-800"  >
+                             <i  class="fa">&#xf056;</i> -->
+          <!-- <i  class="fa">&#xf055;</i>
+                        </div> -->
+          <!-- </div> -->
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="viewPackageLevel">
+  <div class="w-full px-8 py-4 flex bg-white  ">
+    <div class=" my-8 px-4 pt-8 serialBody ">
+
+
+      <div class="my-5 grid grid-cols-3 gap-4 ">
+        <div class="col-span-2">
+          <p class="text-lg mr-5 ">You're viewing generated serial numbers for product name "Drug X 500mg"
+            with GTIN number "12533737" and batch number "1345"</p>
+        </div>
+        <div class="flex-1 flex justify-between">
+          <div
+            class="bg-white text-blueGray-800 border-2 border-blueGray-500 rounded-2xl p-3 font-bold px-3 cursor-pointer ">
+            View Serial Number</div>
+          <div
+            class="bg-white text-blueGray-800 border-2 border-blueGray-500 rounded-2xl p-3 font-bold px-3 cursor-pointer ">
+            Edit Batch</div>
+          <div
+            class="bg-white text-blueGray-800 border-2 border-blueGray-500 rounded-2xl p-3 font-bold px-3 cursor-pointer ">
+            Edit Level</div>
+        </div>
+      </div>
+
+
+      <div class="my-5 grid grid-cols-4 gap-4 border-2 bg-blueGray-100 border-blueGray-800 p-3 bg-white ">
+        <div class="text-sm text-blueGray text-center">
+          Package Level
+        </div>
+        <div class="text-sm text-blueGray text-center ">
+          Number of Package Level
+        </div>
+        <div class="text-sm text-blueGray text-center ">
+          Serial Number Range
+        </div>
+        <div class="text-sm text-blueGray text-center ">
+          Action
+        </div>
+      </div>
+      <div class="border-2 border-blueGray-300 py-2 ">
+        <div class="rounded-2xl bg-blueGray-300 p-3 mt-4 " *ngFor="let level of packageLevels ">
+          <div class="grid grid-cols-4 gap-4 mt-4 ">
+            <div class="text-sm text-blueGray text-center text-blueGray-800 font-bold">
+              {{ level.level }}
+            </div>
+            <div class="text-sm text-blueGray text-center text-blueGray-800 font-bold ">
+              {{ level.quantity }}
+            </div>
+            <div class="text-sm text-blueGray text-center text-blueGray-800 font-bold ">
+              10,000 - 11,1111
+            </div>
+            <div class="text-sm text-blueGray text-center text-2xl text-blueGray-800">
+              <!-- <i  class="fa">&#xf056;</i> -->
+              <i class="fa">&#xf055;</i>
+            </div>
+          </div>
+
+          <!-- <div class="grid grid-cols-4 gap-4 my-5 bg-white border-2 border-blueGray-700 rounded-2xl p-3 mx-5 ">
+                        <div class="text-sm text-blueGray text-center text-blueGray-800 font-bold" >
+                            Tertiary
+                        </div>
+                        <div class="text-sm text-blueGray text-center text-blueGray-800 font-bold " >
+                            100
+                        </div>
+                        <div class="text-sm text-blueGray text-center text-blueGray-800 font-bold " >
+                            10,000 - 11,1111
+                        </div>
+                        <div class="text-sm text-blueGray text-center text-2xl text-blueGray-800"  >
+                             <i  class="fa">&#xf056;</i> -->
+          <!-- <i  class="fa">&#xf055;</i>
+                        </div> -->
+          <!-- </div> -->
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

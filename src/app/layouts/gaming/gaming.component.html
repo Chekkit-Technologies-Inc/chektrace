@@ -1,0 +1,36 @@
+<ngx-loading-bar height="4px" color="#46F7AA"></ngx-loading-bar>
+<div>
+  <!-- <app-sidebar></app-sidebar> -->
+  <div class="relative md:ml-100 min-h-100">
+   <div class="shadow">
+    <app-gaming-nav></app-gaming-nav>
+   </div>
+
+
+    <div class=" w-full  min-h-100 ">
+      <div class="flex w-full">
+        <div class="basis-1/5 sidebar min-h-screen">
+          <div class="menu-list text-center mt-12 px-8 flex flex-col">
+            <a class="text-white text-xs font-semibold border border-white rounded px-8 py-3 my-6 cursor-pointer text-left" [routerLink]=" '/gaming/overview' " routerLinkActive="active" >Overview</a>
+            <a class="text-white text-xs font-semibold border border-white rounded px-8 py-3 my-6 cursor-pointer text-left " [routerLink]=" '/gaming/redemption' " routerLinkActive="active" >Redemption Sites</a>
+            <a class="text-white text-xs font-semibold border border-white rounded px-8 py-3 my-6 cursor-pointer text-left " [routerLink]=" '/gaming/leaderboard' " routerLinkActive="active" >Leaderboard</a>
+            <a class="text-white text-xs font-semibold border border-white rounded px-8 py-3 my-6 cursor-pointer text-left " [routerLink]=" '/gaming/trivia' " routerLinkActive="active" >Trivia</a>
+            <!-- <a class="text-white text-xs font-semibold border border-white rounded px-8 py-3 my-6 cursor-pointer text-left " [routerLink]=" '/gaming/rewards' " routerLinkActive="active">Rewards</a> -->
+          </div>
+        </div>
+        <div class="basis-4/5">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+
+
+
+
+
+    </div>
+
+    <app-footer-admin></app-footer-admin>
+
+
+  </div>
+</div>

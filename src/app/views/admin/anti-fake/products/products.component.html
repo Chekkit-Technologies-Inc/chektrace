@@ -1,0 +1,142 @@
+<div class="w-full px-8 py-8 h-auto">
+  <div *ngIf="currentPage == 1">
+    <div class="grid justify-items-stretch mt-8">
+
+      <p class="justify-self-start text-3xl font-bold">My SKU</p>
+      <div class="justify-self-end">
+        <button
+          class=" flex-1 bg-white text-blueGray-800 border-2 border-blueGray-500 active:bg-blueGray-600 text-sm font-bold px-6 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+          <a [routerLink]="['/mas/orders']">Track My Order</a>
+        </button>
+
+        <button (click)="currentPage = 2"
+          class=" flex-1 bg-white text-blueGray-800 border-2 border-blueGray-500 active:bg-blueGray-600 text-sm font-bold px-6 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+          Create New Batch
+        </button>
+        <!-- <button
+          class=" flex-1 bg-white text-blueGray-800 border-2 border-blueGray-500 active:bg-blueGray-600 text-sm font-bold px-6 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+          Request Label
+        </button> -->
+        <button
+          class=" flex-1 bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold px-6 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          (click)="addProduct()">
+          Add New Product
+        </button>
+      </div>
+
+
+    </div>
+    <div class="bg-white p-6 rounded-3xl mt-6">
+      <div class="grid justify-items-stretch">
+        <p class="justify-self-start text-lg font-bold">Product Table</p>
+        <!-- <div  class="justify-self-end flex-1 bg-white text-blueGray-700 border-2 border-blueGray-600 active:bg-blueGray-600 text-sm font-bold px-12 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+
+        </div> -->
+        <input placeholder="Search Product" [(ngModel)]="term"  class=" searchTerm justify-self-end flex-1 bg-white text-blueGray-700 border-2 border-blueGray-600 active:bg-blueGray-600 text-sm font-bold px-6 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"  />
+
+        <div class="overflow-x-auto  w-full h-full"  >
+
+          <div class=" w-full flex  bg-white justify-between px-4 p-4">
+            <div class="w-24 flex-shrink-0 text-left">
+
+              <p class="font-semibold">
+                 S/N
+              </p>
+            </div>
+            <div class="w-40 flex-shrink-0 text-left font-semibold">
+              Product Name
+            </div>
+
+            <div class="w-40 flex-shrink-0 text-left font-semibold">
+              Production Date
+            </div>
+
+            <div class="w-40 flex-shrink-0 text-left font-semibold">
+              Action
+            </div>
+          </div>
+
+          <div *ngFor=" let product of saved_products | filter: term | paginate: { itemsPerPage: 10, currentPage: p }; let i = index; ">
+            <div class="w-auto flex table-bg mt-4 rounded-2xl justify-between px-4 p-6">
+              <div class="w-24 flex-shrink-0 text-left text-xs">
+
+                &nbsp;&nbsp; {{i + 1}}
+              </div>
+              <div class="w-40 flex-shrink-0 text-left text-xs ">
+                {{product.product_name | slice:0:25 }}
+              </div>
+
+              <div class="w-40 flex-shrink-0 text-left text-xs">
+                {{product.created_at | date : longDate }}
+              </div>
+
+              <div class="w-40 flex-shrink-0 text-left text-xs">
+                <a [routerLink]="['/mas/product-identity', product.id]"
+                  class="border border-green-500 text-green-500 rounded p-2 cursor-pointer">View Product</a> &nbsp;
+
+                     &nbsp;
+                    <span (click)="confirm(product.id)"  class="text-red-500 cursor-pointer"><i
+                    class="fa">&#xf1f8;</i></span>
+              </div>
+            </div>
+          </div>
+          <div class="w-100 text-center p-3 mt-5">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div *ngIf="currentPage == 2">
+    <div class="my-4 font-bold  text-md cursor-pointer ">
+      <a (click)="currentPage = 1"><span><i class="fa fa-arrow-left text-sm "></i></span> &nbsp; &nbsp;
+        <span>Back</span></a>
+    </div>
+    <br>
+    <app-create-batch (selectedProductId)="backToProduct($event)" ></app-create-batch>
+  </div>
+
+  <div *ngIf="showModal"
+    class="bg-blueGray-600 bg-opacity-25 min-h-screen w-screen absolute inset-0 flex justify-center item-center">
+    <div
+      class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+      <div class="relative w-auto my-6 mx-auto max-w-6xl modal-body">
+        <!--content-->
+        <div
+          class="border-0  relative flex flex-col w-full rounded-md bg-white outline-none focus:outline-none modal-body">
+          <!--header-->
+          <div class="flex items-start justify-between p-5  rounded-t">
+
+            <button
+              class="p-2 rounded-2xl ml-auto bg-blueGray-700 border-0 text-white float-right  leading-none font-semibold outline-none focus:outline-none"
+              (click)="showModal = !showModal">
+              <span class=" text-white  h-6 w-6 text-md block outline-none focus:outline-none">
+                <i style="font-size:24px; " class="fa">&#xf00d;</i>
+              </span>
+            </button>
+          </div>
+          <!--body-->
+
+          <div class="mx-4 text-center my-4" >
+            <p class="text-blueGray-700 font-semibold text-2xl" >Are you sure to delete {{selectedProduct.product_name}} ? </p>
+            <div class="mt-5 flex justify-between" >
+              <button class="bg-blueGray-700 text-white font-semibold py-2 px-4 rounded-md" (click)="deleteProduct(this.selectedProduct.id)" >
+                <span *ngIf="!isLoading" >
+                  Yes, please
+                </span>
+                <span *ngIf="isLoading" >
+                  <img class="inline-flex "
+                  src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                </span>
+              </button>
+              <button class="bg-red-600 text-white font-semibold py-2 px-4 rounded-md" (click)="showModal = !showModal"  >No, cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

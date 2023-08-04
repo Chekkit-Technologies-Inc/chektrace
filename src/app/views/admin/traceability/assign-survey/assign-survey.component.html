@@ -1,0 +1,102 @@
+<div class="bg-blueGray-200 pb-10 p-4 mt-14" >
+
+  <div *ngIf="nextStep == 1" class="h-screen">
+    <div class=" p-8 mt-12  mt-12 ">
+      <p class="my-8 md:text-2xl text-md sm:text-2xl font-bold text-blueGray-800 left-border ">Unpacking</p>
+
+      <div class="my-5 sm:grid grid-cols-2 gap-6 w-full">
+        <div class="">
+          <label class="block tracking-wide text-gray-700 text-lg font-semibold mb-2" >
+            Scan Parent Code
+          </label>
+          <input class="border-2 border-blueGray-300 rounded-2xl p-3 m-2 w-full" [(ngModel)]="parent_container"
+            name="parent_container"  >
+        </div>
+        <div class="  ">
+          <label class="block tracking-wide text-gray-700 text-lg font-semibold mb-2" >
+            Scan Children Code
+          </label>
+          <div class="relative">
+            <input class="border-2 border-blueGray-300 rounded-2xl p-3 m-2 w-full" [(ngModel)]="children_container"
+            name="children_container" (change)="addContainer()" >
+
+          </div>
+        </div>
+
+      </div>
+
+
+
+    </div>
+
+    <div class="bg-white rounded-2xl p-8 mt-2 mb-5" *ngIf="children_containers.length >= 1"  >
+      <div class="flow-root mt-6" >
+          <p class="float-left font-semibold text-blueGray-800 text-lg  " > Item List</p>
+          <!-- <p class="float-right border-2 border-blueGray-300 rounded-lg py-2 px-5 " >Filter</p> -->
+      </div>
+
+      <div class="sm:mx-8 md:mx-8 md:mt-5 " >
+          <div class=" grid grid-cols-3 gap-3 " >
+              <!-- <div class="font-semibold text-blueGray-800 text-md text-center sm:text-lg " >Container</div> -->
+              <!-- <div class="font-semibold text-blueGray-800 text-md text-center sm:text-lg " >Serial Number</div> -->
+              <!-- <div class="font-semibold text-blueGray-800 text-md text-center sm:text-lg  " >Time Of Scan</div> -->
+          </div>
+          <div class=" grid grid-cols-3 gap-3 bg-blueGray-200 p-4 rounded-2xl mt-5" *ngFor="let code of children_containers" >
+              <div class=" text-blueGray-800 text-md text-center " >{{code}}</div>
+              <!-- <div class=" text-blueGray-800 text-md text-center " >000110011</div> -->
+              <!-- <div class="text-blueGray-800 text-md text-center  " >11:00AM August 12th 2022</div> -->
+          </div>
+
+      </div>
+      <button
+          class=" h-9 sm:mt-8 md:mt-8  text-white transition-colors duration-150 bg-blueGray-700 rounded-lg focus:shadow-outline hover:bg-blueGray-800 "
+          (click)="unpackPackage()">
+          <span *ngIf="loading" >
+            <img class="inline-flex " src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
+          </span>
+          <span *ngIf="!loading" > Submit</span>
+        </button>
+    </div>
+  </div>
+
+  <div *ngIf="nextStep == 2" class="h-screen">
+    <div class="success-image">
+      <img
+        src="../../../../assets/img/success-image.png"
+        class="m-auto ssimg"
+        alt=""
+        srcset=""
+        width="400"
+      />
+
+      <p class="text-lg font-bold text-blueGray-700 my-5 text-center">
+
+        Package Successfully Unpacked
+      </p>
+      <div class="mt-10   text-center  flex">
+        <div class="text-center m-auto flex">
+          <div
+            class="bg-blueGray-600 rounded-lg text-white py-2 font-semibold w-50 text-lg px-3 hover:bg-blueGray-500 m-3"
+
+          >
+            <a [routerLink]="['/traceability/products']">
+              Back to Dashboard
+            </a>
+          </div>
+          <div
+            class="bg-blueGray-600 rounded-lg text-white py-2 font-semibold w-50 text-lg px-3 hover:bg-blueGray-500 m-3" (click)="nextStep == 1"
+
+          >
+            <a >
+              Continue Unpacking
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+

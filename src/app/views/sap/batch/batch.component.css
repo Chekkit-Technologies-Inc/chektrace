@@ -1,0 +1,71 @@
+body {
+    background-color: #E5E5E5;
+}
+
+.title {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 54px;
+    margin-top: 100px;
+    margin-bottom: 20px;
+}
+
+.chekkit {
+    color: #46F7AD
+}
+
+.sap {
+    font-weight: 900;
+    color: #153853;
+
+}
+
+input {
+    display: flex;
+flex-direction: row;
+align-items: center;
+padding: 26px 16px;
+
+position: static;
+width: 857px;
+height: 67px;
+left: 0px;
+top: 30px;
+
+border: 1px solid #979797;
+box-sizing: border-box;
+border-radius: 15px;
+}
+
+label {
+font-family: 'Graphik';
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 20px;
+
+display: flex;
+align-items: center;
+text-transform: capitalize;
+
+color: #101010;
+}
+
+button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 26px 16px;
+    color: #fff;
+    position: static;
+    width: 617px;
+    height: 72px;
+    left: 0px;
+    top: 0px;
+    background: #153853;
+    border-radius: 15px;
+}
+

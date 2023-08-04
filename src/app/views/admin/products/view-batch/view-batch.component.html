@@ -1,0 +1,84 @@
+<div class="flex flex-wrap mt-4">
+    <div class="w-full mb-12 px-4">
+        <div class="relative page-content flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
+        ngClass="bg-white"
+        >
+            <div class="block w-full overflow-x-auto">
+                <div class="block w-full overflow-x-auto">
+                    <div class="flex flex-wrap mt-4">
+                        <div class="w-full mb-6 px-4">
+                            <h5 class="text-2xl text-center font-bold leading-normal mt-0 mb-2 text-blueGray-800">
+                                View Batch
+                            </h5>
+                            <p class="text-lg text-center font-light leading-relaxed mt-2 mb-4 text-blueGray-800">
+                                You Are Viewing {{batchObject?.product_name}}
+                            </p>                           
+                        </div>
+                </div>
+
+                <div class="block w-full overflow-x-auto">
+                    <div class="w-full px-4 mb-3">
+                        <div class="  w-full">
+                            <div class=" lg:w-6/12 relative mb-6" *ngIf="batchObject">
+                                <p>Batch Name: {{batchObject?.product_name}}</p>
+                                <p>Production {{batchObject.production_date | date:'MM/YYYY'}}</p>
+                                <p>Expiry {{batchObject.expiry_date | date:'MM/YYYY'}}</p>
+                                <button
+                                (click)="printComponent('print-index-invoice')"
+                                class="active:bg-blueGray-200  rounded border border-solid border-blueGray-700 font-bold uppercase text-xs px-4 py-2 rounded hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                                type="button">
+                                <i class="fas fa-print"></i>
+                                Print
+                            </button> 
+                            </div>
+                            <!-- <div class=" lg:w-6/12 relative w-full mb-6" *ngIf="batchObject">
+                                
+                            <button
+                            style="float: right;"
+                            (click)="printDiv()"
+                            class="active:bg-blueGray-200  rounded border border-solid border-blueGray-700 font-bold uppercase text-xs px-4 py-2 rounded hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                            type="button">
+                            <i class="fas fa-print"></i>
+                            Print
+                        </button> 
+                                
+                            </div> -->
+                        </div>
+                        <div  id="print-index-invoice">
+                            <span  *ngFor="let pin of pins;let i=index;">
+                                <pin-card [size]="'small'" [code_format]="batchObject.code_format" [sgtin]="pin?.pin_value" [exp]="batchObject.expiry_date | date:'YYMMdd'" [lotNo]="batchObject.batch_num" [gtin]="'1000' + pin.id"></pin-card>
+                            </span>
+                        </div>
+
+                        <!-- <pin-card [size]="'small'" [code_format]="'qr_code'" [gtin]="2343322444349" [exp]="'10/2022'" [lotNo]="'D70742'" [sgtin]="4334343"></pin-card>
+                        <pin-card [size]="'small'" [code_format]="'qr_code'" [gtin]="2343322444349" [exp]="'10/2022'" [lotNo]="'D70742'" [sgtin]="4334343"></pin-card>
+                        <pin-card [size]="'small'" [code_format]="'qr_code'" [gtin]="2343322444349" [exp]="'10/2022'" [lotNo]="'D70742'" [sgtin]="4334343"></pin-card>
+                        <pin-card [size]="'small'" [code_format]="'qr_code'" [gtin]="2343322444349" [exp]="'10/2022'" [lotNo]="'D70742'" [sgtin]="4334343"></pin-card> -->
+
+                    </div>
+                    <div>
+
+                    <ul class="pagination justify-content-end" *ngIf="pins?.length>0 && !loading">
+                        <li class="page-item" *ngIf="hasPrevious" style="cursor: pointer;">
+                            <a class="page-link" (click)="getPrevPin()">Previous</a>
+                        </li>
+                        <li class="page-item" *ngIf="hasNext" style="cursor: pointer;"><a class="page-link" (click)="getNextPin()">Next</a></li>
+                    </ul>
+                    <div class=" px-4 " style="padding-top: 40px;" *ngIf="pins?.length <1">
+                        <div class="col-md-3">
+                            <p style="padding-top: 10px; font-size: 12px;">
+                                {{loading?'generating pin...':'No code generated'}}
+                            </p>
+                        </div>
+                    </div> 
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+
+    </div>
+  </div>
+  

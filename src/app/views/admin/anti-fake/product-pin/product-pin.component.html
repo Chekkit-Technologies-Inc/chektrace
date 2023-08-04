@@ -1,0 +1,365 @@
+<div class="my-16 w-100 sm:px-16 md:px-16 px-4" *ngIf="currentStage == 1">
+
+  <div class="sm:flex md:flex w-full ">
+
+    <p class="w-full flex-1 text-2xl text-blueGray-700 font-bold ">Pin Center</p>
+
+    <div class="w-full flex-2 text-right">
+      <button
+        class="border border-blueGray-500 py-2 m-1 px-4 text-blueGray-800 transition-colors duration-150 bg-white rounded-lg focus:shadow-outline hover:bg-blueGray-700 font-semibold text-sm" (click)="currentStage = 4" >Track
+        My Request</button>
+
+      <button
+      (click)="currentStage = 5"
+        class="border border-blueGray-500 py-2 m-1 px-4 text-blueGray-800 transition-colors duration-150 bg-white rounded-lg focus:shadow-outline hover:bg-blueGray-700 font-semibold text-sm ">My
+        Serial Numbers</button>
+
+      <button
+        class="border border-blueGray-700 py-2 m-1 px-4 text-white transition-colors duration-150 bg-blueGray-800 rounded-lg focus:shadow-outline hover:bg-blueGray-700 font-semibold text-sm"
+        (click)="nextStep()">
+        Start New Pin Assignment
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="bg-white rounded-2xl p-4 my-3  overflow-x-auto w-full h-full">
+    <div class="flex w-full ">
+
+      <p class=" w-50 flex-shrink-0 text-lg font-bold text-blueGray-700">Pin Assignment History</p>
+
+      <div class="w-full sm:ml-3 md:ml-2 lg:ml-2 flex-1 text-right hidden sm:block md:block">
+        <input placeholder="Search by Product " [(ngModel)]="term"  class=" searchTerm justify-self-end flex-1 bg-white text-blueGray-700 border-2 border-blueGray-600 active:bg-blueGray-600 text-sm font-bold px-6 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"  />
+
+
+      </div>
+
+    </div>
+    <br>
+
+    <!-- table header -->
+    <div class="flex bg-white justify-between px-4 p-4 my-8">
+      <div class="w-40 flex-shrink-0 text-left">
+
+        <p class="font-bold"><span>
+            <!-- <input type="checkbox"> -->
+          </span> &nbsp;&nbsp; Date Created
+        </p>
+      </div>
+      <div class="w-40 flex-shrink-0 text-left font-bold">
+        Product
+      </div>
+      <div class="w-40 flex-shrink-0 text-left font-bold">
+        Batch
+      </div>
+      <div class="w-40 flex-shrink-0 text-left font-bold">
+        Status
+      </div>
+      <div class="w-40 flex-shrink-0 text-left font-bold">
+        Action
+      </div>
+    </div>
+    <!-- table content starts-->
+    <div class="flex table-bg mt-4 rounded-2xl justify-between px-4 p-6"
+      *ngFor="let data of datas| filter: term; let j = index;  ">
+      <div class="w-40 flex-shrink-0 text-left ">
+
+        <p class="text-xs font-semibold" ><span>
+            <!-- <input type="checkbox"> -->
+          </span> &nbsp;&nbsp; {{data.created_at | date : longDate }} </p>
+      </div>
+      <div class="w-40 flex-shrink-0 text-left font-semibold text-blueGray-800 text-xs">
+        {{  data.subProduct.product_name}}
+      </div>
+      <div class="w-40 flex-shrink-0 text-left font-semibold text-xs">
+        {{ data.subProduct.batch_num}}
+      </div>
+      <div class="w-40 flex-shrink-0 text-left font-semibold text-xs   ">
+
+        <span class="bg-blueGray-800 rounded-3xl p-4 text-white "> {{data ? data.status: ''}} </span>
+      </div>
+      <div class="w-40 flex-shrink-0 text-left font-semibold text-xs cursor-pointer " (click)="viewPinDetail(data.id)" >
+        VIEW
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="my-16 w-100 px-16 h-screen" *ngIf="currentStage == 2">
+  <p class="mb-10 text-blueGray-800 text-md font-bold cursor-pointer" (click)="stepBack()"> <i class="fa fa-arrow-left text-sm "></i> Back</p>
+  <div class="flex justify-between my-5">
+    <p class="text-3xl font-bold text-blueGray-700 ">Welcome to Pin Request Center</p>
+    <button
+      class="border border-blueGray-500 py-4 m-3 px-8 text-white transition-colors duration-150 bg-blueGray-800 rounded-lg focus:shadow-outline hover:bg-blueGray-700 font-bold"
+      (click)="nextStep()">Begin</button>
+
+  </div>
+
+  <p class="my-5 font-bold text-blueGray-700">Setup the stickers your assets will be tagged with.</p>
+  <br><br>
+
+  <div class="mt-6">
+    <div class="flex text-center my-3">
+      <img src="../../../../../assets/img/pin-list.png" width="50" alt="" srcset=""> &nbsp;
+      <p class="text-center pt-3 font-semibold text-blueGray-700">Fill the request form, select the Product and fill and
+        the batches how it works.</p>
+    </div>
+    <div class="flex text-center my-3">
+      <img src="../../../../../assets/img/pin-list.png" width="50" alt="" srcset=""> &nbsp;
+      <p class="text-center pt-3 font-semibold text-blueGray-700">Fill the request form, select the Product and fill and
+        the batches how it works.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="my-16 w-100 px-16 h-screen" *ngIf="currentStage == 3">
+  <p class="mb-10 text-blueGray-800 text-md font-bold ">
+    <span class="cursor-pointer" (click)="stepBack()"><i class="fa fa-arrow-left text-sm "></i> Back</span>
+  </p>
+  <div class="flex justify-between my-5">
+    <p class="text-3xl font-bold text-blueGray-700 ">Pin Assignment Request</p>
+
+  </div>
+
+  <!-- <p class="my-5 font-bold text-blueGray-700" >Setup the stickers your assets will be tagged with.</p> -->
+  <br><br>
+  <div class="grid grid-cols-4 gap-4">
+    <div class="col-span-2">
+      <div>
+        <p class="font-bold">Select Product </p>
+        <select [(ngModel)]="product_name" (change)="selectProduct($event.target.value)"
+          class="block bg-white text-gray-700 border border-blueGray-500 rounded-lg py-3 px-4 mb-3 leading-tight w-full ">
+          <option [value]="data.id" *ngFor="let data of userProducts"> {{data.product_name}} </option>
+
+        </select>
+      </div>
+    </div>
+    <div class="col-span-2">
+      <div *ngIf="productBatches">
+        <p class="font-bold">Product Batch</p>
+        <select [(ngModel)]="product_batch" (change)="selectBatch($event.target.value)"
+          class="block bg-white text-gray-700 border border-blueGray-500 rounded-lg py-3 px-4 mb-3 leading-tight w-full ">
+          <option [value]="data.id" *ngFor="let data of productBatches"> {{data.product_name}} ( {{data.batch_num}} ) </option>
+
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="mt-12 grid grid-cols-4 gap-4">
+    <div class="col-span-2">
+        <p class="text-md text-blueGray-800 font-semibold">Indicate where the stickers should be placed</p>
+      <br>
+      <select [(ngModel)]="label_placement" name="label_placement" (change)="selectLabel($event.target.value)" class="w-full rounded-lg py-3 px-4" >
+        <option selected>--Select label placement--</option>
+        <option value="1">Sticker on box</option>
+        <option value="2">Sticker on satchets</option>
+      </select>
+    </div>
+
+    <div class="col-span-2">
+      <div *ngIf="label_placement" class="my-4 mt-6">
+        <p class="text-md text-blueGray-800 font-semibold">Input the quantity of stickers required</p>
+        <input type="number" class="rounded border border-blueGray-600 bg-white p-3 px-6 w-full rounded-lg py-3 px-4" [(ngModel)]="label_quantity"
+          name="label_quantity" />
+      </div>
+    </div>
+  </div>
+
+
+  <button (click)="submitRequest()"
+  *ngIf="label_quantity"
+    class="border border-blueGray-500 py-4 m-3 px-12 text-white transition-colors duration-150 bg-blueGray-800 rounded-lg focus:shadow-outline hover:bg-blueGray-700 font-bold">
+    <span *ngIf="loading">
+      <img
+        class="inline-flex"
+        src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+      />
+    </span>
+    <span *ngIf="!loading">
+      Submit Request
+    </span>
+
+  </button>
+
+
+</div>
+
+<div *ngIf="currentStage == 4" class=" mx-8 " >
+  <br>
+  <p class="mb-5 text-blueGray-800 text-md font-bold ">
+    <span class="cursor-pointer" (click)="currentStage = 1"><i class="fa fa-arrow-left text-sm "></i> Back</span>
+  </p>
+  <br>
+  <div class="flex justify-between my-5">
+    <p class="text-lg font-bold text-blueGray-700 ">Pin Assignment Update</p>
+
+  </div>
+
+  <div class="sm:grid md:grid grid-cols-4 gap-4"  >
+    <div class="bg-white rounded-lg py-6 px-3 my-3 shadow-md statusCard" *ngFor="let data of datas;" >
+      <div>
+        <p *ngIf="data.status == 'requested' " >
+          <span class="text-md font-bold text-blueGray-800 mr-8">Pin Allocated</span>
+          <span class="p-2 rounded-2xl text-blueGray-800 bg-yellow-300 font-bold text-sm ml-4"  >Pending</span>
+        </p>
+        <p *ngIf="data.status == 'processing' " >
+          <span class="text-md font-bold text-blueGray-800 mr-8">Pin Allocated</span>
+          <span class="p-2 rounded-2xl text-blueGray-800 bg-yellow-300 font-bold text-sm ml-4"  >Ongoing</span>
+        </p>
+        <span class="text-blueGray-500 font-bold text-sm" >
+          {{data.created_at | date: longDate }}
+        </span>
+      </div>
+
+      <div class="w-100 text-center mt-1" *ngIf="data.status == 'approved' ">
+        <button class="mt-7 bg-blueGray-300 text-blueGray-800 text-lg text-center px-5 py-3 rounded-lg font-semibold" >Contact Support</button>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+</div>
+
+<div *ngIf="currentStage == 5" class=" mx-8 " >
+  <br>
+  <p class="mb-5 text-blueGray-800 text-md font-bold ">
+    <span class="cursor-pointer" (click)="currentStage = 1"><i class="fa fa-arrow-left text-sm "></i> Back</span>
+  </p>
+  <br>
+  <div class="flex justify-between my-5">
+    <div>
+      <p class="text-2xl font-semibold text-blueGray-700 ">My Serial Numbers</p>
+      <small>Here are all the serial numbers and box number that you have been delivered to by Chekkit</small>
+    </div>
+    <div>
+
+    </div>
+
+  </div>
+  <br>
+  <div class="bg-white rounded-md p-5" >
+    <p class="text-md text-blueGray-700 font-semibold" >Pin Assignment History</p>
+
+    <div class="flex justify-between mt-10 p-4" >
+      <div class="text-blueGray-700 text-sm font-semibold text-center flex-1 " >Date created</div>
+      <div class="text-blueGray-700 text-sm font-semibold text-center flex-1 " >Box Number</div>
+      <div class="text-blueGray-700 text-sm font-semibold text-center flex-1 " >Status</div>
+      <div class="text-blueGray-700 text-sm font-semibold text-center flex-1 " >Action</div>
+    </div>
+    <hr>
+    <div *ngFor="let serial of serialNumbers" >
+      <div class="mt-5 bg-blueGray-100 rounded-md p-4" >
+        <div class="flex justify-between my-4"  >
+          <div class="text-blueGray-700 text-xs font-semibold text-center flex-1 " > {{serial.label.created_at | date: longDate}} </div>
+          <div class="text-blueGray-700 text-xs font-semibold text-center flex-1" > {{serial.label.boxNumber}} </div>
+          <div class="text-blueGray-700 text-xs font-semibold  text-center flex-1 " >
+            <span class="bg-yellow-400  rounded-md py-2 px-3 flex-1" *ngIf="serial.label.status == 'unassigned' "  >
+              {{serial.label.status}}
+            </span>
+
+          </div>
+          <div class="text-blueGray-700 text-xs font-semibold text-center flex-1 cursor-pointer" (click)="viewBox = !viewBox" >VIEW BOX &nbsp;
+            <span *ngIf="viewBox" ><i class='fas'>&#xf107;</i></span>
+            <span *ngIf="!viewBox" ><i class='fas'>&#xf106;</i></span>
+          </div>
+        </div>
+        <div *ngIf="viewBox" >
+          <hr>
+        <div class="border border-blueGray-500 rounded-md bg-white p-3 my-3"  >
+          <div class="flex justify-between" >
+            <p class="text-sm text-blueGray-800 font-semibold flex-1 " > Number of Label   </p>
+            <button class="text-white font-semibold font-sm py-2 px-4  text-center bg-blueGray-800 rounded-md" >Contact Support</button>
+          </div>
+
+          <div *ngFor="let count of serial.counts; let j = index;" class="mt-3">
+            <div class="flex justify-between py-4">
+              <p class="text-sm  text-blueGray-700 flex-1" > Rows:  <span class="font-semibold" >{{count.count}} </span> </p>
+              <p class="flex-1 text-center" >
+                <span *ngIf="count.sub_product_id == null " class="text-sm font-semibold text-blueGray-700 bg-blueGray-200 py-1 px-2 rounded "  > Unassigned </span>
+                <span *ngIf="count.sub_product_id != null " class="text-sm font-semibold text-blueGray-700 bg-blueGray-200 py-1 px-2 rounded " > Assigned </span>
+              </p>
+              <p class="text-sm font-semibold text-blueGray-700 flex-1 text-right">
+                <span *ngIf="count.batch" >Product Batch {{count.batch}} </span>
+                <span *ngIf="!count.batch" >  </span>
+              </p>
+            </div>
+        </div>
+        </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<div *ngIf="showModal"
+  class="bg-blueGray-600 bg-opacity-25 h-screen w-screen absolute inset-0 flex justify-center item-center" >
+  <div
+      class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+      <div class="relative w-auto my-6 mx-auto max-w-6xl modal-body">
+          <!--content-->
+          <div
+              class="border-0  relative flex flex-col w-full bg-white outline-none focus:outline-none modal-body">
+              <!--header-->
+              <div class="flex items-start justify-between p-5  rounded-t">
+
+                  <button
+                      class="p-2 rounded-2xl ml-auto bg-blueGray-700 border-0 text-white float-right  leading-none font-semibold outline-none focus:outline-none"
+                      (click)="showModal = !showModal">
+                      <span
+                          class=" text-white  h-6 w-6 text-md block outline-none focus:outline-none">
+                          <i style="font-size:24px; " class="fa">&#xf00d;</i>
+                      </span>
+                  </button>
+              </div>
+              <!--body-->
+              <div class="p-3">
+                <div class="py-5 text-center" >
+                  <img [src]=" this.selected.product.product_image " class="object-contain h-48 w-96" >
+                </div>
+                <p class="text-blueGray-700" >Product Details</p>
+                <div class="mb-5 bg-blueGray-200 rounded p-5 " >
+                  <div class="flex">
+                    <p class=" w-40 flex-shrink-0 text-xs" >Product Name</p>
+                    <p class=" w-40 flex-shrink-0 text-xs" >Batch No.</p>
+
+                    <p class=" w-40 flex-shrink-0 text-xs" >FDA No.</p>
+                  </div>
+                  <div class="flex">
+                    <p class=" w-40 flex-shrink-0 text-xs font-semibold " > {{selected.subProduct.product_name}} </p>
+                    <p class=" w-40 flex-shrink-0 text-xs font-semibold" > {{selected.subProduct.batch_num}}</p>
+
+                    <p class=" w-40 flex-shrink-0 text-xs font-semibold " > {{selected.product.fda_number}} </p>
+                  </div>
+
+                </div>
+                <p class="text-blueGray-700 text-md " >Request Details</p>
+                <div class="mb-5 bg-blueGray-200 rounded p-5 " >
+                  <div class="flex">
+                    <p class=" w-40 flex-shrink-0 text-xs" >Sticker Placement</p>
+                    <p class=" w-40 flex-shrink-0 text-xs" >Quantity</p>
+                    <p class=" w-40 flex-shrink-0 text-xs" >Status</p>
+                  </div>
+                  <div class="flex">
+                    <p class=" w-40 flex-shrink-0 text-xs font-semibold" >
+                      <span *ngIf="selected.stickerPlacement == 1 " >Yes</span>
+                      <span *ngIf="selected.stickerPlacement == 0 " >No</span>
+                    </p>
+                    <p class=" w-40 flex-shrink-0 text-xs font-semibold " > {{selected.quantity}} </p>
+                    <p class=" w-40 flex-shrink-0 text-xs font-semibold " > {{selected.status}} </p>
+                  </div>
+
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>

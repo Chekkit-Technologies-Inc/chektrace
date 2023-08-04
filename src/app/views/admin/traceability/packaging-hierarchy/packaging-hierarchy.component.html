@@ -1,0 +1,613 @@
+<div class="bg-white w-100 h-100 px-8" >
+    <div class="w-full md:px-8 py-8 relative holder">
+      <div *ngIf="nextStep == 1" class="px-8">
+        <div class="mt-10 mb-3">
+          <p>
+            <i class="fa">&#xf060;</i>&nbsp;&nbsp;
+            <span
+              class="text-sm text-blueGray-700 cursor-pointer"
+              (click)="nextStep = 3"
+              >Back</span
+            >
+          </p>
+        </div>
+        <div class="flex justify-between">
+          <p class="text-blueGray-800 text-lg font-bold ">
+            <span *ngIf="serialNumberLevel == 'Primary' " >Primary</span>
+              <span *ngIf="serialNumberLevel == 'Secondary' " >Secondary</span>
+              <span *ngIf="serialNumberLevel == 'Tertiary' " >Tertiary</span>
+              <span *ngIf="serialNumberLevel == 'Pallet' " >Pallet</span> Package Level
+          </p>
+          <p class="text-blueGray-800 text-sm font-bold ">
+            <!-- Serial Number : 10000-110000 -->
+          </p>
+        </div>
+
+        <div class="flex justify-between my-5">
+          <div class="" >
+            <button (click)="selectedTab = 'generated-stickers'" [class.selected]="selectedTab == 'generated-stickers'" class=" shadow text-sm p-3 rounded-2xl text-blueGray-300 m-1 " >Generated Stickers</button>
+            <button (click)="selectedTab = 'commission'" [class.selected]="selectedTab == 'commission'" class="shadow text-sm p-3 rounded-2xl text-blueGray-300 m-1" >Commissioned {{commissionedData}}/{{qrTotalCount}}</button>
+            <button (click)="selectedTab = 'post-commission'" [class.selected]="selectedTab == 'post-commission'" class="shadow text-sm p-3 rounded-2xl text-blueGray-300 m-1" >Post-Commission Operations</button>
+          </div>
+          <div></div>
+          <div>
+            <div *ngIf="selectedTab == 'generated-stickers'" >
+              <button class="border-2 border-blueGray-500 text-blueGray-500 rounded-lg bg-white p-1 m-1 px-4 text-sm"  >Export</button>
+              <button class="bg-blueGray-700 rounded-lg text-white p-2 m-1 px-4 text-sm" (click)="printThisPage()" >Send To printer</button>
+            </div>
+            <div *ngIf="selectedTab == 'commission'" >
+              <button class="bg-blueGray-700 rounded-lg text-white p-2 m-1 px-4 text-sm" (click)="nextStep = 5"  >Start Commission</button>
+            </div>
+
+          </div>
+        </div>
+
+        <br />
+
+        <div *ngIf="selectedTab == 'generated-stickers' ">
+          <p class="text-blueGray-800 w-100 text-center text-lg">
+            <b>{{ serialNumberLevel }}</b> Level Serial Number:
+            <span class="font-bold">{{ serailNumberRange }}</span>
+          </p>
+          <!-- <p class="text-blueGray-800 font-bold text-lg m-5 " >Primary Code</p> -->
+          <div *ngIf="code == 'QR'">
+            <div
+              class="grid grid-cols-2 gap-5 w-full my-5"
+              *ngIf="serialNumberLevel === 'Primary'"
+            >
+              <div
+                class="border-2 border-blueGray-500 p-2 rounded-lg flex justify-between"
+                *ngFor="let qr of qrData"
+              >
+                <div class="flex-1">
+                  <qrcode
+                    [qrdata]="qr.elementString"
+                    [width]="100"
+                    [errorCorrectionLevel]="'M'"
+                  ></qrcode>
+                </div>
+                <div class="flex-2">
+                  <p class="text-sm" >
+                    GTIN:
+                    <span class="font-bold text-blueGray-800">{{
+                      qr.epcText | slice: 0:17
+                    }}</span>
+                  </p>
+                  <p class="text-sm">
+                    EXP:
+                    <span class="font-bold text-blueGray-800"
+                      >(17){{ this.productExpiry | date: "MM/YYYY" }}
+                    </span>
+                  </p>
+                  <p class="text-sm">
+                    LOT:
+                    <span class="font-bold text-blueGray-800">(10){{
+                      this.batchNum
+                    }}</span>
+                  </p>
+                  <p class="text-sm">
+                    S/N:
+                    <span class="font-bold text-blueGray-800 text-sm">{{
+                      qr.epcText | slice: 18:38
+                    }}</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- <div  *ngIf="serialNumberLevel == 'Secondary' ">
+              <div
+              class="grid grid-cols-12 gap-4 w-full my-5"
+            >
+
+              <div
+                class="border-2 border-blueGray-500 p-4 rounded-lg"
+                *ngFor="let qr of qrData"
+              >
+                <qrcode
+                  [qrdata]="qr.elementString"
+                  [width]="100"
+                  [errorCorrectionLevel]="'M'"
+                ></qrcode>
+              </div>
+            </div>
+            </div> -->
+
+            <!-- <div  *ngIf="serialNumberLevel ==   'Tertiary' ">
+              <div
+              class="grid grid-cols-12 gap-4 w-full my-5"
+            >
+
+              <div
+                class="border-2 border-blueGray-500 p-4 rounded-lg"
+                *ngFor="let qr of qrData"
+              >
+                <qrcode
+                  [qrdata]="qr.elementString"
+                  [width]="100"
+                  [errorCorrectionLevel]="'M'"
+                ></qrcode>
+              </div>
+            </div>
+            </div> -->
+            <div  *ngIf="serialNumberLevel ==   'Pallet' ">
+              <div
+              class="grid grid-cols-12 gap-4 w-full my-5"
+            >
+
+              <div
+                class="border-2 border-blueGray-500 p-4 rounded-lg"
+                *ngFor="let qr of qrData"
+              >
+                <qrcode
+                  [qrdata]="qr.elementString"
+                  [width]="100"
+                  [errorCorrectionLevel]="'M'"
+                ></qrcode>
+              </div>
+            </div>
+            </div>
+          </div>
+          <div *ngIf="code == 'MATRIX'">
+            <div
+              class="grid grid-cols-3 gap-5 w-full my-5"
+              *ngIf="serialNumberLevel === 'Primary'"
+            >
+              <div
+                class="border-2 border-blueGray-500 p-6 px-10 rounded-lg flex justify-between"
+                *ngFor="let qr of qrData"
+              >
+                <div class="flex-1">
+                  <img
+                    class=""
+                    height="100"
+                    src="https://bwipjs-api.metafloor.com/?bcid=datamatrix&text={{
+                      qr.elementString
+                    }}"
+                  />
+                </div>
+                <div class="flex-2">
+                  <p class="text-sm" >
+                    GTIN:
+                    <span class="font-bold text-blueGray-800">{{
+                      qr.epcText | slice: 0:17
+                    }}</span>
+                  </p>
+                  <p class="text-sm">
+                    EXP:
+                    <span class="font-bold text-blueGray-800"
+                      >(17){{ this.productExpiry | date: "MM/YYYY" }}
+                    </span>
+                  </p>
+                  <p  class="text-sm">
+                    LOT:
+                    <span class="font-bold text-blueGray-800">(10){{
+                      this.batchNum
+                    }}</span>
+                  </p>
+                  <p  class="text-sm">
+                    S/N:
+                    <span class="font-bold text-blueGray-800 text-sm">{{
+                      qr.epcText | slice: 18:38
+                    }}</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+            class="grid grid-cols-3 gap-5 w-full my-5"
+            *ngIf="serialNumberLevel === 'Secondary'"
+          >
+            <div
+              class="border-2 border-blueGray-500 p-6 px-10 rounded-lg flex justify-between"
+              *ngFor="let qr of qrData"
+            >
+              <div class="flex-1">
+                <img
+                    class=""
+                    height="100"
+                    src="https://bwipjs-api.metafloor.com/?bcid=datamatrix&text={{
+                      qr.elementString
+                    }}"
+                  />
+              </div>
+              <div class="flex-2">
+                <p>
+                  GTIN:
+                  <span class="font-bold text-blueGray-800">{{
+                    qr.epcText | slice: 0:17
+                  }}</span>
+                </p>
+                <p>
+                  EXP:
+                  <span class="font-bold text-blueGray-800"
+                    >(17){{ this.productExpiry | date: "MM/YYYY" }}
+                  </span>
+                </p>
+                <p>
+                  LOT:
+                  <span class="font-bold text-blueGray-800">(10){{
+                    this.batchNum
+                  }}</span>
+                </p>
+                <p>
+                  S/N:
+                  <span class="font-bold text-blueGray-800 text-sm">{{
+                    qr.epcText | slice: 18:38
+                  }}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+          class="grid grid-cols-3 gap-5 w-full my-5"
+          *ngIf="serialNumberLevel === 'Tertiary'"
+        >
+          <div
+            class="border-2 border-blueGray-500 p-6 px-10 rounded-lg flex justify-between"
+            *ngFor="let qr of qrData"
+          >
+            <div class="flex-1">
+              <qrcode
+                [qrdata]="qr.elementString"
+                [width]="100"
+                [errorCorrectionLevel]="'M'"
+              ></qrcode>
+            </div>
+            <div class="flex-2">
+              <p>
+                GTIN:
+                <span class="font-bold text-blueGray-800">{{
+                  qr.epcText | slice: 0:17
+                }}</span>
+              </p>
+              <p>
+                EXP:
+                <span class="font-bold text-blueGray-800"
+                  >(17){{ this.productExpiry | date: "MM/YYYY" }}
+                </span>
+              </p>
+              <p>
+                LOT:
+                <span class="font-bold text-blueGray-800">(10){{
+                  this.batchNum
+                }}</span>
+              </p>
+              <p>
+                S/N:
+                <span class="font-bold text-blueGray-800 text-sm">{{
+                  qr.epcText | slice: 18:38
+                }}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+            <div class="grid grid-cols-12 gap-4 w-full my-5" *ngIf="serialNumberLevel == 'Pallet'">
+              <!-- <div
+                class="border-2 border-blueGray-500 p-4 rounded-lg"
+                *ngFor="let qr of qrData"
+              >
+                <img
+                  class=""
+                  height="100"
+                  src="https://bwipjs-api.metafloor.com/?bcid=datamatrix&text={{
+                    qr.elementString
+                  }}"
+                />
+              </div> -->
+            </div>
+
+          </div>
+
+          <div *ngIf="code == '128' " class="px-16 printScreen" id="demo"  >
+
+
+            <br><br>
+            <div class="grid grid-cols-4 gap-4 w-full my-5 " *ngIf="serialNumberLevel == 'Secondary' ">
+
+              <div class="border-2 border-blueGray-500 p-4 rounded-lg " *ngFor="let qr of qrData">
+
+                <img alt='Barcode Generator TEC-IT'
+                src='https://barcode.tec-it.com/barcode.ashx?data={{ qr.elementString}}&code=EANUCC128&translate-esc=on'/>
+
+
+
+              </div>
+            </div>
+
+            <div class="grid grid-cols-4 gap-4 w-full my-5 " *ngIf="serialNumberLevel == 'Tertiary' ">
+
+              <div class="border-2 border-blueGray-500 p-4 rounded-lg " *ngFor="let qr of qrData">
+
+                <img alt='Barcode Generator TEC-IT'
+                src='https://barcode.tec-it.com/barcode.ashx?data={{ qr.elementString}}&code=EANUCC128&translate-esc=on'/>
+
+
+
+              </div>
+            </div>
+
+            <div class="grid grid-cols-4 gap-4 w-full my-5 " *ngIf="serialNumberLevel == 'Pallet' ">
+
+              <div class="border-2 border-blueGray-500 p-4 rounded-lg " *ngFor="let qr of qrData">
+
+                <img alt='Barcode Generator TEC-IT'
+                src='https://barcode.tec-it.com/barcode.ashx?data={{ qr.elementString}}&code=EANUCC128&translate-esc=on'/>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="selectedTab == 'commission'" >
+          <p class="text-blueGray-800 w-100 text-center text-lg">
+            <b>{{ serialNumberLevel }}</b> Level Serial Number:
+            <span class="font-bold">{{ serailNumberRange }}</span>
+          </p>
+          <!-- <p class="text-blueGray-800 font-bold text-lg m-5 " >Primary Code</p> -->
+          <div *ngIf="code == 'QR'">
+            <div
+              class="grid grid-cols-2 gap-5 w-full my-5"
+              *ngIf="serialNumberLevel === 'Primary'"
+            >
+              <div
+                class="border-2 border-blueGray-500 p-2 rounded-lg flex justify-between"
+                *ngFor="let qr of qrData"
+              >
+                <div class="flex-1">
+                  <qrcode
+                    [qrdata]="qr.elementString"
+                    [width]="100"
+                    [errorCorrectionLevel]="'M'"
+                  ></qrcode>
+                </div>
+                <div class="flex-2">
+                  <p class="text-sm" >
+                    GTIN:
+                    <span class="font-bold text-blueGray-800">{{
+                      qr.epcText | slice: 0:17
+                    }}</span>
+                  </p>
+                  <p class="text-sm">
+                    EXP:
+                    <span class="font-bold text-blueGray-800"
+                      >(17){{ this.productExpiry | date: "MM/YYYY" }}
+                    </span>
+                  </p>
+                  <p class="text-sm">
+                    LOT:
+                    <span class="font-bold text-blueGray-800">(10){{
+                      this.batchNum
+                    }}</span>
+                  </p>
+                  <p class="text-sm">
+                    S/N:
+                    <span class="font-bold text-blueGray-800 text-sm">{{
+                      qr.epcText | slice: 18:38
+                    }}</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div  *ngIf="serialNumberLevel ==   'Pallet' ">
+              <div
+              class="grid grid-cols-12 gap-4 w-full my-5"
+            >
+
+              <div
+                class="border-2 border-blueGray-500 p-4 rounded-lg"
+                *ngFor="let qr of qrData"
+              >
+                <qrcode
+                  [qrdata]="qr.elementString"
+                  [width]="100"
+                  [errorCorrectionLevel]="'M'"
+                ></qrcode>
+              </div>
+            </div>
+            </div>
+          </div>
+          <div *ngIf="code == 'MATRIX'">
+            <div
+              class="grid grid-cols-3 gap-5 w-full my-5"
+              *ngIf="serialNumberLevel === 'Primary'"
+            >
+              <div
+                class="border-2 border-blueGray-500 p-6 px-10 rounded-lg flex justify-between"
+                *ngFor="let qr of qrData"
+              >
+                <div class="flex-1">
+                  <img
+                    class=""
+                    height="100"
+                    src="https://bwipjs-api.metafloor.com/?bcid=datamatrix&text={{
+                      qr.elementString
+                    }}"
+                  />
+                </div>
+                <div class="flex-2">
+                  <p class="text-sm" >
+                    GTIN:
+                    <span class="font-bold text-blueGray-800">{{
+                      qr.epcText | slice: 0:17
+                    }}</span>
+                  </p>
+                  <p class="text-sm">
+                    EXP:
+                    <span class="font-bold text-blueGray-800"
+                      >(17){{ this.productExpiry | date: "MM/YYYY" }}
+                    </span>
+                  </p>
+                  <p  class="text-sm">
+                    LOT:
+                    <span class="font-bold text-blueGray-800">(10){{
+                      this.batchNum
+                    }}</span>
+                  </p>
+                  <p  class="text-sm">
+                    S/N:
+                    <span class="font-bold text-blueGray-800 text-sm">{{
+                      qr.epcText | slice: 18:38
+                    }}</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+            class="grid grid-cols-3 gap-5 w-full my-5"
+            *ngIf="serialNumberLevel === 'Secondary'"
+          >
+            <div
+              class="border-2 border-blueGray-500 p-6 px-10 rounded-lg flex justify-between"
+              *ngFor="let qr of qrData"
+            >
+              <div class="flex-1">
+                <img
+                    class=""
+                    height="100"
+                    src="https://bwipjs-api.metafloor.com/?bcid=datamatrix&text={{
+                      qr.elementString
+                    }}"
+                  />
+              </div>
+              <div class="flex-2">
+                <p>
+                  GTIN:
+                  <span class="font-bold text-blueGray-800">{{
+                    qr.epcText | slice: 0:17
+                  }}</span>
+                </p>
+                <p>
+                  EXP:
+                  <span class="font-bold text-blueGray-800"
+                    >(17){{ this.productExpiry | date: "MM/YYYY" }}
+                  </span>
+                </p>
+                <p>
+                  LOT:
+                  <span class="font-bold text-blueGray-800">(10){{
+                    this.batchNum
+                  }}</span>
+                </p>
+                <p>
+                  S/N:
+                  <span class="font-bold text-blueGray-800 text-sm">{{
+                    qr.epcText | slice: 18:38
+                  }}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+          class="grid grid-cols-3 gap-5 w-full my-5"
+          *ngIf="serialNumberLevel === 'Tertiary'"
+        >
+          <div
+            class="border-2 border-blueGray-500 p-6 px-10 rounded-lg flex justify-between"
+            *ngFor="let qr of qrData"
+          >
+            <div class="flex-1">
+              <qrcode
+                [qrdata]="qr.elementString"
+                [width]="100"
+                [errorCorrectionLevel]="'M'"
+              ></qrcode>
+            </div>
+            <div class="flex-2">
+              <p>
+                GTIN:
+                <span class="font-bold text-blueGray-800">{{
+                  qr.epcText | slice: 0:17
+                }}</span>
+              </p>
+              <p>
+                EXP:
+                <span class="font-bold text-blueGray-800"
+                  >(17){{ this.productExpiry | date: "MM/YYYY" }}
+                </span>
+              </p>
+              <p>
+                LOT:
+                <span class="font-bold text-blueGray-800">(10){{
+                  this.batchNum
+                }}</span>
+              </p>
+              <p>
+                S/N:
+                <span class="font-bold text-blueGray-800 text-sm">{{
+                  qr.epcText | slice: 18:38
+                }}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+            <div class="grid grid-cols-12 gap-4 w-full my-5" *ngIf="serialNumberLevel == 'Pallet'">
+              <!-- <div
+                class="border-2 border-blueGray-500 p-4 rounded-lg"
+                *ngFor="let qr of qrData"
+              >
+                <img
+                  class=""
+                  height="100"
+                  src="https://bwipjs-api.metafloor.com/?bcid=datamatrix&text={{
+                    qr.elementString
+                  }}"
+                />
+              </div> -->
+            </div>
+
+          </div>
+
+          <div *ngIf="code == '128' " class="px-16 printScreen" id="demo"  >
+
+
+            <br><br>
+            <div class="grid grid-cols-4 gap-4 w-full my-5 " *ngIf="serialNumberLevel == 'Secondary' ">
+
+              <div class="border-2 border-blueGray-500 p-4 rounded-lg " *ngFor="let qr of qrData">
+
+                <img alt='Barcode Generator TEC-IT'
+                src='https://barcode.tec-it.com/barcode.ashx?data={{ qr.elementString}}&code=EANUCC128&translate-esc=on'/>
+
+
+
+              </div>
+            </div>
+
+            <div class="grid grid-cols-4 gap-4 w-full my-5 " *ngIf="serialNumberLevel == 'Tertiary' ">
+
+              <div class="border-2 border-blueGray-500 p-4 rounded-lg " *ngFor="let qr of qrData">
+
+                <img alt='Barcode Generator TEC-IT'
+                src='https://barcode.tec-it.com/barcode.ashx?data={{ qr.elementString}}&code=EANUCC128&translate-esc=on'/>
+
+
+
+              </div>
+            </div>
+
+            <div class="grid grid-cols-4 gap-4 w-full my-5 " *ngIf="serialNumberLevel == 'Pallet' ">
+
+              <div class="border-2 border-blueGray-500 p-4 rounded-lg " *ngFor="let qr of qrData">
+
+                <img alt='Barcode Generator TEC-IT'
+                src='https://barcode.tec-it.com/barcode.ashx?data={{ qr.elementString}}&code=EANUCC128&translate-esc=on'/>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="selectedTab == 'post-commission'" >
+          <app-attach-rewards [serialNumber]="serialNumber" [serialDetails]="serialDetails" [packageLevel]="packageLevel" ></app-attach-rewards>
+        </div>
+
+      </div>
+
+    </div>
+</div>
+

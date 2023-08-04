@@ -1,0 +1,226 @@
+<form role="form" [formGroup]="surveyForm" *ngIf="currentStep == 1 ">
+  <div class="bg-white rounded-lg p-4">
+    <p class="text-blueGray-700 font-bold my-4">Step 1: Input Survey Information</p>
+
+
+    <div class="flex my-8">
+      <div class="flex-1 m-3">
+        <div class="form-group">
+          <p class="font-bold text-blueGray-700 ">Survey Name</p>
+          <input
+            class="form-control appearance-none block w-full bg-white text-gray-700 border border-blueGray-500 rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+            id="grid-first-name" type="text" formControlName="title" placeholder="Enter Survey Name">
+        </div>
+      </div>
+      <div class="flex-1 m-3">
+        <div class="form-group">
+          <p class="font-bold text-blueGray-700 ">Does This Survey have Label?</p>
+          <select
+            class="form-control block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            id="grid-state" formControlName="hasSurvey">
+            <option value="yes"> <span class="fa font-black text-blueGray-800 ">Yes</span> </option>
+            <option value="no"><span class="fa font-black text-blueGray-800 ">No</span></option>
+
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="my-8 form-group">
+      <p class="font-bold text-blueGray-700">Survey Content/Intent</p>
+      <textarea placeholder="Type Here" rows="6" class="form-control rounded-lg w-full p-4" formControlName="content">
+
+            </textarea>
+    </div>
+
+  </div>
+
+  <div class="flex my-6 justify-evenly md:px-16">
+    <div class="w-full sm:mr-3 md:mr-2 mr-2 lg:mr-2">
+      <button
+      (click)="currentStep = 3"
+        class="w-full h-12  text-blueGray-800 transition-colors duration-150 border-blueGray-600 border-solid border-2 bg-white rounded-lg focus:shadow-outline hover:bg-blueGray-700">Select
+        Existing Surveys</button>
+    </div>
+
+    <div class="w-full sm:ml-3 md:ml-2 lg:ml-2">
+      <button
+        class="w-full h-12  text-white transition-colors duration-150 bg-blueGray-800 rounded-lg focus:shadow-outline hover:bg-blueGray-700 "
+        (click)="proceedtoAddQuestion()">Proceed
+        To Add Questions</button>
+
+    </div>
+
+  </div>
+
+</form>
+
+<div *ngIf="currentStep == 2 ">
+  <div class=" bg-white rounded mt-4 p-4 w-100">
+
+
+    <form class="w-100 mt-4" cdkDropList (cdkDropListDropped)="drop($event)">
+      <div cdkDrag>
+
+        <div *ngFor="let question of questions; let i = index">
+          <div class="md:flex lg:flex flex-wrap w-100 mb-6">
+            <div class="flex-1 mb-6 md:mb-0">
+              <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                Question {{i + 1}}
+              </label>
+              <input
+                class="block w-full  text-gray-700 border border-blueGray-500 rounded py-3 px-4 mb-3 leading-tight bg-white focus:outline-none focus:bg-white"
+                id="grid-first-name" [(ngModel)]="question.content" name="question{{ question.id }}" type="text"
+                placeholder="Type question here........">
+            </div>
+            <div class="flex-1  px-3">
+              <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2" for="question-type">
+                Question Type
+              </label>
+              <div class="relative">
+                <select
+                  class="block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  id="grid-state" [(ngModel)]="question.questionType" name="questionType{{ question.id}}">
+                  <option> <span class="fa font-black text-blueGray-800 ">Checkboxes</span>
+                  </option>
+                  <option>Radio buttons</option>
+                  <option>Empty lines</option>
+                </select>
+
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="flex flex-wrap -mx-3 mb-6">
+              <div class="w-full px-3">
+                <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                  Options
+                </label>
+              </div>
+            </div>
+            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0" *ngFor="let choice of question.choices; let j = index">
+
+              <div class="flex ">
+                <div class="flex-auto ">
+                  <input
+                    class="appearance-none block w-full bg-white text-gray-700 border border-gray-200 rounded  py-3 px-4 my-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    type="text" placeholder="Type answer here ......" [(ngModel)]="choice.text"
+                    name="choice{{ choice.id }}">
+                </div>
+
+                <!-- <div class="flex-auto"> -->
+                <span (click)="removeOption(question)" class="cursor-pointer"> &nbsp;&nbsp; <i
+                    class='fas pr-4'>&#xf1f8;</i></span>
+                <!-- </div> -->
+
+
+
+              </div>
+            </div>
+
+
+          </div>
+          <div class="w-full flex justify-end px-3" *ngIf="question.choices.length <= 3">
+            <div class="bg-blueGray-100 rounded p-2 text-blueGray-800 text-sm font-bold cursor-pointer"
+              (click)="addOptions(question)">
+              <i class='fas'>&#xf067;</i>&nbsp; Add Option
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <div class="w-full flex justify-start px-3">
+        <div class=" rounded p-2 text-blueGray-800 text-sm font-bold cursor-pointer " (click)="addQuestions()">
+          <i class='fas'>&#xf055;</i>&nbsp; Add Question
+        </div>
+
+      </div>
+      <div class="px-6 mt-8">
+        <hr>
+        <div class="w-full flex justify-end px-5 py-4">
+
+          <div class="cursor-pointer p-2 text-blueGray-800 font-bold ">
+            <i class='far pr-4'>&#xf24d;</i>
+          </div>
+
+          <div class="cursor-pointer rounded p-2 text-blueGray-800  font-bold ">
+            <i class='fas pr-4'>&#xf1f8;</i>
+          </div>
+          <button
+            class="bg-blueGray-800 cursor-pointer  text-white active:bg-blueGray-800 text-sm font-bold px-6 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+            Done
+          </button>
+
+        </div>
+      </div>
+
+
+    </form>
+
+  </div>
+
+
+
+
+  <div class="flex justify-between mt-8 mx-8">
+    <!-- <div class="flex-1 h-12 bg-white text-blueGray-600 rounded-lg py-3 text-white mr-3 border-2 text-center hover:bg-blueGray-800 cursor-pointer border-blueGray-500 ">
+            Skip
+        </div> -->
+    <div
+      class="flex-1 h-12 text-white rounded-lg py-3 text-white mr-3 border-2 text-center bg-blueGray-800 cursor-pointer border-blueGray-500 "
+      (click)="onSubmit()">
+      Continue
+    </div>
+  </div>
+</div>
+
+<div *ngIf="currentStep == 3 " class="mb-5" >
+  <div class="flex justify-between mt-8" >
+    <p class="text-blueGray-700 text-2xl font-semibold" >Surveys</p>
+    <button class="bg-blueGray-700 text-white px-8 py-3 rounded font-semibold" (click)="currentStep = 1" >New Survey</button>
+  </div>
+
+  <!-- <div class="flex justify-between  bg-white p-3 my-3 border-b-2 border-blueGray-600">
+    <div class="text-sm font-semibold text-blueGray-800 " >S/N</div>
+    <div class="text-sm font-semibold text-blueGray-800 " >Survey Name</div>
+    <div class="text-sm font-semibold text-blueGray-800 " >Questions</div>
+    <div class="text-sm font-semibold text-blueGray-800 " >Date Created</div>
+    <div class="text-sm font-semibold text-blueGray-800 " >Batch Number</div>
+    <div class="text-sm font-semibold text-blueGray-800 " >Action</div>
+  </div>
+
+  <div class="flex justify-between  bg-blueGray-200 rounded-md p-3 my-3" *ngFor="let survey of userSurveys | paginate: { itemsPerPage: 10, currentPage: p }; let i = index;" >
+    <div class="text-sm font-semibold text-blueGray-800 text-center  " > {{i + 1}} </div>
+    <div class="text-sm font-semibold text-blueGray-800 text-center  " >
+      {{ survey.title |  slice:0:25}}
+    </div>
+    <div class="text-sm font-semibold text-blueGray-800 text-center  " >
+      {{survey ? survey?.questions_count : '0'}}
+    </div>
+    <div class="text-sm font-semibold text-blueGray-800 text-center  " >
+      {{survey.created_at | date: longDate}}
+    </div>
+    <div class="text-sm font-semibold text-blueGray-800 " >Batch Number</div>
+    <div class="text-xs font-semibold text-blueGray-800 text-center  " >
+      <span class="text-blue-400 cursor-pointer " >VIEW</span> |
+      <span class="text-green-400 cursor-pointer " >EDIT</span> |
+      <span class="text-blueGray-800 cursor-pointer" >DUPLICATE</span>
+    </div>
+  </div>
+  <div class="w-100 text-center p-3 mt-5">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div> -->
+
+  <div class="mt-6" >
+    <label class="text-blueGray-700 font-semibold text-md" >Select From Existing Survey</label>
+    <select class="p-3 border-2 border-blueGray-500 rounded-md w-full"  (change)="selectSurvey($event.target.value)" >
+      <option>--Select Survey--</option>
+      <option  *ngFor="let survey of userSurveys" [value]="survey.id"  > {{survey.title}} </option>
+    </select>
+
+  </div>
+</div>

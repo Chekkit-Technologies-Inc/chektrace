@@ -1,0 +1,11 @@
+
+@media (min-width: 1024px) {
+    .onboarding-steps{
+        /* padding: 0 10% 0 25%; */
+        padding: 0 20%;
+    }
+}
+hr.divider{
+    width: 50px;
+    border-top: 5px solid #000000;
+}

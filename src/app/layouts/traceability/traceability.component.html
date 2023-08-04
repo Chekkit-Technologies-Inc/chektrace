@@ -1,0 +1,22 @@
+<ngx-loading-bar height="4px" color="#46F7AA"></ngx-loading-bar>
+<div>
+  <!-- <app-sidebar></app-sidebar> -->
+  <div class="relative md:ml-100 h-100">
+    <app-traceability-navbar></app-traceability-navbar>
+    <!-- <app-engage-navbar></app-engage-navbar> -->
+
+    <!-- <app-header-stats></app-header-stats> -->
+    <div class=" mx-auto w-full z-10 pt-14 min-h-100 ">
+
+      <router-outlet></router-outlet>
+
+      <div class="mb-0">
+        <!-- <app-footer-admin></app-footer-admin> -->
+      </div>
+
+    </div>
+    <app-footer-admin></app-footer-admin>
+
+
+  </div>
+</div>

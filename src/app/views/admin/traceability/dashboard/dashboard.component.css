@@ -1,0 +1,11 @@
+.text-xxs{
+    font-size: 10px;
+  }
+
+  *:focus {
+    outline: none !important;
+  }
+
+  #myChart{
+    height: 350px !important;
+  }

@@ -1,0 +1,193 @@
+<div class="w-full px-8 py-8">
+    <div class="my-8 p-4 title-box">
+        <p class="text-4xl font-bold" >Product Onboarding</p>
+        <p class="font-semibold text-blueGray-500 text-base " >How would you like to onboard your product ?</p>
+    </div>
+    <div class="w-full flex justify-between text-left h-screen ">
+        <div class="flex-1 p-4 ">
+            <div *ngIf="step == 1" class="flex justify-between " >
+                <div class="basis-2 border-4 border-blueGray-200 hover:border-blueGray-700 w-100 rounded-3xl m-3 p-4" (click)="onboardCsv()" >
+                    <img src="../../../../../assets/img/csv-onboard.png" width="80" alt="" srcset="">
+                    <p class="font-bold text-3xl my-4" >Onboard Via CSV</p>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+                        Eius, nisi quaerat! Quisquam architecto commodi incidunt
+                         exercitationem deserunt minima veritatis ullam,
+                         laborum quo consectetur molestias! Maiores harum eum officia reiciendis deleniti?
+                    </p>
+                </div>
+                <div class="basis-2 border-4 border-blueGray-200 hover:border-blueGray-700 w-100 rounded-3xl m-3 p-4">
+                    <img src="../../../../../assets/img/csv-onboard.png" width="80" alt="" srcset="">
+                    <p class="font-bold text-3xl my-4" >Onboard Via Product Fetch (API)</p>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+                        Eius, nisi quaerat! Quisquam architecto commodi incidunt
+                         exercitationem deserunt minima veritatis ullam,
+                         laborum quo consectetur molestias! Maiores harum eum officia reiciendis deleniti?
+                    </p>
+                </div>
+            </div>
+            <div *ngIf="step == 2" class="w-100 h-screen" >
+                <app-upload-csv-component></app-upload-csv-component>
+
+                <div class="my-8 flex w-100 justify-center ">
+                    <button  (click)="nextStage()"
+                                class="flex-1 bg-white text-blueGray-700 border-2 border-blueGray-700 active:bg-blueGray-600 text-sm font-bold px-12 py-4 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 mx-4 ease-linear transition-all duration-150">
+                                Back
+                    </button>
+                    <button  (click)="displayCsvDetails()"
+                                class="flex-1 bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold px-12 py-4 mx-4 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+                                Continue
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="flex-1 "></div>
+
+    </div>
+    <div class="w-full" *ngIf="step == 4" >
+        <div class="grid justify-items-stretch                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  " >
+            <p class="justify-self-start text-3xl font-bold" >Upload CSV</p>
+            <button  (click)="nextStage()"
+                                class="justify-self-end flex-1 bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold px-12 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+                                Upload More Data
+                    </button>
+
+        </div>
+        <div class=" p-4">
+            <div class="flex bg-white justify-between px-4 p-4">
+                <div class="flex-1 text-center" >
+                    
+                    <p class="font-bold" ><span>
+                        <input type="checkbox">
+                    </span> &nbsp;&nbsp; Product ID
+                </p>
+                </div>
+                <div  class="flex-1 text-center font-bold">
+                    Product Name
+                </div>
+                <div  class="flex-1 text-center font-bold">
+                    Number of Batch
+                </div>
+                <div  class="flex-1 text-center font-bold">
+                   Date Created
+                </div>
+                <div  class="flex-1 text-center font-bold">
+                    Action
+                </div>
+            </div>
+            <hr>
+            <div class="flex bg-blueGray-300 mt-4 rounded-2xl justify-between px-4 p-6">
+                <div  class="flex-1 text-center font-semibold">
+                    
+                    <p><span>
+                        <input type="checkbox">
+                    </span> &nbsp;&nbsp; P124</p>
+                </div>
+                <div  class="flex-1 text-center font-semibold">
+                    Solar Panel
+                </div>
+                <div  class="flex-1 text-center font-semibold">
+                    32
+                </div>
+                <div  class="flex-1 text-center font-semibold">
+                   April 20, 2021
+                </div>
+                <div  class="flex-1 text-center font-semibold">
+                    Edit | <span class="text-red-500" >Delete</span>
+                </div>
+            </div>
+            <div class="flex bg-blueGray-300 mt-4 rounded-2xl justify-between px-4 p-6">
+                <div  class="flex-1 text-center font-semibold">
+                    
+                    <p><span>
+                        <input type="checkbox">
+                    </span> &nbsp;&nbsp; P124</p>
+                </div>
+                <div  class="flex-1 text-center font-semibold">
+                    Solar Panel
+                </div>
+                <div  class="flex-1 text-center font-semibold">
+                    32
+                </div>
+                <div  class="flex-1 text-center font-semibold">
+                   April 20, 2021
+                </div>
+                <div  class="flex-1 text-center font-semibold">
+                    Edit | <span class="text-red-500" >Delete</span>
+                </div>
+            </div>
+            <div class="flex bg-blueGray-300 mt-4 rounded-2xl justify-between px-4 p-6">
+                <div  class="flex-1 text-center font-semibold">
+                    
+                    <p><span>
+                        <input type="checkbox">
+                    </span> &nbsp;&nbsp; P124</p>
+                </div>
+                <div  class="flex-1 text-center font-semibold">
+                    Solar Panel
+                </div>
+                <div  class="flex-1 text-center font-semibold">
+                    32
+                </div>
+                <div  class="flex-1 text-center font-semibold">
+                   April 20, 2021
+                </div>
+                <div  class="flex-1 text-center font-semibold">
+                    Edit | <span class="text-red-500" >Delete</span>
+                </div>
+            </div>
+            <div class="flex bg-blueGray-300 mt-4 rounded-2xl justify-between px-4 p-6">
+                <div  class="flex-1 text-center font-semibold">
+                    
+                    <p><span>
+                        <input type="checkbox">
+                    </span> &nbsp;&nbsp; P124</p>
+                </div>
+                <div  class="flex-1 text-center font-semibold">
+                    Solar Panel
+                </div>
+                <div  class="flex-1 text-center font-semibold">
+                    32
+                </div>
+                <div  class="flex-1 text-center font-semibold">
+                   April 20, 2021
+                </div>
+                <div  class="flex-1 text-center font-semibold">
+                    Edit | <span class="text-red-500" >Delete</span>
+                </div>
+            </div>
+            <div class="flex bg-blueGray-300 mt-4 rounded-2xl justify-between px-4 p-6">
+                <div  class="flex-1 text-center font-semibold">
+                    
+                    <p><span>
+                        <input type="checkbox">
+                    </span> &nbsp;&nbsp; P124</p>
+                </div>
+                <div  class="flex-1 text-center font-semibold">
+                    Solar Panel
+                </div>
+                <div  class="flex-1 text-center font-semibold">
+                    32
+                </div>
+                <div  class="flex-1 text-center font-semibold">
+                   April 20, 2021
+                </div>
+                <div  class="flex-1 text-center font-semibold">
+                    Edit | <span class="text-red-500" >Delete</span>
+                </div>
+            </div>
+             
+
+        </div>
+
+        <div class="my-8 flex w-100 justify-center ">
+            <button  (click)="nextStage()"
+                        class="flex-1 bg-white text-blueGray-700 border-2 border-blueGray-700 active:bg-blueGray-600 text-sm font-bold px-12 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+                        Back
+            </button>
+            <button  (click)="displayCsvDetails()"
+                        class="flex-1 bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold px-12 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+                        Continue
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+.text-md{
+  font-size: 70% !important;
+}
+
+.text-sm{
+  font-size: 50% !important;
+}
+
+.text-lg{
+  font-size: 100% !important;
+}
+
+
+.swal2-styled.swal2-confirm{
+  background-color: #153853 !important;
+}

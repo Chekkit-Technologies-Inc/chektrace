@@ -1,0 +1,310 @@
+<div class="mt-12">
+  <div *ngIf="isLabelRequest" >
+    <div class="my-4 font-bold px-8 text-md">
+      <a [routerLink]="['/mas/quicklinks']"><span><i class="fa fa-arrow-left text-sm "></i></span> &nbsp; &nbsp;
+        <span>Back</span></a>
+    </div>
+    <br>
+    <div>
+      <div class=" px-16 w-full ">
+        <p class="font-bold text-2xl text-blueGray-700">Requesting Labels For Batch</p>
+        <div class="bg-white rounded-lg p-2 my-4 w-100">
+          <p class="text-blueGray-700 font-bold my-2 px-2">Product Information</p>
+
+          <div class="flex my-4">
+
+            <div class="flex-1 m-3">
+              <div>
+                <p class="text-sm font-bold text-blueGray-700 ">Product Name</p>
+                <select (change)="selectProduct($event)"
+                  class="block appearance-none w-full bg-white border border-blueGray-700 text-gray-700 py-2 px-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  id="grid-state">
+                  <option> <span class="fa font-black text-blueGray-800 ">Select Product Name</span> </option>
+                  <option *ngFor="let product of save_products" value="{{product.id}}"> {{product.product_name}}
+                  </option>
+
+                </select>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="bg-white rounded-lg p-2 my-4 w-100">
+          <p class="text-blueGray-700 font-bold my-2 px-2">Label Information</p>
+
+          <div class="sm:flex md:flex my-4">
+            <div class="flex-1 m-3">
+              <div>
+                <p class="font-bold text-blueGray-700 text-sm ">Number of Labels you need (Unit)</p>
+                <input
+                  class="appearance-none block w-full bg-white text-gray-700 border border-blueGray-500 rounded py-2 px-2 mb-3 mt-1 leading-tight focus:outline-none focus:bg-white"
+                  id="grid-first-name" [(ngModel)]="quantity" name="quantiy" type="text" placeholder="Enter Number">
+              </div>
+            </div>
+            <div class="flex-1 m-3">
+              <div>
+                <p class="font-bold text-blueGray-700 text-sm ">Type of Label (QR or PIN)</p>
+                <select (change)="selectLabelType($event)"
+                  class="block appearance-none w-full bg-white border border-blueGray-700 text-gray-700 py-2 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  id="grid-state">
+                  <option> <span class="fa font-black text-blueGray-800 ">Select Type</span> </option>
+                  <option value="qr">QR</option>
+                  <option value="pin">PIN</option>
+                </select>
+              </div>
+            </div>
+            <div class="flex-1 m-3">
+              <div>
+                <p class="font-bold text-blueGray-700 text-sm ">With Tagant or Not?</p>
+                <select (change)="selectTagOpt($event)"
+                  class="block appearance-none w-full bg-white border border-blueGray-700 text-gray-700 py-2 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  id="grid-state">
+                  <option>Select </option>
+                  <option value="no">No</option>
+                  <option value="yes">Yes</option>
+
+                </select>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="bg-white rounded-lg p-2 my-4 w-100">
+          <p class="text-blueGray-700 font-bold my-2 ">Delivery Details</p>
+
+          <div class="sm:flex md:flex my-8">
+            <div class="flex-1 m-3">
+              <div>
+                <p class="font-bold text-blueGray-700 text-sm">Address</p>
+                <input ngx-google-places-autocomplete [options]='options' (keydown.space)="$event.preventDefault()"
+                  (onAddressChange)="AddressChange($event)"
+                  class="appearance-none block w-full bg-white text-gray-700 border border-blueGray-500 rounded-lg py-2 px-2 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  id="grid-first-name" type="text" [(ngModel)]="formattedaddress" name="address" placeholder="Enter Address ">
+              </div>
+            </div>
+            <div class="flex-1 m-3">
+              <div>
+                <p class="font-bold text-blueGray-700 text-sm ">Region</p>
+                <input [(ngModel)]="formattedRegion" name="region" ngx-google-places-autocomplete [options]='options'
+                  (keydown.space)="$event.preventDefault()" (onAddressChange)="RegionChange($event)"
+                  class="appearance-none block w-full bg-white text-gray-700 border border-blueGray-500 rounded-lg py-2 px-2 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  id="grid-first-name" placeholder="Enter Region ">
+
+
+              </div>
+            </div>
+            <div class="flex-1 m-3">
+              <div>
+                <p class="font-bold text-blueGray-700 text-sm ">Country</p>
+                <input [(ngModel)]="country" name="country"
+                  class="appearance-none block w-full bg-white text-gray-700 border border-blueGray-500 rounded-lg py-2 px-2 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  id="grid-first-name" type="text" placeholder="Enter Country ">
+              </div>
+            </div>
+
+          </div>
+
+
+
+        </div>
+
+        <div class="  w-100 text-center ">
+          <button
+            class=" text-lg px-24 py-2 text-white transition-colors duration-150 bg-blueGray-800 rounded-lg focus:shadow-outline hover:bg-blueGray-400 font-bold"
+            (click)="requestLabels()">
+            <span *ngIf="!loading">Proceed</span>
+            <span *ngIf="loading">
+              <img class="inline-flex "
+                src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            </span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isLabelInvoice">
+    <div class="my-4 font-bold px-16 text-md">
+      <a (click)="goBack()" ><span><i class="fa fa-arrow-left text-sm "></i></span> &nbsp; &nbsp;
+        <span>Back</span></a>
+    </div>
+    <!-- <div class=" px-16 w-full ">
+      <p class="font-bold text-2xl text-blueGray-700 my-5"> Label Request Invoice</p>
+      <div class="bg-white rounded-lg p-8 my-8 w-100">
+
+        <div class="flex justify-between">
+          <p>BILL TO</p>
+          <p>Flour Mills Nigeria PLC</p>
+        </div>
+
+        <div class="flex w-full px-16 my-4">
+
+          <div class="flex-1">
+            <p class="text-indigo-800 font-bold text-lg">INVOICE-LABEL REQUEST</p>
+            <small class="text-indigo-800">#46F7AA</small>
+          </div>
+
+
+          <div class="w-full sm:ml-3 md:ml-2 lg:ml-2 flex-1 text-right">
+            <small class="text-gray-500">Date: <b> {{date | date: "longDate"}} </b></small><br>
+            <small class="text-gray-500">Due Date: <b>10-07-23</b></small>
+          </div>
+
+        </div>
+        <br>
+        <div class="flex w-full px-16 my-4">
+          <div class="flex-1">
+            <p class="text-gray-500 font-bold text-lg">BILL FROM:</p>
+            <img src="../../../../../assets/img/chekki-invoice-logo.png" width="120" class="my-4" alt="" srcset="">
+            <small class="text-gray-500">9b Onikoyi Lane Parkview Estate,<br> Ikoyi 101233, Lagos</small>
+          </div>
+
+
+          <div class="w-full sm:ml-3 md:ml-2 lg:ml-2 flex-1 text-right">
+            <p class="text-gray-500 font-bold text-lg">BILL TO:</p>
+            <p class="font-bold text-lg my-4">TOM JONES</p>
+            <small class="text-gray-500"> {{customerAddress}} <br> {{addressRegion}} </small>
+          </div>
+
+        </div>
+        <br>
+        <div class="flex justify-between px-16 divide-y-2">
+          <div>
+            <p class="text-indigo-800 text-sm font-semibold">ITEM</p>
+            <small class="font-bold">
+              Chekkit {{customerLabelType}} labels <br>
+              <span *ngIf="taggantStatus == 'no' ">Without taggants</span>
+              <span *ngIf="taggantStatus == 'yes' ">With taggants</span>
+            </small>
+          </div>
+          <div>
+            <p class="text-indigo-800 text-sm font-semibold ">UNIT COST</p>
+            <small class="font-bold">&#8358; 200:00</small>
+          </div>
+          <div>
+            <p class="text-indigo-800 text-sm font-semibold ">UNITs</p>
+            <small class="font-bold"> {{labelQuantity}} </small>
+          </div>
+
+        </div>
+        <br>
+        <div class="flex w-full px-16 my-8">
+          <div class="flex-1">
+            <p class="text-indigo-800 font-bold text-lg">Total Purchase</p>
+          </div>
+
+
+          <div class="w-full sm:ml-3 md:ml-2 lg:ml-2 flex-1 text-right">
+            <p class="text-indigo-800 text-2xl font-bold">&#8358; {{labelQuantity * 200}} </p>
+          </div>
+
+        </div>
+
+      </div>
+      <br>
+      <div class="flex w-full px-16 my-8">
+        <div class="flex-1">
+          <p class="text-blueGray-800 font-bold text-md">How Would You Like To Pay ?</p>
+        </div>
+
+        <div class="w-full sm:ml-3 md:ml-2 lg:ml-2 flex-1 text-right">
+          <button
+            class=" flex-1 bg-white text-blueGray-700 border border-blueGray-500 active:bg-blueGray-600 text-md font-bold px-12 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+            Purchase Order
+          </button>
+        </div>
+        <div class="w-full sm:ml-3 md:ml-2 lg:ml-2 flex-1 text-right">
+          <button *ngIf="!proceedToPay " (click)="initPayment()"
+            class=" flex-1 bg-blueGray-800 text-white active:bg-blueGray-600 text-md font-bold px-12 py-3 rounded-lg hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+            <span *ngIf="!loading">Pay With Card</span>
+            <span *ngIf="loading">
+              <img class="inline-flex "
+                src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            </span>
+          </button>
+          <angular4-paystack [email]="'dh@gmail.com'" *ngIf="proceedToPay " [amount]="this.labelQuantity * 200 * 100"
+            [ref]="paymentRef" [channels]="['bank', 'card']"
+            [class]="'bg-blueGray-800 text-white font-bold rounded-lg px-8 py-3'" (onClose)="paymentCancel()"
+            (callback)="paymentDone($event)">
+            Pay &#x20A6;{{this.labelQuantity * 200}}
+          </angular4-paystack>
+        </div>
+
+      </div>
+    </div> -->
+    <div class="w-full px-16" >
+      <div class="flex  mt-4 ">
+        <div class="w-2/3 bg-green-400 py-10 px-10">
+          <p class="text-3xl" >PROFORMA INVOICE</p>
+          <small>Amaizing Day Shortcode Campaign Consumer Intelligence Service</small>
+        </div>
+        <div class="w-1/3 flex bg-green-600 text-center py-10 ">
+         <div class="m-auto">
+          <p class="text-xs" >Amount Due (NGN) </p>
+          <p class="text-3xl font-semibold " > &#8358;{{labelQuantity * 200}} </p>
+         </div>
+        </div>
+      </div>
+      <div class="bg-white px-10">
+        <div class="flex justify-between py-10">
+          <div>
+            <p class="text-sm text-gray-400 font-semibold " >BILL TO</p>
+            <p class="text-sm text-gray-700 font-semibold" >Flour Mills Nigeria PLC</p>
+            <p class="text-sm text-gray-400 font-semibold " >Babatunde Adenaike</p>
+            <br>
+            <p class="text-sm text-gray-400 font-semibold " > (234) 879 5670 789 </p>
+            <p class="text-sm text-gray-400 font-semibold " >badenaike@fmnplc.com</p>
+            <p class="text-sm text-gray-400 font-semibold pr-5"> {{customerAddress}} </p>
+            <p  class="text-sm text-gray-400 font-semibold"  > {{customerCountry}} </p>
+          </div>
+          <div>
+            <p class="text-sm text-gray-700 font-semibold py-2" >Invoice Number: <span class="text-gray-400 font-normal " > {{reference}} </span> </p>
+            <p class="text-sm text-gray-700 font-semibold py-2" >P.O / S.O. Number: <span class="text-gray-400 font-normal" > 100020-02 </span> </p>
+            <p class="text-sm text-gray-700 font-semibold py-2" >Invoice Date: <span class="text-gray-400 font-normal" > {{date | date: 'longDate'}} </span> </p>
+            <p class="text-sm text-gray-700 font-semibold py-2" >Payment Due: <span class="text-gray-400 font-normal" > December 5, 2023 </span> </p>
+            <p class="text-sm text-gray-700 font-semibold py-2" > Label Status: <span class="text-gray-400 font-normal"  >{{labelStatus}}</span> </p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-gray-200 px-10 py-10">
+        <div class="flex justify-between px-5">
+          <div class="text-md font-semibold text-left flex-1" >Item Type</div>
+          <div class="text-md font-semibold text-left flex-1"  >Unit</div>
+          <div class="text-md font-semibold text-left flex-1"  >Amount per Unit</div>
+        </div>
+        <div class="flex justify-between bg-blueGray-200 py-2 mt-3 mb-10 px-5">
+          <div class="text-sm text-blueGray-700 text-left flex-1 uppercase" > {{customerLabelType}} <span *ngIf="taggantStatus == 'yes' " > with taggant </span> <span *ngIf="taggantStatus == 'no' " > without taggant </span> </div>
+          <div class="text-sm text-blueGray-700 text-left flex-1"  > {{labelQuantity}} </div>
+          <div class="text-sm text-blueGray-700 text-left flex-1"  > 200 </div>
+        </div>
+        <hr>
+        <div class="text-right py-10 border-t-2 border-gray-500 mb-10">
+          <p class="text-sm font-semibold" > Subtotal Amount: <span class="font-light"> N{{labelQuantity * 200}} </span></p>
+          <!-- <p class="text-sm font-semibold" > Subtotal Amount: <span class="font-light">N500,000</span></p> -->
+        </div>
+        <div class="text-left my-10" >
+          <p class="text-sm font-semibold text-blueGray-500" >Terms</p>
+          <p class="text-xs text-blueGray-500" >Please pay to Account:</p>
+          <p class="text-xs text-blueGray-500" >Account No 04456372829</p>
+          <p class="text-xs text-blueGray-500" >Swift code: GTBINGLA</p>
+          <p class="text-xs text-blueGray-500" >Bank sort code: 058-152608</p>
+          <p class="text-xs text-blueGray-500" >Guaranty Trust Bank, Nigeria.</p>
+          <p class="text-xs text-blueGray-500" >CHEKKIT Technologies Ltd.</p>
+        </div>
+        <div class="text-center text-xs text-blueGray-500">
+          Thank you for your business
+        </div>
+        <div class=" mt-10">
+          <img src="../../../../../assets/img/single-logo.png" width="80" class="mx-auto"  alt="" srcset="">
+          <p class="text-3xl text-blueGray-800 font-extrabold text-center" >CHEKKIT</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

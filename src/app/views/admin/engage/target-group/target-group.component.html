@@ -1,0 +1,145 @@
+<div class="flex flex-wrap mt-4">
+    <div class="w-full mb-12 px-4">
+        <div class="relative page-content flex flex-col min-w-0 break-words w-full mb-6 pb-6 px-4 rounded"
+        ngClass="bg-white"
+        >
+                <div class="px-4 pb-4 pt-12">
+                    <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+                        <div class="text-left font-bold text-blueGray-800 mb-4 cursor-pointer" (click)="goBack()">
+                            <span><i class="fa fa-arrow-left text-sm "></i></span> &nbsp; &nbsp; <span>Go Back</span>
+    
+                        </div>
+                        <div class="text-blueGray-800 text-left mb-6 mt-4 font-semibold flex ">
+                            <img alt="..." src="assets/img/contact-icon-2.png" class=" hidden sm:hidden md:block lg:block" /> &nbsp;
+                            <div class=" text-2xl">
+                                Chekkit Target Database
+                            </div>
+                        </div>
+                        <p class="font-thin mb-4" >We have up to 10m contact database for you to send targeted sms to. Kindly filter the list below</p>
+                        <p class="font-bold text-lg mb-4" >Please you need to give your contact group a name</p>
+                        <br>
+
+                        <div class="text-blueGray-800 mb-6 text-left font-bold">
+                            Contact Group
+                        </div>
+                        <div class="relative flex w-full  mb-3">
+                            <div class="flex-auto lg:w-12/12 py-10 pt-0">
+                                <span class="z-10 h-full leading-snug font-normal absolute text-center text-blueGray-300 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                                <input type="text" placeholder="name contact group here" class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full pl-10"/>
+                             
+                                <!-- <td
+                                    class="border-t-0 text-blueGray-700 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                                > -->
+                                <!-- <app-existing-customers-dropdown></app-existing-customers-dropdown>   -->
+                                <!-- <app-table-dropdown></app-table-dropdown> -->
+
+                                <!-- </td> -->
+                            </div>
+                            <!-- <div class="flex-auto px-4 lg:w-4/12 lg:px-10 py-10 pt-0">
+                                <button 
+                                class="bg-transparent hover:bg-blueGray text-blueGray text-sm font-bold hover:shadow-lg mr-1 px-6 py-3 border-2 border-blue hover:border-transparent rounded">
+                                    filter
+                                </button>                                
+                            </div> -->
+                        </div>
+
+                        <div class="w-100 text-center">
+                            <button [hidden]="stage == 3" (click)="nextStage()"
+                                class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold px-12 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+                                Continue
+                            </button>
+                        </div>
+
+<!-- 
+                        <div class="block w-full overflow-x-auto">
+                            <form [formGroup]="form" (ngSubmit)="submit()">
+                                <table class="items-center w-full bg-transparent border-collapse">
+                                    <thead>
+                                        <tr class="border border-solid rounded mb-3">
+                                            <th
+                                                class="px-6 align-middle py-3 text-xs capitalize whitespace-nowrap font-semibold text-left"
+                                            
+                                            >
+                                                <input type="checkbox" class="form-check-input" (change)="selectAll($event)"  value="selectAll">
+                                            </th>
+                                            <th
+                                                class="px-6 align-middle py-3 text-xs capitalize whitespace-nowrap font-semibold text-left"
+                                            >
+                                                phone number
+                                            </th>
+                                            <th
+                                                class="px-6 align-middle py-3 text-xs capitalize whitespace-nowrap font-semibold text-left"
+                                            >
+                                                age range
+                                            </th>
+                                            <th
+                                                class="px-6 align-middle py-3 text-xs capitalize whitespace-nowrap font-semibold text-left"
+                                            >
+                                                date added
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border border-solid rounded" formArrayName="contacts" *ngFor="let order of ordersFormArray.controls; let i = index">
+                                            <td
+                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center"
+                                            >                                            
+                                                <input  type="checkbox" [formControlName]="i" class="form-check-input"  value="13-19">
+                                            </td>
+                                            <td
+                                                class="border-t-0 text-blueGray-700 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                                            >
+                                                0941 567 3402
+                                            </td>
+                                            <td
+                                                class="border-t-0 text-blueGray-700 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                                            >
+                                                18 - 25
+                                            </td>
+                                            <td
+                                                class="border-t-0 text-blueGray-700 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                                            >
+                                            <app-table-dropdown></app-table-dropdown>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div> -->
+                    </div>
+                <div>
+                </div>
+            </div>
+<!-- 
+            <div class="footer-nav">
+                <button 
+                (click)="prevStage()"
+                [disabled]="stage == 1"
+                class="bg-transparent hover:bg-blueGray text-blueGray text-sm font-bold hover:shadow-lg mr-1 px-6 py-3 border-2 border-blue hover:border-transparent rounded">
+                    Go back
+                </button>
+                <button 
+                [hidden]="stage == 3"
+                (click)="nextStage()"
+                class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold px-6 py-3 rounded hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                >
+                Next
+                </button>
+                <button 
+                [hidden]="stage !== 3"
+                class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold px-6 py-3 rounded hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                type="submit"
+                >
+                Send
+                </button>
+            </div> -->
+        </div>
+        
+        
+
+    </div>
+  </div>
+  

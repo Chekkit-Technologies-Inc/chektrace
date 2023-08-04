@@ -1,0 +1,64 @@
+<div class="w-full sm:px-8 px-2 py-8">
+    <br><br>
+    <div class=" my-8  w-70 px-4 sm:pt-8 md:pt-8 pt-4 ">
+        <div class="text-center">
+            <h2 class="font-bold text-3xl " >Link your account on ERP<br> with <span class="active-link" >Chekkit's</span> Serialization Tool </h2>
+        </div>
+
+
+
+        <br><br><br><br>
+
+        <div class="flex justify-between mb-8">
+            <div class="flex-1 text-center">
+                <button [ngClass]="{'selected':selected == 'userkey'}" class="sm:w-1/2 md:w-1/2 h-12  text-blueGray-700 transition-colors rounded-3xl border-2 border-blueGray-600 bg-white duration-150 rounded-lg focus:shadow-outline hover:bg-blueGray-800 font-semibold" (click)="useToken()" >
+                    Connect using GS1 Userkey
+                </button>
+            </div>
+            <div class="flex-1 text-center">
+                <button [ngClass]="{'selected':selected == 'email'}" class="sm:w-1/2 md:w-1/2 h-12  text-blueGray-700 border-2 rounded-3xl border-blueGray-600 transition-colors duration-150 bg-white rounded-lg focus:shadow-outline hover:bg-blueGray-800 font-semibold" (click)="useEmail()" >
+                    Connect using GS1 Email
+                </button>
+            </div>
+        </div>
+
+        <div class=" inputRow ">
+
+            <div class="p-4 mt-16 w-1/2 myInput" *ngIf="selected == 'email'" >
+                <label class="font-bold text-lg" >Customer's Universal ID</label>
+                <input class="border rounded-lg appearance-none border-blueGray-500 w-full py-3 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline font-bold " type="text" [(ngModel)]="link_email" name="link_email" placeholder="user@gs1email.com">
+                <div class="w-100 sm:ml-3 md:ml-2 lg:ml-2 text-center my-4" *ngIf="link_email" >
+
+                    <button class="w-1/2 h-12  text-white transition-colors duration-150 bg-blueGray-700 rounded-lg focus:shadow-outline hover:bg-blueGray-800 font-semibold" (click)="linkAccount()" >
+                        <span *ngIf="loading">
+                            <img class="inline-flex " src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
+                        </span>
+                        <span *ngIf="!loading">Link Account</span>
+
+                    </button>
+
+                </div>
+            </div>
+
+
+            <div class="   p-4 mt-16 w-1/2 myInput" *ngIf="selected == 'userkey'" >
+                <label class="font-bold text-lg" >Customer's Universal ID</label>
+                <input class="border rounded-lg appearance-none border-blueGray-500 w-full py-3 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline font-bold " type="text" [(ngModel)]="link_key" name="link_key" placeholder="@userkey">
+                <div class="w-100 sm:ml-3 md:ml-2 lg:ml-2 text-center my-4" *ngIf="link_key" >
+
+                    <button class="w-1/2 h-12  text-white transition-colors duration-150 bg-blueGray-700 rounded-lg focus:shadow-outline hover:bg-blueGray-800 font-semibold" (click)="linkToken()" >
+                        <span *ngIf="loading">
+                            <img class="inline-flex " src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
+                        </span>
+                        <span *ngIf="!loading">Link Account</span>
+
+                    </button>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

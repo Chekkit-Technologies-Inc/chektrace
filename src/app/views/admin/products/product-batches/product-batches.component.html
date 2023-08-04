@@ -1,0 +1,92 @@
+<div class="flex flex-wrap mt-4">
+    <div class="w-full mb-12 px-4">
+        <div class="relative page-content flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
+        ngClass="bg-white"
+        >
+            <div class="block w-full overflow-x-auto">
+                <div class="block w-full overflow-x-auto">
+                    <div class="flex flex-wrap mt-4">
+                        <div class="w-full mb-12 px-4">
+                            <h5 class="text-2xl  text-center font-bold leading-normal mt-0 mb-2 text-blueGray-800">
+                                Product Batches
+                            </h5>
+                            <p class="text-lg text-center font-light leading-relaxed mt-2 mb-4 text-blueGray-800">
+                                View product batches created for product
+                            </p>
+                            <button
+                                style="float: right;"
+                                (click)="gotoCreateBatch(productObject)"
+                                class="active:bg-blueGray-200  rounded border border-solid border-blueGray-700 font-bold uppercase text-xs px-4 py-2 rounded hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                                type="button">
+                                <i class="fas fa-plus"></i>
+                                Get Pins
+                            </button>                            
+                        </div>
+                </div>
+
+                <div class="block w-full overflow-x-auto" *ngIf="rows">
+                  <table class="items-center w-full bg-transparent border-collapse" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                    <thead>
+                      <tr>
+                        <th
+                        class="px-6 align-middle border border-solid py-3  uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                          Product Name
+                        </th>
+                        <th
+                        class="px-6 align-middle border border-solid py-3  uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                            Batch Number
+                        </th>
+                        <th
+                        class="px-6 align-middle border border-solid py-3  uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                            Quantity
+                        </th>
+                        <th
+                        class="px-6 align-middle border border-solid py-3  uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                            Date Created
+                        </th>
+                        
+                        <th class="px-6 align-middle border border-solid py-3  uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let row of rows">
+                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-4 text-left flex items-center">
+                            {{row?.product_name}}  
+                        </td>
+                        <td
+                          class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-4">
+                          {{row.batch_num }}
+                        </td>
+                        <td
+                          class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-4">
+                          {{row.total_generated_code }}
+                        </td>
+                        <td
+                          class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-4">
+                          {{row.created_at | date:'short' }}
+                        </td>
+                        <td
+                          class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
+                            <button
+                            class="rounded border border-solid border-blueGray-700 font-bold text-xs px-4 py-2 rounded hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+
+                             (click)="ViewBatch(row)">view</button>
+                          <!-- <button>edit</button> -->
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="text-center">
+                  <p *ngIf="!rows">Loading table data</p>
+                  <p *ngIf="rows && rows.length < 1">Loading table data...</p>
+                  
+                </div>
+                
+            </div>
+        </div>
+        
+
+    </div>
+  </div>
+  

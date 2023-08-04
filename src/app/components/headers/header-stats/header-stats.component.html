@@ -1,0 +1,46 @@
+<!-- Header -->
+<div class="relative bg-blueGray-800 md:pt-32 pb-32 pt-12">
+  <div class="px-4 md:px-10 mx-auto w-full">
+    <div>
+      <!-- Card stats -->
+      <div class="flex flex-wrap">
+        <div class="w-full lg:w-6/12 xl:w-3/12 px-4 quick-link" [routerLink]="['/mas']">
+          <app-card-stats
+            statSubtitle="Protect products"
+            statTitle="MAS"
+            statDescripiron="Mobile Authentication System"
+            statIconName="fa fa-shield-alt"
+            statIconColor="bg-emerald-500"
+          ></app-card-stats>
+        </div>
+        <div class="w-full lg:w-6/12 xl:w-3/12 px-4 quick-link" [routerLink]="['/traceability']">
+          <app-card-stats
+            statSubtitle="Track Products"
+            statTitle="Traceability"
+            statDescripiron="Track on supply chain"
+            statIconName="fa fa-truck"
+            statIconColor="bg-emerald-500"
+          ></app-card-stats>
+        </div>
+        <div class="w-full lg:w-6/12 xl:w-3/12 px-4 quick-link" [routerLink]="['/sap']">
+          <app-card-stats
+            statSubtitle="SAP integration"
+            statTitle="SAP"
+            statDescripiron="Integrate with ease"
+            statIconName="fa fa-tablets"
+            statIconColor="bg-emerald-500"
+          ></app-card-stats>
+        </div>
+        <div class="w-full lg:w-6/12 xl:w-3/12 px-4 quick-link" [routerLink]="['/docs']">
+          <app-card-stats
+            statSubtitle="Api Integration"
+            statTitle="Chekkit Docs"
+            statDescripiron="Seemlessly Integrate with our apis"
+            statIconName="fa fa-server"
+            statIconColor="bg-emerald-500"
+          ></app-card-stats>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

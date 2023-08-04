@@ -1,0 +1,19 @@
+.fmn-secondary{
+  background-color: #F3F9EB;
+}
+.modal-body{
+  min-width: 500px !important;
+}
+
+.fmn-primary{
+  background-color: #479C46;
+  color: #fff;
+}
+
+.fmn-border{
+  border: 1px solid #479C46;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}

@@ -1,0 +1,138 @@
+<div class="mb-16 mt-4 w-100 px-16">
+  <div class="flex justify-between" *ngIf="currentStage == 1" >
+    <div class="flex-1" >
+      <p class="font-bold text-md my-8 cursor-pointer text-blueGray-700" >
+        <span (click)="currentStage = 1" >
+          <i class="fa">&#xf060;</i> &nbsp; &nbsp;
+        Back
+        </span>
+      </p>
+      <p class="text-blueGray-700 font-semibold text-2xl my-3" >Activate Sticker Labels for this Campaign</p>
+      <br>
+      <div  >
+        <div class="my-3" >
+          <p class="text-blueGray-800 text-sm font-semibold" >Do you have sticker label for this campaign</p>
+          <!-- <input class="border border-blueGray-300 rounded-md" > -->
+          <select class="border border-blueGray-300 rounded-md p-2 w-full" (change)="selectCode($event.target.value)" >
+            <option class="text-sm" >--Select Option--</option>
+            <option value="yes" class="text-sm">Yes</option>
+            <option value="no" class="text-sm">No</option>
+          </select>
+        </div>
+       <div *ngIf="labelExist" >
+        <div class="my-3" >
+          <p class="text-blueGray-800 text-sm font-semibold" >Serial Number Range</p>
+          <input class="border border-blueGray-300 rounded-md p-2 w-full">
+        </div>
+        <div class="my-3" >
+          <p class="text-blueGray-800 text-sm font-semibold" >Product Name</p>
+          <!-- <input class="border border-blueGray-300 rounded-md" > -->
+          <select [(ngModel)]="product_name" (change)="selectProduct($event.target.value)" class="border border-blueGray-300 rounded-md p-2 w-full " >
+            <option >Select Product</option>
+            <option [value]="data.id" *ngFor="let data of userProducts" >{{data.product_name}}</option>
+          </select>
+        </div>
+        <div class="my-3"  >
+          <p class="text-blueGray-800 text-sm font-semibold" >Product Batch</p>
+          <!-- <input class="border border-blueGray-300 rounded-md" > -->
+          <select class="border border-blueGray-300 rounded-md p-2 w-full" (change)="selectBatch($event.target.value)" >
+            <option>Select Product Batch</option>
+            <option [value]="data.id" *ngFor="let data of productBatches" > {{data.product_name}} </option>
+          </select>
+        </div>
+        <button class="bg-blueGray-700 text-white text-sm font-semibold w-full text-center py-2 rounded-md" >Continue</button>
+       </div>
+      </div>
+    </div>
+    <div class="flex-1" ></div>
+  </div>
+
+  <div class="" *ngIf="currentStage == 2" >
+    <p class="font-bold text-md my-8 cursor-pointer text-blueGray-700" >
+      <span (click)="currentStage = 1" >
+        <i class="fa">&#xf060;</i> &nbsp; &nbsp;
+      Go Back
+      </span>
+    </p>
+    <p class="text-blueGray-700 text-md font-semibold my-3" > Summary</p>
+    <div class="bg-white rounded-md p-6 my-5" >
+      <p class="text-blueGray-800 text-sm my-3" >Assigned Campaign</p>
+      <span class="bg-blueGray-300 text-blueGray-800 text-sm py-3 px-5 rounded-md font-semibold" > Airtime Campaign </span>
+    </div>
+    <div class="bg-white rounded-md p-6 my-5" >
+      <p class="text-blueGray-800 text-sm my-3" >Airtime Campaign Setup</p>
+      <div class="bg-blueGray-100 rounded-md p-3 flex justify-between">
+        <div class="text-blueGray-800" >
+          <p class="text-xs" >Airtime Amount</p>
+          <span class="text-sm font-semibold" >100</span>
+        </div>
+        <div class="text-blueGray-800" >
+          <p class="text-xs" >Total Winners</p>
+          <span class="text-sm font-semibold" >100</span>
+        </div>
+        <div class="text-blueGray-800" >
+          <p class="text-xs" >Price </p>
+          <span class="text-sm font-semibold" >100</span>
+        </div>
+        <div class="" >
+          <span class="text-sm font-semibold text-green-400" >EDIT</span> | <span class="text-sm font-semibold text-blueGray-800" >VIEW</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-md p-6 my-5" >
+      <p class="text-blueGray-800 text-sm my-3" >Assigned Survey</p>
+      <div class="bg-blueGray-100 rounded-md p-3 flex justify-between">
+        <div class="text-blueGray-800" >
+          <p class="text-xs" >Name</p>
+          <span class="text-sm font-semibold" >Survey 01</span>
+        </div>
+        <div class="text-blueGray-800" >
+          <p class="text-xs" >Questions</p>
+          <span class="text-sm font-semibold" >100 Questions</span>
+        </div>
+
+        <div class="" >
+          <span class="text-sm font-semibold text-green-400" >EDIT</span> | <span class="text-sm font-semibold text-blueGray-800" >VIEW</span>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-md p-6 my-5" >
+      <p class="text-blueGray-800 text-sm my-3" >Attached Reward</p>
+      <div class="bg-blueGray-100 rounded-md p-3 flex justify-between">
+        <div class="text-blueGray-800" >
+          <p class="text-xs" >Name</p>
+          <span class="text-sm font-semibold" >Reward 01</span>
+        </div>
+        <div class="text-blueGray-800" >
+          <p class="text-xs" >Reward Type</p>
+          <span class="text-sm font-semibold" >Loyalty Point</span>
+        </div>
+        <div class="text-blueGray-800" >
+          <p class="text-xs" >Reward Point</p>
+          <span class="text-sm font-semibold" >50 Points</span>
+        </div>
+        <div class="text-blueGray-800" >
+          <p class="text-xs" >Cashout Type</p>
+          <span class="text-sm font-semibold" >Cash Transfer</span>
+        </div>
+
+        <div class="" >
+          <span class="text-sm font-semibold text-green-400" >EDIT</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="currentStage == 3" class="flex" >
+    <div class="m-auto">
+      <img src="../../../../../assets/img/success-image.png" width="500" alt="" srcset="">
+      <p class="my-3 text-2xl font-blueGray-800 text-center font-semibold text-blueGray-800 " >Success!!!</p>
+      <div class="flex" >
+        <button class="bg-blueGray-700 text-white font-semibold w-full py-3 rounded-md text-center m-auto" >
+          <a [routerLink]="['/MAS/campaigns']" >Continue</a>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

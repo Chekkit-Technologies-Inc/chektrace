@@ -1,0 +1,32 @@
+.bn{
+  margin-bottom: 6rem;
+}
+
+.package-image{
+  height: 100px;
+}
+
+.img-hld{
+  background-color: #fff;
+  width: 100%;
+  display: flex;
+  border-radius: 1rem;
+  
+}
+img{
+  width: 50% !important;
+  margin: auto;
+}
+.card-body{
+  padding: 2rem;
+}
+
+.left-border{
+  border-left: 3px #222 !important;
+}
+
+@media (min-width: 700px) {
+  .holder{
+      padding: 0 100px;
+  }
+}

@@ -1,0 +1,112 @@
+<div class="flex flex-wrap mt-4">
+    <div class="w-full mb-12 px-4">
+        <div class="relative page-content flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
+        ngClass="bg-white"
+        >
+            <div class="block w-full overflow-x-auto">
+                <div class="block w-full overflow-x-auto">
+                    <div class="flex flex-wrap mt-4">
+                        <div class="w-full mb-12 px-4">
+                            <h5 class="text-2xl  text-center font-bold leading-normal mt-0 mb-2 text-blueGray-800">
+                                Loyalty Points
+                            </h5>
+                            <p class="text-lg text-center font-light leading-relaxed mt-2 mb-4 text-blueGray-800">
+                                Give points to your customers for taking surveys
+                            </p>
+                            <button
+                                style="float: right;"
+                                routerLink="/dashboard/rewards/create-loyalty-reward"
+                                class="active:bg-red-700  rounded border border-solid border-blueGray-700 font-bold uppercase text-xs px-4 py-2 rounded hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                                type="button">
+                                <i class="fas fa-plus"></i>
+                                Add Reward
+                            </button>                            
+                        </div>
+                </div>
+
+                <div class="block w-full overflow-x-auto" *ngIf="rows">
+                    <div class="w-full lg:w-6/12 px-4 mt-3">
+                        <div class="relative w-full mb-3">
+                            <label
+                                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                htmlFor="grid-password">
+                                Search
+                            </label>
+                            <input
+                                type="text"
+                                (keyup)='updateFilter($event)'
+                                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                            />
+                        </div>
+                    </div>
+                  <table class="items-center w-full bg-transparent border-collapse" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                    <thead>
+                      <tr>
+                        <th
+                        class="px-6 align-middle border border-solid py-3  uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                        [ngClass]="
+                            color === 'light'
+                              ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                              : 'bg-red-800 text-red-300 border-red-700'
+                          ">
+                          Reward Value
+                        </th>
+                        <th
+                          class="px-6 align-middle border border-solid py-3 uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                          [ngClass]="
+                            color === 'light'
+                              ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                              : 'bg-red-800 text-red-300 border-red-700'
+                          "
+                        >
+                          Quanity
+                        </th>
+                        <th
+                          class="px-6 align-middle border border-solid py-3 uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                          [ngClass]="
+                            color === 'light'
+                              ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                              : 'bg-red-800 text-red-300 border-red-700'
+                          "
+                        >
+                          Type
+                        </th>
+                        <th
+                          class="px-6 align-middle border border-solid py-3 uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                          [ngClass]="
+                            color === 'light'
+                              ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                              : 'bg-red-800 text-red-300 border-red-700'
+                          "
+                        ></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let row of rows">
+                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-4 text-left flex items-center">
+                            {{row?.reward_value}}  
+                        </td>
+                        <td
+                          class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-4">
+                          {{row.reward_quantity }}
+                        </td>
+                        <td
+                          class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-4">
+                          {{row.reward_type }}
+                        </td>
+                        <td
+                          class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
+                          <button>edit</button>
+                         </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+            </div>
+        </div>
+        
+
+    </div>
+  </div>
+  

@@ -1,0 +1,47 @@
+<!-- <a
+  class="text-blueGray-500 block py-1 px-3"
+  href="#pablo"
+  (click)="toggleDropdown($event)"
+  #btnDropdownRef
+>
+  <i class="fas fa-ellipsis-v"></i>
+</a> -->
+<button 
+(click)="toggleDropdown($event)"
+#btnDropdownRef
+class="bg-transparent hover:bg-blueGray text-indigo-600 text-sm font-semibold hover:shadow-lg mr-1 px-6 py-3 border-2 border-indigo hover:border-transparent rounded">
+<i class="fa">&#xf1de;</i> &nbsp; filter
+</button>
+<div class="min-w-48 z-50" #popoverDropdownRef>
+  <div
+    class="bg-white text-base float-left py-2 list-none text-left rounded shadow-lg mt-1 min-w-48"
+    [ngClass]="dropdownPopoverShow ? 'block' : 'hidden'"
+  >
+  <div  class="text-sm py-2 px-2 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">
+    <label
+    class="block text-blueGray-600 text-xs font-light mb-2"
+    htmlFor="grid-password">
+        contact group
+    </label>
+    <select class="border-1 border-blueGray-200 px-3 w-full py-1 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm">
+        <option value="1">Group 1</option>
+        <option value="2">Group 2</option>
+        <option value="3">Group 3</option>
+    </select>
+  </div>
+  <div  class="text-sm py-2 px-2 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">
+    <label
+    class="block text-blueGray-600 text-xs font-light mb-2"
+    htmlFor="grid-password">
+       age range
+    </label>
+    <select class="border-1 border-blueGray-200 px-3 w-full py-1 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm">
+        <option value="1">Group 1</option>
+        <option value="2">Group 2</option>
+        <option value="3">Group 3</option>
+    </select>
+  </div>
+  
+  </div>
+</div>
+<!-- <app-existing-customers-dropdown></app-existing-customers-dropdown> -->

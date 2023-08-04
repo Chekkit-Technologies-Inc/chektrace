@@ -1,0 +1,220 @@
+<div class="flex flex-wrap mt-4">
+    <div class="w-full lg:w-8/12 px-4 mt-3">
+        <!-- <form class="form-horizontal col-md-12" role="form" [formGroup]="surveyForm" (ngSubmit)="onSubmit()"> -->
+            <!-- <div *ngIf="stage == 1"> -->
+            <!-- <div class="relative w-full mb-3">
+                    <p
+                        class="block uppercase text-blueGray-600 text-s font-bold mb-2">
+                        Step 1: Input Survey Information
+                    </p>
+                </div>
+                <div class="w-full lg:w-12/12 px-4 mt-3">
+                    <div class="relative w-full mb-3">
+                        <label
+                            class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                            htmlFor="grid-password">
+                            Survey Name
+                        </label>
+                        <input
+                            type="text"
+                            formControlName="title"
+                            class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        />
+                        <div *ngIf="submitted && f.title.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                            <span class="inline-block align-middle mr-8">
+                                <b class="capitalize">warning!</b> This field is required
+                            </span>
+                        </div>
+                    </div>
+                </div> -->
+            <!-- <div class="w-full lg:w-12/12 px-4 mt-3">
+
+                    <div class="relative w-full mb-3">
+                    <label
+                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                        Does this survey have a Label ?
+                    </label>
+                    <select class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    formControlName="hasSurvey"  > 
+                        <option value="1">Yes</option>
+                        <option value="2">No</option>
+                    </select>
+                    <div *ngIf="submitted && f.title.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                        <span class="inline-block align-middle mr-8">
+                            <b class="capitalize">warning!</b> This field is required
+                        </span>
+                    </div>
+                    </div>
+                </div> -->
+            <!-- <div class="w-full lg:w-12/12 px-4 mt-3">
+                    <div class="relative w-full mb-3">
+                    <label  class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                        Survey Content / Intent:
+                    </label>
+                    <textarea
+                        type="text"
+                        formControlName="content"
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        rows="3" > </textarea>
+                        <div *ngIf="submitted && f.title.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                            <span class="inline-block align-middle mr-8">
+                                <b class="capitalize">warning!</b> This field is required
+                            </span>
+                        </div>
+                    </div>
+                </div> -->
+            <!-- </div> -->
+            <!-- <div *ngIf="stage == 2">
+                <div>
+                    <button (click)="stage = 1" type="submit"
+                        class="active:bg-blueGray-700 mb-4  border-solid border-blueGray-700 font-bold uppercase text-xs px-4 py-2 rounded hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150">
+                        <i class="fas fa-angle-left"></i>
+                        Go Back
+                    </button>
+                </div>
+                <div *ngIf="currentMode == 'creating'">
+                    <p class="block uppercase text-blueGray-600 text-s font-bold mb-2">
+                        Step 2: Input Survey Questions
+                    </p>
+                    <div class="w-full lg:w-12/12 px-4 mt-3">
+                        <div class="relative w-full mb-3">
+                            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                htmlFor="grid-password">
+                                Question {{qust_num}}
+                            </label>
+                            <input type="text" formControlName="question"
+                                placeholder="enter the question you want users to answer here..."
+                                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                            <div *ngIf="submitted && f.title.errors"
+                                class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                                <span class="inline-block align-middle mr-8">
+                                    <b class="capitalize">warning!</b> This field is required
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full lg:w-12/12 px-4 mt-8">
+                        <div class="relative w-full mb-3">
+                            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                htmlFor="grid-password">
+                                Options For Users To Select:
+                            </label>
+                            <input type="text" *ngFor="let option of options; let a=index;"
+                                formControlName="choice{{a+1}}"
+                                placeholder="Answer Option {{a+1}} {{a>1 ? '(Optional)':''}}"
+                                class="border-0 px-3 py-3 mb-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                        </div>
+                        <div class="relative w-full mb-3">
+                            <button *ngIf="options.length <4" type="button"
+                                class=" ml-1 text-blue-600 font-bold px-2 py-1 absolute right-0 outline-none focus:outline-none mr-1 mb-1 bg-blueGray-200 active:bg-blueGray-200 text-sm ease-linear transition-all duration-150"
+                                (click)="increaseOptions()">
+                                + add option
+                            </button>
+                            <button *ngIf="options.length  > 2" type="button"
+                                class=" ml-1 text-red-600 font-bold px-2 py-1 outline-none focus:outline-none mr-1 mb-1 text-sm ease-linear transition-all duration-150"
+                                (click)="decreaseOptions()">
+                                <i class="fa fa-trash"></i> remove last option
+                            </button>
+                        </div>
+                        <br>
+                        <button type="button"
+                            class=" ml-1 text-blue-600 font-bold px-2 py-1 outline-none focus:outline-none mr-1 mb-1 text-sm ease-linear transition-all duration-150"
+                            (click)="addMoreQuestion()">
+                            <i class="fa fa-plus-circle"></i> Add Question
+                        </button>
+                    </div>
+                </div>
+                <div *ngIf="currentMode == 'editing'">
+                    <form class="form-horizontal col-md-12" role="form" [formGroup]="editForm" (ngSubmit)="onSubmit()">
+                        <p class="block uppercase text-blueGray-600 text-s font-bold mb-2">
+                            Step 2: Input Survey Questions
+                        </p>
+                        <div class="w-full lg:w-12/12 px-4 mt-3">
+                            <div class="relative w-full mb-3">
+                                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    htmlFor="grid-password">
+                                    Question {{qust_num}}
+                                </label>
+                                <input type="text" formControlName="question"
+                                    placeholder="enter the question you want users to answer here..."
+                                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                                <div *ngIf="submitted  && f.question.errors " class="invalid-feedback">
+                                    <div *ngIf="f.question.errors.required">Question is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-12/12 px-4 mt-8">
+                            <div class="relative w-full mb-3">
+                                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    htmlFor="grid-password">
+                                    Options For Users To Select:
+                                </label>
+                                <input type="text" *ngFor="let option of options; let a=index;"
+                                    formControlName="choice{{a+1}}"
+                                    placeholder="Answer Option {{a+1}} {{a>1 ? '(Optional)':''}}"
+                                    class="border-0 px-3 py-3 mb-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                            </div>
+                            <div class="relative w-full mb-3">
+                                <button *ngIf="options.length <4" type="button"
+                                    class=" ml-1 text-blue-600 font-bold px-2 py-1 absolute right-0 outline-none focus:outline-none mr-1 mb-1 bg-blueGray-200 active:bg-blueGray-200 text-sm ease-linear transition-all duration-150"
+                                    (click)="increaseOptions()">
+                                    + add option
+                                </button>
+                                <button *ngIf="options.length  > 2" type="button"
+                                    class=" ml-1 text-red-600 font-bold px-2 py-1 outline-none focus:outline-none mr-1 mb-1 text-sm ease-linear transition-all duration-150"
+                                    (click)="decreaseOptions()">
+                                    <i class="fa fa-trash"></i> remove last option
+                                </button>
+                            </div>
+                            <br>
+                            <button (click)="saveQuestionChanges()" type="button"
+                                class="rounded-full ml-1 text-white font-bold px-3 py-3 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 text-sm shadow hover:shadow-lg ease-linear transition-all duration-150">
+                                Save Changes
+                            </button>
+                            
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+            <hr> -->
+            <!-- <button *ngIf="stage == 2" [disabled]="loading" type="submit"
+                class="rounded-full ml-1 mt-8 text-white font-bold px-3 py-3 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 text-sm shadow hover:shadow-lg ease-linear transition-all duration-150">
+                <loading-spinner *ngIf="loading"></loading-spinner>
+                Create Survey
+            </button> -->
+        <!-- </form> -->
+    </div>
+    <div class="w-full lg:w-4/12 px-4 mt-3">
+        <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                Created Questions
+            </label>
+        </div>
+        <div>
+            <div *ngFor="let question of questions; let i=index;" class="single-question">
+                <p class="q-txt-1 text-blueGray-600 font-normal leading-normal mb-2">{{i+1}}. {{question.content}}</p>
+                <div class="opt-container flex flex-wrap">
+                    <div class="w-full lg:w-6/12 mb-4"
+                        *ngFor="let choice of returnArray(question.choices); let a=index;">
+                        <p class=""><input readonly style=" pointer-events: none;" type="checkbox" /> {{choice.text}}
+                        </p>
+                    </div>
+                    <button type="button" class="btn btn-sm" (click)="editQuestion(question, i)">
+                        <i class="fa fa-edit"></i> edit question
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="questions.length < 1">
+            <i>No questions created</i>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <button *ngIf="stage == 1 && currentMode !== 'editing'" (click)="stage = 2" type="submit"
+            class="rounded-full ml-1 text-white font-bold px-3 py-3 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 text-sm shadow hover:shadow-lg ease-linear transition-all duration-150">
+            Add Question
+        </button>
+    </div>
+</div>

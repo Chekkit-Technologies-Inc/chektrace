@@ -1,0 +1,324 @@
+<div class=" mt-4">
+    <!-- <div #mycanvas id="mycanvas"></div> -->
+    <div #barcodeCanvas id="barcodeCanvas"></div>
+
+    <form class="form-horizontal" role="form" [formGroup]="subProductForm" (ngSubmit)="onSubmit()">
+        <div class="w-full mb-12 px-4">
+            <div class="relative page-content flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
+            ngClass="bg-white"
+            >
+            <div class="block w-full overflow-x-auto px-4" *ngIf="stage == 1">
+                <div class="flex flex-wrap mt-4">
+                    <div class="w-full mb-12 px-4">
+                        <div class=" flex justify-center mb-6 mt-8">
+                            <img class="h-12 w-36 bg-white" src="assets/img/chekkitlogoo.png" />
+                        </div>
+                        <h5 class="text-2xl  text-center font-normal leading-normal mt-0 mb-2 text-blueGray-800">
+                            Set up authentication labels in 5 minutes
+                        </h5>
+                        <p class="text-sm text-center font-light leading-relaxed mt-2 mb-4 text-blueGray-800">
+                            please select what method you are interested in
+                        </p>
+                       
+                        <div class="container px-4 mx-auto">
+                            <div class="flex flex-wrap">
+                              <div class="w-full px-4 flex-1">
+                                <div class="text-sm block text-center my-4 p-3 text-blueGray-700 rounded  shadow-lg  border-blueGray-100">
+                                    <img class="h-36 mx-auto w-36 bg-white" src="assets/img/coins.png" />
+                                    <input type="radio" formControlName="mode" id="new" value="new" /> <label class="ml-2 cursor-pointer" for="new">Request Serial Code</label>
+                                </div>
+                              </div>
+                              <div class="w-full px-4 flex-1">
+                                <div class="text-sm block text-center my-4 p-3 text-blueGray-700 rounded  shadow-lg  border-blueGray-100">
+                                    <img class="h-36 mx-auto w-36 bg-white" src="assets/img/monitor.png" />
+                                    <input type="radio" formControlName="mode" id="reassignment" value="reassignment" /> <label class="ml-2 cursor-pointer" for="reassignment">Request Sticker Labels</label>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="flex mb-12 justify-center">
+                    
+                    <div class="">
+                        <button (click)="stage = 2" type="submit" class="self-auto  ml-1 text-white font-bold px-12 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-800 active:bg-blueGray-600 text-sm shadow hover:shadow-lg ease-linear transition-all duration-150" >
+                            Get Started
+                        </button>
+                        <!-- <button (click)="generateQR()">Click to render</button> -->
+                    </div>
+                </div> 
+            </div>
+            <div class="block w-full overflow-x-auto px-4" *ngIf="stage == 2">
+                <div class="flex flex-wrap mt-4">
+                    <div class="w-full mb-12 px-4">
+                        <h5 class="text-2xl  text-center font-normal leading-normal mt-0 mb-2 text-blueGray-800">
+                            How do you want the labels to be printed
+                        </h5>
+                        <div class="container px-4 mx-auto">
+                            <div class="flex flex-wrap">
+                                <div class="w-full px-4 flex-1">
+                                  <div class="text-sm block text-center my-4 p-3 text-blueGray-700 rounded  shadow-lg  border-blueGray-100">
+                                      <img class="h-36 mx-auto w-36 bg-white mb-4" src="assets/img/dm-sample.gif" />
+                                      <input type="radio" id="mc" value="matrix_code" formControlName="code_format" /> <label class="ml-2 cursor-pointer" for="mc">Data Matrix Code</label>
+                                  </div>
+                                </div>
+                                <div class="w-full px-4 flex-1">
+                                  <div class="text-sm block text-center my-4 p-3 text-blueGray-700 rounded  shadow-lg  border-blueGray-100">
+                                      <img class="h-36 mx-auto w-36 bg-white mb-4" src="assets/img/qrcode.gif" />
+                                      <input type="radio" value="qr_code" id="qr" formControlName="code_format" /> <label class="ml-2 cursor-pointer" for="qr">QR Code</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex mb-12 justify-center">
+                    
+                    <div class="">
+                        <button (click)="stage = 3" type="submit" class="self-auto  ml-1 text-white font-bold px-12 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-800 active:bg-blueGray-600 text-sm shadow hover:shadow-lg ease-linear transition-all duration-150" >
+                            Get Started
+                        </button>
+                        <button (click)="stage = 1" type="submit" class="self-auto  ml-1 text-black font-bold px-12 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-white text-sm shadow hover:shadow-lg ease-linear transition-all duration-150" >
+                            Back
+                        </button>
+                    </div>
+                </div> 
+            </div>
+            <div class="px-4 pb-4 pt-12" *ngIf="stage == 3">
+                <div *ngIf="subProductForm.value.mode == 'new'" class="flex-auto px-4 lg:px-10 py-10 pt-0">
+                    <h5 class="text-2xl  text-center font-normal leading-normal mt-0 mb-2 text-blueGray-800">
+                        Submit Batch Details
+                    </h5>
+                    <div class="relative w-full mb-8">
+                        <label
+                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                        >
+                        Batch Name
+                        </label>
+                        <input
+                        type="text" 
+                        formControlName="product_name"
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Input Batch Name"
+                        />
+                        <div *ngIf="submitted && f.product_name.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                        <span class="inline-block align-middle mr-8">
+                            <b class="capitalize">warning!</b> Batch Name is required
+                        </span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap mb-8">
+                        <div class="w-full lg:w-6/12 pr-4 pt-4">
+                            <div class="relative w-full mb-3">
+                                <label
+                                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    htmlFor="grid-password"
+                                >
+                                    Production Date
+                                </label>
+                                <input
+                                    type="date"
+                                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                    formControlName="production_date"
+                                />
+                                <div *ngIf="submitted && f.production_date.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                                    <span class="inline-block align-middle mr-8">
+                                        <b class="capitalize">warning!</b> This field is required
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-6/12 pt-4">
+                            <div class="relative w-full mb-3">
+                                <label
+                                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    htmlFor="grid-password"
+                                >
+                                    Expiry Date
+                                </label>
+                                <input
+                                    type="date"
+                                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                    formControlName="expiry_date"
+                                />
+                                <div *ngIf="submitted && f.expiry_date.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                                    <span class="inline-block align-middle mr-8">
+                                        <b class="capitalize">warning!</b> This field is required
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative w-full mb-8">
+                        <label
+                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        htmlFor="grid-password">
+                            Please select the survey you want to attach to this Product.
+                        </label>
+                        <select class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" formControlName="survey_id">
+                            <option value="" disabled>{{!save_survey?'loading...':'--Select Survey--'}}</option>
+                            <option *ngFor="let survey of save_survey"
+                                value="{{survey.id}}">{{survey.title}}</option>
+                        </select>
+                        <div *ngIf="submitted2 && f.surveyId.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                            <span class="inline-block align-middle mr-8">
+                                <b class="capitalize">warning!</b> This field is required
+                            </span>
+                        </div>
+                    </div>
+                    <div class="relative w-full mb-8">
+                        <label class="form-control inline-flex items-center cursor-pointer" style="margin-bottom: 40px;">
+                            <input
+                                [disabled]="!defaultReward"
+                                id="customCheckLogin"
+                                type="checkbox"
+                                [(ngModel)]="useDefault"
+                                [ngModelOptions]="{standalone: true}"
+                                (change)="checkValue(useDefault?1:0)"
+                                class="form-checkbox border-1 text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150 rounded"
+                            />
+                            <span class="ml-2 text-sm font-semibold text-blueGray-600">
+                                Use chekkit default reward
+                            </span>
+                        </label>
+                    </div>
+                    <div class="relative w-full mb-8">
+                        <label
+                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        htmlFor="grid-password">
+                        Please select the reward you want to attach to this Product.
+                        </label>
+                        <select class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" formControlName="reward_id">
+                            <option value="" disabled>{{!save_surveyReward?'loading...':'--Select Reward--'}}</option>
+                            <option *ngFor="let reward of save_surveyReward" value="{{reward.id}}">
+                                {{reward.reward_type}}
+                                {{reward.reward_value}}
+                            </option>
+                        </select>
+                        <div *ngIf="submitted2 && f.reward_id.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                            <span class="inline-block align-middle mr-8">
+                                <b class="capitalize">warning!</b> This field is required
+                            </span>
+                        </div>
+                    </div>        
+                    <div class="text-center mt-6">
+                        <button
+                            [disabled]="loading || (subProductForm.invalid && !useDefault)"
+                            class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                            type="submit" >
+                            <loading-spinner *ngIf="loading" ></loading-spinner>                                    
+                            Save and Generate Code For This Batch
+                        </button>
+                        <button
+                            (click)="stage = 2"
+                            class="mt-4 bg-white text-black active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                            type="button" >
+                            Back
+                        </button>
+                        
+                    </div>
+                </div>
+                <div *ngIf="subProductForm.value.mode == 'reassignment'" class="flex-auto px-4 lg:px-10 py-10 pt-0">
+                    <form class="form-horizontal" role="form" [formGroup]="requestLabelsForm" (ngSubmit)="onSubmit()">
+                        <div *ngIf="!showingSummary">
+                            <h5 class="text-2xl  text-center font-normal leading-normal mt-0 mb-2 text-blueGray-800">
+                                Request Labels
+                            </h5>
+
+                            <div class="relative w-full mb-8">
+                                <label
+                                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                htmlFor="grid-password">
+                                    Please select the batch you want to request labels for.
+                                </label>
+                                <select (ngModelChange)='onBatchSelected($event)' [ngModel]="selectedBatch"  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" formControlName="subProductId">
+                                    <option value="" disabled>{{!batches?'loading...':'--Select Batch--'}}</option>
+                                    <option *ngFor="let batch of batches"
+                                        [ngValue]="batches[0]">{{batch.product_name}}</option>
+                                </select>
+                                <!-- <div *ngIf="submitted2 && f.surveyId.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                                    <span class="inline-block align-middle mr-8">
+                                        <b class="capitalize">warning!</b> This field is required
+                                    </span>
+                                </div> -->
+                            </div>
+                            <div class="relative w-full mb-8">
+                                <label
+                                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                htmlFor="grid-password">
+                                    Number of Pins You Want To Generate
+                                </label>
+                                <input
+                                type="number" 
+                                formControlName="quantity"
+                                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                placeholder="e.g. 1,2,1000"
+                                />
+                                <div *ngIf="submitted && f.pin_quantity.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                                <span class="inline-block align-middle mr-8">
+                                    <b class="capitalize">warning!</b> Quantity is required
+                                </span>
+                                </div>
+                            </div>      
+                            <div class="text-center mt-6">
+                                <button
+                                    [disabled]="requestLabelsForm.invalid "
+                                    (click)="showingSummary = true"
+                                    class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                                    type="button" >
+                                    Continue
+                                </button>
+                                <button
+                                    (click)="stage = 2"
+                                    class="bg-white mt-4 text-black active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                                    type="button" >
+                                    Back
+                                </button>
+                                
+                            </div>
+                        </div>
+
+                        <div *ngIf="showingSummary" >
+                            <!-- <pin-card [size]="'small'" [code_format]="'matrix_code'" [gtin]="pin?.pin_value" [exp]="batchObject.expiry_date | date:'MM/YYYY'" [lotNo]="batchObject.batch_num" [sgtin]="'1000' + pin.id"></pin-card> -->
+
+                            <div class="text-blueGray-600 text-center mb-3 text-xl font-bold">
+                                Sample Code
+                            </div>
+                            <div class="w-full" style=" display: flex; justify-content: center;">
+                                <pin-card *ngIf="selectedBatch" [size]="'large'" [code_format]="selectedBatch.code_format" [sgtin]="'2611720728355666'" [exp]="selectedBatch.expiry_date  | date:'YYMMdd'" [lotNo]="selectedBatch.batch_num" [gtin]="'10015907611'"></pin-card>
+                            </div>
+                            <div class="text-center mt-12">
+                                <button
+                                    (click)="onSubmitRequest()"
+                                    class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                                    type="button" >
+                                    <loading-spinner *ngIf="loading2" ></loading-spinner>                                    
+                                    Submit Label Request
+                                </button>
+                                <button
+                                    (click)="showingSummary = false"
+                                    class="bg-white mt-4 text-black active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                                    type="button" >
+                                    Back
+                                </button>
+                                
+                            </div>
+                        </div>
+                    </form>
+
+                    
+                </div>
+
+
+            </div>
+        </div>
+            
+
+        </div>
+    </form>
+</div>
+  

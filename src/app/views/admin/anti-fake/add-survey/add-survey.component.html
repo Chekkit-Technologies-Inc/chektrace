@@ -1,0 +1,108 @@
+<div class="my-16 w-100 px-16">
+
+  <div class="px-16  h-100" *ngIf="viewSurvey">
+    <p class="text-blueGray-700 font-bold my-16"><i class="fa">&#xf060;</i> &nbsp;Back</p>
+
+    <div class="flex w-full px-16">
+
+      <p class=" flex-1 text-4xl text-blueGray-700 font-semibold ">Attach Survey To Campaign</p>
+
+      <div class="w-full sm:ml-3 md:ml-2 lg:ml-2 flex-1 text-right">
+
+        <p class=" py-4 m-3 px-8 text-blueGray-700 transition-colors duration-150 font-bold cursor-pointer"
+          (click)="createSurvey()"><i class="fa">&#xf055;</i>&nbsp;Create New Survey</p>
+
+      </div>
+
+    </div>
+    <br><br>
+
+    <!-- table header -->
+    <div class="flex bg-white justify-between px-4 p-4 my-8">
+      <div class="flex-1 text-center">
+
+        <p class="font-bold"><span>
+            <input type="checkbox">
+          </span> &nbsp;&nbsp; S/N
+        </p>
+      </div>
+      <div class="flex-1 text-center font-bold">
+        Survey Name
+      </div>
+      <div class="flex-1 text-center font-bold">
+        Questions
+      </div>
+      <div class="flex-1 text-center font-bold">
+        Date Created
+      </div>
+      <div class="flex-1 text-center font-bold">
+        Batch Number
+      </div>
+      <div class="flex-1 text-center font-bold">
+        Action
+      </div>
+    </div>
+    <!-- table content starts-->
+
+    <div class="flex bg-blueGray-200 mt-4 rounded-3xl justify-between px-4 p-6"
+      *ngFor="let survey of surveys | paginate: { itemsPerPage: 10, currentPage: p }; let i = index;   ">
+      <div class="flex-1 text-center font-semibold">
+
+        <p><span>
+            <!-- <input type="checkbox"> -->
+          </span> &nbsp;&nbsp; {{i + 1}}</p>
+      </div>
+      <div class="flex-1 text-center font-semibold">
+        {{survey.title}}
+      </div>
+      <div class="flex-1 text-center font-semibold">
+        {{survey.questions_count}}
+      </div>
+      <div class="flex-1 text-center font-semibold   ">
+
+        {{survey.created_at | date: 'longDate'}}
+      </div>
+      <div class="flex-1 text-center font-semibold">
+        32
+      </div>
+      <div class="flex-1 text-center font-semibold">
+        <span class="text-green-400">EDIT</span> | <span class="text-blueGray-700">DUPLICATE</span>
+      </div>
+    </div>
+    <div class="w-100 text-center p-3 mt-5" >
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+     </div>
+
+
+    <div class="flex w-100 px-16 my-8 justify-between">
+
+      <button
+        class="border border-blueGray-500 py-4 px-32 w-100 text-blueGray-800 transition-colors duration-150 bg-white rounded-lg focus:shadow-outline hover:bg-blueGray-600 font-bold">SKIP</button>
+
+
+      <button
+        class="border border-blueGray-500 py-4 px-32 w-100 text-white transition-colors duration-150 bg-blueGray-700 rounded-lg focus:shadow-outline hover:bg-blueGray-600 font-bold">CONTINUE</button>
+
+
+
+    </div>
+  </div>
+
+  <div *ngIf="addSurvey" class="">
+    <div class="flex-auto px-4 lg:px-10 pt-0">
+      <div class="text-left font-bold text-blueGray-800 my-4 cursor-pointer " (click)="goHome()">
+        <span><i class="fa fa-arrow-left text-sm "></i></span> &nbsp; &nbsp; <span>Home</span>
+
+      </div>
+      <div class="font-bold text-blueGray-800 text-2xl pt-8 ">
+        Step 2: Setup Surveys
+      </div>
+      <app-attach-survey (assignRewards)="onSuccess($event)" ></app-attach-survey>
+
+
+    </div>
+
+  </div>
+
+
+</div>

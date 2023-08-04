@@ -1,0 +1,26 @@
+<div class="container px-2 py-2 mx-auto label-review rounded border border-solid border-blueGray-400" [ngClass]="sizeValue == 'small' ? 'label-review-sm' : 'label-review-lg'">
+    <div class="flex flex-wrap">
+        <div class="w-full flex justify-center items-center px-4 md:w-4/12 img-cont">
+            <img class="" *ngIf="codeFormatValue == 'matrix_code'" src="https://bwipjs-api.metafloor.com/?bcid=datamatrix&text={{gtinValue}}" />
+            <!-- <qrcode *ngIf="codeFormatValue == 'matrix_code'" [qrdata]="'Your data string'" [width]="256" [errorCorrectionLevel]="'M'"></qrcode> -->
+            <qrcode *ngIf="codeFormatValue !== 'matrix_code'" class="_code" [qrdata]="gtinValue" [width]="65" [height]="65" [errorCorrectionLevel]="'M'"></qrcode>
+        </div>
+        <div class="w-1/2 px-2 my-2 p-3 md:w-8/12 text-cont">
+            <h5 class="font-normal mt-0 label-txt">
+                <span>GTIN</span> {{gtinValue}}
+            </h5>
+            <h5 class=" font-normal mt-0 label-txt">
+                <span>EXP</span> {{expValue}}
+            </h5>
+            <h5 class=" font-normal mt-0 label-txt">
+                <span>LOT No.</span> {{lotnoValue}}
+            </h5>
+            <h5 class=" font-normal mt-0 label-txt">
+                <span>S/N</span> {{sgtinValue}}
+            </h5>
+        </div>
+    </div>
+    <div class="text-center btm-txt">
+        Verify with https://chekkit.app <br> Download ChekkitApp on appstore
+    </div>
+</div>

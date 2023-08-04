@@ -1,0 +1,277 @@
+
+<div class="sm:mt-12 md:mt-12 mt-3">
+
+<div *ngIf="nextStep == 1" class="px-8 sm:pt-10 md:pt-10" >
+    <div class=" md:my-10 sm:my-10 mt-4" >
+        <p class="text-sm sm:text-lg md:text-lg" ><i class="fa">&#xf060;</i>&nbsp;&nbsp;
+            <span class="font-bold text-blueGray-700 cursor-pointer font-lg " (click)="prevStep()">Back</span>
+        </p>
+    </div>
+    <div class="w-full sm:my-4 md:my-4 m-2 bn">
+
+        <div class=" bg-white shadow-lg rounded-lg w-auto p-4 text-sm sm:text-2xl md:text-2xl font-light sm:font-bold md:float-right sm:float-right">
+            Batch Number: &nbsp;<span class="md:text-lg sm:text-lg font-bold" *ngIf="this.batchNum"> {{this.batchNum}} </span>
+        </div>
+    </div>
+    <div class=" w-100 border-l-4 pl-8  mt-4">
+        <div class="basis-2/3 my-10 border-green " >
+            <!-- <p class="font-bold text-blueGray-600 text-2xl" >Step 2</p> -->
+            <h2 class="font-bold text-blueGray-800 md:text-3xl text-md sm:text-3xl " >Comissioning </h2>
+        </div>
+        <div class="sm:flex md:flex justify-between">
+            <div class="w-100 flex-1">
+                <br>
+                <div *ngIf="!commissionAll" >
+                    <div>
+                        <div class="text-blueGray-700 font-bold text-lg" >Serial Number Range</div>
+                        <input (keydown.space)="$event.preventDefault()" class="border-2 border-blueGray-500 p-4 m-5 rounded rounded-full w-full  " [(ngModel)]="serial_range" name="serial_range" placeholder="Enter Serial Number Range" />
+                    </div>
+                    <p class="text-blueGray-700 font-bold text-right w-full my-10" >
+                        <span class="cursor-pointer " (click)="addMore()" > <i  class="fa ">&#xf055;</i> &nbsp;&nbsp; Add More </span>
+                        
+                    </p>
+                </div>
+                
+                <p class="text-blueGray-700 text-lg font-bold w-full my-10" >
+                    Commission entire batch ? &nbsp;&nbsp;&nbsp; <input type="checkbox" (change)="comissionAll()" />
+                    
+                </p>
+
+
+                <div class="my-10 p-4 " *ngIf="serialRange">
+                    <span *ngFor="let serial of serialRange" class="bg-blueGray-200 p-5 border-2 border-blueGray-500 rounded-3xl m-3 px-12" > {{serial}} </span>
+                </div>
+                <button class="p-5 bg-blueGray-800 px-12 rounded-3xl text-center text-white text-lg w-full" [disabled]="loading" (click)="comissionProduct()" >
+                    <span *ngIf="!loading" >Submit</span>
+                    <span *ngIf="loading" >
+                    <img class="inline-flex " src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
+                    </span>
+                </button>
+            </div>
+            <div class="flex-1 m-3 hidden sm:block md:block ">
+
+                <div  *ngIf="!commissionAll">
+                    <div class="text-center m-4 text-2xl font-bold text-blueGray-800 mb-5">Serial Number Ranges</div>
+
+                    <div class="grid grid-cols-3 gap-4 w-full my-5 ">
+                        <div *ngFor="let package of packageLevel" class="text-center w-100  "  >
+                            <p class="text-blueGray-800 text-2xl font-bold  mb-4 " >
+                                <span class="border-2 border-blueGray-500 p-3 px-5 rounded " >
+                                    {{package.serial_no_range}} &nbsp;&nbsp;&nbsp; <i class="fa cursor-pointer " (click)="copySerial(package.serial_no_range)" >&#xf24d;</i>
+                                </span>
+                            </p>
+    
+                        </div>
+                    </div>
+                </div>
+                
+
+                
+
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<div *ngIf="nextStep == 2" class="px-8" >
+    <div class="success-body text-center ">
+
+        <div class="success-image">
+            <img src="../../../../assets/img/success-image.png" class="m-auto ssimg" alt="" srcset="">
+
+            <p class="text-3xl font-bold text-blueGray-700 my-5">Comission Was successful</p>
+            <div class="my-5">
+                <button
+                    class="bg-blueGray-600 rounded-2xl text-white py-2 font-bold text-2xl px-12 hover:bg-blueGray-500" (click)="packingSummary()"
+                    >
+                    Proceed To Summary
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<div *ngIf="nextStep == 8" class="mt-5 py-5 bg-blueGray-200 border-t-2 border-blueGray-300">
+    <div *ngIf="showModal"
+    class="bg-blueGray-600 bg-opacity-25 h-screen w-screen absolute inset-0 flex justify-center item-center" (click)="closeModal()">
+    <div
+        class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+        <div class="relative w-auto my-6 mx-auto max-w-6xl modal-body">
+            <!--content-->
+            <div
+                class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none modal-body">
+                <!--header-->
+                <!-- <div class="flex items-start justify-between p-5  rounded-t">
+
+                    <button
+                        class="p-4 rounded-2xl ml-auto bg-blueGray-700 border-0 text-white float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                        (click)="closeModal()">
+                        <span
+                            class=" text-white  h-6 w-6 text-2xl block outline-none focus:outline-none">
+                            <i style="font-size:24px; " class="fa">&#xf00d;</i>
+                        </span>
+                    </button>
+                </div> -->
+                <!--body-->
+                <div class="relative p-6 w-100 flex-auto">
+                    <div class="text-center m-5 ">
+
+                        <p class="font-bold text-blueGray-700 text-lg my-5">Are you willing to attach survey to access consumer insights ? </p>
+
+
+                    </div>
+
+                    <div class="w-100 text-center flex justify-between">
+                        <button
+                        (click)="gotoShipping()"
+                            class="bg-blueGray-700  text-white active:bg-blueGray-700 text-lg font-bold px-12 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+
+                            No, Skip This
+                        </button>
+                        <button
+                            class="bg-blueGray-700  text-white active:bg-blueGray-700 text-lg font-bold px-12 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            (click)="attachSurvey()">
+
+                            Yes, Attach Survey
+                        </button>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <br><br>
+    <div class="sm:flex md:flex justify-between my-8 md:px-8">
+        <div class="flex-1">
+            <p class="md:text-3xl sm:text-3xl font-bold text-blueGray-800" >Packing Summary</p>
+        </div>
+        <div class="flex-1 xs:flex sm:text-right md:text-right">
+            <span class="bg-white rounded-lg p-4 px-12 text-blueGray-800 border-2 border-blueGray-500 text-lg mx-2" >
+                Export
+            </span>
+
+            <span class="bg-blueGray-800 border-2 border-blueGray-500 rounded-2xl p-4 px-12 text-white font-lg mx-4 font-semibold" >
+                Print
+            </span>
+        </div>
+    </div>
+    <br><br>
+    <div class=" my-10 md:px-8 ">
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <p class="text-blueGray-800 font-bold sm:text-2xl md:text-2xl text-md  my-5 " >Product Information</p>
+            <div class="sm:grid md:grid grid-cols-3 gap-4 bg-white  rounded-lg p-5 ">
+                <div class=" m-4 w-100 ">
+                    
+                    <img src="../../../../../assets/img/capsule-pack.png"  alt="" srcset="">
+                </div>
+                <div class="col-span-2 m-4 ">
+                    <p class="text-lg text-blueGray-800 font-bold " >Product Name</p>
+                    <p class="text-2xl text-blueGray-800 font-bold "  > {{this.productName}} </p>
+                    <br>
+                    <p class="text-md text-blueGray-800 font-bold " >Product Description</p>
+                    <p class="text-lg text-blueGray-800 font-bold " >
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique
+                        nam placeat perferendis autem sint sunt 
+                        incidunt minus provident nulla beatae dicta accusamus, odit, 
+                        assumenda rerum quas veritatis, accusantium quo. Quam!
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, magnam natus
+                        cum enim ex vel. Aliquid inventore obcaecati ut perferendis porro? 
+                        Omnis quo accusamus in fugiat dolorem incidunt quaerat neque?
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-between">
+            <div class="flex-1 m-5">
+                <div class="bg-white shadow m-5 p-5 rounded-lg ">
+                    <p class="text-lg text-blueGray-800 font-bold my-4"  >Batch Information</p>
+
+                    <div class="bg-blueGray-200 rounded-lg p-3 rounded-lg flex justify-between">
+                        <div> 
+                            <p class="text-blueGray-700" >GTIN </p>
+                            <p class="font-bold " > {{this.gtin}} </p>
+                        </div>
+                        <div>
+                            <p class="text-blueGray-700"  >Production Date</p>
+                            <p>
+                                {{this.productionDate | date: 'longDate'}}
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-blueGray-700"  >Expiry Date</p>
+                            <p> {{this.productExpiry | date: 'longDate' }} </p>
+                        </div>
+                        <div>
+                            <p class="text-blueGray-700"  >Batch Number</p>
+                            <p>
+                                {{this.batchNum}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-1 m-5 ">
+                <div class="bg-white shadow m-5 p-5 rounded-lg">
+                    <p class="text-lg text-blueGray-800 font-bold my-4"  >Packaging Information</p>
+
+                    <div class="bg-blueGray-200 rounded-lg p-3 rounded-lg flex justify-between">
+                        <div> 
+                            <p class="text-blueGray-700" >Tertiary</p>
+                            <p> {{this.tertiary_value}} pallets</p>
+                        </div>
+                        
+                        <div>
+                            <p class="text-blueGray-700"  >Secondary</p>
+                            <p> {{this.secondary_value }} Boxes</p>
+                        </div>
+                        <div>
+                            <p class="text-blueGray-700"  >Primary</p>
+                            <p>
+                                {{this.primary_value}} Packages
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white rounded-lg shadow p-5 ">
+            <div class="flex justify-between m-4 p-4">
+                <div class="flex-1 text-center ">
+                    Package Level
+                </div>
+                <div class="flex-1 text-center ">
+                    Number of Package Level
+                </div>
+                <div class="flex-1 text-center ">
+                    Serial Number Range
+                </div>
+            </div>
+            <hr>
+            <div class="flex justify-between m-4 p-5 bg-blueGray-200"  *ngFor="let package of packageLevel"  >
+                <div class="flex-1 text-center">{{package.level}} </div>
+                <div class="flex-1 text-center">{{package.quantity}}</div>
+                <div class="flex-1 text-center">{{package.serial_no_range}}</div>
+            </div>
+        </div>
+       
+
+
+        <p class="my-5 text-center text-lg text-blueGray-800 font-bold cursor-pointer" (click)="toggleModal()" > Proceed &nbsp; <i  class="fa">&#xf0a9;</i> </p>
+    </div>
+
+    
+
+</div>
+</div>
+
+

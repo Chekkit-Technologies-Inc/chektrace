@@ -1,0 +1,115 @@
+<div class="flex flex-wrap mt-4">
+    <div class="w-full mb-12 px-4">
+        <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
+        ngClass="bg-white"
+        >
+            <div class="block w-full overflow-x-auto">
+                <div class="flex flex-wrap mt-4">
+                    <div class="w-full mb-12 px-4">
+                        <h5 class="text-2xl  text-center font-bold leading-normal mt-0 mb-2 text-blueGray-800">
+                            Code Collection
+                          </h5>
+                          <p class="text-lg text-center font-light leading-relaxed mt-2 mb-4 text-blueGray-800">
+                            View product pins from your product batches
+                          </p>
+                          
+                    </div>
+                </div>
+                
+                <div class="flex flex-wrap  mb-12">
+                    <div class="block w-full overflow-x-auto">
+                        <table class="items-center w-full bg-transparent border-collapse">
+                        <thead>
+                            <tr>
+                                <th
+                                    class="px-6 align-middle border border-solid py-3  uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                                    [ngClass]="
+                                    color === 'light'
+                                        ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                                        : 'bg-red-800 text-red-300 border-red-700'
+                                    ">
+                                    Product Name
+                                </th>
+                                <th
+                                    class="px-6 align-middle border border-solid py-3 uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                                    [ngClass]="
+                                    color === 'light'
+                                        ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                                        : 'bg-red-800 text-red-300 border-red-700'
+                                    "
+                                >
+                                    Quantity
+                                </th>
+                                <th
+                                    class="px-6 align-middle border border-solid py-3 uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                                    [ngClass]="
+                                    color === 'light'
+                                        ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                                        : 'bg-red-800 text-red-300 border-red-700'
+                                    "
+                                >
+                                    Date Created
+                                </th>
+                                <th
+                                    class="px-6 align-middle border border-solid py-3 uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                                    [ngClass]="
+                                    color === 'light'
+                                        ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                                        : 'bg-red-800 text-red-300 border-red-700'
+                                    "
+                                >
+                                    Actions
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let batch of batches">
+                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-4 text-left flex items-center">
+                                    <img
+                                      [src]="batch.product?batch.product.product_image:'assets/img/no-image.jpeg'"
+                                      class="h-12 w-12 bg-white rounded-full border"
+                                      alt="..."
+                                    />
+                                    <span
+                                      class="ml-3 font-bold"
+                                      [ngClass]="color === 'light' ? 'text-blueGray-600' : 'text-white'"
+                                    >
+                                        {{batch?.product_name}}  
+                                    </span>
+                                </td>
+                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-4">
+                                    {{batch.total_generated_code}}
+                                </td>
+                                <td class="border-t-0 px-6 align-middle text-xs border-l-0 border-r-0 whitespace-nowrap p-4">
+                                    {{batch.created_at | date:'dd/MM/YYYY'}}
+                                </td>
+                                <td
+                                    class="border-t-0 px-6 align-left border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                                >
+                                <button
+                                  routerLink="/dashboard/products/add-product"
+                                  class="rounded border border-solid border-blueGray-700 font-bold uppercase text-xs px-4 py-2 rounded hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                                  type="button">
+                                  View Pins
+                                </button>
+                                <button
+                                  routerLink="/dashboard/products/add-product"
+                                  class="rounded border border-solid border-blueGray-700 font-bold uppercase text-xs px-4 py-2 rounded hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                                  type="button">
+                                  View Batch
+                                </button>
+                                    <!-- <survey-table-dropdown (onViewEvent)="gotoViewSurvey(survey)" (onEditEvent)="gotoEditSurvey(survey)"></survey-table-dropdown> -->
+                                </td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+    </div>
+  </div>
+  

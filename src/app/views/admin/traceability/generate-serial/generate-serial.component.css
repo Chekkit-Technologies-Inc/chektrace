@@ -1,0 +1,12 @@
+.inputRow{
+    display: flex;
+    width: 100% !important;
+}
+
+.myInput{
+    margin: auto;
+}
+
+.modal-body{
+  width: 60%;
+}

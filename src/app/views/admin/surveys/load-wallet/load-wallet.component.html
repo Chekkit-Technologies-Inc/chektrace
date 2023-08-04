@@ -1,0 +1,51 @@
+<div class="flex flex-wrap mt-4">
+    <div class="w-full mb-6 px-6">
+        <img src="../../../../../assets/img/survey-up-right.png" class="h-20 float-right " alt="" srcset="">
+        <div class="relative page-content min-w-0 break-words w-full mb-4 pb-6 px-6 rounded">
+            
+            
+
+            
+
+            <div class="flex-auto lg:px-10 pt-0">
+                <div class="text-left font-bold text-blueGray-800 mb-4 cursor-pointer" (click)="goBack()">
+                    <span><i class="fa fa-arrow-left text-sm "></i></span> &nbsp; &nbsp; <span>Go Back</span>
+
+                </div>
+                <div class="font-bold text-blueGray-800 text-2xl my-6">
+                    Step 2: Load Your Wallet
+                </div>
+                <div class="grid grid-cols-2 gap-6 my-6">
+                    <div class=" rounded-lg bg-blueGray-300 px-6 p-4 md:px-10 lg:px-10 ">
+                        <p class="text-2xl font-bold my-4 " ><b>*347*03#</b></p>
+                        <p class="font-semibold text-md mb-4" >This option costs #10 per<br> message</p>
+                    </div>
+                    <div class=" rounded-lg bg-blueGray-300 px-6 p-4 md:px-10 lg:px-10 ">
+                        <p class="text-2xl font-bold my-4 " ><b>*347*03#</b></p>
+                        <p class="font-bold text-md mb-4" >This option costs #10 per<br> message</p>
+                    </div>
+
+                </div>
+                <p class="my-6 font-thin">PS: before you send any message, you will get a price calculator to show how much you'd be paying. You can top up your wallet with any amount.</p>
+
+                <div class="flex-1 mb-6 md:mb-0 my-6">
+                    <label class="block  tracking-wide text-blueGray-800 text-xs font-bold mb-2"
+                        for="grid-first-name">
+                        <b>Enter Amount</b>
+                    </label>
+                    <input
+                        class="appearance-none block w-full bg-white text-gray-700 border border-red-500 rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        id="grid-first-name" type="text" placeholder="">
+                </div>
+
+                <button class="w-full h-12  text-white transition-colors duration-150 bg-blueGray-800 rounded-lg focus:shadow-outline hover:bg-indigo-800 " (click)="sendMessage()" >Top Up Now</button>
+
+                
+            </div>
+
+            <img src="../../../../../assets/img/survey-bottom-left.png" class="h-20 float-left " alt="" srcset="">
+
+
+        </div>
+    </div>
+</div>

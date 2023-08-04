@@ -1,0 +1,224 @@
+<div class="flex flex-wrap mt-4">
+    <div class="w-full mb-12 px-4">
+        <div class="relative page-content flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
+        ngClass="bg-white"
+        >
+                <div class="block w-full overflow-x-auto px-4" *ngIf="stage == 1">
+                    <div class="flex flex-wrap mt-4">
+                        <div class="w-full mb-12 px-4">
+                            <div class=" flex justify-center mb-6 mt-8">
+                                <img class=" h-12 w-36 bg-white" src="assets/img/chekkitlogoo.png" />
+                            </div>
+                            <h5 class="text-2xl  text-center font-normal leading-normal mt-0 mb-2 text-blueGray-800">
+                                Create Raffle Reward
+                            </h5>
+                            <p class="text-sm text-center font-light leading-relaxed mt-2 mb-4 text-blueGray-800">
+                                Reward your consumers with raffle for taking your survey
+                            </p>
+                            <div class=" flex justify-center">
+                                <img
+                                src="assets/img/survey-pic.png"
+                                style=" height:500px;"
+                                class="animated zoomIn h-350 w-350 bg-white"
+                                alt="..."
+                              />
+                            </div>
+                              
+                        </div>
+                    </div>
+                    
+                    <div class="flex mb-12 justify-center">
+                        
+                        <div class="">
+                            <button (click)="stage = 2" type="submit" class="self-auto  ml-1 text-white font-bold px-12 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-800 active:bg-blueGray-600 text-sm shadow hover:shadow-lg ease-linear transition-all duration-150" >
+                                Get Started
+                            </button>
+                        </div>
+                    </div> 
+                </div>
+            <div class="px-4 pb-4 pt-12" *ngIf="stage == 2">
+                <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+                    <div class="text-blueGray-600 text-center mb-8 text-xl">
+                    Add New Raffle Reward
+                    </div>
+                    <div class="relative w-full mb-12">
+                        <label
+                        class="block text-blueGray-800 mb-2"
+                        htmlFor="grid-password"
+                        >
+                        Raffle Name
+                        </label>
+                        <input
+                        type="text" 
+                        [(ngModel)]="raffleData.reward_value" 
+                        placeholder="e.g. promo"
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        />
+                        <div *ngIf="submitted && !raffleData.reward_value" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                        <span class="inline-block align-middle mr-8">
+                            <b class="capitalize">warning!</b> Raffle Name is required
+                        </span>
+                        </div>
+                    </div>
+                    <div class="relative w-full mb-8 mt-6">
+                        <div class="gift-section-wrapper"> 
+                            <h3 class="text-blueGray-800">Add Gifts To Reward</h3>
+                            <div class="w-full">
+                                <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
+                                <li *ngFor="let gift of raffleData.gifts; let i = index" class="-mb-px mr-2 last:mr-0 text-center" style="width: 20px;">
+                                    <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal" (click)="switchToGift(i)" [ngClass]="{'text-blue-600 bg-white': currentGiftIndex !== i, 'text-white bg-blueGray-600': currentGiftIndex === i}">
+                                        {{i+1}}
+                                    </a>
+                                </li>
+                                </ul>
+                            </div>
+                            <div class="gift-section">
+                                <div class="flex flex-wrap">
+
+                                    <div class="w-full lg:w-6/12 px-4 mt-3">
+                                        <div class="relative w-full mb-3">
+                                            <label
+                                                class="block uppercase text-white text-xs font-bold mb-2"
+                                                htmlFor="grid-password">
+                                                {{uploading?'Uploading Image...':'Upload Gift Image:'}}
+                                            </label>
+                                            <input class="form-control border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" type="file" name="photo" (change)="onFileChange($event)" accept="image/*">
+                                        </div>
+                                    </div>
+
+                                    <div class="w-full lg:w-6/12 px-4 mt-3">
+                                        <div class="relative w-full mb-3">
+                                            <div *ngIf="gift.photo && !uploading" style="display: flex; justify-content: center;" class="text-center">
+                                                <img [src]="gift.photo" height="100px" style="height: 80px;" *ngIf="gift.photo" />
+                                                <div *ngIf="submitted2 && !gift.photo" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                                                    <span class="inline-block align-middle mr-8">
+                                                        <b class="capitalize">warning!</b> Gift photo is required
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="uploading" class="mt-4">
+                                                <div style="width: 60px; height: 60px; padding: 10px; text-align: center;">
+                                                    <loading-spinner ></loading-spinner>                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="w-full lg:w-8/12 px-4 mt-3">
+                                        <label
+                                        class="block uppercase text-white text-xs font-bold mb-2"
+                                        htmlFor="grid-password"
+                                        >
+                                        Name of Gift
+                                        </label>
+                                        <input
+                                        type="text"  
+                                        [(ngModel)]="gift.name" 
+                                        placeholder="e.g. promo"
+                                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                        />
+                                        <div *ngIf="submitted2 && !gift.name" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                                            <span class="inline-block align-middle mr-8">
+                                                <b class="capitalize">warning!</b> Gift Name is required
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="w-full lg:w-4/12 px-4 mt-3">
+                                        <label
+                                        class="block uppercase text-white text-xs font-bold mb-2"
+                                        htmlFor="grid-password"
+                                        >
+                                        Quantity
+                                        </label>
+                                        <input
+                                        type="text" 
+                                        [(ngModel)]="gift.quantity" 
+                                        placeholder="e.g. 1,2"
+                                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                        />
+                                        <div *ngIf="submitted2 && !gift.quantity" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                                        <span class="inline-block align-middle mr-8">
+                                            <b class="capitalize">warning!</b> Quantity is required
+                                        </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="w-full lg:w-12/12 px-4 mt-6">
+                                        <button type="button" (click)="addGift()" class="rounded w-full  ml-1 px-6 py-3 text-white bg-transparent border border-dashed border-white">
+                                            Add Another Gift
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="w-full lg:w-12/12 mt-6">
+                                <button type="button" style="background-color: #15B881;" (click)="onSubmit()" class="rounded bg-teal-600 w-full mt-6 text-white font-bold px-3 py-3 rounded outline-none focus:outline-none mr-1 mb-1 text-sm shadow hover:shadow-lg ease-linear transition-all duration-150">
+                                    <loading-spinner  *ngIf="loading"></loading-spinner>                                    
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                  <!-- <form [formGroup]="dataForm" (ngSubmit)="onSubmit()" >
+                    <div class="relative w-full mb-8">
+                      <label
+                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        Airtime Naira Value
+                      </label>
+                      <input
+                        type="text" 
+                        formControlName="reward_value"
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Eg: 50,100"
+                      />
+                      <div *ngIf="submitted && f.reward_value.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                        <span class="inline-block align-middle mr-8">
+                          <b class="capitalize">warning!</b> Airtime Naira value is required
+                        </span>
+                      </div>
+                    </div>
+                    <div class="relative w-full mb-8">
+                      <label
+                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                      Airtime Units
+                      </label>
+                      <input
+                        type="number" 
+                        formControlName="reward_quant"
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="eg: 100, 200, 300"
+                      />
+                      <div *ngIf="submitted && f.reward_quant.errors" class="text-white px-4 py-1 border-0 rounded relative mb-4 bg-red-400 mt-4">
+                        <span class="inline-block align-middle mr-8">
+                          <b class="capitalize">warning!</b> Airtime value is required
+                        </span>
+                      </div>
+                    </div>
+        
+                    <div class="text-center mt-6">
+                      <button
+                        [disabled]="loading"
+                        class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                        type="submit"
+                      >
+                        <loading-spinner *ngIf="loading" ></loading-spinner>                                    
+                        Submit
+                      </button>
+                      
+                    </div>
+                  </form> -->
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
+  </div>
+  

@@ -1,0 +1,82 @@
+<div class="flex flex-wrap mt-4">
+    <div class="w-full mb-12 px-4">
+        <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
+        ngClass="bg-white"
+        >
+
+            <div class="flex flex-wrap mt-4">
+                <div class="w-full mb-12 px-4">
+                    <h5 class="text-2xl  text-center font-bold leading-normal mt-0 mb-2 text-blueGray-800">
+                        Products List
+                      </h5>
+                      <p class="text-lg text-center font-light leading-relaxed mt-2 mb-4 text-blueGray-800">
+                        View products created on your account
+                      </p>
+                      <button
+                      style="float: right;"
+                        [hidden]="!utility.hasPermission(25)" routerLink="/dashboard/products/add-product"
+                        class="active:bg-red-700 text-right rounded border border-solid border-blueGray-700 font-bold uppercase text-xs px-4 py-2 rounded hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                        type="button">
+                        <i class="fas fa-plus"></i>
+                        Add New Product
+                      </button>                      
+                </div>
+            </div>
+
+            <div class="block w-full overflow-x-auto">
+                <div class="flex flex-wrap">
+                    <div *ngFor="let product of save_products" class="w-full lg:w-4/12 px-4">
+                        <div class="relative product-card flex flex-col min-w-0 break-words bg-white w-full mb-6 border border-solid border-blueGray-700 rounded-lg mt-8">
+                            <div class="px-6">
+                                <div class="flex flex-wrap justify-center">
+                                    <div class="w-full px-4 pt-8 flex justify-center">
+                                        <div class="relative">
+                                            <img alt="..."
+                                                src="{{product.product_image}}" 
+                                                height="80px"
+                                                onerror="this.onerror=null;this.src='assets/theme/images/lonart.jpg';"
+                                                class="rounded-full align-midddle max-w-150-px product-img"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="w-full px-4 text-center mt-10">
+                                        <div class="flex justify-center py-4 lg:pt-2 pt-2">
+                                            <div class="mr-4 text-center cursor-pointer" [hidden]="!utility.hasPermission(26)" (click)="ViewProduct(product)">
+                                                <span class="text-sm text-blueGray-900"><i class="fas fa-eye mr-1 text-lg text-blueGray-400"></i> View Batches</span>
+                                            </div>
+                                            <div class="text-center cursor-pointer" [hidden]="!utility.hasPermission(24)" (click)="CreateBatch(product)">
+                                                <span class="text-sm text-teal-400"><i class="fas fa-plus mr-1 text-lg text-blueGray-400"></i> Create New Batch</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center mt-1">
+                                    <h3 class="text-xl font-bold leading-normal mb-2 text-blueGray-700 mb-2" >
+                                        {{product.product_name}} 
+                                    </h3>
+                                    <div class="text-sm leading-normal mt-0 mb-8 text-blueGray-400 font-bold uppercase"  >
+                                        ({{product.id_range}})
+                                    </div>
+                                </div>
+                                <div class="mt-2 py-10 border-t border-blueGray-200 text-center">
+                                    <div class="flex flex-wrap justify-center">
+                                        <div class="w-full lg:w-12/12 px-4">
+                                        <p class="mb-4 text-lg leading-relaxed text-blueGray-700">
+                                            {{product.product_description}}
+                                        </p>
+                                        <a href="javascript:void(0);" [hidden]="!utility.hasPermission(27)" (click)="editProduct(product)" class="font-normal text-xs px-4 py-2 rounded-full border border-solid border-blueGray-700 text-blueGray-600 ">
+                                            Edit Product
+                                        </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+  </div>
+  

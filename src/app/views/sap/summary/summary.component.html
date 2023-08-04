@@ -1,0 +1,105 @@
+<div class="flex flex-wrap mt-4" >
+    <div class="w-full mb-12 px-4">
+        <div class="relative page-content px-8 flex min-w-0 break-words w-full mb-6 shadow-lg rounded" ngClass="bg-sap">
+            <div class="block w-full overflow-x-auto px-4">
+                
+                <div class="flex">
+                    <h2 class="title"><span class="sap">Summary</span></h2>
+                </div>
+                <div class="flex justify-end">
+                    <ul class="flex justify-end batch">
+                        <li class="cursor-pointer ">Batch Number <span class="text-2xl">320011</span></li>
+                    </ul>
+                 </div>
+
+                <div class="flex-auto px-4 lg:px-10 py-5 pt-0 justify-center rounded-md" >
+                    <form >
+
+                        <div class="w-full flex-1 lg:w-12/12 px-4 pt-1 mb-6 pb-6 rounded" ngClass="bg-white">
+                                
+                                      <div class="relative w-full mb-3 rounded-lg" >
+                                        <p class="text-sm mt-3">Chosen Survey</p>
+                                      </div>
+                                      <div class="flex flex-row bg-gray-100 rounded-lg py-6 px-6 mr-5">
+          
+                                            <div class="relative w-full mr-2">
+                                                <p class="text-xs">Name</p>
+                                                <p class="text-sm">Survey01</p>
+                                            </div>
+                
+                                            <div class="relative w-full mr-3">
+                                                <p class="text-xs">Questions</p>
+                                                <p class="text-sm">10 Questions</p>
+                                            </div>
+                                            
+                                            <div class="flex flex-row relative w-full mr-z">
+                                                <p class="text-xs mt-3"><span class="teal">EDIT</span> | VIEW</p> 
+                                                <!-- <p class="text-xs mt-3"> VIEW</p> -->
+                                            </div>
+
+                                      </div>
+                       
+                        </div>
+
+                        <div class="w-full flex-1 lg:w-12/12 px-4 pt-1 pb-6 rounded-lg" ngClass="bg-white">
+                                
+                              <div class="relative w-full mb-3  ">
+                                <p class="text-sm mt-3">Attached Reward</p>
+                              </div>
+                              <div class="flex flex-row bg-gray-100 rounded-lg py-6 px-6 mr-4">
+  
+                                    <div class="relative w-full">
+                                        <p class="text-xs">Name</p>
+                                        <p class="text-sm">Reward01</p>
+                                    </div>
+        
+                                    <div class="relative w-full">
+                                        <p class="text-xs">Reward Type</p>
+                                        <p class="text-sm">Loyalty Points</p>
+                                    </div>
+
+                                    <div class="relative w-full">
+                                        <p class="text-xs">Reward Point</p>
+                                        <p class="text-sm">50 Points</p>
+                                    </div>
+
+                                    <div class="relative w-full">
+                                        <p class="text-xs">Cashout Type</p>
+                                        <p class="text-sm">Cash Transfer</p>
+                                    </div>
+
+                                    <p class="teal text-xs mt-3">EDIT</p>
+                            
+                               </div>
+                    
+                        </div>
+
+                        <div class="w-full flex-1 lg:w-12/12 mt-8 rounded-lg  px-4 pt-1 pb-6" ngClass="bg-white">
+                            <div class="relative w-full mb-3 ">
+                                <p class="final text-xl">Final Pins</p>
+                            </div>
+                                <div class="flex flex-column relative w-full">
+                                    <input type="radio" class="appearance-none checked:bg-blue-900 mr-1" /><p class="pin text-sm">Include Pins</p>
+                                </div>                              
+                        </div> 
+
+
+                        <div class="flex flex-wrap justify-center mt-8">
+                            <button [routerLink]="['/summary']" type="submit" class="left self-auto mr-3  ml-1 text-blueGray-600 px-12 py-4 rounded-lg  mr-1 mb-1 text-sm  hover:shadow-lg ease-linear transition-all duration-150" >
+                                Cancel Process
+                            </button>
+                            <button [routerLink]="['/summary']" type="submit" class="right self-auto  ml-1 px-12 py-4 rounded-lg  mr-1 mb-1 text-sm hover:shadow-lg ease-linear transition-all duration-150" >
+                                Activate Unique ID
+                            </button>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+
+  

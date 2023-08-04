@@ -1,0 +1,45 @@
+<!-- Navbar -->
+<nav
+  class="absolute top-0 left-0 right-0 w-full z-10 bg-transparent md:flex-row md:flex-nowrap md:justify-between flex items-center p-4 border-b border-blueGray-300 shadow-md ">
+  <div class="w-full mx-auto items-center flex justify-between md:flex-nowrap flex-wrap  px-4">
+    <!-- Brand -->
+    <a
+      class="md:block text-left flex-1 md:pb-0 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-0 px-0">
+      <span class="block sm:hidden"> CHEKTRACE </span>
+      <span class="hidden sm:block">
+        <img alt="..." class=" align-middle border-none" style="height: 50px;"
+          src="../../../../assets/img/chekkitlogoo 2.png" /></span>
+    </a>
+
+    <!-- User -->
+    <ul class="flex-col flex-3 justify-between md:flex-row list-none items-center hidden md:flex" *ngIf="nav.visible ">
+      <li class="nav-item p-2">
+        <a class="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0 font-semibold text-sm" href="/mas/quicklinks">Home</a>
+      </li>
+      <li class="nav-item p-2">
+        <a class="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0 font-semibold text-sm" href="/mas/products">Products</a>
+      </li>
+      <li class="nav-item p-2">
+        <a class="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0 font-semibold text-sm" href="/mas/campaigns">Campaigns</a>
+      </li>
+      <li class="nav-item p-2">
+        <a class="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0 font-semibold text-sm " href="/mas/product-pin">Pin Center</a>
+      </li>
+      <li class="nav-item p-2">
+        <a class="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0 font-semibold text-sm" href="/mas/survey">Survey</a>
+      </li>
+      <li class="nav-item p-2">
+        <a class="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0 font-semibold text-sm " href="/mas/rewards">Rewards</a>
+      </li>
+      <li class="nav-item p-2">
+        <a class="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0 font-semibold text-sm " href="/mas/user-management">Management</a>
+      </li>
+      <!-- <li class="nav-item p-2">
+        <a class="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0 font-semibold text-sm" href="/traceability">Traceability</a>
+      </li> -->
+      <!-- <app-user-dropdown class="block"></app-user-dropdown> -->
+    </ul>
+
+
+  </div>
+</nav>

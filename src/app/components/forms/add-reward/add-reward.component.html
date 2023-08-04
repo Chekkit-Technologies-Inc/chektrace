@@ -1,0 +1,106 @@
+<div class="flex flex-wrap mt-4">
+    <div class="w-full mb-12 px-4">
+        <h5 class="text-2xl  text-center font-bold leading-normal mt-0 mb-2 text-blueGray-800">
+            Step 3: Setup Rewards
+          </h5>
+          <p class="text-lg text-center font-light leading-relaxed mt-2 mb-4 text-blueGray-800">
+            We currently support 4 Channels. Kindly select the one you want to work with
+          </p>
+          
+    </div>
+</div>
+
+<div class="flex flex-wrap">
+    <div class="w-full flex-1 lg:w-3/12 px-4 pt-1 text-center">
+        <div class="relative w-full mb-3">
+          <div class="card-selector card-selector-row" (click)="rewardType = 'loyalty'">
+              <div>
+                <img
+                    alt="..."
+                    src="assets/img/contact-icon.png"
+                    class=""
+                />
+              </div>
+              <div>
+                <p>Loyalty Point</p>
+              </div>
+          </div>
+        </div>
+    </div>
+    <div class="w-full flex-1 lg:w-3/12 px-4 pt-1">
+        <div class="relative w-full mb-3">
+          <div class="card-selector card-selector-row" (click)="rewardType = 'airtime'">
+              <div>
+                <img
+                    alt="..."
+                    src="assets/img/contact-icon.png"
+                    class=""
+                />
+              </div>
+              <div>
+                <p>Airtime</p>
+              </div>
+          </div>
+        </div>
+    </div>
+    <div class="w-full flex-1 lg:w-3/12 px-4 pt-1">
+        <div class="relative w-full mb-3">
+          <div class="card-selector card-selector-row" (click)="rewardType = 'merchandise'">
+              <div>
+                <img
+                    alt="..."
+                    src="assets/img/contact-icon.png"
+                    class=""
+                />
+              </div>
+              <div>
+                <p>Merchandise</p>
+              </div>
+          </div>
+        </div>
+    </div>
+    <div class="w-full flex-1 lg:w-3/12 px-4 pt-1">
+        <div class="relative w-full mb-3">
+          <div class="card-selector card-selector-row " (click)="rewardType = 'raffle'">
+              <div>
+                <img
+                    alt="..."
+                    src="assets/img/contact-icon.png"
+                    class=""
+                />
+              </div>
+              <div>
+                <p>Raffle Draw</p>
+              </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+<div class="">
+    <form class="form-horizontal" [formGroup]="rewardForm" (ngSubmit)="updateRewardProduct()">
+        <div class="w-full lg:w-12/12 px-4 mt-3" *ngIf="rewardType == 'loyalty'">
+
+            <div class="relative w-full mb-3">
+                <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                    Attach Reward To Survey
+                </label>
+                <select class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                formControlName="rewardId"  > 
+                    <option selected="">Select</option>
+                    <option *ngFor="let reward of loyalt_points"
+                        value="{{reward.id}}">{{reward.loyalty_name}}
+                        ({{reward?.loyalty_reward}} -
+                        {{reward?.loyalty_reward_value}})</option>
+                </select>
+            </div>
+        </div>
+                                
+        <div class="mt-12" *ngIf="rewardType">
+            <button type="submit" class="rounded-full ml-1 text-white font-bold px-6 py-2 outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 text-sm shadow hover:shadow-lg ease-linear transition-all duration-150">
+                Finish
+            </button>
+        </div>
+    </form>
+</div>

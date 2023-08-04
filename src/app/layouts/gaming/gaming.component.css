@@ -1,0 +1,14 @@
+.sidebar{
+  background-color: #479C46;
+
+}
+
+.active{
+  background-color: #FFC700;
+}
+
+input[type="text"], input[type="password"], textarea {
+  border: none !important;
+  outline: none !important;
+  border-bottom: 1px solid #ccc !important; /* You can adjust the color and thickness of the outline */
+}

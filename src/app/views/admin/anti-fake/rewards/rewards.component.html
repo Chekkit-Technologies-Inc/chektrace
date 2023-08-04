@@ -1,0 +1,156 @@
+<div class="my-16 w-100 sm:px-8 md:px-8 px-2">
+  <div *ngIf="currentPage == 1">
+
+    <div class="flex w-full ">
+
+      <p class=" flex-1 text-2xl text-blueGray-700 font-bold ">Rewards</p>
+
+      <div class="w-full sm:ml-3 md:ml-2 lg:ml-2 flex-1 text-right">
+
+
+        <button (click)="currentPage = 2"
+          class="border border-blueGray-700 py-2 mb-3 text-sm px-3 text-white transition-colors duration-150 bg-blueGray-800 rounded-lg focus:shadow-outline font-bold">Start
+          New Rewards</button>
+
+      </div>
+
+    </div>
+    <br>
+    <div class="py-4 px-2 overflow-x-auto  w-full h-full ">
+      <!-- table header -->
+      <div class="flex sm:bg-white md:bg-white justify-between px-4 p-4 my-4 border-b-1 border-blueGray-700">
+        <div class="w-25 flex-shrink-0 text-left">
+
+          <p class="font-bold text-sm ">&nbsp;&nbsp; S/N
+          </p>
+        </div>
+        <div class="w-40 flex-shrink-0 text-left text-sm font-bold">
+          Reward Type
+        </div>
+        <div class="w-40 flex-shrink-0 text-left text-sm font-bold">
+          Rewards Point
+        </div>
+        <div class="w-40 flex-shrink-0 text-left text-sm font-bold">
+          Value
+        </div>
+        <!-- <div class="w-40 flex-shrink-0 text-left text-sm font-bold">
+          Cashout Type
+        </div> -->
+        <!-- <div class="w-40 flex-shrink-0 text-left text-sm font-bold">
+          Batch Number
+        </div> -->
+        <div class="w-40 flex-shrink-0 text-left text-sm font-bold">
+          Date Created
+        </div>
+        <div class="w-40 flex-shrink-0 text-left text-sm font-bold">
+          Action
+        </div>
+      </div>
+      <!-- table content starts-->
+      <div *ngFor="let reward of availableRewards | paginate: { itemsPerPage: 10, currentPage: p }; let i = index; ">
+        <div class="flex table-bg mt-4 rounded-3xl justify-between px-4 py-4">
+          <div class="w-25 flex-shrink-0 text-left text-blueGray-700  ">
+
+            <p class="text-xs"><span>
+                <!-- <input type="checkbox"> -->
+              </span> &nbsp;&nbsp; {{i + 1}}</p>
+          </div>
+          <div class="w-40 flex-shrink-0 text-left text-blueGray-700 text-xs ">
+            {{reward.reward_type}}
+          </div>
+          <div class="w-40 flex-shrink-0 text-left text-blueGray-700 text-xs">
+            {{reward.point_to_claim_reward}}
+          </div>
+          <div class="w-40 flex-shrink-0 text-left text-blueGray-700 text-xs   ">
+
+            {{reward.reward_value}}
+          </div>
+          <!-- <div class="w-40 flex-shrink-0 text-left text-blueGray-700 text-xs ">
+            Partner Store
+          </div> -->
+          <!-- <div class="w-40 flex-shrink-0 text-left text-blueGray-700 text-xs ">
+            32
+          </div> -->
+          <div class="w-40 flex-shrink-0 text-left text-blueGray-700 text-xs ">
+            {{reward.created_at | date: longDate}}
+          </div>
+          <div class="w-40 flex-shrink-0 text-left text-blueGray-700 font-semibold text-xs ">
+            <span class="text-blueGray-700 cursor-pointer  " (click)="selectReward(reward.id)">VIEW</span>
+            <!-- <span class="text-green-400 cursor-pointer"  >EDIT</span> -->
+          </div>
+        </div>
+      </div>
+      <div class="w-100 text-center p-3 mt-5">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+
+
+    </div>
+
+  </div>
+  <div *ngIf="currentPage == 2">
+    <div class="my-4 font-bold  cursor-pointer text-blueGray-700" (click)="currentPage = 1">
+      <span><i class="fa fa-arrow-left text-sm "></i></span> &nbsp; &nbsp; <span> Back</span>
+    </div>
+    <br>
+    <app-assign-rewards (selectedRewardId)="getRewardId($event)" (completedReward)="creteSubproduct($event)">
+    </app-assign-rewards>
+  </div>
+
+
+  <div *ngIf="showModal"
+  class="bg-blueGray-600 bg-opacity-25 h-screen w-screen absolute inset-0 flex justify-center item-center" >
+  <div
+      class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+      <div class="relative w-auto my-6 mx-auto max-w-6xl modal-body">
+          <!--content-->
+          <div
+              class="border-0  relative flex flex-col w-full bg-white outline-none focus:outline-none modal-body">
+              <!--header-->
+              <div class="flex items-start justify-between p-5  rounded-t">
+
+                  <button
+                      class="p-2 rounded-2xl ml-auto bg-blueGray-700 border-0 text-white float-right  leading-none font-semibold outline-none focus:outline-none"
+                      (click)="showModal = !showModal">
+                      <span
+                          class=" text-white  h-6 w-6 text-md block outline-none focus:outline-none">
+                          <i style="font-size:24px; " class="fa">&#xf00d;</i>
+                      </span>
+                  </button>
+              </div>
+              <!--body-->
+              <div class="relative p-6 w-100 flex-auto">
+                  <p class="text-blueGray-700 text-md font-semobold" >Reward Details</p>
+                  <div class="my-5 ">
+                    <div class="flex my-2 py-2">
+                      <p class="text-sm font-semibold text-blueGray-800 flex-1" > Reward Types : </p>
+                      <input class= " border py-1 border-blueGray-500 rounded-md px-2 flex-1" [(ngModel)]="selectedReward.reward_type" name="selectedReward.reward_type" [value]="selectedReward.reward_type" [readonly]="true" />
+                    </div>
+                    <div class="flex my-2 py-2">
+                      <p class="text-sm font-semibold text-blueGray-800 flex-1" > Reward Quantity : </p>
+                      <input class= " border py-1 border-blueGray-500 rounded-md px-2 flex-1" [(ngModel)]="selectedReward.reward_quantity" name="selectedReward.reward_quantity" [value]="selectedReward.reward_quantity" [readonly]="isReadonly" />
+                    </div>
+                    <div class="flex my-2 py-2">
+                      <p class="text-sm font-semibold text-blueGray-800 flex-1" > Reward Point : </p>
+                      <input class= " border py-1 border-blueGray-500 rounded-md px-2 flex-1" [(ngModel)]="selectedReward.point_to_claim_reward" name="selectedReward.point_to_claim_reward" [value]="selectedReward.point_to_claim_reward" [readonly]="isReadonly" />
+                    </div>
+                    <div class="flex my-2 py-2">
+                      <p class="text-sm font-semibold text-blueGray-800 flex-1" > Reward Value : </p>
+                      <input class= " border py-1 border-blueGray-500 rounded-md px-2 flex-1" [(ngModel)]="selectedReward.reward_value" name="selectedReward.reward_value" [value]="selectedReward.reward_value" [readonly]="isReadonly" />
+                    </div>
+                  </div>
+                  <div class="flex">
+                    <div class="m-auto">
+                      <button class="bg-blueGray-800 text-white font-semibold text-sm py-3 px-8 rounded-md " (click)="isReadonly = !isReadonly" *ngIf="isReadonly" >Edit Reward</button>
+                      <button class="bg-blueGray-800 text-white font-semibold text-sm py-3 px-8 rounded-md " (click)="updateReward(selectedReward.id)" *ngIf="!isReadonly" >Update Reward</button>
+                    </div>
+                  </div>
+              </div>
+
+          </div>
+      </div>
+  </div>
+
+</div>
+
+</div>

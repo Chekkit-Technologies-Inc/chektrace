@@ -1,0 +1,71 @@
+body {
+    background-color: #E5E5E5;
+}
+
+.title {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 54px;
+    margin-top: 250px;
+    margin-bottom: 50px;
+}
+
+.chekkit {
+    color: #46F7AD
+}
+
+.sap {
+    font-weight: 900;
+    color: #153853;
+
+}
+
+
+.box {
+    position: static;
+width: 100px;
+height: 50px;
+left: 860px;
+top: 0px;
+
+background: #FFFFFF;
+border: 2px solid #153853;
+box-sizing: border-box;
+border-radius: 30px;
+
+}
+
+.flow {
+    border-color: #153853;
+    border-width: 2px;
+}
+
+.flow-text {
+    color: #153853;
+    font-family: 'Poppins';
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 42px;
+    align-items: center;
+
+}
+
+button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 26px 16px;
+    color: #fff;
+    position: static;
+    width: 617px;
+    height: 72px;
+    left: 0px;
+    top: 0px;
+    background: #153853;
+    border-radius: 15px;
+}
+
+

@@ -1,0 +1,7 @@
+.statusCard{
+  min-height: 150px;
+}
+
+.modal-body{
+  min-width: 500px !important;
+}

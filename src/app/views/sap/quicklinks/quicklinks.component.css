@@ -1,0 +1,142 @@
+body {
+    background-color: #E5E5E5;
+}
+
+.title {
+   font-family: Graphik;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 26px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-top: 50px;
+    margin-bottom: 10px;
+}
+
+.chekkit {
+    color: #46F7AD
+}
+
+.sap {
+    font-weight: 900;
+    color: #000000;
+
+}
+
+
+.flow {
+    height: 200px;
+    width: 400px;
+    left: 0px;
+    top: 0px;
+    border-radius: 30px;
+    border-width: 2px;
+    border-color: #153853;
+}
+
+.flow-text {
+    font-family: Graphik;
+font-size: 20px;
+font-weight: 500;
+line-height: 22px;
+letter-spacing: 0em;
+text-align: center;
+color: #242424;
+}
+
+.flow-p {
+    font-family: Graphik;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0px;
+    text-align: center;
+    color: #5C6F7F;
+
+}
+
+
+.buttons {
+    height: 48px;
+    width: 212px;
+    left: 24px;
+    top: 204px;
+    border-radius: 8px;
+    background: #46F7AD;
+    margin-top: 30px;
+
+    border-radius: 15px;
+}
+
+button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 26px 16px;
+    color: #fff;
+    position: static;
+    width: 617px;
+    height: 72px;
+    left: 0px;
+    top: 0px;
+    background: #153853;
+    border-radius: 15px;
+}
+
+.full {
+    background-color: #153853;
+    color: #fff;
+}
+
+.rounded-lg {
+    border-radius: 24px;
+ 
+}
+
+input {
+    height: 76px;
+    width: 485px;
+    border-radius: 15px;
+    padding: 26px, 16px, 26px, 16px;
+    margin-left: -150px ;
+
+
+}
+
+label{
+    color: #101010;
+    font-family: Graphik;
+font-size: 18px;
+font-weight: 500;
+line-height: 20px;
+letter-spacing: 0em;
+text-align: left;
+
+}
+
+.label {
+    color: #979797;
+    font-family: Graphik;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+    
+ 
+    
+}
+
+.unique {
+    font-family: Segoe UI;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.form label {
+    text-align: left;
+}

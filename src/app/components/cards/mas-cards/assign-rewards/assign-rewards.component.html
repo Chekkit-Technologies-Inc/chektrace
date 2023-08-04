@@ -1,0 +1,363 @@
+<div class="bg-white p-4 rounded-lg">
+    <p class="text-2xl text-blueGray-700 font-semibold my-3">Select Reward Type</p>
+    <p class="my-4 font-bold text-blueGray-700 ">We currently support 4 channels. Kindly select the one you want to work
+        with.</p>
+
+    <div class="sm:grid md:grid grid-cols-4 gap-4 my-8">
+        <div class="border border-blueGray-600 p-6 flex rounded-2xl my-3 " (click)="toggleMerch()" >
+            <div class="m-auto text-center">
+                <img src="../.././../../assets/img/merch-reward.png" width="100" alt="" srcset="">
+                <p class="font-bold text-blueGray-800 mt-6 text-lg">Merchandize</p>
+            </div>
+        </div>
+        <div class="border border-blueGray-600 p-6 flex rounded-2xl my-3">
+            <div class="m-auto text-center">
+                <img src="../../../../assets/img/loyalty-point.png" width="100" alt="" srcset="">
+                <p class="font-bold text-blueGray-800 mt-6 text-lg">Loyalty Point</p>
+            </div>
+        </div>
+        <div class="border border-blueGray-600 p-6 flex rounded-2xl my-3" (click)="toggleAirtime()">
+            <div class="m-auto text-center">
+                <img src="../../../../assets/img/airtime-reward.png" width="100" alt="" srcset="">
+                <p class="font-bold text-blueGray-800 mt-6 text-lg">Airtime</p>
+            </div>
+        </div>
+        <div class="border border-blueGray-600 p-6 flex rounded-2xl my-3">
+            <div class="m-auto text-center">
+                <img src="../../../../assets/img/raffle-reward.png" width="100" alt="" srcset="">
+                <p class="font-bold text-blueGray-800 mt-6 text-lg">Raffle Draw</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="flex my-6 justify-evenly w-100 md:px-16">
+  <div class="w-full sm:mr-3 md:mr-2 mr-2 lg:mr-2">
+      <button
+          class="w-full h-12  text-blueGray-800 transition-colors duration-150 border-blueGray-600 border-solid border-2 bg-white rounded-lg focus:shadow-outline hover:bg-blueGray-600 font-bold" (click)="showExisting = !showExisting" >Select
+          Existing Rewards</button>
+  </div>
+
+  <div class="w-full sm:ml-3 md:ml-2 lg:ml-2">
+      <button
+          class="w-full h-12  text-white transition-colors duration-150 bg-blueGray-800 rounded-lg focus:shadow-outline hover:bg-blueGray-600 font-bold" (click)="finish()" >
+          <span *ngIf="loading" >
+            <img class="inline-flex " src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        </span>
+        <span *ngIf="!loading" >
+          Finish
+        </span>
+
+      </button>
+
+  </div>
+
+</div>
+<!-- airtime modal -->
+<div *ngIf="showModal"
+    class="bg-blueGray-600 bg-opacity-25 h-auto w-screen absolute inset-0 flex justify-center item-center">
+    <div
+        class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+        <div class="relative w-auto my-6 mx-auto max-w-6xl modal-body">
+            <!--content-->
+            <div
+                class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none modal-body">
+                <!--header-->
+                <div class="flex items-start justify-between p-5  rounded-t">
+
+                    <button
+                        class="p-4 rounded-2xl ml-auto bg-blueGray-700 border-0 text-white float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                        (click)="toggleAirtime()">
+                        <span class=" text-white  h-6 w-6 text-2xl block outline-none focus:outline-none">
+                            <i style="font-size:24px; " class="fa">&#xf00d;</i>
+                        </span>
+                    </button>
+                </div>
+                <!--body-->
+                <div class="relative p-6 w-100 flex-auto">
+                    <div class="text-center m-5 ">
+
+                        <p class="font-bold text-blueGray-700 text-lg my-5">Define Rewards</p>
+
+                        <div class="p-5 border border-solid border-slate-200 rounded-2xl text-center reward-icon ">
+                            <p class="text-blueGray-700 text-2xl my-5" ><i style="font-size:24px" class="fa">&#xf09d;</i></p>
+                            <p class="text-lg text-blueGray-700 font-bold ">Airtime Rewards</p>
+                        </div>
+                    </div>
+                    <!-- <p class="text-slate-200 font-bold " >Define how many points equals to a scan</p> -->
+
+                    <div class="my-5" >
+                        <p class="font-bold text-blueGray-700 ">Airtime Naira Value</p>
+                        <input
+                            class="form-control appearance-none block w-full bg-white text-gray-700 border border-blueGray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                             type="number" [(ngModel)]="airtime_value" name="airtime_value"   placeholder="Product
+                            Production Date"  placeholder="Enter Expiry Date">
+                    </div>
+                    <div class="my-5" >
+                        <p class="font-bold text-blueGray-700 ">Airtime Units</p>
+                        <input
+                            class="form-control appearance-none block w-full bg-white text-gray-700 border border-blueGray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                             type="number" [(ngModel)]="airtime_units" name="airtime_units"  placeholder="Product
+                            Production Date"  placeholder="Enter Expiry Date">
+                    </div>
+
+
+                    <div class=" rounded p-2 text-blueGray-800 text-sm font-bold cursor-pointer" (click)="addNewAirtime()" >
+                      <i class='fas'>&#xf067;</i>&nbsp; Add New
+                  </div>
+                    <!-- <span><input type="radio">&nbsp;&nbsp;<label>Partner Store(Discount incl.) </label></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span><input type="radio">&nbsp;&nbsp;<label>Cash Transfer </label></span> -->
+
+                    <div class="bg-blueGray-100 rounded-lg p-5 mt-5" *ngIf="rewards.length" >
+                      <div class="flex justify-between bg-blueGray-300 rounded-2xl py-3 ">
+                        <div class="flex-1 text-center text-sm font-bold text-blueGray-800">S/N</div>
+                        <div class="flex-1 text-center text-sm font-bold text-blueGray-800 ">Airtime Value</div>
+                        <div class="flex-1 text-center text-sm font-bold text-blueGray-800 ">Airtime Quantity</div>
+                        <div class="flex-1 text-center text-sm font-bold text-blueGray-800 ">Action </div>
+                      </div>
+                      <hr>
+                      <div class="flex justify-between bg-blueGray-300 rounded-2xl py-3 mt-3 " *ngFor="let item of rewards; let i = index" >
+                        <div class="flex-1 text-center text-sm font-bold text-blueGray-800"> {{i + 1}} </div>
+                        <div class="flex-1 text-center text-sm font-bold text-blueGray-800 ">{{item.reward_value}}</div>
+                        <div class="flex-1 text-center text-sm font-bold text-blueGray-800 ">{{item.reward_quant}}</div>
+                        <div class="flex-1 text-center text-sm font-bold text-red-500 cursor-pointer " (click)="removeReward(item.reward_value)" >Remove</div>
+                      </div>
+                    </div>
+                    <br><br>
+                    <div class="w-100 text-center">
+                        <button
+                        (click)="addAirtimeReward()"
+                            class="bg-blueGray-700  text-white active:bg-blueGray-700 text-lg font-bold px-12 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+
+
+                            <span *ngIf="!loading">
+                              Submit
+                            </span>
+
+                            <span *ngIf="loading">
+                              <img
+                                class="inline-flex"
+                                src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                              />
+                            </span>
+                        </button>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Merchandize modal -->
+<div *ngIf="showMerchModal" class="bg-blueGray-600 bg-opacity-25 h-auto w-screen absolute inset-0 flex justify-center item-center">
+    <div
+        class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+        <div class="relative w-auto my-6 mx-auto max-w-6xl modal-body">
+            <!--content-->
+            <div
+                class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none modal-body">
+                <!--header-->
+                <div class="flex items-start justify-between p-5  rounded-t">
+
+                    <button
+                        class="p-4 rounded-2xl ml-auto bg-blueGray-700 border-0 text-white float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                        (click)="toggleMerch()">
+                        <span class=" text-white  h-6 w-6 text-2xl block outline-none focus:outline-none">
+                            <i style="font-size:24px; " class="fa">&#xf00d;</i>
+                        </span>
+                    </button>
+                </div>
+                <!--body-->
+                <div class="relative p-6 w-100 flex-auto">
+                    <div class="text-center m-5 ">
+
+                        <p class="font-bold text-blueGray-700 text-lg my-5">Define Rewards</p>
+
+                        <div class="p-5 border border-solid border-slate-200 rounded-2xl text-center reward-icon ">
+                            <p class="text-blueGray-700 text-2xl my-5" ><i style="font-size:24px" class="fa">&#xf09d;</i></p>
+                            <p class="text-lg text-blueGray-700 font-bold ">Merchandize</p>
+                        </div>
+                    </div>
+                    <!-- <p class="text-blueGray-700 font-bold text-center" >Define how many points equals to a scan</p> -->
+
+
+
+                    <form [formGroup]="myForm" (ngSubmit)="submit()" class="text-left" >
+                        <div  class="text-sm font-semibold text-blueGray-700 " >Reward Quantity: </div>
+                      <div class="form-group my-3">
+
+                          <input
+                              formControlName="reward_quant"
+                              id="reward_quant"
+                              type="number"
+                              class="form-control  rounded w-full ">
+                          <div *ngIf="f.reward_quant.touched && f.reward_quant.invalid" class="alert alert-danger">
+                              <div *ngIf="f.reward_quant.errors.required">Name is required.</div>
+                              <div *ngIf="f.reward_quant.errors.minlength">Name should be 3 character.</div>
+                          </div>
+                      </div>
+                      <div class="text-sm font-semibold text-blueGray-700 " >Reward Value: </div>
+                      <div class="form-group my-3 ">
+
+                        <input
+                            formControlName="reward_value"
+                            id="reward_value"
+                            type="number"
+                            class="form-control rounded w-full">
+                        <div *ngIf="f.reward_value.touched && f.reward_value.invalid" class="alert alert-danger">
+                            <div *ngIf="f.reward_value.errors.required">Name is required.</div>
+                            <div *ngIf="f.reward_value.errors.minlength">Name should be 3 character.</div>
+                        </div>
+                    </div>
+                    <div  class="text-sm font-semibold text-blueGray-700 " >Reward Point: </div>
+                    <div class="form-group my-3">
+
+                      <input
+                          formControlName="reward_point"
+                          id="reward_point"
+                          type="number"
+                          class="form-control rounded w-full">
+                      <div *ngIf="f.reward_point.touched && f.reward_point.invalid" class="alert alert-danger">
+                          <div *ngIf="f.reward_point.errors.required">Name is required.</div>
+                          <div *ngIf="f.reward_point.errors.minlength">Name should be 3 character.</div>
+                      </div>
+                  </div>
+                  <div  class="text-sm font-semibold text-blueGray-700 " >Reward Photo: </div>
+                      <div class="form-group my-3">
+
+                          <input
+                        name="photo"
+                        id="actual-btn"
+                        type="file"
+                        class="form-control rounded"
+                        (change)="onFileChange($event)"  >
+                        <img [src]="imageSrc" *ngIf="imageSrc" class="my-5" style="height: 100px; width:200px">
+
+                      </div>
+
+                      <button class="bg-blueGray-700  text-blueGray-700 border border-blueGray-500 active:bg-blueGray-700 text-md font-bold px-12 py-2 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="submit" >Submit</button>
+                  </form>
+                    <!-- <br><br>
+                    <div class="w-100 text-center">
+                        <button
+                        (click)="addMerchandize()"
+                            class="bg-blueGray-700  text-white active:bg-blueGray-700 text-lg font-bold px-12 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+
+                            Continue
+                        </button>
+
+                    </div> -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div *ngIf="showExisting" class="bg-blueGray-600 bg-opacity-25 h-auto w-screen absolute inset-0 flex justify-center item-center">
+    <div
+        class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+        <div class="relative w-auto my-6 mx-auto max-w-6xl modal-body">
+            <!--content-->
+            <div
+                class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none modal-body">
+                <!--header-->
+                <div class="flex items-start justify-between  rounded-t">
+
+                    <button
+                        class="p-4 rounded-lg ml-auto bg-blueGray-700 border-0 text-white float-right text-lg leading-none font-semibold outline-none focus:outline-none"
+                        (click)="showExisting = !showExisting">
+                        <span class=" text-white  h-6 w-6 text-2xl block outline-none focus:outline-none">
+                            <i style="font-size:24px; " class="fa">&#xf00d;</i>
+                        </span>
+                    </button>
+                </div>
+                <!--body-->
+                <div class="relative p-6 w-100 flex-auto">
+                    <div class="text-center m-5 ">
+
+                        <p class="font-bold text-blueGray-700 text-lg my-5">Select Existing Rewards</p>
+
+
+                    </div>
+
+                    <div class="w-100 text-center">
+                        <div>
+
+                            <!-- tabel head -->
+                            <div class="grid grid-cols-6 gap-4 my-4 border border-blueGray-600 rounded-2xl p-2 px-8">
+
+                                <div class="font-smbold text-sm text-blueGray-700 " >
+                                   &nbsp;&nbsp;<span>S/N</span>
+                                </div>
+                                <div class="font-smbold text-sm text-blueGray-700 " >
+                                    <span>Reward Name</span>
+                                </div>
+                                <div class="font-smbold text-sm text-blueGray-700 " >
+                                    <span>Reward Type</span>
+                                </div>
+                                <div class="font-smbold text-sm text-blueGray-700 " >
+                                    <span>Worth</span>
+                                </div>
+                                <div class="font-smbold text-sm text-blueGray-700 " >
+                                    <span>Cashout Type</span>
+                                </div>
+                                <div class="font-smbold text-sm text-blueGray-700 " >
+                                    <span>Date Created</span>
+                                </div>
+
+                            </div>
+                            <!-- table content -->
+                            <div class="grid grid-cols-6 gap-4 my-3 border-0 bg-blueGray-100 rounded-2xl p-2 px-8 shadow" (click)="selectReward(reward.id)" *ngFor="let reward of availableRewards | paginate: { itemsPerPage: 10, currentPage: p }; let i= index" >
+
+                                <div class="text-sm  text-blueGray-700" >
+                                    <span> {{i + 1}} </span>
+                                </div>
+                                <div class="text-sm  text-blueGray-700" >
+                                    <span> {{reward.reward_type}} </span>
+                                </div>
+                                <div class="text-sm  text-blueGray-700" >
+                                    <span> {{reward.reward_type}} </span>
+                                </div>
+                                <div class="text-sm  text-blueGray-700" >
+                                    <span> {{reward.reward_value * reward_reward_quantity}} </span>
+                                </div>
+                                <div class="text-sm  text-blueGray-700" >
+                                    <span>Partner Store</span>
+                                </div>
+                                <div class="text-sm  text-blueGray-700" >
+                                    <span> {{reward.created_at | date : 'longDate'}} </span>
+                                </div>
+
+                            </div>
+                            <div class="w-100 text-center p-3 mt-5">
+                              <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                            </div>
+                            <!-- <div class="mt-3" >
+                              <select class="p-1 border-2 border-blueGray-500 rounded w-100"  (change)="selectReward($event.target.value)" >
+                                <option>--Select Survey--</option>
+                                <option  *ngFor="let reward of availableRewards;" [value]="reward.id"  > {{reward.title}} </option>
+                              </select>
+
+                            </div> -->
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+

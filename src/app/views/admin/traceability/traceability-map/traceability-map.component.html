@@ -1,0 +1,319 @@
+
+<div class="bg-blueGray-200 w-full mt-8 min-h-screen">
+
+    <div class="mx-10 pt-10" *ngIf="step == 1 " >
+      <span class="text-2xl text-blueGray-700 font-bold mt-10" >Inventory Management</span>
+      <br>
+      <div class="flex justify-between  my-3 ">
+        <div class="flex-1 flex border border-blueGray-300 rounded bg-white shadow-lg py-8 mr-5">
+          <img src="../../../../../assets/img/dashboard-icon4.png" width="60" alt="" srcset="">
+          <div class="m-auto" >
+            <p class="text-md font-semibold text-blueGray-500 " >Total Packages Received</p>
+            <p class="text-lg text-blueGray-800 font-semibold" > {{receivedItems?receivedItems.length:'0'}} </p>
+          </div>
+        </div>
+        <div class="flex-1 border border-blueGray-300 rounded bg-white shadow-lg py-8 mx-5 ">
+          <div class="flex-1 flex">
+            <img src="../../../../../assets/img/dashboard-icon5.png" width="60" alt="" srcset="">
+            <div class="m-auto" >
+              <p class="text-md font-semibold text-blueGray-500 " >Total Packages Shipped</p>
+              <p class="text-lg text-blueGray-800 font-semibold" >0</p>
+            </div>
+          </div>
+        </div>
+        <div class="flex-1 border border-blueGray-300 rounded bg-white shadow-lg py-8 ml-5">
+          <div class="flex-1 flex">
+            <img src="../../../../../assets/img/dashboard-icon6.png" width="60" alt="" srcset="">
+            <div class="m-auto" >
+              <p class="text-md font-semibold text-blueGray-500 " >Current Inventory Count</p>
+              <p class="text-lg text-blueGray-800 font-semibold" > {{receivedItems?receivedItems.length:'0'}} </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-6 overflow-x-auto bg-white rounded-md p-6 mt-10">
+        <div class="w-100 text-right" *ngIf="isItemVisible">
+          <button class="bg-purple-800 text-white text-sm font-semibold py-3 px-8 rounded-md shadow-md my-6 mx-3" (click)="shipModal = !shipModal"  >Ship An Item</button>
+
+          <button class="bg-blueGray-800 text-white text-sm font-semibold py-3 px-8 rounded-md shadow-md my-6" (click)="receiveModal = !receiveModal"  >Receive An Item</button>
+        </div>
+
+        <div class="overflow-x-auto  w-full h-full">
+
+          <div class="w-full flex  mt-4 rounded-2xl justify-between px-4 py-2 ">
+            <div class="w-40 flex-shrink-0 text-left text-md font-semibold ">
+              Product Name
+            </div>
+            <div class="w-40 flex-shrink-0 text-left font-semibold text-md ">
+              Batch Number
+            </div>
+            <div class="w-40 flex-shrink-0 text-left font-semibold text-md">
+              Movement
+            </div>
+            <div class="w-40 flex-shrink-0 text-left font-semibold text-md">
+              Date
+            </div>
+
+            <div class="w-40 flex-shrink-0 text-left font-semibold ">
+              Actions
+
+            </div>
+          </div>
+          <hr>
+
+
+          <div>
+
+            <div *ngIf="!isItemVisible" class="text-center mt-10" >
+              <p class="text-blueGray-500 text-2xl font-semibold text-center" >It's a ghost town down here, start by receiving item(s)</p>
+              <button class="bg-blueGray-800 py-3 px-6 rounded-md shadow-md text-white font-semibold my-5 text-sm hover:shadow-lg " (click)="receiveModal = !receiveModal" >Receive Item</button>
+            </div>
+            <!-- <div  *ngIf="isItemVisible">
+              <div class="w-full flex table-bg mt-4 rounded-2xl justify-between px-4 py-2 " *ngFor="let received of receivedItems" >
+                <div class="w-40 flex-shrink-0 text-left text-sm">
+                  {{received.product.product_name}}
+                </div>
+                <div class="w-40 flex-shrink-0 text-left  text-sm ">
+                  {{received.product.batch_num}}
+                </div>
+                <div class="w-40 flex-shrink-0 text-left text-sm">
+                  Received
+                </div>
+                <div class="w-40 flex-shrink-0 text-left  text-sm">
+                  {{received.created_at | date: 'longDate'}}
+                </div>
+
+                <div class="w-40 flex-shrink-0 text-left ">
+
+                  <span class=" text-blueGray-800 text-xs cursor-pointer py-2 px-2  font-semibold" (click)="view(received.id)"
+                    > VIEW </span>
+
+                </div>
+              </div>
+            </div> -->
+
+
+
+
+            <!-- <div *ngIf="receiveModal"
+              class="bg-blueGray-600 bg-opacity-25 h-auto w-screen absolute inset-0 flex justify-center item-center"
+              >
+              <div
+                class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+                <div class="relative w-auto my-6 mx-auto max-w-6xl modal-body">
+
+
+                  <div
+                    class="border-0  relative flex flex-col w-full bg-white outline-none focus:outline-none modal-body">
+                    <div class="text-right p-5" >
+                      <span class="text-blueGray-500 text-2xl p-3 shadow-md   rounded cursor-pointer " (click)="receiveModal = !receiveModal" >X</span>
+                    </div>
+                    <p class="text-center font-bold text-blueGray-800 my-2" >RECEIVE ITEM</p>
+
+                    <div class="relative p-6 w-100 flex-auto">
+                      <div class="md:flex justify-between " >
+                        <div class="flex-1 mt-8" >
+                          <div class=" my-5 ">
+                            <label class="font-semibold text-sm text-blueGray-700">Select Product Name</label>
+
+                            <select class="border-2 rounded-md border-blueGray-300 bg-white py-3 w-full text-md px-5"
+                              (change)="selectProduct($event.target.value)">
+                              <option selected>--Select Product--</option>
+                              <option *ngFor="let product of save_products" value="{{product.id}}"> {{product.product_name}}
+                              </option>
+                            </select>
+                          </div>
+                          <div class="my-5" >
+                            <div class="font-semibold text-sm text-blueGray-700" >Receiving Location</div>
+                            <select class="border-2 rounded-md border-blueGray-300 bg-white py-3 w-full text-md px-5" (change)="selectDestinationLocation($event.target.value)" >
+                              <option>--Select Location--</option>
+                              <option value="{{location.gln}}" *ngFor="let location of locations"> {{location.address}} </option>
+                            </select>
+                          </div>
+                          <div class="my-5" >
+                            <div class="font-semibold text-sm text-blueGray-700" >Scan Item(s)</div>
+                            <input class="border-2 rounded-md border-blueGray-300 bg-white py-3 w-full text-md px-5" [(ngModel)]="item" name="item" (change)="addReceive()"  />
+                            <small>Scan every item to be received</small>
+                          </div>
+
+                          <div class="my-5" >
+                            <button class="bg-blueGray-800 text-white font-semibold text-md px-8 py-3 rounded-md" (click)="receiveContainer()" >
+                              <span *ngIf="loading" >
+                                <img class="inline-flex " src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                              </span>
+                              <span *ngIf="!loading" >Submit</span>
+
+                            </button>
+                          </div>
+                        </div>
+                        <div class="flex-1 mt-8 border-l-2 border-blueGray-300 pl-4 ml-3 py-8" >
+                          <p class="text-blueGray-800 text-md font-semibold text-center" >Scan Output</p>
+
+                          <div class="mt-8 px-2  " *ngFor="let code of receiveList" >
+                            <p class="bg-blueGray-200 rounded-lg py-3 w-100 px-3" > <span class="text-xs" > {{code}}</span>  &nbsp; <span (click)="delete(code)"  class="text-red-500 cursor-pointer text-right "><i
+                              class="fa">&#xf1f8;</i></span> </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div *ngIf="shipModal"
+              class="bg-blueGray-600 bg-opacity-25 h-auto w-screen absolute inset-0 flex justify-center item-center"
+              >
+              <div
+                class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+                <div class="relative w-auto my-6 mx-auto max-w-6xl modal-body">
+
+
+                  <div
+                    class="border-0  relative flex flex-col w-full bg-white outline-none focus:outline-none modal-body">
+                    <div class="text-right p-5" >
+                      <span class="text-blueGray-500 text-2xl p-3 shadow-md   rounded cursor-pointer " (click)="shipModal = !shipModal" >X</span>
+                    </div>
+                    <p class="text-center font-bold text-blueGray-800 my-2" >SHIP ITEM</p>
+
+                    <div class="relative p-6 w-100 flex-auto">
+                      <div class="md:flex justify-between " >
+                        <div class="flex-1 mt-8" >
+                          <div class=" my-5 ">
+                            <label class="font-semibold text-sm text-blueGray-700">Select Product Name</label>
+
+                            <select class="border-2 rounded-md border-blueGray-300 bg-white py-3 w-full text-md px-5"
+                              (change)="selectProduct($event.target.value)">
+                              <option selected>--Select Product--</option>
+                              <option *ngFor="let product of save_products" value="{{product.id}}"> {{product.product_name}}
+                              </option>
+                            </select>
+                          </div>
+                          <div class="my-5" >
+                            <div class="font-semibold text-sm text-blueGray-700" >Destination Location</div>
+                            <select class="border-2 rounded-md border-blueGray-300 bg-white py-3 w-full text-md px-5" (change)="selectDestinationLocation($event.target.value)" >
+                              <option>--Select Location--</option>
+                              <option value="{{location.gln}}" *ngFor="let location of locations"> {{location.address}} </option>
+                            </select>
+                          </div>
+
+                          <div class="my-5" >
+                            <div class="font-semibold text-sm text-blueGray-700" >Shipping Location</div>
+                            <select class="border-2 rounded-md border-blueGray-300 bg-white py-3 w-full text-md px-5" (change)="selectShippingLocation($event.target.value)" >
+                              <option>--Select Location--</option>
+                              <option value="{{location.gln}}" *ngFor="let location of locations"> {{location.address}} </option>
+                            </select>
+                          </div>
+                          <div class="my-5" >
+                            <div class="font-semibold text-sm text-blueGray-700" >Scan Item(s) </div>
+                            <input class="border-2 rounded-md border-blueGray-300 bg-white py-3 w-full text-md" [(ngModel)]="item" name="item"  (change)="addShip()" />
+                            <small>Scan every item to be shipped</small>
+                          </div>
+
+                          <div class="my-5" >
+                            <button class="bg-blueGray-800 text-white font-semibold text-md px-8 py-3 rounded-md" (click)="shipContainer()" >
+                              <span *ngIf="loading" >
+                                <img class="inline-flex " src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                              </span>
+                              <span *ngIf="!loading" >Submit</span>
+                            </button>
+                          </div>
+                        </div>
+                        <div class="flex-1 mt-8 border-l-2 border-blueGray-300 pl-4 ml-3 py-8" >
+                          <p class="text-blueGray-800 text-md font-semibold text-center" >Scan Output</p>
+                          <div class="mt-8 px-2  " *ngFor="let code of shipList" >
+                            <p class="bg-blueGray-200 rounded-lg py-3 w-100 px-3" > <span class="text-xs" > {{code}}</span>  &nbsp; <span (click)="deleteShip(code)"  class="text-red-500 cursor-pointer text-right "><i
+                              class="fa">&#xf1f8;</i></span> </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="mx-10 pt-10" *ngIf="step == 2" >
+      <div class="my-4 font-bold px-8 text-md">
+        <a (click)="step = 1" class="cursor-pointer" ><span><i class="fa fa-arrow-left text-sm "></i></span> &nbsp; &nbsp;
+          <span>Back</span></a>
+      </div>
+      <br>
+      <div class="flex w-full px-16">
+
+        <p class=" flex-1 text-sm sm:text-2xl font-bold text-blueGray-700">You are viewing {{selectedObj.product.product_name}} </p>
+
+
+      </div>
+      <div class="bg-white rounded-lg p-6 mt-12 mx-16">
+        <div class="flex flex-col justify-between my-5">
+          <p class="text-blueGray-700 font-bold text-sm sm:text-md md:text-md ">Product Identification </p>
+          <div  class="flex my-8 w-full">
+            <div class="border-2 border-blueGray-500 rounded p-3 ">
+              <img [src]="selectedObj.product.product_image" width="200" alt="">
+
+            </div>
+
+            <div class=" w-100 sm:mt-5 md:mt-5">
+
+              <div class="flex justify-between sm:ml-3 my-3">
+                <div class="mx-3">
+                  <small class="my-4 text-xs md:text-sm md:text-sm">
+                    Producer Name
+                  </small>
+                  <p class="font-semibold text-xs md:text-sm md:text-sm"> {{selectedObj.product.producer_name}}  </p>
+                </div>
+                <div class="mx-3">
+                  <small class="my-4 text-xs md:text-sm md:text-sm">
+                    Product Name
+                  </small>
+                  <p class="font-semibold text-xs md:text-sm md:text-sm">{{selectedObj.product.product_name}}</p>
+                </div>
+
+                <div class="mx-3">
+                  <small class="my-4 text-xs md:text-sm md:text-sm">Product Description</small>
+                  <p class="font-semibold text-xs md:text-sm md:text-sm">
+                    {{selectedObj.product.product_description}}
+                  </p>
+                </div>
+
+              </div>
+              <br>
+              <div class="flex justify-between sm:ml-3 my-3">
+                <div class="mx-3">
+                  <small class="my-4 text-xs md:text-sm md:text-sm">
+                    Production Date
+                  </small>
+                  <p class="font-semibold text-xs md:text-sm md:text-sm"> {{selectedObj.product.production_date | date: 'longDate'}} </p>
+                </div>
+
+                <div class="mx-3">
+                  <small class="my-4 text-xs md:text-sm md:text-sm">
+                    Package Level
+                  </small>
+                  <p class="font-semibold text-xs md:text-sm md:text-sm"> {{selectedObj.packageLevel.level}} </p>
+                </div>
+                <div class="text-xs md:text-sm md:text-sm">
+                  <small class="my-4 text-xs md:text-sm md:text-sm">
+                    Package Serial
+                  </small>
+                  <p class="font-semibold text-xs md:text-sm md:text-sm"> {{selectedObj.elementString}} </p>
+                </div>
+
+              </div>
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </div>

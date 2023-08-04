@@ -1,0 +1,1511 @@
+<div class="w-full py-2 md:mt-6 sm:mt-6 relative" (window:beforeunload)="confirmReload()" >
+  <div class="hidden sm:block md:block">
+    <br />
+  </div>
+
+  <div *ngIf="nextStep == 1" class="px-2 md:px-8 sm:px-8">
+    <div class="w-full sm:my-4 md:my-4 m-2 bn">
+
+
+      <div
+        class="bg-white shadow-lg rounded-lg w-auto p-4 md:text-lg sm:text-lg  font-light sm:font-bold md:float-right sm:float-right"
+      >
+        Batch Number: &nbsp;<span
+          class="md:text-lg sm:text-lg font-bold"
+          *ngIf="this.batchNum"
+        >
+          {{ this.batchNum }}
+        </span>
+      </div>
+    </div>
+    <div
+      class="flex justify-between md:flex-row w-100 border-l-4 pl-2 md:pl-8 sm:pl-8 border-green mt-4"
+    >
+      <div class="md:basis-2/3 md:my-10 sm:basis-2/3 sm:my-10">
+        <!-- <p class="font-bold text-blueGray-600 text-2xl" >Step 2</p> -->
+        <h2 class="font-bold text-blueGray-800 sm:text-3xl md:text-3xl">
+          Define Packaging Levels for product " {{ this.productName }} "
+        </h2>
+      </div>
+    </div>
+
+    <div class="my-4 bg-blueGray-200 w-100 rounded-lg py-4 pl-4 my-10">
+      <p>
+        What is packaging level?
+        <span class="font-bold">Click to read more</span>
+      </p>
+    </div>
+    <div class="sm:flex md:flex flex-nowrap my-4 justify-between">
+      <div class="flex-1 p-4">
+        <div class="bg-emerald-400 rounded-lg w-100 card-body">
+          <div class="img-hld text-center py-4">
+            <img
+              src="../../../../../assets/img/capsule-pack.png"
+              class="img"
+              alt=""
+              srcset=""
+            />
+          </div>
+          <div class="my-4">
+            <h2 class="font-bold text-2xl">Satchet</h2>
+            <p class="text-lg">
+              How many Satchets will<br />
+              be in a pack?
+            </p>
+          </div>
+          <div class="mt-4 flex flex-nowrap justify-between w-full">
+            <div class="w-100 text-center my-4 mx-1">
+              <button
+                *ngIf="primary_unit >= 1"
+                (click)="decreaseSatchetCounter()"
+                class="h-10 text-blueGray-800 transition-colors duration-150 bg-sap rounded-lg focus:shadow-outline hover:bg-blueGray-800 hover:text-blueGray-600 p-2 md:px-2 sm:px-2 font-bold sm:text-2xl md:text-2xl text-center"
+              >
+                <i class="fas">&#xf068;</i>
+              </button>
+            </div>
+            <div class="w-100 text-center my-4 mx-1">
+              <input
+                [(ngModel)]="primary_unit"
+                name="primary_unit"
+                type="number"
+                class="h-10 w-full input_box text-blueGray-800 transition-colors duration-150 bg-blueGray-300 rounded-lg focus:shadow-outline px-2 p-2 text-2xl"
+              />
+            </div>
+            <div class="w-100 text-center my-4 mx-1">
+              <button
+                (click)="increaseSatchetCounter()"
+                class="h-10 text-white transition-colors duration-150 bg-blueGray-700 rounded-lg focus:shadow-outline hover:bg-blueGray-800 px-2 md:px-2 sm:px-2 md:text-2xl sm:text-2xl font-bold text-center"
+              >
+                <i class="fas">&#xf067;</i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex-1 p-4">
+        <div class="bg-emerald-400 rounded-lg w-100 card-body">
+          <div class="img-hld text-center py-4">
+            <img
+              src="../../../../../assets/img/packaging-level1.png"
+              class="img"
+              alt=""
+              srcset=""
+            />
+          </div>
+          <div class="my-4">
+            <h2 class="font-bold text-2xl">Pack</h2>
+            <p class="text-lg">How many Pack will be<br />in a carton pack?</p>
+          </div>
+          <div class="mt-4 flex flex-wrap justify-between">
+            <div class="w-100 text-center my-4">
+              <button
+                *ngIf="secondary_unit >= 1"
+                (click)="decreasePackCounter()"
+                class="h-10 text-blueGray-800 transition-colors duration-150 bg-sap rounded-lg focus:shadow-outline hover:bg-blueGray-800 hover:text-blueGray-600 p-2 md:px-2 sm:px-2 font-bold sm:text-2xl md:text-2xl text-center"
+              >
+                <i class="fas">&#xf068;</i>
+              </button>
+            </div>
+            <div class="w-100 text-center my-4">
+              <input
+                [(ngModel)]="secondary_unit"
+                name="secondary_unit"
+                type="number"
+                class="h-10 w-full input_box text-blueGray-800 transition-colors duration-150 bg-blueGray-300 rounded-lg focus:shadow-outline px-2 p-2 text-2xl"
+              />
+            </div>
+            <div class="w-100 text-center my-4">
+              <button
+                (click)="increasePackCounter()"
+                class="h-10 text-white transition-colors duration-150 bg-blueGray-700 rounded-lg focus:shadow-outline hover:bg-blueGray-800 px-2 md:px-2 sm:px-2 md:text-2xl sm:text-2xl font-bold text-center"
+              >
+                <i class="fas">&#xf067;</i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex-1 p-4">
+        <div class="bg-emerald-400 rounded-lg w-100 card-body">
+          <div class="img-hld text-center py-4">
+            <img
+              src="../../../../../assets/img/package-level2.png"
+              class="img"
+              alt=""
+              srcset=""
+            />
+          </div>
+          <div class="my-4">
+            <h2 class="font-bold text-2xl">Carton</h2>
+            <p class="text-lg">How many Carton will be<br />in a pallet ?</p>
+          </div>
+          <div class="mt-4 flex flex-wrap justify-between">
+            <div class="w-100 text-center my-4">
+              <button
+                *ngIf="carton_unit >= 1"
+                (click)="decreaseCartonUnit()"
+                class="h-10 text-blueGray-800 transition-colors duration-150 bg-sap rounded-lg focus:shadow-outline hover:bg-blueGray-800 hover:text-blueGray-600 p-2 md:px-2 sm:px-2 font-bold sm:text-2xl md:text-2xl text-center"
+              >
+                <i class="fas">&#xf068;</i>
+              </button>
+            </div>
+            <div class="w-100 text-center my-4">
+              <input
+                [(ngModel)]="carton_unit"
+                name="carton_unit"
+                type="number"
+                class="h-10 w-full input_box text-blueGray-800 transition-colors duration-150 bg-blueGray-300 rounded-lg focus:shadow-outline px-2 p-2 text-2xl"
+              />
+            </div>
+            <div class="w-100 text-center my-4">
+              <button
+                (click)="increaseCartonUnit()"
+                class="h-10 text-white transition-colors duration-150 bg-blueGray-700 rounded-lg focus:shadow-outline hover:bg-blueGray-800 px-2 md:px-2 sm:px-2 md:text-2xl sm:text-2xl font-bold text-center"
+              >
+                <i class="fas">&#xf067;</i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="flex-1 p-4">
+                <div class="bg-emerald-400 rounded-lg w-100 card-body">
+                    <div class="img-hld text-center py-4 ">
+                        <img src="../../../../../assets/img/package-level3.png" class="img" alt="" srcset="">
+                    </div>
+                    <div class="my-4">
+                        <h2 class="font-bold text-2xl">Pallet </h2>
+                        <p class="text-lg"></p>
+                    </div>
+                    <div class="mt-4 flex flex-wrap justify-between w-full">
+                        <div class="w-100  text-center my-4 ">
+                            <button (click)="decreasePalletCounter()" *ngIf="tertiary_unit >= 1"
+                                class="h-12 text-blueGray-800 transition-colors duration-150 bg-sap rounded-lg focus:shadow-outline hover:bg-blueGray-800 hover:text-blueGray-600 p-2 md:px-4 sm:px-4 font-bold sm:text-3xl md:text-3xl text-center"><i
+                                    class='fas'>&#xf068;</i>
+                            </button>
+
+                        </div>
+                        <div class="w-100 text-center my-4 ">
+                            <input [(ngModel)]="tertiary_unit" type="number" name="tertiary_unit"
+                                class="h-12 w-full input_box text-blueGray-800 transition-colors duration-150 bg-blueGray-300 rounded-lg focus:shadow-outline px-4 p-4 text-2xl">
+
+                        </div>
+                        <div class="w-100 text-center my-4 ">
+                            <button (click)="increasePalletCounter()"
+                            class="h-12   text-white transition-colors duration-150 bg-blueGray-700 rounded-lg focus:shadow-outline hover:bg-blueGray-800 px-2 md:px-4 sm:px-4 md:text-3xl sm:text-3xl font-bold text-center"><i
+                            class='fas'>&#xf067;</i>
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+    </div>
+    <div class="w-full text-center my-10">
+      <div class="w-100 sm:ml-3 md:ml-2 lg:ml-2 text-center my-4">
+        <button
+          class="h-12 text-lg text-white transition-colors duration-150 bg-blueGray-700 font-semibold rounded-lg focus:shadow-outline hover:bg-blueGray-800 px-12"
+          (click)="updatePackageLevel()"
+          [disabled]="loading"
+        >
+          <span *ngIf="loading">
+            <img
+              class="inline-flex"
+              src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+            />
+          </span>
+          <span *ngIf="!loading">Submit</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="nextStep == 2"
+    class="px-8 bg-blueGray-200 h-100 pb-10 border-t-2 border-blueGray-300 min-h-screen"
+  >
+    <div class="w-full flex justify-between sm:my-4 md:my-4 m-2 bn pt-4">
+      <p >
+        <i class="fa">&#xf060;</i>&nbsp;&nbsp;
+        <span class="font-bold text-blueGray-700 cursor-pointer" (click)="backHome()">Back</span>
+      </p>
+      <div
+        class="bg-white shadow-lg rounded-lg w-auto p-4 text-sm sm:text-md md:text-md font-light sm:font-bold md:float-right sm:float-right"
+      >
+        Batch Number: &nbsp;<span
+          class="md:text-lg sm:text-lg font-bold"
+          *ngIf="this.batchNum"
+        >
+          {{ this.batchNum }}
+        </span>
+      </div>
+    </div>
+    <div class="md:my-10 sm:my-10">
+
+    </div>
+
+    <p class="mb-5" >Define the Package Level for product name "<b>{{this.productName}}</b>" and batch number "<b>{{this.batchNum}}</b>"  </p>
+    <div *ngFor="let field of packageLevelField; let i = index;" >
+      <form>
+        <div class="flex justify-between">
+
+          <div class="flex-1 m-3">
+            <label class="font-bold" >Packaging Level</label>
+
+            <select
+            class="border border-blueGray-700 rounded-lg bg-white p-2 w-full "
+            (change)="selectPackageLevel($event.target.value)"
+            name="level{{field.id}}"
+            [(ngModel)]="field.level"
+            >
+              <option class="text-blueGray-300" >Select packaging level</option>
+              <option value="Primary">Primary</option>
+              <option value="Secondary" >Secondary</option>
+              <option value="Tertiary" >Tertiary</option>
+              <option value="Pallet" >Pallet</option>
+            </select>
+          </div>
+          <div class="flex-1 m-3">
+            <label class="font-bold" >Packaging Type</label>
+
+            <select
+            class="border border-blueGray-700 rounded-lg bg-white p-2 w-full "
+            name="type{{field.id}}"
+            [(ngModel)]="field.type"
+             >
+              <option  class="text-blueGray-300" >Select packaging type</option>
+              <option value="Satchet" >Satchet</option>
+              <option value="Vial">Vial</option>
+              <option value="Bottle" >Bottle</option>
+              <option value="Pack" >Pack</option>
+              <option value="Carton" >Carton</option>
+              <option value="Pallet" >Pallet</option>
+            </select>
+          </div>
+        </div>
+      </form>
+      <p class="border border-blueGray-500" ></p>
+    </div>
+
+    <div class="mt-5" >
+      <span class="cursor-pointer font-bold text-white text-md bg-blueGray-600 rounded shadow p-3 " (click)="addField()" >Add more level +</span>
+    </div>
+    <div class="mt-8 text-center w-full" *ngIf="loading"  >
+      <img
+        class="inline-flex"
+        src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+      />
+      Checking if there's an existing package level for this product.
+    </div>
+
+    <div class="mt-8 text-center w-full" >
+      <button class="bg-blueGray-800 rounded-lg p-3 px-6 text-white"  (click)="this.nextStep = 4" >Continue</button>
+    </div>
+
+
+  </div>
+
+  <div *ngIf="nextStep == 3"
+    class="md:px-8 lg:px-8 sm:px-8 px-3 border-t-2 border-blueGray-300"
+  >
+    <div class="w-full sm:my-4 md:my-4 m-2 bn">
+      <div
+        class="bg-white shadow-lg rounded-lg w-auto p-4 text-sm sm:text-md md:text-md font-light sm:font-bold md:float-right sm:float-right"
+      >
+        Batch Number: &nbsp;<span
+          class="md:text-md sm:text-md font-bold"
+          *ngIf="this.batchNum"
+        >
+          {{ this.batchNum }}
+        </span>
+      </div>
+    </div>
+
+    <div class="md:my-10 sm:my-10 mt-4">
+      <p class="text-sm sm:text-md md:text-md">
+        <i class="fa">&#xf060;</i>&nbsp;&nbsp;
+        <span
+          class=" text-blueGray-700 cursor-pointer"
+          (click)="prevStep()"
+          >Back</span
+        >
+      </p>
+    </div>
+    <div class="md:flex sm:flex justify-between mb-5">
+      <div class="flex-1 sm:text-left md:text-left text-center my-3">
+        <p class="sm:text-md md:text-md text-md font-lg text-blueGray-800">
+          You're viewing Package Level for product name "<b>{{this.productName}}</b>" and batch number "<b>{{this.batchNum}}</b>"
+        </p>
+      </div>
+      <div
+        class="flex-1 my-3 text-center md:text-right sm:text-right hidden sm:block md:block"
+      >
+
+      </div>
+    </div>
+
+    <div class=" overflow-x-auto mt-3 bg-white rounded-lg p-4 px-8" >
+      <div class="flex justify-between p-4 text-center">
+        <p class="font-semibold text-center w-40 flex-shrink-0 " >Package Level </p>
+        <p class="font-semibold text-center w-40 flex-shrink-0" >Package Type</p>
+        <p class="font-semibold text-center w-40 flex-shrink-0" >Quantity</p>
+        <p class="font-semibold text-center w-40 flex-shrink-0 " >Status</p>
+
+        <p class="font-semibold text-center w-40 flex-shrink-0" >Action</p>
+      </div>
+      <hr>
+      <div class="flex justify-between table-bg rounded-lg p-4 mt-3 text-center" *ngFor="let level of packageLevel" >
+        <p class="text-semibold text-center w-40 flex-shrink-0 " >
+          {{level.level}}
+        </p>
+        <p class="text-semibold  text-center w-40 flex-shrink-0" >
+          <span *ngIf="level.type == 'Satchet' " class="satchet">
+            {{level.type}}
+          </span>
+          <span *ngIf="level.type == 'Vial' " class="satchet">
+            {{level.type}}
+          </span>
+          <span *ngIf="level.type == 'Bottle' " class="satchet">
+            {{level.type}}
+          </span>
+          <span *ngIf="level.type == 'Pack' " class="pack">
+            {{level.type}}
+          </span>
+
+          <span *ngIf="level.type == 'Carton' " class="carton">
+            {{level.type}}
+          </span>
+          <span *ngIf="level.type == 'Pallet' " class="pallet">
+            {{level.type}}
+          </span>
+
+        </p>
+        <p class="text-semibold text-center w-40 flex-shrink-0 " >
+          {{level.quantity}}
+
+        </p>
+        <p class="text-semibold text-center w-40 flex-shrink-0" >
+          <span class="text-semibold text-center flex-1 bg-red-100 text-red-600 p-3 px-5 rounded-2xl" *ngIf="level.status == 0" >
+            Unserialized
+          </span>
+          <span class="text-semibold text-center flex-1 bg-green-100 text-green-600 p-3 px-5 rounded-2xl" *ngIf="level.status == 1" >
+            Serialized
+          </span>
+          <span class="text-semibold text-center flex-1 bg-green-100 text-green-600 p-3 px-5 rounded-2xl" *ngIf="level.status == 2" >
+            Commissioned
+          </span>
+        </p>
+        <p class="text-semibold text-center text-semibold w-40 flex-shrink-0 cursor-pointer text-indigo-600 font-lg "  >
+          <span (click)="viewCode(level.id)"  *ngIf="level.status == 1" class="border border-green-500 text-green-500 rounded p-2 px-6 cursor-pointer" >
+            View
+          </span>
+          <span *ngIf="level.level !== 'Primary'" >
+            <span (click)="viewCode(level.id)"  *ngIf="level.status == 2" class="border-2 border-green-500 text-green-500 rounded-md shadow p-2 px-6 cursor-pointer" >
+              Pack
+          </span>
+          </span>
+
+          <span class=""  *ngIf="level.status == 0" (click)="openModal(level.id)"  >
+            Generate
+          </span>
+        </p>
+      </div>
+
+    </div>
+
+
+  </div>
+
+  <div *ngIf="updateModal"
+    class="bg-blueGray-600 bg-opacity-60 min-h-screen w-screen absolute inset-0 flex justify-center item-center"
+    >
+    <div
+      class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+      <div class="relative w-auto my-6 mx-auto max-w-6xl modal-body">
+        <!--content-->
+        <div class="border-0  relative flex flex-col w-full bg-white rounded-lg  outline-none focus:outline-none modal-body">
+          <!--header-->
+
+          <!--body-->
+          <div class="relative p-6 w-100 flex-auto">
+            <div class="text-center m-5 ">
+
+              <p class="font-bold text-blueGray-700 text-lg my-5">Enter Quantity for the Level </p>
+
+
+            </div>
+            <input class="border-2 border-blueGray-600 p-2 my-2 rounded-lg bg-blueGray-200 w-full" type="number" [(ngModel)]="packageLevelQuantity" />
+
+            <div class="w-100 text-center flex justify-between">
+              <button (click)="openModal()"
+                class="bg-white border-2 border-blueGray-500 text-blueGray-700 active:bg-blueGray-700 text-lg font-bold px-12 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+
+                Cancel
+              </button>
+              <button
+                class="bg-blueGray-700  text-white active:bg-blueGray-700 text-lg font-bold px-12 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                (click)="serialize()">
+                <span *ngIf="loading">
+                  <img
+                    class="inline-flex"
+                    src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                  />
+                </span>
+                <span *ngIf="!loading">
+                  Generate
+                </span>
+              </button>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="nextStep == 4" class="px-8 border-t-2 border-blueGray-300">
+    <div class="w-full sm:my-4 md:my-4 m-2 bn">
+      <div
+        class="bg-white shadow-lg rounded-lg w-auto p-4 text-sm sm:text-md md:text-md font-light sm:font-bold md:float-right sm:float-right"
+      >
+        Batch Number: &nbsp;<span
+          class="md:text-md sm:text-md font-bold"
+          *ngIf="this.batchNum"
+        >
+          {{ this.batchNum }}
+        </span>
+      </div>
+    </div>
+    <br />
+    <div
+      class="flex justify-between md:flex-row w-100 border-l-4 md:pl-4 sm:pl-4 border-green mt-2"
+    >
+      <div class="basis-2/3 my-10 ml-2">
+        <!-- <p class="font-bold text-blueGray-600 text-2xl" >Step 2</p> -->
+        <h2 class="font-bold text-blueGray-800 text-2xl">
+          Select Manufacturing site for the product.
+        </h2>
+      </div>
+    </div>
+    <div class="md:mx-8 sm:mx-8 sm:p-5 w-100 text-center md:my-8 my-8">
+      <select
+        (change)="selectLocation($event.target.value)"
+        class="rounded-full w-100 border-2 border-blueGray-500 item-center p-2 md:p-4 sm:p-4"
+      >
+        <option>--Select Location--</option>
+        <option value="{{ location.gln }}" *ngFor="let location of locations">
+          {{ location.address }}
+        </option>
+      </select>
+    </div>
+
+    <div class="w-full text-center my-10">
+      <div class="w-100 sm:ml-3 md:ml-2 lg:ml-2 text-center my-4">
+        <button
+          class="h-12 text-2xl text-white transition-colors duration-150 bg-blueGray-700 font-semibold rounded-lg focus:shadow-outline hover:bg-blueGray-800 px-12"
+          [disabled]="loading"
+          (click)="createPackageLevel()"
+        >
+          <span *ngIf="loading">
+            <img
+              class="inline-flex"
+              src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+            />
+          </span>
+          <span *ngIf="!loading">Continue</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="nextStep == 5" class="px-8 border-t-2 py-8 border-blueGray-300">
+    <p class="text-sm text-blueGray-800 font-bold "  (click)="nextStep = 3" ><i class="fa">&#xf060;</i>&nbsp;&nbsp; Back</p>
+
+    <div class="w-100 mt-5 ">
+      <div class="basis-2/3 mt-10 border-green">
+        <h2 class="font-bold text-blueGray-800 md:text-2xl text-md sm:text-2xl ">
+          Commissioning
+        </h2>
+      </div>
+      <div class="border-green-400 border-l-4 py-2 pl-4 my-5">
+        <p class="font-bold font-2xl text-blueGray-700" >
+          {{serialNumberLevel}} Package Level Commissioning</p>
+      </div>
+    </div>
+
+
+
+    <div class="w-100 ">
+      <div class="">
+        <div class="sm:flex md:flex justify-between">
+          <div class="w-100 flex-1">
+            <br />
+            <div *ngIf="!commissionAll">
+              <div>
+                <div class="text-blueGray-700 font-bold text-md ">
+                  Scan Item(s) Here
+                </div>
+                <input
+                  (keydown.space)="$event.preventDefault()"
+                  (change)="addMore()"
+                  class="border-2 border-blueGray-300 p-2 rounded rounded-md w-full"
+                  [(ngModel)]="serial_range"
+                  name="serial_range"
+                  placeholder=""
+                />
+              </div>
+            </div>
+          </div>
+          <div class="flex-1 m-3 hidden sm:block md:block">
+          </div>
+        </div>
+      </div>
+
+      <br><br>
+      <div class="bg-blueGray-200  p-6 rounded-lg"  >
+        <div class="flex justify-between">
+          <div class="flex-1 text-center">Scanned Serial Numbers</div>
+          <div class="flex-1 text-center "></div>
+          <div class="flex-1 text-center ">
+            <button
+              class="p-1 bg-blueGray-800  rounded-lg text-center text-white text-md px-4"
+              [disabled]="loading"
+              (click)="comissionProduct()"
+            >
+              <span *ngIf="!loading">Submit</span>
+              <span *ngIf="loading">
+                <img
+                  class="inline-flex"
+                  src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                />
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <div class="w-100 flex pt-4 mt-5" *ngIf="!serialRange.length"  >
+          <div class="m-auto">
+            <img src="../../../../../assets/img/55.svg" alt="" srcset="">
+            <p class="font-bold text-blueGray-800" >No Item has been scanned</p>
+          </div>
+        </div>
+
+        <div >
+          <div class="flex justify-between rounded-lg bg-white shadow mt-6 py-4 "  *ngFor="let serial of serialRange">
+            <div class="flex-1 text-center ">
+              <span>{{serial}}</span>&nbsp;&nbsp;&nbsp;
+
+              <span class="right-0 cursor-pointer" (click)="removeCode(serial)" ><i style="font-size:24px" class="fa">&#xf1f8;</i></span>
+            </div>
+            <!-- <div class="flex-1 text-center ">Date Created</div> -->
+            <div class="flex-1 text-center "></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div *ngIf="nextStep == 6" class="px-8 border-t-2 border-blueGray-300">
+    <div class="success-body text-center">
+      <div class="success-image">
+        <img
+          src="../../../../assets/img/success-image.png"
+          class="m-auto ssimg"
+          alt=""
+          srcset=""
+        />
+
+        <p class="text-2xl font-bold text-blueGray-700 my-5">
+
+          {{serialNumberLevel}} Package Level Comissioning Was successful
+        </p>
+        <div class="mt-10 flex justify-between w-70 ">
+          <div class="flex-1 text-right">
+            <button
+              class="bg-blueGray-800 rounded-md text-white py-2 font-bold text-md px-7 hover:bg-blueGray-500 m-3"
+              (click)="bactToStatus()"
+            >
+              Back to Status Page
+            </button>
+          </div>
+          <div class="flex-1 text-left ">
+            <button
+              class="bg-blueGray-800 rounded-md text-white py-2 font-bold text-md px-7 hover:bg-blueGray-500 m-3"
+              (click)="packingSummary()"
+            >
+              Proceed To Summary
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="nextStep == 7" class="px-8">
+    <div class="mt-10 mb-3">
+      <p>
+        <i class="fa">&#xf060;</i>&nbsp;&nbsp;
+        <span
+          class="text-sm text-blueGray-700 cursor-pointer"
+          (click)="nextStep = 3"
+          >Back</span
+        >
+      </p>
+    </div>
+    <div class="flex justify-between">
+      <p class="text-blueGray-800 text-lg font-bold ">
+        <span *ngIf="serialNumberLevel == 'Primary' " >Primary</span>
+          <span *ngIf="serialNumberLevelType == 'Pack' " >Secondary</span>
+          <span *ngIf="serialNumberLevelType == 'Pallet' " >Pallet</span>
+          <span *ngIf="serialNumberLevelType == 'Carton' " >Tertiary</span>
+           Package Level
+      </p>
+      <p class="text-blueGray-800 text-sm font-bold ">
+        <!-- Serial Number : 10000-110000 -->
+      </p>
+    </div>
+
+    <div class="flex justify-between my-5">
+      <div class="" >
+        <button (click)="selectedTab = 'generated-stickers'" [class.selected]="selectedTab == 'generated-stickers'" class=" shadow text-sm p-3 rounded-2xl text-blueGray-500 m-1 " >Generated Stickers</button>
+        <button (click)="selectedTab = 'commission'" [class.selected]="selectedTab == 'commission'" class="shadow text-sm p-3 rounded-2xl text-blueGray-500 m-1" >Commissioned {{commissionedData}}/{{qrTotalCount}}</button>
+        <button  (click)="selectedTab = 'post-commission'" [class.selected]="selectedTab == 'post-commission'" class="shadow text-sm p-3 rounded-2xl text-blueGray-500 m-1" >Post-Commission Operations</button>
+      </div>
+      <div></div>
+      <div>
+        <div *ngIf="selectedTab == 'generated-stickers'" >
+          <button class="border-2 border-blueGray-500 text-blueGray-500 rounded-lg bg-white p-1 m-1 px-4 text-sm"  >Export</button>
+          <button class="bg-blueGray-700 rounded-lg text-white p-2 m-1 px-4 text-sm" ngxPrint [useExistingCss]="true"
+          printSectionId="print-section"
+          >Send To printer</button>
+        </div>
+        <div *ngIf="selectedTab == 'commission'" >
+          <button class="bg-blueGray-700 rounded-lg text-white p-2 m-1 px-4 text-sm" (click)="nextStep = 5"  >Start Commission</button>
+        </div>
+
+      </div>
+    </div>
+
+    <br />
+
+    <div classs="pt-8" >
+      <div *ngIf="selectedTab == 'generated-stickers' ">
+        <!-- <p class="text-blueGray-800 w-100 text-center text-lg">
+          <b>{{ serialNumberLevel }}</b> Level Serial Number:
+          <span class="font-bold">{{ serailNumberRange }}</span>
+        </p> -->
+        <!-- <p class="text-blueGray-800 font-bold text-lg m-5 " >Primary Code</p> -->
+        <div *ngIf="code == 'QR'">
+          <div
+            class="sm:grid md:grid grid-cols-2 gap-5 w-full my-5"
+            *ngIf="serialNumberLevel === 'Primary'"
+          >
+            <div
+              class="border-2 border-blueGray-500 p-2 my-1 rounded-lg flex justify-between"
+              *ngFor="let qr of qrData"
+            >
+              <div class="flex-1">
+                <qrcode
+                  [qrdata]="qr.elementString"
+                  [width]="100"
+                  [errorCorrectionLevel]="'M'"
+                ></qrcode>
+              </div>
+              <div class="flex-2">
+                <p class="text-sm" >
+                  GTIN:
+                  <span class="font-bold text-blueGray-800">{{
+                    qr.epcText | slice: 0:17
+                  }}</span>
+                </p>
+                <p class="text-sm">
+                  EXP:
+                  <span class="font-bold text-blueGray-800"
+                    >(17){{ this.productExpiry | date: "MM/YYYY" }}
+                  </span>
+                </p>
+                <p class="text-sm">
+                  LOT:
+                  <span class="font-bold text-blueGray-800">(10){{
+                    this.batchNum
+                  }}</span>
+                </p>
+                <p class="text-sm">
+                  S/N:
+                  <span class="font-bold text-blueGray-800 text-sm">{{
+                    qr.epcText | slice: 18:38
+                  }}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- <div  *ngIf="serialNumberLevel == 'Secondary' ">
+            <div
+            class="grid grid-cols-12 gap-4 w-full my-5"
+          >
+
+            <div
+              class="border-2 border-blueGray-500 p-4 rounded-lg"
+              *ngFor="let qr of qrData"
+            >
+              <qrcode
+                [qrdata]="qr.elementString"
+                [width]="100"
+                [errorCorrectionLevel]="'M'"
+              ></qrcode>
+            </div>
+          </div>
+          </div> -->
+
+          <!-- <div  *ngIf="serialNumberLevel ==   'Tertiary' ">
+            <div
+            class="grid grid-cols-12 gap-4 w-full my-5"
+          >
+
+            <div
+              class="border-2 border-blueGray-500 p-4 rounded-lg"
+              *ngFor="let qr of qrData"
+            >
+              <qrcode
+                [qrdata]="qr.elementString"
+                [width]="100"
+                [errorCorrectionLevel]="'M'"
+              ></qrcode>
+            </div>
+          </div>
+          </div> -->
+          <div  *ngIf="serialNumberLevel ==   'Pallet' ">
+            <div
+            class="grid grid-cols-12 gap-4 w-full my-5"
+          >
+
+            <div
+              class="border-2 border-blueGray-500 p-4 rounded-lg"
+              *ngFor="let qr of qrData"
+            >
+              <qrcode
+                [qrdata]="qr.elementString"
+                [width]="100"
+                [errorCorrectionLevel]="'M'"
+              ></qrcode>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div *ngIf="code == 'MATRIX'">
+          <div
+
+            class=""
+            *ngIf="serialNumberLevel === 'Primary'"
+          >
+            <div class="grid grid-cols-3 gap-4 w-full my-5 codeDetails" id="print-section"  >
+              <div
+              class="border-2 border-blueGray-500 my-1 py-2 px-4 rounded-lg "
+              id="stickers"
+              *ngFor="let qr of qrData"
+            >
+
+            <div  class="flex justify-between " id="sticker-label"   >
+              <div class="flex-1 labelImg "  >
+                <img class="printImg" height="70" src="https://bwipjs-api.metafloor.com/?bcid=datamatrix&text={{
+                      qr.elementString
+                    }}" />
+              </div>
+              <div class="flex-2 printDetail">
+                <p class="text-md text-left  ">
+                  GTIN:
+                  <span class="font-bold text-blueGray-800">{{
+                    qr.epcText | slice: 0:17
+                    }}</span>
+                </p>
+                <p class="text-md text-left  ">
+                  EXP:
+                  <span class="font-bold text-blueGray-800">(17){{ this.productExpiry | date: "MM/YYYY" }}
+                  </span>
+                </p>
+                <p class="text-md text-left  ">
+                  LOT:
+                  <span class="font-bold text-blueGray-800">(10){{
+                    this.batchNum
+                    }}</span>
+                </p>
+                <p class="text-md text-left ">
+                  S/N:
+                  <span class="font-bold text-blueGray-800">{{
+                    qr.epcText | slice: 18:38
+                    }}</span>
+                </p>
+              </div>
+
+            </div>
+
+            </div>
+            </div>
+
+          </div>
+          <div
+          class="sm:grid md:grid  grid-cols-3 gap-5 w-full my-5"
+          id="print-section"
+          *ngIf="serialNumberLevel === 'Secondary'"
+        >
+          <div
+            class="border-2 border-blueGray-500 py-2 my-1 px-4 rounded-lg "
+            id="stickers"
+            *ngFor="let qr of qrData"
+          >
+          <div  class="flex justify-between " id="sticker-label"  >
+            <div class="flex-1">
+              <img
+                  class="printImg"
+                  height="100"
+                  src="https://bwipjs-api.metafloor.com/?bcid=datamatrix&text={{
+                    qr.elementString
+                  }}"
+                />
+            </div>
+            <div class="flex-2 printDetail">
+              <p class="text-md text-left  ">
+                GTIN:
+                <span class="font-bold text-blueGray-800">{{
+                  qr.epcText | slice: 0:17
+                  }}</span>
+              </p>
+              <p class="text-md text-left  ">
+                EXP:
+                <span class="font-bold text-blueGray-800">(17){{ this.productExpiry | date: "MM/YYYY" }}
+                </span>
+              </p>
+              <p class="text-md text-left  ">
+                LOT:
+                <span class="font-bold text-blueGray-800">(10){{
+                  this.batchNum
+                  }}</span>
+              </p>
+              <p class="text-md text-left ">
+                S/N:
+                <span class="font-bold text-blueGray-800">{{
+                  qr.epcText | slice: 18:38
+                  }}</span>
+              </p>
+            </div>
+          </div>
+
+          </div>
+        </div>
+        <div
+        class="sm:grid md:grid grid-cols-3 gap-5 w-full my-5"
+        *ngIf="serialNumberLevel === 'Tertiary'"
+      >
+        <div
+          class="border-2 border-blueGray-500 my-1 py-2 px-4 rounded-lg flex justify-between"
+          *ngFor="let qr of qrData"
+        >
+          <div class="flex-1">
+            <qrcode
+              [qrdata]="qr.elementString"
+              [width]="100"
+              [errorCorrectionLevel]="'M'"
+            ></qrcode>
+          </div>
+          <div class="flex-2">
+            <p>
+              GTIN:
+              <span class="font-bold text-blueGray-800">{{
+                qr.epcText | slice: 0:17
+              }}</span>
+            </p>
+            <p>
+              EXP:
+              <span class="font-bold text-blueGray-800"
+                >(17){{ this.productExpiry | date: "MM/YYYY" }}
+              </span>
+            </p>
+            <p>
+              LOT:
+              <span class="font-bold text-blueGray-800">(10){{
+                this.batchNum
+              }}</span>
+            </p>
+            <p>
+              S/N:
+              <span class="font-bold text-blueGray-800 text-sm">{{
+                qr.epcText | slice: 18:38
+              }}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+          <div class="sm:grid md:grid grid-cols-12 gap-4 w-full my-5" *ngIf="serialNumberLevel == 'Pallet'">
+            <!-- <div
+              class="border-2 border-blueGray-500 p-4 rounded-lg"
+              *ngFor="let qr of qrData"
+            >
+              <img
+                class=""
+                height="100"
+                src="https://bwipjs-api.metafloor.com/?bcid=datamatrix&text={{
+                  qr.elementString
+                }}"
+              />
+            </div> -->
+          </div>
+
+        </div>
+
+        <div *ngIf="code == '128' " class="px-16 printScreen" id="demo"  >
+
+
+          <br><br>
+          <div class="sm:grid md:grid grid-cols-4 gap-4 w-full my-5 " *ngIf="serialNumberLevel == 'Secondary' ">
+
+            <div class="border-2 border-blueGray-500 p-4 my-1 rounded-lg " *ngFor="let qr of qrData">
+
+              <img alt='Barcode Generator TEC-IT' id="print-section sticker-label"
+              src='https://barcode.tec-it.com/barcode.ashx?data={{ qr.elementString}}&code=EANUCC128&translate-esc=on'/>
+
+
+
+            </div>
+          </div>
+
+          <div class=" w-full my-5 " *ngIf="serialNumberLevel == 'Tertiary' ">
+            <div id="print-section" class="sm:grid md:grid grid-cols-4 gap-4 w-full"  >
+              <div class="border-2 border-blueGray-500 p-4 my-1 rounded-lg " id="stickers" *ngFor="let qr of qrData" >
+
+                <img alt='Barcode Generator TEC-IT' id="sticker-label"
+                src='https://barcode.tec-it.com/barcode.ashx?data={{ qr.elementString}}&code=EANUCC128&translate-esc=on'/>
+
+
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="sm:grid md:grid grid-cols-4 gap-4 w-full my-5 " *ngIf="serialNumberLevel == 'Pallet' ">
+            <div id="print-section">
+              <div class="border-2 border-blueGray-500 my-1 p-4 rounded-lg " *ngFor="let qr of qrData" >
+                <img alt='Barcode Generator TEC-IT' id="sticker-label"
+                src='https://barcode.tec-it.com/barcode.ashx?data={{ qr.elementString}}&code=EANUCC128&translate-esc=on'/>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="selectedTab == 'commission'" >
+        <!-- <p class="text-blueGray-800 w-100 text-center text-lg">
+          <b>{{ serialNumberLevel }}</b> Level Serial Number:
+          <span class="font-bold">{{ serailNumberRange }}</span>
+        </p> -->
+        <!-- <p class="text-blueGray-800 font-bold text-lg m-5 " >Primary Code</p> -->
+        <div *ngIf="code == 'QR'">
+          <div
+            class="grid grid-cols-2 gap-5 w-full my-5"
+            *ngIf="serialNumberLevel === 'Primary'"
+          >
+
+            <div *ngIf="!commissioned.length" class="my-5 text-center" >
+              <img src="../../../../../assets/img/55.svg" alt="" srcset="">
+              <p  class="text-2xl text-indigo-400 font-bold">None of the Stickers has been commissioned</p>
+            </div>
+
+
+            <div
+              class="border-2 border-blueGray-500 p-2 rounded-lg flex justify-between"
+              *ngFor="let qr of commissioned"
+            >
+              <div class="flex-1">
+                <qrcode
+                  [qrdata]="qr.elementString"
+                  [width]="100"
+                  [errorCorrectionLevel]="'M'"
+                ></qrcode>
+              </div>
+              <div class="flex-2">
+                <p class="text-sm" >
+                  GTIN:
+                  <span class="font-bold text-blueGray-800">{{
+                    qr.epcText | slice: 0:17
+                  }}</span>
+                </p>
+                <p class="text-sm">
+                  EXP:
+                  <span class="font-bold text-blueGray-800"
+                    >(17){{ this.productExpiry | date: "MM/YYYY" }}
+                  </span>
+                </p>
+                <p class="text-sm">
+                  LOT:
+                  <span class="font-bold text-blueGray-800">(10){{
+                    this.batchNum
+                  }}</span>
+                </p>
+                <p class="text-sm">
+                  S/N:
+                  <span class="font-bold text-blueGray-800 text-sm">{{
+                    qr.epcText | slice: 18:38
+                  }}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div  *ngIf="serialNumberLevel ==   'Pallet' ">
+            <div
+            class="grid grid-cols-12 gap-4 w-full my-5"
+          >
+
+            <div
+              class="border-2 border-blueGray-500 p-4 rounded-lg"
+              *ngFor="let qr of commissioned"
+            >
+              <qrcode
+                [qrdata]="qr.elementString"
+                [width]="100"
+                [errorCorrectionLevel]="'M'"
+              ></qrcode>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div *ngIf="code == 'MATRIX'">
+
+          <div  *ngIf="serialNumberLevel === 'Primary'">
+            <div class=" flex w-full pt-4 mt-5" *ngIf="!commissioned.length"  >
+              <div class="m-auto text-center">
+                <img src="../../../../../assets/img/55.svg" alt="" srcset="">
+                <p class="font-bold text-blueGray-400 mt-5" >None of the Stickers has been commissioned. Kindly proceed to Commission them.</p>
+              </div>
+            </div>
+
+            <div
+            class="grid grid-cols-3 gap-5 w-full my-5"
+
+          >
+            <div
+              class="border-2 border-blueGray-500 p-6 px-10 rounded-lg flex justify-between"
+              *ngFor="let qr of commissioned"
+            >
+              <div class="flex-1">
+                <img
+                  class=""
+                  height="100"
+                  src="https://bwipjs-api.metafloor.com/?bcid=datamatrix&text={{
+                    qr.elementString
+                  }}"
+                />
+              </div>
+              <div class="flex-2">
+                <p class="text-sm" >
+                  GTIN:
+                  <span class="font-bold text-blueGray-800">{{
+                    qr.epcText | slice: 0:17
+                  }}</span>
+                </p>
+                <p class="text-sm">
+                  EXP:
+                  <span class="font-bold text-blueGray-800"
+                    >(17){{ this.productExpiry | date: "MM/YYYY" }}
+                  </span>
+                </p>
+                <p  class="text-sm">
+                  LOT:
+                  <span class="font-bold text-blueGray-800">(10){{
+                    this.batchNum
+                  }}</span>
+                </p>
+                <p  class="text-sm">
+                  S/N:
+                  <span class="font-bold text-blueGray-800 text-sm">{{
+                    qr.epcText | slice: 18:38
+                  }}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          </div>
+
+
+          <div  *ngIf="serialNumberLevel === 'Secondary'">
+            <div class=" flex w-full pt-4 mt-5" *ngIf="!commissioned.length"  >
+              <div class="m-auto text-center">
+                <img src="../../../../../assets/img/55.svg" alt="" srcset="">
+                <p class="font-bold text-blueGray-400 mt-5" >None of the Stickers has been commissioned. Kindly proceed to Commission them.</p>
+              </div>
+            </div>
+
+            <div
+          class="grid grid-cols-3 gap-5 w-full my-5"
+
+        >
+
+
+          <div
+            class="border-2 border-blueGray-500 p-6 px-10 rounded-lg flex justify-between"
+            *ngFor="let qr of commissioned"
+          >
+            <div class="flex-1">
+              <img
+                  class=""
+                  height="100"
+                  src="https://bwipjs-api.metafloor.com/?bcid=datamatrix&text={{
+                    qr.elementString
+                  }}"
+                />
+            </div>
+            <div class="flex-2">
+              <p>
+                GTIN:
+                <span class="font-bold text-blueGray-800">{{
+                  qr.epcText | slice: 0:17
+                }}</span>
+              </p>
+              <p>
+                EXP:
+                <span class="font-bold text-blueGray-800"
+                  >(17){{ this.productExpiry | date: "MM/YYYY" }}
+                </span>
+              </p>
+              <p>
+                LOT:
+                <span class="font-bold text-blueGray-800">(10){{
+                  this.batchNum
+                }}</span>
+              </p>
+              <p>
+                S/N:
+                <span class="font-bold text-blueGray-800 text-sm">{{
+                  qr.epcText | slice: 18:38
+                }}</span>
+              </p>
+            </div>
+          </div>
+
+
+        </div>
+          </div>
+
+
+        <div
+        class="grid grid-cols-3 gap-5 w-full my-5"
+        *ngIf="serialNumberLevel === 'Tertiary'"
+      >
+        <div
+          class="border-2 border-blueGray-500 p-6 px-10 rounded-lg flex justify-between"
+          *ngFor="let qr of commissioned"
+        >
+          <div class="flex-1">
+            <qrcode
+              [qrdata]="qr.elementString"
+              [width]="100"
+              [errorCorrectionLevel]="'M'"
+            ></qrcode>
+          </div>
+          <div class="flex-2">
+            <p>
+              GTIN:
+              <span class="font-bold text-blueGray-800">{{
+                qr.epcText | slice: 0:17
+              }}</span>
+            </p>
+            <p>
+              EXP:
+              <span class="font-bold text-blueGray-800"
+                >(17){{ this.productExpiry | date: "MM/YYYY" }}
+              </span>
+            </p>
+            <p>
+              LOT:
+              <span class="font-bold text-blueGray-800">(10){{
+                this.batchNum
+              }}</span>
+            </p>
+            <p>
+              S/N:
+              <span class="font-bold text-blueGray-800 text-sm">{{
+                qr.epcText | slice: 18:38
+              }}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+          <div class="grid grid-cols-12 gap-4 w-full my-5" *ngIf="serialNumberLevel == 'Pallet'">
+            <!-- <div
+              class="border-2 border-blueGray-500 p-4 rounded-lg"
+              *ngFor="let qr of qrData"
+            >
+              <img
+                class=""
+                height="100"
+                src="https://bwipjs-api.metafloor.com/?bcid=datamatrix&text={{
+                  qr.elementString
+                }}"
+              />
+            </div> -->
+          </div>
+
+        </div>
+
+        <div *ngIf="code == '128' " class="px-16 printScreen" id="demo"  >
+
+
+          <br><br>
+
+          <div *ngIf="serialNumberLevel == 'Secondary' ">
+            <div class="grid grid-cols-4 gap-4 w-full my-5 " >
+
+              <div class="border-2 border-blueGray-500 p-4 rounded-lg " *ngFor="let qr of commissioned">
+
+                <img alt='Barcode Generator TEC-IT'
+                src='https://barcode.tec-it.com/barcode.ashx?data={{ qr.elementString}}&code=EANUCC128&translate-esc=on'/>
+
+
+
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="serialNumberLevel == 'Tertiary' ">
+            <div class=" flex w-full pt-4 mt-5" *ngIf="!commissioned.length"  >
+              <div class="m-auto text-center">
+                <img src="../../../../../assets/img/55.svg" alt="" srcset="">
+                <p class="font-bold text-blueGray-400 mt-5" >None of the Stickers has been commissioned. Kindly proceed to Commission them.</p>
+              </div>
+            </div>
+            <div class="grid grid-cols-4 gap-4 w-full my-5 " >
+
+              <div class="border-2 border-blueGray-500 p-4 rounded-lg " *ngFor="let qr of commissioned">
+
+                <img alt='Barcode Generator TEC-IT'
+                src='https://barcode.tec-it.com/barcode.ashx?data={{ qr.elementString}}&code=EANUCC128&translate-esc=on'/>
+
+
+
+              </div>
+            </div>
+          </div>
+
+
+          <div class="grid grid-cols-4 gap-4 w-full my-5 " *ngIf="serialNumberLevel == 'Pallet' ">
+            <div class=" flex w-full pt-4 mt-5" *ngIf="!commissioned.length"  >
+              <div class="m-auto text-center">
+                <img src="../../../../../assets/img/55.svg" alt="" srcset="">
+                <p class="font-bold text-blueGray-400 mt-5" >None of the Stickers has been commissioned. Kindly proceed to Commission them.</p>
+              </div>
+            </div>
+
+            <div class="border-2 border-blueGray-500 p-4 rounded-lg " *ngFor="let qr of commissioned">
+
+              <img alt='Barcode Generator TEC-IT'
+              src='https://barcode.tec-it.com/barcode.ashx?data={{ qr.elementString}}&code=EANUCC128&translate-esc=on'/>
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="selectedTab == 'post-commission'" >
+        <app-attach-rewards (backToStatus)="checkStatus($event)" [serialNumber]="serialNumber" [serialDetails]="serialDetails" [packageLevel]="packageLevel" ></app-attach-rewards>
+      </div>
+    </div>
+
+  </div>
+
+  <div
+    *ngIf="nextStep == 8"
+    class="mt-5 py-5 bg-blueGray-200 border-t-2 border-blueGray-300"
+  >
+    <br /><br />
+    <div class="sm:flex md:flex justify-between my-8 md:px-8">
+      <div class="flex-1">
+        <p class="md:text-lg sm:text-lg text-sm font-bold text-blueGray-800">
+          Packing Summary
+        </p>
+      </div>
+      <div class="flex-1 xs:flex sm:text-right md:text-right">
+        <span
+          class="bg-white rounded-lg py-2 px-6 text-blueGray-800 border-2 border-blueGray-500 text-md mx-2"
+        >
+          Export
+        </span>
+
+        <span
+          class="bg-blueGray-800 border-2 border-blueGray-500 rounded-2xl py-2 px-6 text-white font-lg mx-2 font-semibold"
+          (click)="printThisPage()"
+        >
+          Print
+        </span>
+      </div>
+    </div>
+    <br /><br />
+    <div class="my-10 md:px-8">
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <p
+          class="text-blueGray-800 font-bold sm:text-2xl md:text-2xl text-md my-5"
+        >
+          Product Information
+        </p>
+        <div class="sm:grid md:grid grid-cols-3 gap-4 bg-white rounded-lg p-5">
+          <div class="m-4 w-100">
+            <img [src]="this.productImage" alt="" srcset="" />
+          </div>
+          <div class="col-span-2 m-4">
+            <p class="text-md text-blueGray-800 font-semibold">Product Name</p>
+            <p class="text-2xl text-blueGray-800 font-bold">
+              {{ this.productName }}
+            </p>
+            <br />
+            <p class="text-md text-blueGray-800 font-semibold">
+              Product Description
+            </p>
+            <p class="text-lg text-blueGray-800 font-semibold">
+              {{ productDescription }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-between">
+        <div class="flex-1 m-5">
+          <div class="bg-white shadow m-5 p-5 rounded-lg">
+            <p class="text-lg text-blueGray-800 font-bold my-4">
+              Batch Information
+            </p>
+
+            <div
+              class="bg-blueGray-200 rounded-lg p-3 rounded-lg flex justify-between"
+            >
+              <div>
+                <p class="text-blueGray-700 text-xs">GTIN</p>
+                <p class="font-bold text-xs">{{ gtinNumber }}</p>
+              </div>
+              <div>
+                <p class="text-blueGray-700 text-xs">Production Date</p>
+                <p class="font-bold text-xs">
+                  {{ this.productionDate | date: "longDate" }}
+                </p>
+              </div>
+              <div>
+                <p class="text-blueGray-700 text-xs">Expiry Date</p>
+                <p class="font-bold text-xs">
+                  {{ this.productExpiry | date: "longDate" }}
+                </p>
+              </div>
+              <div>
+                <p class="text-blueGray-700 text-xs">Batch Number</p>
+                <p class="font-bold text-xs">
+                  {{ this.batchNum }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex-1 m-5">
+          <div class="bg-white shadow m-5 p-5 rounded-lg">
+            <p class="text-lg text-blueGray-800 font-bold my-4">
+              Packaging Information
+            </p>
+
+            <div
+              class="bg-blueGray-200 rounded-lg p-3 rounded-lg flex justify-between"
+            >
+              <div>
+                <p class="text-blueGray-700">Tertiary</p>
+                <p class="font-bold">{{ this.package.quantity[2] }} Items</p>
+              </div>
+
+              <div>
+                <p class="text-blueGray-700">Secondary</p>
+                <p class="font-bold">{{ this.package.quantity[1] }} Items</p>
+              </div>
+              <div>
+                <p class="text-blueGray-700">Primary</p>
+                <p class="font-bold">{{ this.package.quantity[0] }} Items</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-lg shadow p-5">
+        <div class="flex justify-between m-4 p-4">
+          <div class="flex-1 text-center">Package Level</div>
+          <div class="flex-1 text-center">Number of Package Level</div>
+          <!-- <div class="flex-1 text-center">Serial Number Range</div> -->
+        </div>
+        <hr />
+        <div
+          class="flex justify-between m-4 p-5 bg-blueGray-200"
+          *ngFor="let package of packageLevel"
+        >
+          <div class="flex-1 text-center">{{ package.level }}</div>
+          <div class="flex-1 text-center">{{ package.quantity }}</div>
+          <!-- <div class="flex-1 text-center">{{ package.serial_no_range }}</div> -->
+        </div>
+      </div>
+
+      <p
+        class="my-5 text-center text-lg text-blueGray-800 font-bold cursor-pointer"
+        (click)="this.nextStep = 3"
+      >
+        Proceed &nbsp; <i class="fa">&#xf0a9;</i>
+      </p>
+    </div>
+  </div>
+
+  <div
+    *ngIf="nextStep == 9"
+    class="py-5 bg-blueGray-200 border-t-2 border-blueGray-300"
+  >
+    <div class="px-8">
+      <app-attach-survey
+        (assignRewards)="proceedToShipping($event)"
+      ></app-attach-survey>
+    </div>
+  </div>
+</div>
+<div
+  *ngIf="showModal"
+  class="bg-blueGray-600 bg-opacity-60 absolute inset-0 flex justify-center item-center"
+  (click)="closeModal()"
+>
+  <div
+    class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex"
+  >
+    <div class="relative w-auto my-6 mx-auto max-w-6xl modal-body">
+      <!--content-->
+      <div
+        class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none modal-body"
+      >
+        <!--header-->
+
+        <!--body-->
+        <div class="relative p-6 w-100 flex-auto">
+          <div class="text-center m-5">
+            <p class="font-bold text-blueGray-700 text-lg my-5">
+              Are you willing to attach survey to access consumer insights ?
+            </p>
+          </div>
+
+          <div class="w-100 text-center flex justify-between">
+            <button
+              (click)="gotoShipping()"
+              class="bg-blueGray-700 text-white active:bg-blueGray-700 text-lg font-bold px-12 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+            >
+              No, Skip This
+            </button>
+            <button
+              class="bg-blueGray-700 text-white active:bg-blueGray-700 text-lg font-bold px-12 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              (click)="attachSurvey()"
+            >
+              Yes, Attach Survey
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

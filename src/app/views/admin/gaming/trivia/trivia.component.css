@@ -1,0 +1,101 @@
+.fmn-secondary{
+  background-color: #F3F9EB;
+  color: #222;
+}
+
+.text-fmn{
+  color: #479C46;
+}
+
+.fmn-primary{
+  background-color: #479C46;
+  color: #fff;
+}
+
+.fmn-border{
+  border: 1px solid #479C46;
+}
+
+.modal-body{
+  min-width: 500px !important;
+}
+
+
+
+svg {
+  animation: 2s linear infinite svg-animation;
+  max-width: 50px;
+}
+
+
+@keyframes svg-animation {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg)
+  }
+}
+
+
+circle {
+  animation: 1.4s ease-in-out infinite both circle-animation;
+  /* display: block; */
+  fill: transparent;
+  stroke: #b3c2d3;
+  stroke-linecap: round;
+  stroke-dasharray: 283;
+  stroke-dashoffset: 280;
+  stroke-width: 10px;
+  transform-origin: 50% 50%;
+}
+
+
+@keyframes circle-animation {
+  0%,
+  25% {
+    stroke-dashoffset: 280;
+    transform: rotate(0);
+  }
+
+  50%,
+  75% {
+    stroke-dashoffset: 75;
+    transform: rotate(45deg);
+  }
+
+  100% {
+    stroke-dashoffset: 280;
+    transform: rotate(360deg);
+  }
+}
+
+input[type=file] {
+  color: transparent !important;
+}
+
+
+.trivia_card{
+  height: 250px;
+}
+
+.trivia_card img{
+  height: 200px;
+  width: 100%;
+  object-fit: contain;
+}
+
+.modal-body{
+  min-width: 80% !important;
+  max-height: 90% !important;
+}
+
+.trivia_logo{
+  height: 180px;
+  width: 100px;
+}
+
+.trivia_logo img{
+  height: 130px;
+  background-size: contain;
+}

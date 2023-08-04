@@ -1,0 +1,90 @@
+<div class="my-16 w-100 px-16 h-screen">
+    <div *ngIf="selectedPlan == 'isNotSelected' " >
+        <p class="text-blueGray-700 font-bold my-16"><i class="fa">&#xf060;</i> &nbsp;Back</p>
+
+        <p class="text-4xl text-blueGray-700 font-bold">Start a new Campaign</p>
+
+        <p class="text-blueGray-700 font-semibold text-lg">Step 1: Select Campaign type</p>
+
+
+        <div class="flex w-100 justify-between">
+            <div class="bg-white rounded-lg p-6 w-full m-3 campaign-box">
+                <div class="my-4 w-50">
+                    <div class="rounded-full p-6 bg-blueGray-200  align-self-left"></div>
+                </div>
+                <p class="text-blueGray-700 font-bold text-3xl">Airtime Campaign</p>
+                <div class="text-right cursor-pointer text-blueGray-500 font-semibold">
+                    <small><u>What is it?</u></small>
+                </div>
+                <button
+                    class=" my-4 font-semibold bg-blueGray-300 py-3 px-8 text-lg text-blueGray-700 rounded-lg w-full hover:shadow-lg" (click)="selectPlan('airtime')" >Select</button>
+
+
+            </div>
+            <div class="bg-blueGray-700 rounded-lg p-6 w-full m-3 shadow">
+                <div class="my-4 w-50">
+                    <div class="rounded-full p-6 bg-blueGray-200  align-self-left"></div>
+                </div>
+                <p class="text-white font-bold text-3xl">Voucher Campaign</p>
+                <div class="text-right cursor-pointer text-green-300 font-semibold">
+                    <small><u>What is it?</u></small>
+                </div>
+                <button
+                    class=" my-4 font-semibold bg-green-300 py-3 px-8 text-lg text-blueGray-700 rounded-lg w-full hover:shadow-lg" (click)="selectPlan('voucher')" >Choose</button>
+
+
+            </div>
+            <div class="bg-white rounded-lg p-6 w-full m-3 campaign-box">
+                <div class="my-4 w-50">
+                    <div class="rounded-full p-6 bg-blueGray-200  align-self-left"></div>
+                </div>
+                <p class="text-blueGray-700 font-bold text-3xl">Raffle Campaign</p>
+                <div class="text-right cursor-pointer text-blueGray-500 font-semibold">
+                    <small><u>What is it?</u></small>
+                </div>
+                <button
+                    class=" my-4 font-semibold bg-blueGray-300 py-3 px-8 text-lg text-blueGray-700 rounded-lg w-full hover:shadow-lg" (click)="selectPlan('raffle')" >Select</button>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="selectedPlan == 'airtime' ">
+        <p class="text-blueGray-700 font-bold my-16"><i class="fa">&#xf060;</i> &nbsp;Back</p>
+
+
+        <div class="flex w-full px-16">
+        
+            <p class=" flex-1 text-4xl text-blueGray-700 font-semibold " >Start a new Campaign</p>
+        
+            <div class="w-full sm:ml-3 md:ml-2 lg:ml-2 flex-1 text-right" >
+    
+                <button class="border border-blueGray-700 py-4 m-3 px-8 text-white transition-colors duration-150 bg-blueGray-800 rounded-lg focus:shadow-outline hover:bg-indigo-800 font-bold" >Continue</button>
+    
+            </div>
+           
+        </div>
+
+        <div class="flex justify-between">
+            <div class="flex-1 m-4">
+                <div class="my-4">
+                    <p class="text-lg text-blueGray-800 " >How much airtime will you like to generate ?</p>
+                    <input placeholder="Enter amount" class="bg-white border-2 border-blueGray-800 rounded-2xl p-3 w-full ">
+                </div>
+                <div class="my-4">
+                    <p class="text-lg text-blueGray-800 " >How many winners are going to win this airtime ?</p>
+                    <input placeholder="Enter amount" class="bg-white border-2 border-blueGray-800 rounded-2xl p-3 w-full">
+                </div>
+            </div>
+
+            <div class="flex-1 p-6 text-center border-2 border-blueGray-800 rounded-2xl m-6">
+                <p class="font-bold text-blueGray-800 my-4 text-2xl" >Price corresponds with your input</p>
+                <p class="font-bold text-5xl text-blueGray-300" >NGN 0:00</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

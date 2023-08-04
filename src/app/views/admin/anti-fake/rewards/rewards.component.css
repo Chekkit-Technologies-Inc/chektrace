@@ -1,0 +1,7 @@
+.modal-body{
+  min-width: 500px !important;
+}
+
+textarea:focus, input:focus{
+  outline: none !important;
+}

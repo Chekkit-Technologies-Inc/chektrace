@@ -1,0 +1,170 @@
+<div class="w-full px-8 md:px-4 py-8 h-auto sm:h-screen md:h-screen">
+  <div class="grid justify-items-stretch mt-8 xs:flex  xs:flex-col ">
+    <p class="justify-self-start text-2xl font-bold text-blueGray-800 xs:m-auto">Quicklinks for you</p>
+    <div class="justify-self-end xs:flex xs:flex-col  ">
+      <button
+
+        class="xs:m-auto flex-1 bg-white text-blueGray-500 border-2 border-blueGray-500 active:bg-blueGray-500 text-sm font-bold px-12 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+        <a [routerLink]="['/traceability']" >
+          Goto ChekIntel
+        </a>
+      </button>
+      <button
+        class="xs:m-auto flex-1 bg-white text-blueGray-800 border-2 border-blueGray-800 active:bg-blueGray-600 text-sm font-bold px-12 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+        Pin Assignment Request
+      </button>
+
+      <!-- <button
+                class=" flex-1 bg-white text-blueGray-800 border-2 border-blueGray-700 active:bg-blueGray-600 text-sm font-bold px-12 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+                Create a New Batch
+            </button> -->
+      <button
+        class="xs:m-auto flex-1 bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold px-12 py-3 rounded-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+        <a [routerLink]="['/mas/quick-request']">Sticker Label Request</a>
+      </button>
+    </div>
+
+
+  </div>
+
+
+
+
+  <div class="sm:flex md:flex flex-wrap my-12 md:w-full md:text-center">
+    <div class="  w-100 xl:w-1/3 lg:w-1/2 md:w-1/2 px-4 pt-1 text-left">
+      <div class="relative w-full mb-3">
+        <div class="card-selector card-selector-row bg-white  flow" routerLink="/mas/dashboard">
+
+
+          <div class="m-3">
+            <div class="flex">
+              <div class="image"></div>
+            </div>
+            <p class="flow-text my-2">Analytics</p>
+            <p class="text-blueGray-700 block md:block xl:block tag">Assign survey to new to new serial numbers you
+              just requested.</p>
+          </div>
+          <div class="hidden md:block xl:block">
+            <img alt="Logo" src="assets/img/circle.png" class="mid" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class=" w-100 xl:w-1/3 lg:w-1/2 md:w-1/2 px-4 pt-1 text-center">
+      <div class="relative w-full mb-3">
+        <div class="card-selector card-selector-row bg-white flow" routerLink="/mas/products">
+          <div class="m-3">
+            <div class="flex">
+              <div class="image"></div>
+            </div>
+            <p class="flow-text ">My Products</p>
+            <p class="text-blueGray-700 block md:block xl:block tag">Track shipment details of assets you have just printed
+              labels for.</p>
+          </div>
+          <div class="hidden md:block xl:block">
+            <img alt="Logo" src="assets/img/circle.png" class="mid" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-100 xl:w-1/3 lg:w-1/2 md:w-1/2 flex-1  px-4 pt-1 text-center">
+      <div class="relative w-full mb-3">
+        <div class="card-selector card-selector-row bg-white  flow" routerLink="/mas/product-pin">
+          <div class="m-3">
+            <div class="flex">
+              <div class="image"></div>
+            </div>
+            <p class="flow-text">Pin Center</p>
+            <p class="text-blueGray-700 block md:block xl:block tag">Track shipment details of assets you have just printed
+              labels for.</p>
+          </div>
+          <div class="hidden md:block xl:block">
+            <img alt="Logo" src="assets/img/circle.png" class="mid" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-100 xl:w-1/3 lg:w-1/2 md:w-1/2 flex-1 px-4 pt-1 text-center">
+      <div class="relative w-full mb-3">
+        <div class="card-selector card-selector-row bg-white  flow" routerLink="/mas/survey">
+          <div class="m-3">
+            <div class="flex">
+              <div class="image"></div>
+            </div>
+            <p class="flow-text">Survey </p>
+            <p class="text-blueGray-700 block md:block xl:block ">Track shipment details of assets you have just printed
+              labels for.</p>
+          </div>
+          <div class="hidden md:block xl:block">
+            <img alt="Logo" src="assets/img/circle.png" class="mid" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-100 xl:w-1/3 lg:w-1/2 md:w-1/2 flex-1  px-4 pt-1 text-center">
+      <div class="relative w-full mb-3">
+        <div class="card-selector card-selector-row bg-white  flow" routerLink="/mas/campaigns">
+          <div class="m-3">
+            <div class="flex">
+              <div class="image"></div>
+            </div>
+            <p class="flow-text">Campaigns</p>
+            <p class="text-blueGray-700 block md:block xl:block">Track shipment details of assets you have just printed
+              labels for.</p>
+          </div>
+          <div class="hidden md:block xl:block">
+            <img alt="Logo" src="assets/img/circle.png" class="mid" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-100 xl:w-1/3 lg:w-1/2 md:w-1/2 flex-1  px-4 pt-1 text-center">
+      <div class="relative w-full mb-3">
+        <div class="card-selector card-selector-row bg-white  flow" routerLink="/mas/rewards">
+          <div class="m-3">
+            <div class="flex">
+              <div class="image"></div>
+            </div>
+            <p class="flow-text">Rewards</p>
+            <p class="text-blueGray-700 block md:block xl:block">Track shipment details of assets you have just printed
+              labels for.</p>
+          </div>
+          <div class="hidden md:block xl:block">
+            <img alt="Logo" src="assets/img/circle.png" class="mid" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- airtime modal -->
+<div *ngIf="showModal"
+    class="bg-blueGray-600 bg-opacity-25 h-auto w-screen absolute inset-0 flex justify-center item-center">
+    <div
+        class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+        <div class="relative w-screen h-screen my-6 mx-auto max-wd-7xl modal-body">
+            <!--content-->
+            <div
+                class="border-0 rounded-lg shadow-lg relative flex flex-col h-full w-full bg-white outline-none focus:outline-none modal-body">
+                <!--header-->
+                <div class="flex items-start justify-between p-5  rounded-t">
+
+                    <button
+                        class="p-4 rounded-2xl ml-auto border-0 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                        (click)="toggleModal()">
+                        <span class=" text-blueGray-700  h-6 w-6 text-2xl block outline-none focus:outline-none">
+                            <i style="font-size:24px; " class="fa">&#xf00d;</i>
+                        </span>
+                    </button>
+                </div>
+                <!--body-->
+                <div class="relative p-6 w-100 flex-auto">
+                  <iframe width="100%" height="100%" frameBorder="0" [src]="urlSafe"></iframe>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

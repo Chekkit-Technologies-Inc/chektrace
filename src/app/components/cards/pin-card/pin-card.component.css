@@ -1,0 +1,79 @@
+.label-review{
+    position: relative;
+    border-radius: 10px;
+    border-width: 2px;
+    display: inline-block;
+    float: left;
+    margin-right: 20px;
+}
+
+.label-review-lg{
+    width: 500px;
+    height: 190px;
+    margin-bottom: 30px;
+}
+
+
+.label-review-lg  .btm-txt{
+    background-color: #fff;
+    font-size: 0.9em;
+    position: absolute;
+    bottom: -23px;
+    left: 30%;
+}
+
+.label-review-lg  .label-txt span{
+    display: inline-block;
+    width: 80px;
+    color: #8195a4;
+}
+
+.label-review-sm{
+    width: 300px;
+    height: 120px;
+    margin-bottom: 30px;
+}
+
+.label-review-sm .img-cont{
+    height: 80px;
+}
+
+
+.label-review-sm .text-cont{
+    height: 80px;
+}
+
+.label-review-sm .img-cont ._code{
+    height: 52px;
+    margin-top: 4px;
+}
+
+.label-review-sm  .btm-txt{
+    background-color: #fff;
+    font-size: 0.7em;
+    position: absolute;
+    bottom: -18px;
+    left: 20%;
+}
+
+.label-txt{
+    color: #143853;
+    font-weight: 600;
+}
+
+.label-review-sm  .label-txt span{
+    display: inline-block;
+    width: 50px;
+    color: #8195a4;
+}
+
+.label-review-sm  .label-txt{
+    font-size: 0.6em;
+}
+
+/* .btm-txt{
+    background-color: #fff;
+    position: absolute;
+    bottom: -22px;
+    left: 27%;
+} */

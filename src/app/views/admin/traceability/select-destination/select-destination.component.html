@@ -1,0 +1,723 @@
+<div class="w-100  sm:mt-5   ">
+  <div class="sm:flex md:flex sm:mt-5" *ngIf="nextStep == 2">
+    <div class="flex-1 h-screen mx-8 mt-12">
+      <!-- <div class="text-blueGray-800 font-medium mt-8 cursor-pointer " (click)="nextScreen()">
+                <i style="font-size:24px" class="fa">&#xf060;</i> &nbsp;Back
+            </div> -->
+      <div class="left-border">
+        <!-- <p class="font-bold text-blueGray-600 text-2xl mt-8" >Step 5</p> -->
+        <h2 class="font-bold text-blueGray-800 text-3xl mt-8">Shipping Details</h2>
+      </div>
+      <p class="text-blueGray-800 text-lg my-5 ">Product "<b> {{this.productName}} </b>" with batch number "<b>
+          {{this.batchNum}} </b>" </p>
+      <div class="mt-8">
+        <p class="text-blueGray-800 text-md font-semibold">What are you shipping ?</p>
+
+       <select (change)="selectItem($event.target.value)" class="border-2 border-blueGray-500 rounded-lg p-3">
+         <option selected >---Select Package to ship---</option>
+         <option value="Satchets" >Satchet <sub>(Primary Level)</sub></option>
+         <option value="Pack" >Pack <sub>(Secondary Level)</sub></option>
+         <option value="Satchets" >Bottle <sub>(Primary Level )</sub></option>
+         <option value="vial">Vial <sub>(Primary Level)</sub> </option>
+         <option value="Carton">Carton <sub>(Tertiary Level)</sub></option>
+         <option value="Pallet">Pallet <sub>(Pallet Level)</sub> </option>
+         <option value="Container" >Container(s) </option>
+       </select>
+        <div *ngIf="selectedItem != 'Container'" >
+
+          <div class="flex justify-between">
+            <div class="flex-1   mt-8 mx-1">
+              <label class="block tracking-wide text-gray-700 text-lg font-semibold mb-2" for="question-type">
+                Destination Location
+              </label>
+              <div class="relative">
+                <select (change)="selectDestinationLocation($event.target.value)"
+                  class="block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  id="grid-state">
+                  <option>--Select Destination--</option>
+                  <option value="{{location.gln}}" *ngFor="let location of locations"> {{location.address}} </option>
+                </select>
+
+              </div>
+            </div>
+            <div class="flex-1   mt-8 mx-1">
+              <label class="block tracking-wide text-gray-700 text-lg font-semibold mb-2" for="question-type">
+                Production Location
+              </label>
+              <div class="relative">
+                <select (change)="selectProductionLocation($event.target.value)"
+                  class="block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  id="grid-state">
+                  <option>--Select Location--</option>
+                  <option value="{{location.gln}}" *ngFor="let location of locations"> {{location.address}} </option>
+                </select>
+
+              </div>
+            </div>
+          </div>
+          <div class="flex-1   mt-8 "  >
+            <label class="block tracking-wide text-gray-700 text-lg font-semibold mb-2" for="question-type">
+              Scan Item(s) to ship
+            </label>
+
+            <input [(ngModel)]="selectedContainer" name="selectedContainer" (change)="selectContainer()"
+              class="block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
+
+          </div>
+
+          <div class="bg-blueGray-200 rounded-lg p-3 mt-3" *ngIf="this.containerCodes.length "  >
+                        <div class="my-5  w-full">
+                            <div class=" p-3 rounded-2xl text-center text-blueGray-600 bg-white px-6  my-2" *ngFor="let code of containerCodes"  >
+                                {{code}}
+
+                            </div>
+                        </div>
+                    </div>
+
+          <div class=" sm:ml-3 md:ml-2 lg:ml-2 mt-8 ">
+            <button
+              class="px-8 h-12  text-white transition-colors duration-150 bg-blueGray-700 rounded-lg focus:shadow-outline hover:bg-blueGray-800"
+              [disabled]="loading" (click)="ship()">
+              <span *ngIf="loading">
+                <img class="inline-flex "
+                  src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+              </span>
+              <span *ngIf="!loading">Submit</span>
+
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="flex-1 h-screen my-5 hidden sm:block md:block ">
+      <div id="map-canvas" class="relative w-full rounded h-full"></div>
+    </div> -->
+  </div>
+
+
+  <div class="sm:flex md:flex sm:p-4 md:p-4 sm:mt-2 " *ngIf="nextStep == 1">
+    <div class="flex-1 px-4 h-screen ">
+
+      <p class="text-blueGray-800 md:text-lg sm:text-lg font-bold  ">Serial Shipping Container Code </p>
+      <br><br>
+      <div class="md:mt-4 mt-2">
+        <form>
+          <div class="flex-1 mb-6 md:mb-0 mt-4 p-3">
+            <label class="block  tracking-wide text-gray-700 sm:text-lg md:text-lg font-semibold mb-2"
+              for="grid-first-name">
+              How Many Containers to be loaded
+            </label>
+            <input
+              class="appearance-none block w-full bg-white text-gray-700 border border-blueGray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              id="grid-first-name" [(ngModel)]="container_count" name="container_count" type="number"
+              placeholder="Please enter quantity">
+          </div>
+
+
+          <div class="flex-1 mb-6 md:mb-0 mt-4 p-3">
+            <label class="block  tracking-wide text-gray-700 sm:text-lg md:text-lg font-semibold mb-2"
+              for="grid-first-name">
+              No. of Pallets in each container
+            </label>
+            <input
+              class="appearance-none block w-full bg-white text-gray-700 border border-blueGray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              id="grid-first-name" [(ngModel)]="capacity_level" name="capacity_level" type="number"
+              placeholder="Enter capacity level">
+          </div>
+          <div>
+            <!-- <p class="text-blueGray-700 font-bold text-right w-full my-10" >
+                            <span class="cursor-pointer " (click)="addMore()" > <i  class="fa ">&#xf055;</i> &nbsp;&nbsp; Add More </span>
+
+                        </p> -->
+          </div>
+          <div class="w-full sm:ml-3 md:ml-2 lg:ml-2 mt-4 ">
+            <button
+              class="w-full h-12  text-white transition-colors duration-150 bg-blueGray-700 rounded-lg focus:shadow-outline hover:bg-blueGray-800 "
+              [disabled]="loading" (click)="serializePackage()">
+              <span *ngIf="loading">
+                <img class="inline-flex "
+                  src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+              </span>
+              <span *ngIf="!loading" class="font-bold">Save And Submit</span>
+            </button>
+
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="flex-1 hidden sm:block md:block">
+
+    </div>
+
+  </div>
+
+  <div class="  bg-white mt-5 h-screen " *ngIf="nextStep == 3">
+
+
+    <div class="success-body text-center">
+      <div class="success-image">
+        <img
+          src="../../../../assets/img/success-image.png"
+          class="m-auto ssimg"
+          alt=""
+          srcset=""
+          width="300"
+        />
+
+        <p class="text-lg font-bold text-blueGray-700 my-5 text-center">
+
+          Package Successfully Shipped
+        </p>
+        <div class="mt-10   text-center w-full flex">
+          <div class="text-center m-auto">
+            <button
+              class="bg-blueGray-600 rounded-lg text-white py-2 font-semibold  text-lg px-3 hover:bg-blueGray-500 m-auto"
+              (click)="back()"
+            >
+            <a
+            [routerLink]="['/traceability/products']"
+          >
+            Back to Dashboard
+        </a>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+
+
+  <div class=" bg-blueGray-100 h-screen" *ngIf="nextStep == 4">
+    <div class="sm:flex justify-between md:flex sm:mt-5 w-100">
+      <div class="flex-1 sm:px-8  h-screen ">
+        <!-- <div class="text-blueGray-800 font-medium mb-8 cursor-pointer " (click)="nextScreen()">
+                    <i style="font-size:24px" class="fa">&#xf060;</i> &nbsp;Back
+                </div> -->
+
+        <div class="bg-white rounded-lg shadow mb-8">
+          <p class="text-lg font-bold text-blueGray-500">Product Information</p>
+          <div class="bg-blueGray-100 p-3 rounded-lg my-5">
+            <div class="flex justify-between">
+              <div class="flex-1 text-md text-blueGray-500">Serial Number</div>
+              <!-- <div class="flex-1 text-md text-blueGray-500 ">Batch Number</div> -->
+              <div class="flex-1 text-md text-blueGray-500  ">GTIN</div>
+            </div>
+            <div class="flex justify-between">
+
+              <div class="flex-1 text-md text-blueGray-500 font-bold ">
+                <span *ngIf="loading">
+                  <ngx-shimmer-loading [shape]="'square'" [width]="'100px'"></ngx-shimmer-loading>
+                </span>
+                <span *ngIf="!loading"> {{this.productSerialNumber}} </span>
+
+              </div>
+              <!-- <div class="flex-1 text-md text-blueGray-500 font-bold ">
+                            <span *ngIf="loading" ><ngx-shimmer-loading [shape]="'square'" [width]="'100px'"></ngx-shimmer-loading></span>
+                            <span *ngIf="!loading" > {{this.productDetails.batch_num}} </span>
+                        </div> -->
+              <div class="flex-1 text-md text-blueGray-500 font-bold ">
+                <span *ngIf="loading">
+                  <ngx-shimmer-loading [shape]="'square'" [width]="'100px'"></ngx-shimmer-loading>
+                </span>
+                <span *ngIf="!loading"> {{this.productDetails.gtin}} </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg p-8 shadow ">
+          <p class="text-lg font-bold text-blueGray-500">Shipping Information</p>
+          <div class="bg-blueGray-100 p-3 rounded-lg my-5">
+            <div class="flex justify-between">
+              <div class="flex-1 text-md text-blueGray-500">Container Code</div>
+              <!-- <div class="flex-1 text-md text-blueGray-500 ">No of Items</div> -->
+              <div class="flex-1 text-md text-blueGray-500  ">Destination Location</div>
+              <div class="flex-1 text-md text-blueGray-500  ">Production Location</div>
+            </div>
+            <div class="flex justify-between" *ngFor="let summary of shippingSummary">
+              <div class="flex-1 text-md text-blueGray-500 font-bold ">{{summary.elementString}}</div>
+              <!-- <div class="flex-1 text-md text-blueGray-500 font-bold ">1</div> -->
+              <div class="flex-1 text-md text-blueGray-500 font-bold ">No 11, CI STREET SHAGARI ESTATE</div>
+              <div class="flex-1 text-md text-blueGray-500 font-bold ">No 777, Staff quarters, Abuja</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex-1 sm:px-8 md:px-8 h-screen "></div>
+    </div>
+
+  </div>
+
+
+  <div class=" bg-blueGray-100 h-screen p-4" *ngIf="nextStep == 5">
+    <p class="my-8 md:text-2xl text-md sm:text-2xl font-bold text-blueGray-800  ">Load Container</p>
+    <p class="my-5 text-lg font-bold text-blueGray-700">
+      <b>NB:</b> When you scan, items will be automatically populated on the table below and when the barcode scanner
+      can't read the barcode, then you can enter the container SSCC manually.
+    </p>
+    <!--
+        <div >
+
+            <div class="my-5 md:grid sm:grid grid-cols-5 gap-4" >
+                <div  *ngFor="let bar of containerList" >
+                    <qrcode [qrdata]=" bar.elementString " [width]="100"  [errorCorrectionLevel]="'M'"></qrcode>
+                </div>
+
+            </div>
+
+        </div> -->
+    <div class="flex justify-between">
+      <!-- <div class="   mt-8">
+                <label class="block tracking-wide text-gray-700 text-lg font-semibold mb-2"
+                    for="question-type">
+                    Select Container to Load
+                </label>
+                <div class="relative">
+                    <select
+                    (change)="selectContainerToLoad($event.target.value)"
+                        class="block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        id="grid-state">
+                        <option>--Select Containers you wish to ship--</option>
+                        <option value="{{container.elementString}}" *ngFor="let container of conatinerValue"> {{container.elementString}} </option>
+                    </select>
+
+                </div>
+
+            </div> -->
+            <div class="my-5 mx-2 w-full">
+              <div class="col-span-2">
+                          <p class="mx-3 font-bold " >Scan Item S/N to be Loaded</p>
+                          <input class="border-2 border-blueGray-300 rounded-2xl p-3 m-2 w-full" [(ngModel)]="sscc" name="sscc" >
+                      </div>
+
+
+            </div>
+            <div class="my-5 mx-2 w-full">
+              <div class="col-span-2">
+                <p class="mx-3 font-bold">Scan Item S/N to Load </p>
+                <input class="border-2 border-blueGray-300 rounded-2xl p-3 m-2 w-full" [(ngModel)]="pallet_sscc"
+                  name="pallet_sscc" (change)="addtoQueue()">
+              </div>
+            </div>
+
+
+    </div>
+
+
+
+    <!-- <div *ngIf="this.ssccList">
+            <div class="my-5 sm:grid grid-cols-6 gap-6 w-full"  >
+                <div class="border-2 border-blueGray-500 p-3 rounded-2xl text-center"  >
+                    {{code}}
+                </div>
+            </div>
+        </div> -->
+
+
+    <div class="bg-white rounded-2xl p-8 mt-10 mb-5">
+      <div class="flow-root my-6">
+        <p class="float-left font-semibold text-blueGray-800 text-lg  "> Item List</p>
+        <button
+          class=" float-right text-white transition-colors duration-150 bg-blueGray-700 rounded py-2 px-8 focus:shadow-outline hover:bg-blueGray-800 disabled:bg-blueGray-500 disabled:text-blueGray-400"
+          (click)="loadContainer()">
+          <span *ngIf="loading">
+            <img class="inline-flex "
+              src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
+          </span>
+          <span *ngIf="!loading"> Submit</span>
+        </button>
+      </div>
+
+      <div *ngIf="ssccList.length < 1" class="mt-8 text-blue-400 font-bold w-100 text-center text-3xl">
+        Your Item table is currently empty
+      </div>
+
+      <div class="sm:mx-8 md:mx-8 md:mt-10 " *ngIf="ssccList.length >= 1">
+        <div class=" grid grid-cols-3 gap-3 ">
+          <!-- <div class="font-semibold text-blueGray-800 text-md text-center sm:text-lg ">Scanned Item S/N</div> -->
+          <!-- <div class="font-semibold text-blueGray-800 text-md text-center sm:text-lg " >Serial Number</div>
+                    <div class="font-semibold text-blueGray-800 text-md text-center sm:text-lg  " >Date Created</div> -->
+        </div>
+        <div class=" bg-blueGray-200 p-4 rounded-2xl mt-5" *ngFor="let code of ssccList">
+          <div class=" text-blueGray-800 text-md text-center ">{{code}}</div>
+          <!-- <div class=" text-blueGray-800 text-md text-center " >000110011</div>
+                    <div class="text-blueGray-800 text-md text-center  " >11:00AM August 12th 2022</div> -->
+        </div>
+
+      </div>
+    </div>
+    <!-- <button class="w-full h-12 sm:mt-8 md:mt-8  text-white transition-colors duration-150 bg-blueGray-700 rounded-lg focus:shadow-outline hover:bg-blueGray-800 " (click)="loadContainer()"  >
+                    <span *ngIf="loading" >
+                        <img class="inline-flex " src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
+                    </span>
+            <span *ngIf="!loading" > Submit</span>
+        </button> -->
+  </div>
+
+  <div class="  bg-blueGray-100 h-screen" *ngIf="nextStep == 6">
+    <p class="my-8 md:text-2xl text-md sm:text-2xl font-bold text-blueGray-800  ">Receiving Container</p>
+
+    <div class="my-5 sm:grid grid-cols-3 gap-6 w-full">
+      <div class="col-span-2">
+        <p class="mx-3">Serial Number</p>
+        <input class="border-2 border-blueGray-300 rounded-2xl p-3 m-2 w-full" [(ngModel)]="recieved_container"
+          name="recieved_container">
+      </div>
+      <div>
+        <button
+          class="w-full h-12 sm:mt-8 md:mt-8  text-white transition-colors duration-150 bg-blueGray-700 rounded-lg focus:shadow-outline hover:bg-blueGray-800 ">
+
+          <span> Submit</span>
+        </button>
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <!-- <div class=" p-8 mt-8  mt-5 border-t-2 bg-blueGray-100 h-screen" *ngIf="nextStep == 7">
+        <p class= "my-8 md:text-2xl text-md sm:text-2xl font-bold text-blueGray-800  " >Receiving Container Summary</p>
+
+
+
+        <div class="bg-white rounded-2xl p-8 mt-10 mb-5">
+
+
+            <div class="sm:mx-8 md:mx-8 md:mt-10 ">
+                <div class=" grid grid-cols-3 gap-3 " >
+                    <div class="font-semibold text-blueGray-800 text-md text-center sm:text-lg " >SSCC</div>
+                    <div class="font-semibold text-blueGray-800 text-md text-center sm:text-lg " >Item Type</div>
+                    <div class="font-semibold text-blueGray-800 text-md text-center sm:text-lg  " >Time Of Scan</div>
+                </div>
+                <div class=" grid grid-cols-3 gap-3 bg-blueGray-200 p-4 rounded-2xl mt-5" >
+                    <div class=" text-blueGray-800 text-md text-center " >C001</div>
+                    <div class=" text-blueGray-800 text-md text-center " >Container</div>
+                    <div class="text-blueGray-800 text-md text-center  " >11:00AM August 12th 2022</div>
+                </div>
+                <div class=" grid grid-cols-3 gap-3 bg-blueGray-200 p-4 rounded-2xl mt-5" >
+                    <div class=" text-blueGray-800 text-md text-center " >C001</div>
+                    <div class=" text-blueGray-800 text-md text-center " >Pallet</div>
+                    <div class="text-blueGray-800 text-md text-center  " >11:00AM August 12th 2022</div>
+                </div>
+                <div class=" grid grid-cols-3 gap-3 bg-blueGray-200 p-4 rounded-2xl mt-5" >
+                    <div class=" text-blueGray-800 text-md text-center " >C001</div>
+                    <div class=" text-blueGray-800 text-md text-center " >Container</div>
+                    <div class="text-blueGray-800 text-md text-center  " >11:00AM August 12th 2022</div>
+                </div>
+                <div class=" grid grid-cols-3 gap-3 bg-blueGray-200 p-4 rounded-2xl mt-5" >
+                    <div class=" text-blueGray-800 text-md text-center " >C001</div>
+                    <div class=" text-blueGray-800 text-md text-center " >Pallet</div>
+                    <div class="text-blueGray-800 text-md text-center  " >11:00AM August 12th 2022</div>
+                </div>
+                <div class=" grid grid-cols-3 gap-3 bg-blueGray-200 p-4 rounded-2xl mt-5" >
+                    <div class=" text-blueGray-800 text-md text-center " >C001</div>
+                    <div class=" text-blueGray-800 text-md text-center " >Pallet</div>
+                    <div class="text-blueGray-800 text-md text-center  " >11:00AM August 12th 2022</div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+  <div class=" mt-2  h-screen " *ngIf="nextStep == 7">
+    <div class=" px-8 ">
+      <div class="  hidden md:block " *ngIf="!viewContainers">
+        <div class="flex justify-between">
+          <p class="font-bold text-blueGray-800 text-2xl ">Generated Containers</p>
+          <div class="flex justify-between">
+
+
+            <button
+              class="my-3 bg-white border-2 border-blueGray-500 text-blueGray-800 text-center font-bold py-3 px-12 text-blueGray-500 rounded mx-3"
+              (click)="openContainers()">View </button>
+            <button class="my-3 bg-blueGray-800 text-center font-bold py-3 px-12 text-white rounded mx-3"
+                        (click)="this.nextStep = 1">Generate New </button>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg p-5 ">
+
+          <div class="w-100">
+
+          </div>
+          <br><br>
+          <div class="flex justify-between my-2 ">
+            <div class="text-center flex-1 text-sm text-blueGray-800 w-100 font-bold ">
+              Container
+            </div>
+            <div class="flex-1 text-center text-sm text-blueGray-800 w-100 font-bold ">Pallet</div>
+            <div class="flex-1 text-center text-sm text-blueGray-800 w-100 font-bold ">Status</div>
+            <div class="flex-1 text-center text-sm text-blueGray-800 w-100 font-bold ">Date Created </div>
+            <div class="flex-1 text-center text-sm text-blueGray-800 w-100 font-bold ">Action</div>
+          </div>
+          <hr>
+          <!-- <div *ngIf="!conatinerValue">
+            <div class="shimmer-line shimmer-line-br shimmer-line-full shimmer-animate"></div>
+            <div class="shimmer-line shimmer-line-br shimmer-line-full shimmer-animate"></div>
+          </div> -->
+          <div *ngIf="conatinerValue.length < 1" class="text-center" >
+            <p class="text-indigo-500 text-lg font-bold mt-8 " >Proceed to generate a container</p>
+          </div>
+          <div *ngIf="conatinerValue">
+            <div class="flex justify-between rounded-3xl bg-blueGray-200 p-3 m-5 "
+              *ngFor="let summary of conatinerValue">
+              <div class=" flex-1 text-center text-sm text-blueGray-800 font-bold "> {{summary.elementString}} </div>
+              <div class="flex-1 text-center text-sm text-blueGray-800 font-bold "> {{summary.serialNumber}} </div>
+              <div class=" flex-1 text-center text-sm text-blueGray-800 font-bold ">
+                <span *ngIf="summary.commissioned == true"
+                  class="bg-green-200 text-green-800 border border-green-500 px-6 p-2 rounded-lg">Commissioned</span>
+                <span *ngIf="summary.commissioned == false"
+                  class="bg-red-200 text-red-800 border border-red-500 px-6 p-2 rounded-lg">Not Commissioned</span>
+              </div>
+
+              <div class="flex-1 text-center text-sm font-bold">
+                {{summary.created_at | date:'longDate'}}
+              </div>
+              <div class=" flex-1 text-center text-sm text-purple-800 font-bold cursor-pointer">
+                <span *ngIf="summary.commissioned == true" (click)="proceedToLoad(summary.elementString)">Load
+                  Container</span>
+                <span *ngIf="summary.commissioned == false" class="text-slate-300 font-bold text-md " title="Proceed to commission" >Proceed To
+                  Commision</span>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="p-5" *ngIf="viewContainers">
+        <!-- <div class="my-10">
+          <p><i class="fa">&#xf060;</i>&nbsp;&nbsp;
+            <span class="font-bold text-blueGray-700 cursor-pointer " (click)="openContainers()">Back</span>
+          </p>
+        </div> -->
+        <p class="text-blueGray-800 text-lg font-bold my-5 "> Container(s) Codes</p>
+        <br>
+        <div class="flex justify-between my-10">
+          <div class="flex-1 text-left">
+
+            <button (click)="selectedTab = 'generated-stickers'" [class.selected]="selectedTab == 'generated-stickers'"
+              class=" shadow text-sm p-3 rounded-2xl text-blueGray-300 m-1 ">Generated Containers</button>
+            <button (click)="selectedTab = 'commission'" [class.selected]="selectedTab == 'commission'"
+              class=" shadow text-sm p-3 rounded-2xl text-blueGray-300 m-1 ">Commission Containers</button>
+          </div>
+          <div class="flex-1 text-right ">
+            <button class="bg-white text-blueGray-600 font-bold px-12 p-4 m-3 rounded-lg border-2 border-blueGray-500 "
+              *ngIf="selectedTab == 'generated-stickers'">Export</button>
+            <button class="bg-blueGray-700 text-white font-bold px-12 p-4 m-3 rounded-lg border-2 border-blueGray-500 "
+              *ngIf="selectedTab == 'generated-stickers'">Send To Printer</button>
+            <button class="bg-blueGray-700 text-white font-bold px-12 p-4 m-3 rounded-lg border-2 border-blueGray-500 "
+              (click)="this.nextStep = 8" *ngIf="selectedTab == 'commission'"> Proceed To Commission</button>
+          </div>
+        </div>
+        <br>
+        <div class="grid grid-cols-4 gap-4 w-full my-5 ">
+
+          <div class=" p-4 rounded-lg bg-white rounded-lg border-2 border-blueGray-700 "
+            *ngFor="let qr of conatinerValue">
+            <div class="m-4">
+
+              <img alt='Barcode Generator TEC-IT'
+                src='https://barcode.tec-it.com/barcode.ashx?data={{ qr.elementString}}&code=EANUCC128&translate-esc=on' />
+            </div>
+
+
+          </div>
+        </div>
+
+
+        <!-- <div class="flex justify-between mt-12 px-12 ">
+                    <div class="flex-1 m-4">
+                        <div class=" bg-white border-2 border-blueGray-500 p-3 px-12 text-center text-lg text-blueGray-800 rounded-lg w-70 "  >
+                            Export
+                        </div>
+
+                    </div>
+                    <div class="flex-1 m-4">
+                        <div class="bg-blueGray-800 text-white rounded-lg p-4 px-12 text-center text-lg w-70 "  >
+                            Send To Printer
+                        </div>
+                    </div>
+                </div> -->
+
+
+      </div>
+
+    </div>
+  </div>
+
+  <div *ngIf="nextStep == 8">
+    <div class="w-100  pl-8">
+      <div class="">
+        <div class="sm:flex md:flex justify-between">
+          <div class="w-100 flex-1">
+            <br />
+            <div>
+              <div>
+                <div class="text-blueGray-700 font-bold text-md ">
+                  Scanned Container SSCC
+                </div>
+                <input (keydown.space)="$event.preventDefault()" (change)="addMore()"
+                  class="border-2 border-blueGray-300 p-2 rounded rounded-md w-full" [(ngModel)]="serial_range"
+                  name="serial_range" placeholder="Enter Container SSCC" />
+              </div>
+            </div>
+          </div>
+          <div class="flex-1 m-3 hidden sm:block md:block">
+          </div>
+        </div>
+      </div>
+
+      <br><br>
+      <div class="bg-blueGray-200  p-6 rounded-lg">
+        <div class="flex justify-between">
+          <div class="flex-1 text-center">Scanned Serial Numbers</div>
+          <div class="flex-1 text-center "></div>
+          <div class="flex-1 text-center ">
+            <button class="p-1 bg-blueGray-800  rounded-lg text-center text-white text-md px-4" [disabled]="loading"
+              (click)="comissionProduct()">
+              <span *ngIf="!loading">Submit</span>
+              <span *ngIf="loading">
+                <img class="inline-flex"
+                  src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <div class="w-100 flex pt-4 mt-5" *ngIf="!serialRange.length">
+          <div class="m-auto">
+            <img src="../../../../../assets/img/55.svg" alt="" srcset="">
+            <p class="font-bold text-blueGray-800">No Item has been scanned</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="flex justify-between rounded-lg bg-white shadow mt-6 py-4 " *ngFor="let serial of serialRange">
+            <div class="flex-1 text-center ">
+              <span>{{serial}}</span>&nbsp;&nbsp;&nbsp;
+
+              <span class="right-0 cursor-pointer" (click)="removeCode(serial)"><i style="font-size:24px"
+                  class="fa">&#xf1f8;</i></span>
+            </div>
+            <!-- <div class="flex-1 text-center ">Date Created</div> -->
+            <div class="flex-1 text-center "></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="  bg-white mt-5 h-screen " *ngIf="nextStep == 9">
+    <!-- <div class=" ">
+      <p class="text-blueGray-800 text-3xl font-bold my-5 "> Shipping Summary</p>
+
+
+      <div class="bg-white rounded-lg p-5 shadow hidden md:block ">
+
+        <div class="flex justify-between my-2 ">
+          <div class="text-center flex-1 text-lg text-blueGray-800 w-100 font-bold ">
+            Containers
+          </div>
+          <div class="flex-1 text-center text-lg text-blueGray-800 w-100 font-bold ">Action</div>
+        </div>
+        <hr>
+        <div class="flex justify-between rounded-3xl bg-blueGray-200 p-3 m-5 " *ngFor="let summary of shippingSummary">
+          <div class=" flex-1 text-center text-lg text-blueGray-800 font-bold "> {{summary.elementString}} </div>
+          <div class="flex-1 text-center  ">
+            <span class="text-lg text-indigo-400 font-bold cursor-pointer"
+              (click)="viewSummary(summary.id)">VIEW</span>&nbsp; | &nbsp;
+            <a class="text-lg text-green-400 font-bold cursor-pointer"
+              [routerLink]="['/traceability/receive', this.subProductId]"> RECEIVE</a>
+
+          </div>
+        </div>
+
+      </div>
+      <div class="md:hidden sm:hidden overflow-x-auto ">
+        <table class="w-full whitespace-nowrap">
+          <tr class="border-b-2 border-blueGray-300">
+            <th class="p-3 text-sm font-semibold tracking-wide text-center ">
+              Container SSCC
+
+            </th>
+
+            <th class="p-3 text-sm font-semibold tracking-wide text-center ">
+              Serial Number
+            </th>
+            <th class="p-3 text-sm font-semibold tracking-wide text-center ">
+              Action
+            </th>
+          </tr>
+
+          <tbody class="table-curve" *ngFor="let summary of shippingSummary">
+            <br>
+
+            <tr class="bg-blueGray-100 w-full m-3 rounded tr-radius">
+              <td class="p-3 text-sm text-gray-700 text-center">
+                {{summary.epcText}}
+              </td>
+              <td class="p-3 text-sm text-gray-700 text-center ">
+                {{summary.serialNumber}}
+              </td>
+              <td class="p-3 text-sm text-gray-700 text-center ">
+                <span class="flex-1 text-center text-lg text-indigo-400 font-bold cursor-pointer"
+                  (click)="viewSummary(summary.id)">VIEW</span>
+              </td>
+
+
+            </tr>
+          </tbody>
+
+
+        </table>
+
+
+      </div>
+
+    </div> -->
+
+    <div class="success-body text-center">
+      <div class="success-image">
+        <img
+          src="../../../../assets/img/success-image.png"
+          class="m-auto ssimg"
+          alt=""
+          srcset=""
+          width="300"
+        />
+
+        <p class="text-lg font-bold text-blueGray-700 my-5 text-center">
+
+          Container has been Successfully Loaded
+        </p>
+        <div class="mt-10   text-center w-full flex">
+          <div class="text-center m-auto">
+            <button
+              class="bg-blueGray-600 rounded-lg text-white py-2 font-semibold  text-lg px-3 hover:bg-blueGray-500 m-auto"
+              (click)="back()"
+            >
+            <a
+            [routerLink]="['/traceability/products']"
+          >
+            Back to Dashboard
+        </a>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
