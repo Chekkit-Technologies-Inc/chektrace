@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   error = '';
   recoverform = false;
   loginform = false;
+  passwordType: string = 'password'
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,6 +39,14 @@ export class LoginComponent implements OnInit {
     this.returnUrl =
       this.route.snapshot.queryParams['returnUrl'] || '/select-module';
     console.log('this.returnUrl>', this.returnUrl);
+  }
+
+  togglePasswordType(){
+    if(this.passwordType === 'password'){
+      this.passwordType = 'text'
+    }else{
+      this.passwordType = 'password'
+    }
   }
 
   // convenience getter for easy access to form fields

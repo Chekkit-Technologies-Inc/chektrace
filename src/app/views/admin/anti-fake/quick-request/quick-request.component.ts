@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/core/_services/product.service';
 import { AlertService } from 'src/app/core/_services/alert.service';
+import { NavbarService } from 'src/app/core/_services/navbar.service';
 
 @Component({
   selector: 'app-quick-request',
@@ -35,13 +36,19 @@ export class QuickRequestComponent implements OnInit {
   taggantStatus: any;
   addressRegion: any;
   reference: any;
+  userInfo: any;
 
 
   constructor(
     private productService: ProductService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private navService: NavbarService
   ) {
 
+    this.navService.show();
+    const userInfo = localStorage.getItem('chekkitCurrentUser');
+    this.userInfo = JSON.parse(userInfo);
+    console.log(this.userInfo);
       this.productService.getChekkitProducts().subscribe((save_products: any) => {
         if (save_products) {
           console.log(save_products)
@@ -76,6 +83,7 @@ export class QuickRequestComponent implements OnInit {
     console.log(this.tagStatus)
   }
   requestLabels(){
+    this.loading = true;
     const body = {
       "produnctId": parseInt(this.subProductId),
       "quantity": parseInt(this.quantity),
@@ -88,8 +96,9 @@ export class QuickRequestComponent implements OnInit {
     console.log(body)
     this.productService.requestLabels(body).subscribe((res: any)=>{
       console.log(res);
-      if(res.message === "OK"){
-        // this.alertService.showAlertNotification('Success', 'Label Request Successful', 'success');
+      this.loading = false;
+      if(res.statusCode === 200){
+        this.alertService.showAlertNotification('Success', 'Label Request Successful', 'success');
         this.isLabelInvoice = true;
         this.isLabelRequest = false;
         this.customerAddress = res.data.address;
@@ -101,8 +110,11 @@ export class QuickRequestComponent implements OnInit {
         this.taggantStatus = res.data.withTaggant;
         this.addressRegion = res.data.region;
         this.reference = res.data.reference;
+        this.isLabelInvoice = true;
+        this.isLabelRequest = false;
       }
     },(error)=>{
+      this.loading = false;
       this.alertService.showAlertNotification('Error', 'Something unexpected happened, please try again.', 'error')
     })
   }

@@ -51,7 +51,7 @@
                 </p>
               </div>
               <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
-                {{ point.user.first_name }} {{ point.user.last_name }}
+                {{ point.user?point.user.first_name:'' }} {{ point.user?point.user.last_name:'' }}
               </div>
               <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
                 {{ point.dailyPoints }}
@@ -69,7 +69,7 @@
                 </p>
               </div>
               <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
-                {{ point.user.first_name }} {{ point.user.last_name }}
+                {{ point.user?point.user.first_name:'' }} {{ point.user?point.user.last_name:'' }}
               </div>
               <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
                 {{ point.WeeklyPoints }}
@@ -87,7 +87,7 @@
                 </p>
               </div>
               <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
-                {{ point.user.first_name }} {{ point.user.last_name }}
+                {{ point.user?point.user.first_name:'' }} {{ point.user?point.user.last_name :''}}
               </div>
               <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
                 {{ point.allPoints }}
@@ -204,16 +204,16 @@
               </p>
             </div>
             <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
-              {{ person.user.first_name }} {{ person.user.last_name }}
+              {{ person.user?person.user.first_name:'' }} {{ person.user?person.user.last_name:'' }}
             </div>
             <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
-              {{ person.user.age_range}}
+              {{ person.user?person.user.age_range:''}}
             </div>
             <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
               {{ person.allPoints }}
             </div>
             <div class="w-40 flex-shrink-0 text-center font-semibold text-xs">
-              <input type="checkbox" id="cb1" class="shadow" [value]="person.user.id" (change)="selectUser($event)" />
+              <input type="checkbox" id="cb1" class="shadow" [value]="person.user?person.user.id:''" (change)="selectUser($event)" />
             </div>
           </div>
 

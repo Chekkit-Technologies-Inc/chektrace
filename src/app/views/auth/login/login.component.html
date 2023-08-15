@@ -18,8 +18,8 @@
               >
                 Email
               </label>
-              <input 
-                formControlName="email" 
+              <input
+                formControlName="email"
                 type="email"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="Email"
@@ -33,20 +33,25 @@
               >
                 Password
               </label>
-              <input
+              <div class="flex">
+                <input
                 formControlName="password"
-                type="password"
+                [type]="passwordType"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="Password"
-              />
+              /> <div class="ml-1.5" (click)="togglePasswordType()" >
+                 <i *ngIf="passwordType === 'password' " class="fa">&#xf06e;</i>
+                 <i *ngIf="passwordType === 'text' "  class="fa">&#xf070;</i>
+                </div>
+              </div>
             </div>
 
             <div class="text-center mt-6">
-              <button 
+              <button
                 [disabled]="loading"
                 class="bg-green-500 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                 type="submit">
-                <loading-spinner *ngIf="loading" ></loading-spinner> 
+                <loading-spinner *ngIf="loading" ></loading-spinner>
                 Sign In
               </button>
             </div>

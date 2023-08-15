@@ -240,7 +240,7 @@
       <div class="flex  mt-4 ">
         <div class="w-2/3 bg-green-400 py-10 px-10">
           <p class="text-3xl" >PROFORMA INVOICE</p>
-          <small>Amaizing Day Shortcode Campaign Consumer Intelligence Service</small>
+          <!-- <small>Amaizing Day Shortcode Campaign Consumer Intelligence Service</small> -->
         </div>
         <div class="w-1/3 flex bg-green-600 text-center py-10 ">
          <div class="m-auto">
@@ -253,19 +253,19 @@
         <div class="flex justify-between py-10">
           <div>
             <p class="text-sm text-gray-400 font-semibold " >BILL TO</p>
-            <p class="text-sm text-gray-700 font-semibold" >Flour Mills Nigeria PLC</p>
-            <p class="text-sm text-gray-400 font-semibold " >Babatunde Adenaike</p>
+            <p class="text-sm text-gray-700 font-semibold" > {{userInfo.company_rep}} </p>
+            <p class="text-sm text-gray-400 font-semibold " > {{userInfo.first_name}} {{userInfo.last_name}} </p>
             <br>
-            <p class="text-sm text-gray-400 font-semibold " > (234) 879 5670 789 </p>
-            <p class="text-sm text-gray-400 font-semibold " >badenaike@fmnplc.com</p>
+            <p class="text-sm text-gray-400 font-semibold " > (234) {{userInfo.phone_number}} </p>
+            <p class="text-sm text-gray-400 font-semibold " > {{userInfo.email}} </p>
             <p class="text-sm text-gray-400 font-semibold pr-5"> {{customerAddress}} </p>
             <p  class="text-sm text-gray-400 font-semibold"  > {{customerCountry}} </p>
           </div>
           <div>
             <p class="text-sm text-gray-700 font-semibold py-2" >Invoice Number: <span class="text-gray-400 font-normal " > {{reference}} </span> </p>
-            <p class="text-sm text-gray-700 font-semibold py-2" >P.O / S.O. Number: <span class="text-gray-400 font-normal" > 100020-02 </span> </p>
+            <!-- <p class="text-sm text-gray-700 font-semibold py-2" >P.O / S.O. Number: <span class="text-gray-400 font-normal" > 100020-02 </span> </p> -->
             <p class="text-sm text-gray-700 font-semibold py-2" >Invoice Date: <span class="text-gray-400 font-normal" > {{date | date: 'longDate'}} </span> </p>
-            <p class="text-sm text-gray-700 font-semibold py-2" >Payment Due: <span class="text-gray-400 font-normal" > December 5, 2023 </span> </p>
+            <p class="text-sm text-gray-700 font-semibold py-2" >Payment Due: <span class="text-gray-400 font-normal" > -- </span> </p>
             <p class="text-sm text-gray-700 font-semibold py-2" > Label Status: <span class="text-gray-400 font-normal"  >{{labelStatus}}</span> </p>
           </div>
         </div>
@@ -276,7 +276,7 @@
           <div class="text-md font-semibold text-left flex-1"  >Unit</div>
           <div class="text-md font-semibold text-left flex-1"  >Amount per Unit</div>
         </div>
-        <div class="flex justify-between bg-blueGray-200 py-2 mt-3 mb-10 px-5">
+        <div class="flex justify-between bg-blueGray-300 shadow py-2 mt-3 mb-10 px-5">
           <div class="text-sm text-blueGray-700 text-left flex-1 uppercase" > {{customerLabelType}} <span *ngIf="taggantStatus == 'yes' " > with taggant </span> <span *ngIf="taggantStatus == 'no' " > without taggant </span> </div>
           <div class="text-sm text-blueGray-700 text-left flex-1"  > {{labelQuantity}} </div>
           <div class="text-sm text-blueGray-700 text-left flex-1"  > 200 </div>
