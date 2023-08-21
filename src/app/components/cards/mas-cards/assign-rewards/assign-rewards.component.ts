@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { AuthenticationService } from 'src/app/core/_services/authentication.service';
 import { User } from 'src/app/core/_models/user';
 import { FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
+import { AlertService } from 'src/app/core/_services';
 
 @Component({
   selector: 'app-assign-rewards',
@@ -43,6 +44,7 @@ export class AssignRewardsComponent implements OnInit {
     private surveyService: SurveyRewardService,
     private surService: SurveyService,
     private formBuilder: FormBuilder,
+    private alertService: AlertService
   ) {
     this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
       this.currentUser = user;
@@ -183,6 +185,9 @@ export class AssignRewardsComponent implements OnInit {
       if(response.status == true){
         this.showModal = !this.showModal;
       }
+    },(error)=>{
+      this.loading = false;
+      this.alertService.showAlertNotification('Error', error, 'error')
     })
 
     console.log(body)
