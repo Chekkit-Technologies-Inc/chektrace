@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'checktrace'
           slot-name: 'Dev'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8185BD4C92EC496CADD1175B88B122FF }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5F508EF9067A415BAF2B42B48EB85AE9 }}
           package: .
