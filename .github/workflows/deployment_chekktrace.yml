@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - ChekkTrace
+name: Build and deploy Node.js app to Azure Web App - chekkTrace
 
 on:
   push:
@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -23,35 +23,15 @@ jobs:
 
       - name: npm install, build, and test
         run: |
-          npm install --force
+          npm install
           npm run build --if-present
-     #    npm run test --if-present
+          npm run test --if-present
 
-      
       - name: Zip artifact for deployment
-        run: zip -r release.zip ./* 
+        run: zip release.zip ./* -r
 
-
-      - name: Delete Old Artifacts
-        uses: actions/github-script@v6
-        id: artifact
-        with:
-          script: |
-            const res = await github.rest.actions.listArtifactsForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-            })
-            res.data.artifacts
-              .filter(({ name }) => name === 'node-app')
-              .forEach(({ id }) => {
-                github.rest.actions.deleteArtifact({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  artifact_id: id,
-                })
-              })
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: node-app
           path: release.zip
@@ -68,15 +48,15 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: node-app
-          
-      - name: unzip artifact for deployment
-        run: Expand-Archive release.zip -DestinationPath $env:systemdrive\home\site\wwwroot
-        
+
+      - name: Unzip artifact for deployment
+        run: unzip release.zip
+
       - name: 'Deploy to Azure Web App'
-        uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
         with:
-          app-name: 'ChekkTrace'
+          app-name: 'chekkTrace'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4B836E6303394B52A2BAB8888FF35953 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E6B05FEF30ED4CACB0F5864BAB147CAD }}
           package: .
