@@ -58,5 +58,5 @@ jobs:
         with:
           app-name: 'chekkTrace'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E6B05FEF30ED4CACB0F5864BAB147CAD }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_7D84F3536026402B81CA39CB7BE90A6D }}
           package: .
