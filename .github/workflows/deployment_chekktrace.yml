@@ -53,7 +53,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'chekkTrace'
+          app-name: 'ChekTrace'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_7D84F3536026402B81CA39CB7BE90A6D }}
           package: angular.zip
