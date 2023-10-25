@@ -57,6 +57,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'ChekTrace'
-          slot-name: 'Production'
+          slot-name: 'Dev'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_57DCE4C11B814A4598AA3D2A5BE02AB4 }}
           package: .
